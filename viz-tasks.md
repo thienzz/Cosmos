@@ -269,7 +269,7 @@ curl -o /dev/null -w '%{http_code}\n' http://localhost:3010/v1/entities/ent/NONE
 
 ---
 
-### T-B-06 — `GET /v1/entities/:id` (numeric) 🟡
+### T-B-06 — `GET /v1/entities/:id` (numeric) 🟡 ✅ DONE 6c6d8d3 2026-04-22
 **Depends:** T-B-05  **Est:** 1h
 **Goal:** Fetch by NAIF id or numeric catalog id.
 **Files:** `apps/api/src/routes/entities.ts` (extend)
