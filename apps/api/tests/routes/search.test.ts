@@ -9,6 +9,22 @@ async function buildTestApp() {
   return app;
 }
 
+describe('GET /v1/search input validation', () => {
+  it('rejects missing q', async () => {
+    const app = await buildTestApp();
+    const res = await app.inject({ method: 'GET', url: '/v1/search' });
+    expect(res.statusCode).toBe(400);
+    await app.close();
+  });
+
+  it('rejects negative distance_max_pc', async () => {
+    const app = await buildTestApp();
+    const res = await app.inject({ method: 'GET', url: '/v1/search?q=x&distance_max_pc=-1' });
+    expect(res.statusCode).toBe(400);
+    await app.close();
+  });
+});
+
 describe('GET /v1/search/autocomplete input validation', () => {
   it('rejects empty q', async () => {
     const app = await buildTestApp();

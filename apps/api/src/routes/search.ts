@@ -33,7 +33,110 @@ interface CompletionSuggestEntry {
   options: readonly CompletionSuggestOption[];
 }
 
+const fullTextQuerySchema = z.object({
+  q: z.string().min(1).max(128),
+  category: z.string().max(32).optional(),
+  magnitude_max: z.coerce.number().optional(),
+  distance_max_pc: z.coerce.number().positive().optional(),
+  limit: z.coerce.number().int().min(1).max(100).default(20),
+  offset: z.coerce.number().int().min(0).default(0),
+});
+
 const searchRoutes: FastifyPluginAsync = async (app: FastifyInstance) => {
+  app.get('/v1/search', async (req, reply) => {
+    const parsed = fullTextQuerySchema.safeParse(req.query);
+    if (!parsed.success) {
+      return reply.code(400).send({ error: 'bad_request', issues: parsed.error.issues });
+    }
+    const { q, category, magnitude_max, distance_max_pc, limit, offset } = parsed.data;
+
+    const params: unknown[] = [q];
+    const conds: string[] = [
+      `(e.search_vector @@ plainto_tsquery('simple', $1) OR e.name ILIKE '%' || $1 || '%')`,
+    ];
+
+    if (category !== undefined) {
+      params.push(category);
+      conds.push(`e.category::text = $${params.length}`);
+    }
+    if (magnitude_max !== undefined) {
+      params.push(magnitude_max);
+      conds.push(`(e.properties->>'magnitude')::float8 <= $${params.length}`);
+    }
+    if (distance_max_pc !== undefined) {
+      params.push(distance_max_pc);
+      conds.push(`e.distance_pc <= $${params.length}`);
+    }
+
+    const where = conds.join(' AND ');
+    const countParams = params.slice();
+    const totalRows = await pgQuery<{ total: string }>(
+      `SELECT count(*)::text AS total FROM entities e WHERE ${where}`,
+      countParams,
+    );
+    const total = Number(totalRows[0]?.total ?? '0');
+
+    params.push(limit);
+    const limitIdx = params.length;
+    params.push(offset);
+    const offsetIdx = params.length;
+
+    const rows = await pgQuery<{
+      ent_id: string;
+      name: string;
+      category: string | null;
+      entity_type: string | null;
+      ra_deg: number | null;
+      dec_deg: number | null;
+      distance_pc: number | null;
+      magnitude: number | null;
+    }>(
+      `SELECT e.ent_id,
+              e.name,
+              e.category::text AS category,
+              e.entity_type::text AS entity_type,
+              e.ra AS ra_deg,
+              e.dec_coord AS dec_deg,
+              e.distance_pc,
+              NULLIF((e.properties->>'magnitude')::float8, 'NaN'::float8) AS magnitude
+       FROM entities e
+       WHERE ${where}
+       ORDER BY ts_rank(e.search_vector, plainto_tsquery('simple', $1)) DESC, e.name ASC
+       LIMIT $${limitIdx} OFFSET $${offsetIdx}`,
+      params,
+    );
+
+    const baseUrl = new URL(req.raw.url ?? '/v1/search', 'http://placeholder');
+    const buildLink = (newOffset: number): string => {
+      const u = new URL(baseUrl);
+      u.searchParams.set('offset', String(newOffset));
+      return `${u.pathname}${u.search}`;
+    };
+
+    const items = rows.map((r) => ({
+      ent_id: r.ent_id,
+      name: r.name,
+      category: r.category,
+      kind: r.entity_type,
+      ra_deg: r.ra_deg,
+      dec_deg: r.dec_deg,
+      distance_pc: r.distance_pc,
+      magnitude: r.magnitude,
+    }));
+
+    return reply.send({
+      query: q,
+      total,
+      limit,
+      offset,
+      items,
+      _links: {
+        next: offset + limit < total ? buildLink(offset + limit) : null,
+        prev: offset > 0 ? buildLink(Math.max(0, offset - limit)) : null,
+      },
+    });
+  });
+
   app.get('/v1/search/autocomplete', async (req, reply) => {
     const parsed = autocompleteQuerySchema.safeParse(req.query);
     if (!parsed.success) {
