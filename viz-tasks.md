@@ -359,7 +359,7 @@ curl -sf http://localhost:3010/v1/solar-system/bodies/399 | jq '.name'  # "Earth
 
 ---
 
-### T-B-11 — Client auto-fallback to localSearchIndex 🟢
+### T-B-11 — Client auto-fallback to localSearchIndex 🟢 ✅ DONE 3648c72 2026-04-22
 **Depends:** T-B-07  **Est:** 2h
 **Goal:** When API is down or returns 5xx, client transparently falls back to in-memory index.
 **Files:** `apps/web/src/api/apiClient.ts`, `apps/web/src/api/search.ts`
