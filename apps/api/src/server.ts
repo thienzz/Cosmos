@@ -4,10 +4,13 @@ import Fastify, { type FastifyInstance } from 'fastify';
 import type { Pool } from 'pg';
 
 import { getPool } from './db/pool.js';
+import { getEsClient } from './es/client.js';
 import { rateLimitPlugin, type RateLimitTierConfig } from './middleware/rate-limit.js';
 import { redisPlugin } from './plugins/redis.js';
 import { entityRoutes } from './routes/entities.js';
 import { healthRoutes } from './routes/health.js';
+import { searchRoutes } from './routes/search.js';
+import type { Client as EsClient } from '@elastic/elasticsearch';
 
 export interface BuildServerOptions {
   readonly logLevel?: string;
@@ -17,6 +20,9 @@ export interface BuildServerOptions {
   readonly rateLimitTiers?: RateLimitTierConfig;
   readonly pool?: Pool;
   readonly enableDb?: boolean;
+  readonly es?: EsClient;
+  readonly enableEs?: boolean;
+  readonly enableSearch?: boolean;
 }
 
 export async function buildServer(opts: BuildServerOptions = {}): Promise<FastifyInstance> {
@@ -49,9 +55,27 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
 
   const dbConfigured = Boolean(process.env.DATABASE_URL);
   const useDb = opts.enableDb ?? dbConfigured;
+  let pool: Pool | undefined;
   if (useDb) {
-    const pool = opts.pool ?? getPool();
+    pool = opts.pool ?? getPool();
     await app.register(entityRoutes, { pool });
+  }
+
+  const esConfigured = Boolean(process.env.ELASTICSEARCH_URL);
+  const useEs = opts.enableEs ?? (opts.es !== undefined || esConfigured);
+  let es: EsClient | undefined;
+  if (useEs) {
+    es = opts.es ?? getEsClient();
+  }
+
+  const useSearch = opts.enableSearch ?? useDb;
+  if (useSearch && pool) {
+    const redis = app.hasDecorator('redis') ? app.redis : undefined;
+    await app.register(searchRoutes, {
+      pool,
+      ...(es ? { es } : {}),
+      ...(redis ? { redis } : {}),
+    });
   }
 
   return app;
