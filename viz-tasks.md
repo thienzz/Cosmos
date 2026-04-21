@@ -464,7 +464,7 @@ curl -sf 'http://localhost:3010/v1/search/autocomplete?q=m31' | jq '.suggestions
 
 ---
 
-### T-C-04 — Airflow DAG `seed_from_ts` 🟢
+### T-C-04 — Airflow DAG `seed_from_ts` 🟢 ✅ DONE dbb5db7 2026-04-22
 **Depends:** T-C-02, T-C-03  **Est:** 2h
 **Goal:** Wrap C-02 + C-03 in an idempotent Airflow DAG.
 **Files:** `apps/etl/dags/seed_from_ts.py`
