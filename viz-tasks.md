@@ -553,8 +553,7 @@ pytest apps/etl/tests/test_gaia_transform.py::test_barnards_star_j2000_position
 
 ---
 
-### T-D-04 — HEALPix pixel column 🟡
-**Depends:** T-A-03  **Est:** 2h
+### T-D-04 — HEALPix pixel column 🟡 ✅ DONE ad6b63f 2026-04-22
 **Goal:** Every star has `healpix_order6 BIGINT` column indexed for fast tile lookups.
 **Files:** `apps/etl/migrations/versions/0002_add_healpix_column.py`
 
