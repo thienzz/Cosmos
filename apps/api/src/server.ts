@@ -1,8 +1,12 @@
 import cors from '@fastify/cors';
+import etag from '@fastify/etag';
 import Fastify, { type FastifyInstance } from 'fastify';
+import type { Pool } from 'pg';
 
+import { getPool } from './db/pool.js';
 import { rateLimitPlugin, type RateLimitTierConfig } from './middleware/rate-limit.js';
 import { redisPlugin } from './plugins/redis.js';
+import { entityRoutes } from './routes/entities.js';
 import { healthRoutes } from './routes/health.js';
 
 export interface BuildServerOptions {
@@ -11,6 +15,8 @@ export interface BuildServerOptions {
   readonly enableRedis?: boolean;
   readonly enableRateLimit?: boolean;
   readonly rateLimitTiers?: RateLimitTierConfig;
+  readonly pool?: Pool;
+  readonly enableDb?: boolean;
 }
 
 export async function buildServer(opts: BuildServerOptions = {}): Promise<FastifyInstance> {
@@ -25,6 +31,8 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
     origin: opts.corsOrigin ?? process.env.CORS_ORIGIN ?? 'http://localhost:5173',
   });
 
+  await app.register(etag, { algorithm: 'sha1' });
+
   const redisConfigured = Boolean(process.env.REDIS_URL);
   const useRedis = opts.enableRedis ?? redisConfigured;
   if (useRedis) {
@@ -38,6 +46,13 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
   });
 
   await app.register(healthRoutes);
+
+  const dbConfigured = Boolean(process.env.DATABASE_URL);
+  const useDb = opts.enableDb ?? dbConfigured;
+  if (useDb) {
+    const pool = opts.pool ?? getPool();
+    await app.register(entityRoutes, { pool });
+  }
 
   return app;
 }
