@@ -10,6 +10,7 @@ import { redisPlugin } from './plugins/redis.js';
 import { entityRoutes } from './routes/entities.js';
 import { healthRoutes } from './routes/health.js';
 import { searchRoutes } from './routes/search.js';
+import { solarSystemRoutes } from './routes/solar-system.js';
 import type { Client as EsClient } from '@elastic/elasticsearch';
 
 export interface BuildServerOptions {
@@ -59,6 +60,7 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
   if (useDb) {
     pool = opts.pool ?? getPool();
     await app.register(entityRoutes, { pool });
+    await app.register(solarSystemRoutes, { pool });
   }
 
   const esConfigured = Boolean(process.env.ELASTICSEARCH_URL);
