@@ -18,6 +18,35 @@ const ENTITY_SELECT = `
 `;
 
 const entitiesRoutes: FastifyPluginAsync = async (app: FastifyInstance) => {
+  app.get<{ Params: { id: string } }>(
+    '/v1/entities/:id(\\d+)',
+    async (req, reply) => {
+      const raw = req.params.id;
+      const asBigInt = Number(raw);
+      if (!Number.isSafeInteger(asBigInt) || asBigInt < 0) {
+        return reply.code(400).send({ error: 'bad_request', message: 'id must be a non-negative integer' });
+      }
+
+      const rows = await query<EntityRow>(
+        `${ENTITY_SELECT}
+         LEFT JOIN solar_system_bodies ssb ON ssb.entity_id = e.id
+         WHERE e.id = $1 OR ssb.naif_id = $1
+         ORDER BY e.id
+         LIMIT 1`,
+        [asBigInt],
+      );
+
+      if (rows.length === 0) {
+        return reply.code(404).send({
+          error: 'not_found',
+          message: `no entity with id=${raw}`,
+        });
+      }
+
+      return reply.send(rowToEntity(rows[0]));
+    },
+  );
+
   app.get<{ Params: { ent_id: string } }>(
     '/v1/entities/ent/:ent_id',
     async (req, reply) => {
