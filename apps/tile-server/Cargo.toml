@@ -28,6 +28,8 @@ uuid = { version = "1", features = ["v4"] }
 http = "1"
 cdshealpix = "0.7"
 half = "2"
+redis = { version = "0.25", features = ["tokio-comp", "connection-manager"] }
+futures-util = "0.3"
 
 [dev-dependencies]
 tempfile = "3"

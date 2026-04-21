@@ -6,6 +6,7 @@
 //! the Airflow ETL (T-ETL) will write to. A Postgres/object-storage backend
 //! can be layered on later without touching handlers.
 
+pub mod cache;
 pub mod config;
 pub mod encoding;
 pub mod error;
