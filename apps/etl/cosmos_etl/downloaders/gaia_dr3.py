@@ -144,22 +144,44 @@ def run(
     output_dir: Path | None = None,
     resume: bool = True,
     chunk_ids: list[int] | None = None,
+    continue_on_failure: bool = True,
+    max_retries_per_chunk: int = 3,
 ) -> list[Path]:
-    """Download all chunks, returning their paths."""
+    """Download all chunks, returning the paths that succeeded.
+
+    With `continue_on_failure=True` (default), a chunk that exhausts
+    its retries is logged and skipped — the run finishes whatever
+    chunks it can reach. Run the downloader again later with
+    `--resume` to pick up the holes once the Gaia archive recovers.
+    """
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(message)s")
     out_dir = output_dir or _default_output_dir()
     ids = chunk_ids if chunk_ids is not None else list(range(chunks))
     paths: list[Path] = []
+    failed: list[int] = []
     for cid in ids:
-        path = download_chunk(
-            cid,
-            chunk_count=chunks,
-            magnitude_max=magnitude_max,
-            output_dir=out_dir,
-            limit=limit,
-            resume=resume,
+        try:
+            path = download_chunk(
+                cid,
+                chunk_count=chunks,
+                magnitude_max=magnitude_max,
+                output_dir=out_dir,
+                limit=limit,
+                resume=resume,
+                max_retries=max_retries_per_chunk,
+            )
+            paths.append(path)
+        except Exception as err:  # noqa: BLE001
+            if not continue_on_failure:
+                raise
+            log.error("chunk %04d: SKIPPED after retries — %s", cid, err)
+            failed.append(cid)
+    if failed:
+        log.warning(
+            "completed with %d failed chunks %s — re-run with --resume to retry",
+            len(failed), failed,
         )
-        paths.append(path)
+    log.info("done: %d succeeded, %d failed of %d total", len(paths), len(failed), len(ids))
     return paths
 
 
