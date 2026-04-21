@@ -622,7 +622,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ## Phase E — Rust tile server (9 tasks, ~40h)
 
-### T-E-01 — `healpix.rs` — pixel → RA/Dec bounds 🟢
+### T-E-01 — `healpix.rs` — pixel → RA/Dec bounds 🟢 ✅ DONE b6761e4 2026-04-22
 **Depends:** T-A-06  **Est:** 3h
 **Goal:** Given HEALPix `(order, pixel)`, return the RA/Dec bounding box.
 **Files:** `apps/tile-server/src/healpix.rs`, `apps/tile-server/Cargo.toml` (add `healpix` crate)
