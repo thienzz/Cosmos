@@ -421,7 +421,7 @@ jq '.[0] | keys' data/seed/entities.json
 
 ---
 
-### T-C-02 — Python ingest from JSON → Postgres 🟡
+### T-C-02 — Python ingest from JSON → Postgres 🟡 ✅ DONE c6defd6 2026-04-22
 **Depends:** T-C-01, T-A-03  **Est:** 3h
 **Goal:** Python ETL upserts entities.json into Postgres.
 **Files:** `apps/etl/cosmos_etl/seed/from_ts_catalog.py`, `apps/etl/tests/test_seed.py`
