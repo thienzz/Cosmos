@@ -518,7 +518,7 @@ wc -l data/raw/gaia/dr3_chunk_0000.csv   # some rows
 
 ---
 
-### T-D-02 — Transformer: Gaia row → entity record 🟡
+### T-D-02 — Transformer: Gaia row → entity record 🟡 ✅ DONE ac7cd54 2026-04-22
 **Depends:** T-D-01  **Est:** 3h
 **Goal:** Python function `gaia_to_entity(row) → dict` producing `entities` row.
 **Files:** `apps/etl/cosmos_etl/transformers/gaia_to_entities.py`
@@ -537,8 +537,7 @@ pytest apps/etl/tests/test_gaia_transform.py
 
 ---
 
-### T-D-03 — J2016 → J2000 proper motion correction 🟡
-**Depends:** T-D-02  **Est:** 2h
+### T-D-03 — J2016 → J2000 proper motion correction 🟡 ✅ DONE ac7cd54 2026-04-22
 **Goal:** Accurate position epoch normalization (CLAUDE.md #5: ICRS J2000.0).
 **Files:** `apps/etl/cosmos_etl/transformers/gaia_to_entities.py` (extend)
 
