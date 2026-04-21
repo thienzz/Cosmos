@@ -1,6 +1,7 @@
 import rateLimit from '@fastify/rate-limit';
 import type { FastifyInstance, FastifyPluginAsync, FastifyRequest } from 'fastify';
 import fp from 'fastify-plugin';
+import type { Redis } from 'ioredis';
 
 export type AuthTier = 'anonymous' | 'registered' | 'research' | 'internal';
 
@@ -47,9 +48,7 @@ function hashToken(token: string): string {
 
 const rateLimitPlugin: FastifyPluginAsync = async (app: FastifyInstance) => {
   const redis =
-    'redis' in app && app.redis !== undefined
-      ? (app.redis as unknown as import('ioredis').Redis)
-      : undefined;
+    'redis' in app && app.redis !== undefined ? (app.redis as Redis) : undefined;
 
   await app.register(rateLimit, {
     global: true,
