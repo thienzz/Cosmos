@@ -8,6 +8,7 @@ import {
   searchCone,
   searchText,
 } from '../index';
+import { resetApiFallbackWarning } from '../search';
 
 function env<T>(data: T, extra: Record<string, unknown> = {}): unknown {
   return { data, meta: { request_id: 'r', data_version: 'v', timestamp: 't' }, ...extra };
@@ -133,6 +134,58 @@ describe('api/search', () => {
     await expect(searchCone(10, 0, 0)).rejects.toBeInstanceOf(RangeError);
     await expect(searchCone(10, 0, 20)).rejects.toBeInstanceOf(RangeError);
     expect(f).not.toHaveBeenCalled();
+  });
+
+  it('searchAutocomplete falls back to local seed on network error', async () => {
+    resetApiFallbackWarning();
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const f = vi.fn().mockRejectedValue(new TypeError('Network failed'));
+    apiConfig.setFetchImpl(f as unknown as typeof fetch);
+
+    const result = await searchAutocomplete('Androm');
+    expect(result.source).toBe('fallback');
+    // The local seed index ships 600+ catalog entities; Andromeda must be
+    // in it. We check for *any* suggestion so we aren't coupled to the
+    // exact catalog layout.
+    expect(result.suggestions.length).toBeGreaterThan(0);
+    expect(warnSpy).toHaveBeenCalledTimes(1);
+    warnSpy.mockRestore();
+  });
+
+  it('searchAutocomplete falls back on 5xx upstream', async () => {
+    resetApiFallbackWarning();
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const f = vi.fn().mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          error: {
+            code: 'INTERNAL_ERROR',
+            message: 'db down',
+            status: 500,
+            request_id: 'r',
+          },
+        }),
+        { status: 500, headers: { 'content-type': 'application/json' } },
+      ),
+    );
+    apiConfig.setFetchImpl(f as unknown as typeof fetch);
+
+    const result = await searchAutocomplete('Sirius');
+    expect(result.source).toBe('fallback');
+    expect(result.suggestions.length).toBeGreaterThan(0);
+    warnSpy.mockRestore();
+  });
+
+  it('searchText falls back to local seed on network error', async () => {
+    resetApiFallbackWarning();
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const f = vi.fn().mockRejectedValue(new TypeError('offline'));
+    apiConfig.setFetchImpl(f as unknown as typeof fetch);
+
+    const { items, pagination } = await searchText('Andromeda');
+    expect(items.length).toBeGreaterThan(0);
+    expect(pagination.total).toBeGreaterThan(0);
+    warnSpy.mockRestore();
   });
 
   it('searchCone posts ra/dec/radius as query params', async () => {

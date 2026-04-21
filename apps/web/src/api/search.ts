@@ -15,8 +15,42 @@
  * so the WS manager can call it).
  */
 
-import { apiGet, apiGetCollection, type CollectionResult } from './client';
+import { searchLocalAutocomplete, searchLocalText } from '@/data/localSearchIndex';
+
+import { ApiError, apiGet, apiGetCollection, type CollectionResult } from './client';
 import type { ApiCatalogIds, ApiCollectionEnvelope, ApiEnvelope } from './types';
+
+/**
+ * Doc 26 §6 resilience: when the backend is unreachable (network error)
+ * or returns a 5xx/503 (SERVICE_UNAVAILABLE), we transparently answer
+ * from the client-bundled `localSearchIndex` so the user still gets
+ * useful results. This is not a silent failure — we `console.warn` once
+ * per fallback so developers see the backend is down without flooding
+ * the console like a caught error would.
+ */
+function isFallbackError(err: unknown): boolean {
+  if (!(err instanceof ApiError)) return false;
+  return (
+    err.code === 'NETWORK_ERROR' ||
+    err.code === 'SERVICE_UNAVAILABLE' ||
+    err.status >= 500
+  );
+}
+
+let fallbackWarned = false;
+function warnOnceOnFallback(endpoint: string, err: ApiError): void {
+  if (fallbackWarned) return;
+  fallbackWarned = true;
+  // eslint-disable-next-line no-console
+  console.warn(
+    `[api] ${endpoint}: backend unavailable (${err.code} ${err.status}) — falling back to local seed catalog`,
+  );
+}
+
+/** Visible-for-tests: reset the warn-once latch. */
+export function resetApiFallbackWarning(): void {
+  fallbackWarned = false;
+}
 
 // ---------------------------------------------------------------------------
 // Autocomplete (Doc 26 §6.2)
@@ -56,6 +90,8 @@ export interface AutocompleteResponse {
   suggestions: AutocompleteItem[];
   query: string;
   took_ms?: number;
+  /** Which layer answered this request — `api` or the in-memory offline seed. */
+  source?: 'api' | 'fallback';
 }
 
 const AUTOCOMPLETE_CACHE_MAX = 100;
@@ -91,23 +127,34 @@ export async function searchAutocomplete(
     autocompleteCache.set(cacheKey, cached);
     return cached;
   }
-  const raw = await apiGet<AutocompleteResponse | AutocompleteItem[]>(
-    '/search/autocomplete',
-    {
-      query: {
-        q: trimmed,
-        category: opts.category ?? undefined,
-        limit: opts.limit ?? undefined,
+  let response: AutocompleteResponse;
+  try {
+    const raw = await apiGet<AutocompleteResponse | AutocompleteItem[]>(
+      '/search/autocomplete',
+      {
+        query: {
+          q: trimmed,
+          category: opts.category ?? undefined,
+          limit: opts.limit ?? undefined,
+        },
+        signal: opts.signal,
+        // Autocomplete is cached in-app; skip ETag revalidation to avoid
+        // conditional-GET latency on every keystroke.
+        bypassCache: true,
       },
-      signal: opts.signal,
-      // Autocomplete is cached in-app; skip ETag revalidation to avoid
-      // conditional-GET latency on every keystroke.
-      bypassCache: true,
-    },
-  );
-  const response: AutocompleteResponse = Array.isArray(raw)
-    ? { suggestions: raw, query: trimmed }
-    : raw;
+    );
+    response = Array.isArray(raw)
+      ? { suggestions: raw, query: trimmed, source: 'api' }
+      : { ...raw, source: raw.source ?? 'api' };
+  } catch (err) {
+    if (!isFallbackError(err)) throw err;
+    warnOnceOnFallback('/search/autocomplete', err as ApiError);
+    const suggestions = searchLocalAutocomplete(trimmed, {
+      category: opts.category ?? null,
+      limit: opts.limit ?? 10,
+    });
+    response = { suggestions, query: trimmed, source: 'fallback' };
+  }
   autocompleteCache.set(cacheKey, response);
   if (autocompleteCache.size > AUTOCOMPLETE_CACHE_MAX) {
     const oldest = autocompleteCache.keys().next().value;
@@ -168,21 +215,43 @@ export async function searchText(
       pagination: { total: 0, limit: opts.limit ?? 50, offset: 0, has_more: false },
     };
   }
-  const result = await apiGetCollection<TextSearchItem>('/search', {
-    query: {
-      q: trimmed,
-      category: opts.category ?? undefined,
-      mag_max: opts.magnitudeMax ?? undefined,
-      distance_max_pc: opts.distanceMaxPc ?? undefined,
-      limit: opts.limit ?? undefined,
-      offset: opts.offset ?? undefined,
-      sort: opts.sort ?? undefined,
-      order: opts.order ?? undefined,
-      cursor: opts.cursor ?? undefined,
-    },
-    signal: opts.signal,
-    bypassCache: true,
-  });
+  let result: CollectionResult<TextSearchItem>;
+  try {
+    result = await apiGetCollection<TextSearchItem>('/search', {
+      query: {
+        q: trimmed,
+        category: opts.category ?? undefined,
+        mag_max: opts.magnitudeMax ?? undefined,
+        distance_max_pc: opts.distanceMaxPc ?? undefined,
+        limit: opts.limit ?? undefined,
+        offset: opts.offset ?? undefined,
+        sort: opts.sort ?? undefined,
+        order: opts.order ?? undefined,
+        cursor: opts.cursor ?? undefined,
+      },
+      signal: opts.signal,
+      bypassCache: true,
+    });
+  } catch (err) {
+    if (!isFallbackError(err)) throw err;
+    warnOnceOnFallback('/search', err as ApiError);
+    const local = searchLocalText(trimmed, {
+      category: opts.category ?? null,
+      limit: opts.limit ?? 20,
+      offset: opts.offset ?? 0,
+    });
+    const limit = opts.limit ?? local.items.length;
+    const offset = opts.offset ?? 0;
+    return {
+      items: local.items,
+      pagination: {
+        total: local.total,
+        limit,
+        offset,
+        has_more: offset + local.items.length < local.total,
+      },
+    };
+  }
   // T51 — apply client-side popularity boosts when the server is sorting
   // by `_score` (its default). Leaves explicit `name` / `magnitude` /
   // `distance` orderings alone so users who picked a sort get it.
