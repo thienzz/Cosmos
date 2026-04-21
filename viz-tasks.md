@@ -306,7 +306,7 @@ curl -sf 'http://localhost:3010/v1/search/autocomplete?q=androm' -w '%{time_tota
 
 ---
 
-### T-B-08 — `GET /v1/search` (full-text) 🟡
+### T-B-08 — `GET /v1/search` (full-text) 🟡 ✅ DONE c8be86d 2026-04-22
 **Depends:** T-B-07  **Est:** 2h
 **Goal:** Full-text entity search with filters.
 **Files:** `apps/api/src/routes/search.ts` (extend)
