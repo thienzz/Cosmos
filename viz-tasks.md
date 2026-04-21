@@ -665,7 +665,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-E-04 — `routes/star_tiles.rs` handler 🟡
+### T-E-04 — `routes/star_tiles.rs` handler 🟡 ✅ DONE 41c7f2c 2026-04-22
 **Depends:** T-E-02, T-E-03  **Est:** 4h
 **Goal:** `GET /tiles/stars/{order}/{pixel}` returns binary tile bytes.
 **Files:** `apps/tile-server/src/routes/star_tiles.rs`, `apps/tile-server/src/main.rs` (wire up)
