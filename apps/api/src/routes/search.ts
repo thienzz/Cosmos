@@ -33,6 +33,15 @@ interface CompletionSuggestEntry {
   options: readonly CompletionSuggestOption[];
 }
 
+const coneQuerySchema = z.object({
+  ra: z.coerce.number().min(0).max(360),
+  dec: z.coerce.number().min(-90).max(90),
+  radius_deg: z.coerce.number().positive().max(180),
+  max_distance_pc: z.coerce.number().positive().optional(),
+  category: z.string().max(32).optional(),
+  limit: z.coerce.number().int().min(1).max(500).default(100),
+});
+
 const fullTextQuerySchema = z.object({
   q: z.string().min(1).max(128),
   category: z.string().max(32).optional(),
@@ -43,6 +52,74 @@ const fullTextQuerySchema = z.object({
 });
 
 const searchRoutes: FastifyPluginAsync = async (app: FastifyInstance) => {
+  app.get('/v1/search/cone', async (req, reply) => {
+    const parsed = coneQuerySchema.safeParse(req.query);
+    if (!parsed.success) {
+      return reply.code(400).send({ error: 'bad_request', issues: parsed.error.issues });
+    }
+    const { ra, dec, radius_deg, max_distance_pc, category, limit } = parsed.data;
+
+    const params: unknown[] = [ra, dec, radius_deg];
+    const conds: string[] = [
+      // spherical law of cosines — angular distance in degrees
+      `degrees(acos(
+         LEAST(1.0, GREATEST(-1.0,
+           sin(radians($2)) * sin(radians(e.dec_coord)) +
+           cos(radians($2)) * cos(radians(e.dec_coord)) * cos(radians($1 - e.ra))
+         ))
+       )) <= $3`,
+    ];
+
+    if (max_distance_pc !== undefined) {
+      params.push(max_distance_pc);
+      conds.push(`e.distance_pc IS NOT NULL AND e.distance_pc <= $${params.length}`);
+    }
+    if (category !== undefined) {
+      params.push(category);
+      conds.push(`e.category::text = $${params.length}`);
+    }
+
+    params.push(limit);
+    const limitIdx = params.length;
+
+    const rows = await pgQuery<{
+      ent_id: string;
+      name: string;
+      category: string | null;
+      ra_deg: number;
+      dec_deg: number;
+      distance_pc: number | null;
+      magnitude: number | null;
+      angular_sep_deg: number;
+    }>(
+      `SELECT e.ent_id,
+              e.name,
+              e.category::text AS category,
+              e.ra AS ra_deg,
+              e.dec_coord AS dec_deg,
+              e.distance_pc,
+              NULLIF((e.properties->>'magnitude')::float8, 'NaN'::float8) AS magnitude,
+              degrees(acos(
+                LEAST(1.0, GREATEST(-1.0,
+                  sin(radians($2)) * sin(radians(e.dec_coord)) +
+                  cos(radians($2)) * cos(radians(e.dec_coord)) * cos(radians($1 - e.ra))
+                ))
+              )) AS angular_sep_deg
+       FROM entities e
+       WHERE ${conds.join(' AND ')}
+       ORDER BY angular_sep_deg ASC
+       LIMIT $${limitIdx}`,
+      params,
+    );
+
+    return reply.send({
+      center: { ra, dec },
+      radius_deg,
+      count: rows.length,
+      items: rows,
+    });
+  });
+
   app.get('/v1/search', async (req, reply) => {
     const parsed = fullTextQuerySchema.safeParse(req.query);
     if (!parsed.success) {
