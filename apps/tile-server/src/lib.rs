@@ -7,6 +7,7 @@
 //! can be layered on later without touching handlers.
 
 pub mod config;
+pub mod encoding;
 pub mod error;
 pub mod handlers;
 pub mod healpix;
