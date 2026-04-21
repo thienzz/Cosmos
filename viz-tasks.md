@@ -388,7 +388,7 @@ curl -sf http://localhost:3010/v1/solar-system/bodies/399 | jq '.name'  # "Earth
 
 ---
 
-### T-B-12 — Phase B full regression 🟢
+### T-B-12 — Phase B full regression 🟢 ✅ DONE e33993b 2026-04-22
 **Depends:** T-B-11  **Est:** 1h
 **Goal:** Run the Phase B verification block from viz.md §2 Phase B (checks B.1-B.6).
 **Do:**
