@@ -47,7 +47,14 @@ def _chunk_path(output_dir: Path, chunk_id: int) -> Path:
 
 
 def _build_adql(magnitude_max: float, chunk_id: int, chunk_count: int, limit: int | None) -> str:
-    """Return the ADQL SELECT for one modulo-sharded chunk.
+    """Return the ADQL SELECT for one HEALPix-sharded chunk.
+
+    Gaia source_id bit-packs HEALPix level-12 in the high 29 bits
+    (``source_id / 2**35``). That means plain ``MOD(source_id, 16)``
+    buckets stars by *instrument-scan sequence*, which correlates
+    strongly with sky position — so a 16-way MOD split lands 95% of
+    rows in a single chunk. Shifting out the low 35 bits first gives
+    a uniform HEALPix-based shard.
 
     Filters:
       phot_g_mean_mag < magnitude_max — bright subset.
@@ -58,7 +65,8 @@ def _build_adql(magnitude_max: float, chunk_id: int, chunk_count: int, limit: in
         f"phot_g_mean_mag < {magnitude_max}",
         "parallax > 0",
         "parallax_error / parallax < 0.2",
-        f"MOD(source_id, {chunk_count}) = {chunk_id}",
+        # `source_id / 34359738368` == `source_id >> 35` (level-12 HEALPix).
+        f"MOD(source_id / 34359738368, {chunk_count}) = {chunk_id}",
     ]
     cols = (
         "source_id, ra, dec, pmra, pmdec, parallax, parallax_error, "
@@ -75,14 +83,24 @@ def download_chunk(
     output_dir: Path,
     limit: int | None = None,
     resume: bool = True,
+    max_retries: int = 3,
+    retry_backoff_seconds: float = 20.0,
 ) -> Path:
     """Download a single chunk via astroquery.gaia. Returns the csv path.
 
     Import astroquery lazily so callers that only want `_build_adql`
     (e.g. unit tests) don't pay the astropy import cost.
+
+    Retries transient Gaia archive 500s with exponential backoff —
+    the archive has documented intermittent availability windows.
     """
+    import time  # noqa: PLC0415 — lazy to keep tests light
+
     out = _chunk_path(output_dir, chunk_id)
-    if resume and out.exists() and out.stat().st_size > 0:
+    # Skip if a fully-downloaded file is already on disk. A 75-byte
+    # "header only" file from a prior 0-row response is treated as
+    # incomplete so the next run re-attempts.
+    if resume and out.exists() and out.stat().st_size > 1024:
         log.info("chunk %04d already present at %s — skipping", chunk_id, out)
         return out
 
@@ -91,15 +109,32 @@ def download_chunk(
     from astroquery.gaia import Gaia  # pylint: disable=import-outside-toplevel
 
     adql = _build_adql(magnitude_max, chunk_id, chunk_count, limit)
-    log.info("chunk %04d: launching job", chunk_id)
-    job = Gaia.launch_job_async(adql, dump_to_file=False)
-    table = job.get_results()
-    log.info("chunk %04d: %d rows returned", chunk_id, len(table))
+    last_err: Exception | None = None
+    for attempt in range(max_retries + 1):
+        try:
+            log.info("chunk %04d: launching job (attempt %d)", chunk_id, attempt + 1)
+            job = Gaia.launch_job_async(adql, dump_to_file=False)
+            table = job.get_results()
+            log.info("chunk %04d: %d rows returned", chunk_id, len(table))
 
-    # astropy.table.Table → csv; keep headers so the transformer has
-    # column names to read.
-    table.write(str(out), format="csv", overwrite=True)
-    return out
+            # astropy.table.Table → csv; keep headers so the transformer has
+            # column names to read.
+            table.write(str(out), format="csv", overwrite=True)
+            return out
+        except Exception as err:  # broad except: astroquery wraps many ex types
+            last_err = err
+            if attempt == max_retries:
+                log.error("chunk %04d: giving up after %d attempts", chunk_id, attempt + 1)
+                raise
+            delay = retry_backoff_seconds * (2**attempt)
+            log.warning(
+                "chunk %04d: attempt %d failed (%s); retrying in %.0fs",
+                chunk_id, attempt + 1, err, delay,
+            )
+            time.sleep(delay)
+
+    assert last_err is not None
+    raise last_err  # unreachable, but satisfies the type checker
 
 
 def run(

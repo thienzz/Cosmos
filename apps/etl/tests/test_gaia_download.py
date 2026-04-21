@@ -12,9 +12,11 @@ def test_adql_has_bright_magnitude_cut() -> None:
     assert "parallax_error / parallax < 0.2" in sql
 
 
-def test_adql_modulo_shards_by_source_id() -> None:
+def test_adql_modulo_shards_by_healpix() -> None:
+    """Gaia source_id packs HEALPix in the high bits — we shift them down
+    before mod-sharding so chunks land uniformly across the sky."""
     sql = _build_adql(magnitude_max=10.0, chunk_id=3, chunk_count=16, limit=None)
-    assert "MOD(source_id, 16) = 3" in sql
+    assert "MOD(source_id / 34359738368, 16) = 3" in sql
 
 
 def test_adql_injects_top_n_for_dev_smoke() -> None:
