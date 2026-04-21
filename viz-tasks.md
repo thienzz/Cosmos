@@ -400,7 +400,7 @@ curl -sf http://localhost:3010/v1/solar-system/bodies/399 | jq '.name'  # "Earth
 
 ## Phase C — ETL seed from TS (5 tasks, ~10h)
 
-### T-C-01 — `export-ts-catalog.ts` Node script 🟢
+### T-C-01 — `export-ts-catalog.ts` Node script 🟢 ✅ DONE 9d9440c 2026-04-21
 **Depends:** T-A-03  **Est:** 2h
 **Goal:** One-shot script imports all `apps/web/src/data/*.ts` catalogs, writes JSON.
 **Files:** `apps/etl/scripts/export-ts-catalog.ts`, `package.json` root script
@@ -421,7 +421,7 @@ jq '.[0] | keys' data/seed/entities.json
 
 ---
 
-### T-C-02 — Python ingest from JSON → Postgres 🟡
+### T-C-02 — Python ingest from JSON → Postgres 🟡 ✅ DONE 2be9beb 2026-04-21
 **Depends:** T-C-01, T-A-03  **Est:** 3h
 **Goal:** Python ETL upserts entities.json into Postgres.
 **Files:** `apps/etl/cosmos_etl/seed/from_ts_catalog.py`, `apps/etl/tests/test_seed.py`
@@ -444,7 +444,7 @@ pytest tests/test_seed.py
 
 ---
 
-### T-C-03 — Populate Elasticsearch autocomplete 🟡
+### T-C-03 — Populate Elasticsearch autocomplete 🟡 ✅ DONE acd260d 2026-04-21
 **Depends:** T-C-02, T-B-03  **Est:** 2h
 **Goal:** After Postgres load, bulk-index into ES autocomplete index.
 **Files:** `apps/etl/cosmos_etl/seed/to_elasticsearch.py`
@@ -464,7 +464,7 @@ curl -sf 'http://localhost:3010/v1/search/autocomplete?q=m31' | jq '.suggestions
 
 ---
 
-### T-C-04 — Airflow DAG `seed_from_ts` 🟢
+### T-C-04 — Airflow DAG `seed_from_ts` 🟢 ✅ DONE 31bd60d 2026-04-21
 **Depends:** T-C-02, T-C-03  **Est:** 2h
 **Goal:** Wrap C-02 + C-03 in an idempotent Airflow DAG.
 **Files:** `apps/etl/dags/seed_from_ts.py`
