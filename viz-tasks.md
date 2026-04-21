@@ -282,7 +282,7 @@ curl -o /dev/null -w '%{http_code}\n' http://localhost:3010/v1/entities/ent/NONE
 
 ---
 
-### T-B-07 — `GET /v1/search/autocomplete` 🟡
+### T-B-07 — `GET /v1/search/autocomplete` 🟡 ✅ DONE 6cd9330 2026-04-22
 **Depends:** T-B-03, T-B-04  **Est:** 3h
 **Goal:** Typing-speed prefix suggestions via Elasticsearch completion suggester.
 **Files:** `apps/api/src/routes/search.ts`, `apps/api/tests/routes/search.test.ts`
