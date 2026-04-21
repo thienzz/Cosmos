@@ -60,9 +60,13 @@ describe('GET /v1/solar-system/bodies', () => {
     try {
       const res = await app.inject({ method: 'GET', url: '/v1/solar-system/bodies' });
       expect(res.statusCode).toBe(200);
-      const body = res.json() as { items: Array<Record<string, unknown>>; count: number };
-      expect(body.count).toBe(1);
-      const earth = body.items[0] as {
+      const body = res.json() as {
+        data: { items: Array<Record<string, unknown>>; count: number };
+        meta: { request_id: string };
+      };
+      expect(body.meta.request_id).toBeTypeOf('string');
+      expect(body.data.count).toBe(1);
+      const earth = body.data.items[0] as {
         name: string;
         naif_id: number;
         orbital_elements: { semi_major_au: number };
@@ -115,8 +119,9 @@ describe('GET /v1/solar-system/bodies/:naifId', () => {
         url: '/v1/solar-system/bodies/399',
       });
       expect(res.statusCode).toBe(200);
-      const body = res.json() as { name: string };
-      expect(body.name).toBe('Earth');
+      const body = res.json() as { data: { name: string }; meta: { request_id: string } };
+      expect(body.meta.request_id).toBeTypeOf('string');
+      expect(body.data.name).toBe('Earth');
     } finally {
       await app.close();
     }

@@ -74,10 +74,14 @@ describe('GET /v1/search/autocomplete', () => {
         url: '/v1/search/autocomplete?q=androm',
       });
       expect(res.statusCode).toBe(200);
-      const body = res.json() as { suggestions: Array<{ text: string; ent_id: string }>; source: string };
-      expect(body.source).toBe('es');
-      expect(body.suggestions[0]?.text).toBe('Andromeda Galaxy');
-      expect(body.suggestions[0]?.ent_id).toBe('GAL-m31');
+      const body = res.json() as {
+        data: { suggestions: Array<{ text: string; ent_id: string }>; source: string };
+        meta: { request_id: string };
+      };
+      expect(body.meta.request_id).toBeTypeOf('string');
+      expect(body.data.source).toBe('es');
+      expect(body.data.suggestions[0]?.text).toBe('Andromeda Galaxy');
+      expect(body.data.suggestions[0]?.ent_id).toBe('GAL-m31');
     } finally {
       await app.close();
     }
@@ -110,8 +114,8 @@ describe('GET /v1/search/autocomplete', () => {
     try {
       const res = await app.inject({ method: 'GET', url: '/v1/search/autocomplete?q=sir' });
       expect(res.statusCode).toBe(200);
-      const body = res.json() as { source: string };
-      expect(body.source).toBe('cache');
+      const body = res.json() as { data: { source: string } };
+      expect(body.data.source).toBe('cache');
       expect(esSpy).not.toHaveBeenCalled();
     } finally {
       await app.close();
@@ -181,10 +185,14 @@ describe('GET /v1/search', () => {
         url: '/v1/search?q=andromeda&limit=5',
       });
       expect(res.statusCode).toBe(200);
-      const body = res.json() as { items: unknown[]; total: number; limit: number };
-      expect(body.total).toBe(1);
-      expect(body.items).toHaveLength(1);
-      expect(body.limit).toBe(5);
+      const body = res.json() as {
+        data: unknown[];
+        pagination: { total: number; limit: number; offset: number; has_more: boolean };
+      };
+      expect(body.pagination.total).toBe(1);
+      expect(body.data).toHaveLength(1);
+      expect(body.pagination.limit).toBe(5);
+      expect(body.pagination.has_more).toBe(false);
       expect(calls[0]?.params[0]).toBe('andromeda');
     } finally {
       await app.close();
@@ -237,8 +245,8 @@ describe('GET /v1/search/cone', () => {
         url: '/v1/search/cone?ra=101.2875&dec=-16.7161&radius_deg=5',
       });
       expect(res.statusCode).toBe(200);
-      const body = res.json() as { count: number; items: unknown[] };
-      expect(body.count).toBe(1);
+      const body = res.json() as { data: { count: number; items: unknown[] } };
+      expect(body.data.count).toBe(1);
       expect(calls[0]?.text).toContain('ST_DWithin');
       expect(calls[0]?.params.slice(0, 2)).toEqual([101.2875, -16.7161]);
     } finally {

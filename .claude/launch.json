@@ -5,7 +5,11 @@
       "name": "web-dev",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["--filter", "@cosmos/web", "dev"],
-      "port": 5173
+      "port": 5173,
+      "env": {
+        "VITE_DEV_API_TARGET": "http://localhost:3010",
+        "COSMOS_DEV_SEARCH_ES_URL": ""
+      }
     }
   ]
 }

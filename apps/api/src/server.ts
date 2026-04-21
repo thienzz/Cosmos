@@ -7,6 +7,7 @@ import type { Pool } from 'pg';
 import { getPool } from './db/pool.js';
 import { getEsClient } from './es/client.js';
 import { rateLimitPlugin, type RateLimitTierConfig } from './middleware/rate-limit.js';
+import envelopePlugin from './plugins/envelope.js';
 import { redisPlugin } from './plugins/redis.js';
 import { entityRoutes } from './routes/entities.js';
 import { healthRoutes } from './routes/health.js';
@@ -39,6 +40,14 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
   });
 
   await app.register(etag, { algorithm: 'sha1' });
+
+  // Doc 26 §2.5 — wrap all non-error, non-binary 2xx responses in the
+  // `{ data, meta, [pagination] }` envelope the client expects. Applied as
+  // a `preSerialization` hook so handlers can keep returning their natural
+  // shape unchanged.
+  await app.register(envelopePlugin, {
+    dataVersion: process.env.COSMOS_DATA_VERSION ?? '0.1.0',
+  });
 
   const redisConfigured = Boolean(process.env.REDIS_URL);
   const useRedis = opts.enableRedis ?? redisConfigured;

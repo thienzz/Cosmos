@@ -47,8 +47,9 @@ describe('GET /v1/entities/ent/:ent_id', () => {
     try {
       const res = await app.inject({ method: 'GET', url: '/v1/entities/ent/ENT-4000' });
       expect(res.statusCode).toBe(200);
-      const body = res.json();
-      expect(body).toMatchObject({
+      const body = res.json() as { data: unknown; meta: { request_id: string } };
+      expect(body.meta.request_id).toBeTypeOf('string');
+      expect(body.data).toMatchObject({
         ent_id: 'ENT-4000',
         id: 42,
         name: 'Andromeda Galaxy',
