@@ -492,7 +492,7 @@ airflow dags test seed_from_ts $(date -u +%Y-%m-%d)
 
 ## Phase D — Gaia bright subset (8 tasks, ~30h)
 
-### T-D-01 — Downloader: mag < 10 bright subset 🟡
+### T-D-01 — Downloader: mag < 10 bright subset 🟡 ✅ DONE a726bbd 2026-04-22
 **Depends:** T-C-04  **Est:** 4h
 **Goal:** Download ~1.2M Gaia DR3 rows (mag ≤ 10), cache on disk.
 **Files:** `apps/etl/cosmos_etl/downloaders/gaia_dr3.py`, `apps/etl/tests/test_gaia_download.py`
