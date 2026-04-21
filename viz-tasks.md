@@ -636,7 +636,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-E-02 — `encoding.rs` — binary tile format 🟢
+### T-E-02 — `encoding.rs` — binary tile format 🟢 ✅ DONE 9ad46c5 2026-04-22
 **Depends:** T-E-01  **Est:** 4h
 **Goal:** Encode star tile per Doc 26 §7.1 (16 B header + 16 B/star, little-endian).
 **Files:** `apps/tile-server/src/encoding.rs`
