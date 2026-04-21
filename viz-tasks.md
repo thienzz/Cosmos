@@ -483,8 +483,7 @@ airflow dags test seed_from_ts $(date -u +%Y-%m-%d)
 
 ---
 
-### T-C-05 — Preview smoke: client via API 🟢
-**Depends:** T-C-04  **Est:** 1h
+### T-C-05 — Preview smoke: client via API 🟢 ✅ DONE (preview-verified) 2026-04-22
 **Goal:** Run viz.md §2 Phase C preview block. All 5 search queries resolve via API.
 **Do:** Run the `preview_eval` block from viz.md Phase C verify C.6.
 **Done when:** `hits.length === 5` + `netHits ≥ 5` + client runs identically to client-only mode.
