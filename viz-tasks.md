@@ -341,7 +341,7 @@ curl -sf 'http://localhost:3010/v1/search/cone?ra=101.2875&dec=-16.7161&radius_d
 
 ---
 
-### T-B-10 — `GET /v1/solar-system/bodies` 🟡
+### T-B-10 — `GET /v1/solar-system/bodies` 🟡 ✅ DONE 413f935 2026-04-22
 **Depends:** T-B-05  **Est:** 2h
 **Goal:** List solar system bodies + per-body details.
 **Files:** `apps/api/src/routes/solar-system.ts`
