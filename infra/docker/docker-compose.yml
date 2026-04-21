@@ -22,6 +22,55 @@ services:
       timeout: 5s
       retries: 10
 
+  pgbouncer:
+    # T-E-07: connection pooler in front of Postgres. Keeps upstream
+    # backend connections bounded (default_pool_size=25) while
+    # presenting a 1000-slot client-facing pool to the Rust tile-server
+    # under load. Configuration rationale lives in pgbouncer.ini; this
+    # compose service wires the env knobs that the edoburu entrypoint
+    # consumes when it generates /etc/pgbouncer/pgbouncer.ini.
+    #
+    # Image: edoburu/pgbouncer (community, continuously updated). We
+    # previously tried bitnami/pgbouncer but Bitnami has been pruning
+    # old tag variants from docker.io.
+    image: edoburu/pgbouncer:latest
+    container_name: cosmos-pgbouncer
+    restart: unless-stopped
+    ports:
+      - "6432:5432"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # edoburu/pgbouncer env-var names:
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_USER: cosmos
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-cosmos_dev}
+      DB_NAME: cosmos
+      POOL_MODE: transaction
+      MAX_CLIENT_CONN: "1000"
+      DEFAULT_POOL_SIZE: "25"
+      RESERVE_POOL_SIZE: "5"
+      RESERVE_POOL_TIMEOUT: "5"
+      QUERY_WAIT_TIMEOUT: "120"
+      SERVER_IDLE_TIMEOUT: "600"
+      # Postgres 14+ stores passwords as SCRAM-SHA-256 verifiers by
+      # default; pgbouncer must match. edoburu's entrypoint writes the
+      # scram verifier it reads from $DB_PASSWORD into userlist.txt
+      # at boot.
+      AUTH_TYPE: scram-sha-256
+      IGNORE_STARTUP_PARAMETERS: extra_float_digits,search_path
+      ADMIN_USERS: cosmos
+    healthcheck:
+      # edoburu/pgbouncer listens on 5432 inside the container.
+      test:
+        - CMD-SHELL
+        - pg_isready -h 127.0.0.1 -p 5432 -U cosmos -d cosmos || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   redis:
     image: redis:7-alpine
     container_name: cosmos-redis
@@ -89,7 +138,7 @@ services:
     ports:
       - "3001:3001"
     depends_on:
-      postgres:
+      pgbouncer:
         condition: service_healthy
       redis:
         condition: service_healthy
@@ -97,7 +146,13 @@ services:
       - path: ../../.env
         required: false
     environment:
-      DATABASE_URL: postgresql://cosmos:cosmos_dev@postgres:5432/cosmos
+      # Talk to Postgres through pgbouncer. Host exposes pgbouncer on
+      # 6432 (see ports:); container-internal, edoburu/pgbouncer listens
+      # on 5432, so inside the compose network the URL is
+      # pgbouncer:5432. Going direct to postgres:5432 would blow past
+      # Postgres' 100-connection default the moment the Rust runtime
+      # fans out under T-E-06-style load.
+      DATABASE_URL: postgresql://cosmos:cosmos_dev@pgbouncer:5432/cosmos
       REDIS_URL: redis://redis:6379
       TILE_SERVER_PORT: 3001
 
