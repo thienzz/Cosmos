@@ -97,7 +97,7 @@ docker exec cosmos-postgres psql -U cosmos -d cosmos -c "SELECT postgis_version(
 ```bash
 pnpm --filter api build && pnpm --filter api start &
 sleep 1
-curl -sf http://localhost:3000/health | jq .status    # "ok"
+curl -sf http://localhost:3010/health | jq .status    # "ok"
 kill %1
 pnpm --filter api typecheck
 ```
@@ -113,14 +113,14 @@ pnpm --filter api typecheck
 **Do:**
 1. Multi-stage: builder (node:20-alpine + pnpm install + build) → runtime (node:20-alpine + only dist + production deps).
 2. COPY order: pnpm workspace files → install → source → build.
-3. HEALTHCHECK instruction: `CMD wget -qO- http://localhost:3000/health || exit 1`.
+3. HEALTHCHECK instruction: `CMD wget -qO- http://localhost:3000/health || exit 1` (container-internal — leave as 3000, not the host remap).
 4. `.dockerignore` excludes `node_modules`, `dist`, `*.log`, `.env`, `coverage`.
 **Verify:**
 ```bash
 docker build -f infra/docker/Dockerfile.api -t cosmos-api:local .
 docker run --rm -p 3000:3000 cosmos-api:local &
 sleep 3
-curl -sf http://localhost:3000/health | jq .status
+curl -sf http://localhost:3010/health | jq .status
 docker stop $(docker ps -lq)
 ```
 **Done when:** Build succeeds, container serves /health.
@@ -140,7 +140,7 @@ docker stop $(docker ps -lq)
 **Verify:**
 ```bash
 docker compose ps --format 'table {{.Service}}\t{{.Status}}' | grep -v Up | wc -l   # should print 1 (header only)
-curl -sf http://localhost:3000/health | jq .status   # "ok"
+curl -sf http://localhost:3010/health | jq .status   # "ok"
 ```
 **Done when:** 4 containers up + healthy + API reachable.
 
@@ -237,7 +237,7 @@ curl -sf http://localhost:9200/entities_autocomplete/_mapping | jq '.entities_au
 4. Tier detection via `Authorization: Bearer ...` JWT (placeholder for now, validate full token in Phase J).
 **Verify:**
 ```bash
-for i in {1..70}; do curl -s -o /dev/null -w '%{http_code}\n' http://localhost:3000/v1/entities/ent/TEST; done | sort | uniq -c
+for i in {1..70}; do curl -s -o /dev/null -w '%{http_code}\n' http://localhost:3010/v1/entities/ent/TEST; done | sort | uniq -c
 # Expect: some 429s after ~60 requests
 ```
 **Done when:** 429 returned when limit exceeded; `X-RateLimit-*` headers present on 2xx responses.
@@ -262,8 +262,8 @@ for i in {1..70}; do curl -s -o /dev/null -w '%{http_code}\n' http://localhost:3
 ```bash
 # Seed
 docker exec cosmos-postgres psql -U cosmos -d cosmos -c "INSERT INTO entities(ent_id,name,kind,category,position,distance_pc,magnitude) VALUES('TEST-1','Test','spiral','galaxies',ST_SetSRID(ST_MakePoint(10,40)::geography,4326),1000,9.0);"
-curl -sf http://localhost:3000/v1/entities/ent/TEST-1 | jq .ent_id   # "TEST-1"
-curl -o /dev/null -w '%{http_code}\n' http://localhost:3000/v1/entities/ent/NONEXISTENT   # 404
+curl -sf http://localhost:3010/v1/entities/ent/TEST-1 | jq .ent_id   # "TEST-1"
+curl -o /dev/null -w '%{http_code}\n' http://localhost:3010/v1/entities/ent/NONEXISTENT   # 404
 ```
 **Done when:** All tests green, ETag works, SQL injection attempts don't leak.
 
@@ -277,7 +277,7 @@ curl -o /dev/null -w '%{http_code}\n' http://localhost:3000/v1/entities/ent/NONE
 1. Route `/v1/entities/:id` where `:id` must be numeric (regex constraint).
 2. Query: `SELECT * FROM entities WHERE (metadata->>'naif_id')::bigint = $1`.
 3. 404 if missing; same ETag logic.
-**Verify:** `curl -sf http://localhost:3000/v1/entities/399 | jq .name` (Earth, assuming seeded).
+**Verify:** `curl -sf http://localhost:3010/v1/entities/399 | jq .name` (Earth, assuming seeded).
 **Done when:** NAIF lookup works, string ids correctly routed to T-B-05.
 
 ---
@@ -296,10 +296,10 @@ curl -o /dev/null -w '%{http_code}\n' http://localhost:3000/v1/entities/ent/NONE
 **Verify:**
 ```bash
 # After seeding "Andromeda Galaxy" into ES
-curl -sf 'http://localhost:3000/v1/search/autocomplete?q=androm' | jq '.suggestions[0].text'
+curl -sf 'http://localhost:3010/v1/search/autocomplete?q=androm' | jq '.suggestions[0].text'
 # Expect: "Andromeda Galaxy"
 # Latency
-curl -sf 'http://localhost:3000/v1/search/autocomplete?q=androm' -w '%{time_total}\n' -o /dev/null
+curl -sf 'http://localhost:3010/v1/search/autocomplete?q=androm' -w '%{time_total}\n' -o /dev/null
 # Expect: < 0.1s P50
 ```
 **Done when:** P95 latency < 50ms, cache hit on repeat, tests green.
@@ -317,7 +317,7 @@ curl -sf 'http://localhost:3000/v1/search/autocomplete?q=androm' -w '%{time_tota
 3. Response: `{ items, total, limit, offset, _links: { next?, prev? } }` per Doc 26 §6.2.
 **Verify:**
 ```bash
-curl -sf 'http://localhost:3000/v1/search?q=andromeda&category=galaxies' | jq '.items[0].name'
+curl -sf 'http://localhost:3010/v1/search?q=andromeda&category=galaxies' | jq '.items[0].name'
 ```
 **Done when:** Filters narrow results correctly; pagination works.
 
@@ -334,7 +334,7 @@ curl -sf 'http://localhost:3000/v1/search?q=andromeda&category=galaxies' | jq '.
 3. Return sorted by angular distance.
 **Verify:**
 ```bash
-curl -sf 'http://localhost:3000/v1/search/cone?ra=101.2875&dec=-16.7161&radius_deg=5' | jq '.count'
+curl -sf 'http://localhost:3010/v1/search/cone?ra=101.2875&dec=-16.7161&radius_deg=5' | jq '.count'
 # Expect: ≥ 1 (Sirius area)
 ```
 **Done when:** Returns neighbors ordered by angular distance.
@@ -352,8 +352,8 @@ curl -sf 'http://localhost:3000/v1/search/cone?ra=101.2875&dec=-16.7161&radius_d
 3. Per Doc 26 §9.
 **Verify:**
 ```bash
-curl -sf http://localhost:3000/v1/solar-system/bodies | jq 'length'    # ≥ 25
-curl -sf http://localhost:3000/v1/solar-system/bodies/399 | jq '.name'  # "Earth"
+curl -sf http://localhost:3010/v1/solar-system/bodies | jq 'length'    # ≥ 25
+curl -sf http://localhost:3010/v1/solar-system/bodies/399 | jq '.name'  # "Earth"
 ```
 **Done when:** Endpoints match Doc 26 §9 schema.
 
@@ -457,7 +457,7 @@ pytest tests/test_seed.py
 ```bash
 python -m cosmos_etl.seed.to_elasticsearch
 curl -sf http://localhost:9200/entities_autocomplete/_count | jq .count   # ≥ 600
-curl -sf 'http://localhost:3000/v1/search/autocomplete?q=m31' | jq '.suggestions[0].ent_id'
+curl -sf 'http://localhost:3010/v1/search/autocomplete?q=m31' | jq '.suggestions[0].ent_id'
 # Expect: "GAL-m31"
 ```
 **Done when:** ES count matches Postgres; autocomplete hits work.
