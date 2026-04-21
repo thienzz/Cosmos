@@ -18,6 +18,7 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "test:e2e": "turbo run test:e2e",
+    "seed:export": "tsx --tsconfig apps/web/tsconfig.json apps/etl/scripts/export-ts-catalog.ts",
     "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {
@@ -31,6 +32,7 @@
     "eslint-plugin-react": "^7.34.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.2.0",
+    "tsx": "^4.7.0",
     "turbo": "^2.0.0",
     "typescript": "^5.4.0"
   }
