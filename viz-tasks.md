@@ -651,7 +651,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-E-03 — `cache.rs` — Redis + in-memory LRU 🟡
+### T-E-03 — `cache.rs` — Redis + in-memory LRU 🟡 ✅ DONE 486338d 2026-04-22
 **Depends:** T-E-02  **Est:** 3h
 **Goal:** Cache tile bytes: check in-memory first, then Redis, then compute + store both.
 **Files:** `apps/tile-server/src/cache.rs`
