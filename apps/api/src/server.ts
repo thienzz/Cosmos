@@ -3,6 +3,7 @@ import etag from '@fastify/etag';
 import Fastify, { type FastifyInstance } from 'fastify';
 
 import rateLimitPlugin from './middleware/rate-limit.js';
+import envelopePlugin from './plugins/envelope.js';
 import redisPlugin from './plugins/redis.js';
 import entitiesRoutes from './routes/entities.js';
 import { healthRoutes } from './routes/health.js';
@@ -27,6 +28,7 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
   });
 
   await app.register(etag);
+  await app.register(envelopePlugin);
   await app.register(redisPlugin);
   await app.register(rateLimitPlugin);
 
