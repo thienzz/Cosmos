@@ -1,9 +1,9 @@
 import { createHash } from 'node:crypto';
 
 import fastifyRateLimit from '@fastify/rate-limit';
+import type { FastifyInstance, FastifyRequest } from 'fastify';
 import fp from 'fastify-plugin';
 
-import type { FastifyInstance, FastifyRequest } from 'fastify';
 
 export type RateLimitTier = 'anonymous' | 'registered' | 'research' | 'internal';
 

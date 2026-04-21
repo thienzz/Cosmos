@@ -1,7 +1,7 @@
+import type { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 import Redis, { type RedisOptions } from 'ioredis';
 
-import type { FastifyInstance } from 'fastify';
 
 export interface RedisPluginOptions {
   readonly url?: string;

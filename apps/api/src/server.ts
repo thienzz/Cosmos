@@ -1,3 +1,4 @@
+import type { Client as EsClient } from '@elastic/elasticsearch';
 import cors from '@fastify/cors';
 import etag from '@fastify/etag';
 import Fastify, { type FastifyInstance } from 'fastify';
@@ -11,7 +12,6 @@ import { entityRoutes } from './routes/entities.js';
 import { healthRoutes } from './routes/health.js';
 import { searchRoutes } from './routes/search.js';
 import { solarSystemRoutes } from './routes/solar-system.js';
-import type { Client as EsClient } from '@elastic/elasticsearch';
 
 export interface BuildServerOptions {
   readonly logLevel?: string;

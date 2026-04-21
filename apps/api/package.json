@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@cosmos/shared-types": "workspace:*",
-    "@elastic/elasticsearch": "^9.3.4",
+    "@elastic/elasticsearch": "^8.19.1",
     "@fastify/cors": "^9.0.0",
     "@fastify/etag": "^5.2.0",
     "@fastify/rate-limit": "^9.0.0",

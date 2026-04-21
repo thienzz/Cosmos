@@ -162,7 +162,7 @@ curl -sf http://localhost:3010/health | jq .status   # "ok"
 
 ## Phase B — API MVP (12 tasks, ~30h)
 
-### T-B-01 — Install deps + base structure 🟢
+### T-B-01 — Install deps + base structure 🟢 ✅ DONE 9a2e82f 2026-04-21
 **Depends:** T-A-06  **Est:** 30m
 **Goal:** All API deps present; folder structure ready.
 **Do:**
@@ -173,7 +173,7 @@ curl -sf http://localhost:3010/health | jq .status   # "ok"
 
 ---
 
-### T-B-02 — `db/pool.ts` — Postgres pool + parameterized query helper 🟡
+### T-B-02 — `db/pool.ts` — Postgres pool + parameterized query helper 🟡 ✅ DONE 005a333 2026-04-21
 **Depends:** T-B-01  **Est:** 2h
 **Goal:** Single source of DB connections; enforces parameterized queries.
 **Files:** `apps/api/src/db/pool.ts`, `apps/api/tests/db.test.ts`
@@ -191,7 +191,7 @@ pnpm --filter api test src/db
 
 ---
 
-### T-B-03 — `es/client.ts` + autocomplete index schema 🟡
+### T-B-03 — `es/client.ts` + autocomplete index schema 🟡 ✅ DONE 4d57f7e 2026-04-21
 **Depends:** T-B-01  **Est:** 3h
 **Goal:** Elasticsearch client; `entities_autocomplete` index exists with `completion` field type.
 **Files:**
@@ -225,7 +225,7 @@ curl -sf http://localhost:9200/entities_autocomplete/_mapping | jq '.entities_au
 
 ---
 
-### T-B-04 — Redis-backed rate-limit middleware 🟡
+### T-B-04 — Redis-backed rate-limit middleware 🟡 ✅ DONE 668ef33 2026-04-21
 **Depends:** T-B-01  **Est:** 2h
 **Goal:** `@fastify/rate-limit` with Redis store. 60/min anonymous, 300/min authenticated, per Doc 26 §13.
 **Files:** `apps/api/src/middleware/rate-limit.ts`, `apps/api/src/plugins/redis.ts`
@@ -244,7 +244,7 @@ for i in {1..70}; do curl -s -o /dev/null -w '%{http_code}\n' http://localhost:3
 
 ---
 
-### T-B-05 — `GET /v1/entities/ent/:ent_id` 🟡
+### T-B-05 — `GET /v1/entities/ent/:ent_id` 🟡 ✅ DONE fd1d540 2026-04-21
 **Depends:** T-B-02, T-B-04  **Est:** 2h
 **Goal:** Fetch entity by string ent_id. Doc 26 §5.2 exact response schema.
 **Files:**
@@ -269,7 +269,7 @@ curl -o /dev/null -w '%{http_code}\n' http://localhost:3010/v1/entities/ent/NONE
 
 ---
 
-### T-B-06 — `GET /v1/entities/:id` (numeric) 🟡
+### T-B-06 — `GET /v1/entities/:id` (numeric) 🟡 ✅ DONE fd1d540 2026-04-21
 **Depends:** T-B-05  **Est:** 1h
 **Goal:** Fetch by NAIF id or numeric catalog id.
 **Files:** `apps/api/src/routes/entities.ts` (extend)
@@ -282,7 +282,7 @@ curl -o /dev/null -w '%{http_code}\n' http://localhost:3010/v1/entities/ent/NONE
 
 ---
 
-### T-B-07 — `GET /v1/search/autocomplete` 🟡
+### T-B-07 — `GET /v1/search/autocomplete` 🟡 ✅ DONE c285b5a 2026-04-21
 **Depends:** T-B-03, T-B-04  **Est:** 3h
 **Goal:** Typing-speed prefix suggestions via Elasticsearch completion suggester.
 **Files:** `apps/api/src/routes/search.ts`, `apps/api/tests/routes/search.test.ts`
@@ -306,7 +306,7 @@ curl -sf 'http://localhost:3010/v1/search/autocomplete?q=androm' -w '%{time_tota
 
 ---
 
-### T-B-08 — `GET /v1/search` (full-text) 🟡
+### T-B-08 — `GET /v1/search` (full-text) 🟡 ✅ DONE c285b5a 2026-04-21
 **Depends:** T-B-07  **Est:** 2h
 **Goal:** Full-text entity search with filters.
 **Files:** `apps/api/src/routes/search.ts` (extend)
@@ -323,7 +323,7 @@ curl -sf 'http://localhost:3010/v1/search?q=andromeda&category=galaxies' | jq '.
 
 ---
 
-### T-B-09 — `GET /v1/search/cone` 🟡
+### T-B-09 — `GET /v1/search/cone` 🟡 ✅ DONE c285b5a 2026-04-21
 **Depends:** T-B-02  **Est:** 2h
 **Goal:** Spatial cone search via PostGIS.
 **Files:** `apps/api/src/routes/search.ts` (extend)
@@ -341,7 +341,7 @@ curl -sf 'http://localhost:3010/v1/search/cone?ra=101.2875&dec=-16.7161&radius_d
 
 ---
 
-### T-B-10 — `GET /v1/solar-system/bodies` 🟡
+### T-B-10 — `GET /v1/solar-system/bodies` 🟡 ✅ DONE 18124ce 2026-04-21
 **Depends:** T-B-05  **Est:** 2h
 **Goal:** List solar system bodies + per-body details.
 **Files:** `apps/api/src/routes/solar-system.ts`
@@ -359,7 +359,7 @@ curl -sf http://localhost:3010/v1/solar-system/bodies/399 | jq '.name'  # "Earth
 
 ---
 
-### T-B-11 — Client auto-fallback to localSearchIndex 🟢
+### T-B-11 — Client auto-fallback to localSearchIndex 🟢 ✅ DONE fe5a8fd 2026-04-21
 **Depends:** T-B-07  **Est:** 2h
 **Goal:** When API is down or returns 5xx, client transparently falls back to in-memory index.
 **Files:** `apps/web/src/api/apiClient.ts`, `apps/web/src/api/search.ts`
