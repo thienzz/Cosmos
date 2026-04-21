@@ -18,7 +18,8 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "test:e2e": "turbo run test:e2e",
-    "clean": "turbo run clean && rm -rf node_modules"
+    "clean": "turbo run clean && rm -rf node_modules",
+    "seed:export": "pnpm --filter @cosmos/web seed:export"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
