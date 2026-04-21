@@ -444,7 +444,7 @@ pytest tests/test_seed.py
 
 ---
 
-### T-C-03 — Populate Elasticsearch autocomplete 🟡
+### T-C-03 — Populate Elasticsearch autocomplete 🟡 ✅ DONE cfa1beb 2026-04-22
 **Depends:** T-C-02, T-B-03  **Est:** 2h
 **Goal:** After Postgres load, bulk-index into ES autocomplete index.
 **Files:** `apps/etl/cosmos_etl/seed/to_elasticsearch.py`
