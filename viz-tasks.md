@@ -127,7 +127,7 @@ docker stop $(docker ps -lq)
 
 ---
 
-### T-A-06 — First `docker compose up -d` end-to-end 🟡
+### T-A-06 — First `docker compose up -d` end-to-end 🟡 ✅ DONE 6890e99 2026-04-21
 **Depends:** T-A-03, T-A-04, T-A-05  **Est:** 2h
 **Goal:** Clean-slate `docker compose up -d` + migration → all services healthy.
 **Files:** —
