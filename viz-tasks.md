@@ -146,7 +146,7 @@ curl -sf http://localhost:3000/health | jq .status   # "ok"
 
 ---
 
-### T-A-07 — CI: run migrations + smoke test on PR 🟢
+### T-A-07 — CI: run migrations + smoke test on PR 🟢 ✅ DONE 00ada7a 2026-04-21
 **Depends:** T-A-06  **Est:** 2h
 **Goal:** GitHub Actions workflow runs `docker compose up -d` + migrations + health check on every PR.
 **Files:** `.github/workflows/ci-backend.yml` (new)
