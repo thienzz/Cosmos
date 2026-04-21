@@ -20,16 +20,16 @@ import {
   type PlanetKind,
 } from '@/utils/planetPalette';
 
-import { AsteroidFieldRenderer, type AsteroidFieldRendererOptions } from './AsteroidFieldRenderer';
-import type { EphemerisSampler, Vec3Km } from './EphemerisSampler';
-import { keplerPosition } from './keplerianOrbit';
-import { createMoonMaterial, type MoonMaterialHandle } from './MoonMaterial';
-import { NamedCometRenderer } from './NamedCometRenderer';
 import {
   applyEntityToggles,
   MOON_KIND_TO_ENT_ID,
   PLANET_KIND_TO_ENT_ID,
 } from './applyEntityToggles';
+import { AsteroidFieldRenderer, type AsteroidFieldRendererOptions } from './AsteroidFieldRenderer';
+import type { EphemerisSampler, Vec3Km } from './EphemerisSampler';
+import { keplerPosition } from './keplerianOrbit';
+import { createMoonMaterial, type MoonMaterialHandle } from './MoonMaterial';
+import { NamedCometRenderer } from './NamedCometRenderer';
 import { createPlanetMaterial, type PlanetMaterialHandle } from './PlanetMaterial';
 import { createRingMaterial, type RingMaterialHandle } from './RingMaterial';
 import type { GpuLifecycleHook } from './SceneManager';

@@ -11,8 +11,8 @@
 
 import { parseTileManifest, type TileManifestDocument } from '@cosmos/tile-decoder';
 
-import { apiConfig } from './config';
 import { apiGet, apiGetBinary, type BinaryRequestOptions, type BinaryResponse } from './client';
+import { apiConfig } from './config';
 
 export interface TileFetchOptions {
   signal?: AbortSignal;

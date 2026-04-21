@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import type * as THREE from 'three';
 import { describe, expect, it } from 'vitest';
 
 import { NAMED_COMETS } from '@/data/namedComets';

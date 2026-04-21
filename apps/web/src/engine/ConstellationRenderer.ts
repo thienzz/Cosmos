@@ -39,6 +39,7 @@ import {
   type ConstellationMeta,
   type IauNamedStar,
 } from '@/data/constellations';
+
 import { type EntityLabelOverlay, type LabelHandle } from './EntityLabelOverlay';
 import type { GpuLifecycleHook } from './gpuLifecycle';
 

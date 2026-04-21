@@ -30,22 +30,10 @@
 import type { AutocompleteItem, TextSearchItem } from '@/api/search';
 import { isGasGiant, type PlanetKind } from '@/utils/planetPalette';
 
-import {
-  DWARF_PLANETS,
-  MAJOR_MOONS,
-  PLANETS,
-  SUN,
-  type BodyKind,
-  type SolarSystemBody,
-} from './solarSystemCatalog';
-import { NAMED_ASTEROIDS } from './namedAsteroids';
-import { NAMED_COMETS } from './namedComets';
-import { NAMED_MINOR_MOONS } from './minorMoons';
-import { NOTABLE_EXOPLANETS } from './exoplanetCatalog';
 import { IAU_NAMED_STARS, IAU_CONSTELLATIONS } from './constellations';
-import { GALAXY_CATALOG } from './galaxyCatalog';
-import { NEBULA_CATALOG } from './nebulaCatalog';
+import { NOTABLE_EXOPLANETS } from './exoplanetCatalog';
 import { EXOTIC_CATALOG } from './exoticCatalog';
+import { GALAXY_CATALOG } from './galaxyCatalog';
 import {
   HARRIS_DIAS_OPEN_CLUSTERS,
   HARRIS_GLOBULAR_CLUSTERS,
@@ -56,6 +44,18 @@ import {
   COSMIC_VOIDS,
   LYMAN_ALPHA_BLOBS,
 } from './largeScaleStructureCatalog';
+import { NAMED_MINOR_MOONS } from './minorMoons';
+import { NAMED_ASTEROIDS } from './namedAsteroids';
+import { NAMED_COMETS } from './namedComets';
+import { NEBULA_CATALOG } from './nebulaCatalog';
+import {
+  DWARF_PLANETS,
+  MAJOR_MOONS,
+  PLANETS,
+  SUN,
+  type BodyKind,
+  type SolarSystemBody,
+} from './solarSystemCatalog';
 
 /** Doc 26 §6.2 category ids. Kept in sync with SearchPanel `CATEGORY_OPTIONS`. */
 const CATEGORY: Record<number, { id: number; name: string }> = {

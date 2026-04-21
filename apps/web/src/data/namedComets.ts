@@ -21,8 +21,8 @@
  *   1_000_007  2I/Borisov (interstellar)
  */
 
-import type { SolarSystemBody } from './solarSystemCatalog';
 import type { SmallBodySubtype } from './proceduralMinorBodies';
+import type { SolarSystemBody } from './solarSystemCatalog';
 
 const AU_KM = 149_597_870.7;
 const yr = (p: number): number => p * 365.25;

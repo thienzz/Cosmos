@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
+import { ALL_PLANET_KINDS, PLANET_ENT_ID } from '@/utils/planetPalette';
+
 import {
   NOTABLE_EXOPLANETS,
   findExoplanet,
   getExoplanetCatalog,
   synthesizeExoplanetSeed,
 } from '../exoplanetCatalog';
-import { ALL_PLANET_KINDS, PLANET_ENT_ID } from '@/utils/planetPalette';
 
 describe('exoplanetCatalog', () => {
   it('ships ≥ 5,500 confirmed exoplanets (T42 TS-DATA requirement)', () => {

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
+import { float16ToFloat32 } from '../float16';
+import { float32ToFloat16 } from '../float16Encode';
 import { decodeStarTile, decodeStarTileToBuffers } from '../starTile';
 import { encodeStarTile, packColorIndex, packMagnitude } from '../starTileEncode';
-import { float32ToFloat16 } from '../float16Encode';
-import { float16ToFloat32 } from '../float16';
 
 describe('encodeStarTile', () => {
   it('round-trips header + records through the decoder', () => {

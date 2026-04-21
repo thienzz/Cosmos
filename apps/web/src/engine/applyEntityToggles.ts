@@ -4,12 +4,12 @@ import {
 } from '@cosmos/shared-types';
 import * as THREE from 'three';
 
+import { useEntityToggleStore } from '@/stores/entityToggleStore';
 import type { ExoticKind } from '@/utils/exoticPalette';
 import type { GalaxyKind } from '@/utils/galaxyPalette';
 import type { MoonKind } from '@/utils/moonPalette';
 import type { NebulaKind } from '@/utils/nebulaPalette';
 import type { PlanetKind } from '@/utils/planetPalette';
-import { useEntityToggleStore } from '@/stores/entityToggleStore';
 
 /**
  * T52 — hot-path adapter between `entityToggleStore` and `ShaderMaterial`.

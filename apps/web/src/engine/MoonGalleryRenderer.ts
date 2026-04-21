@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import { ALL_MOON_KINDS, type MoonKind } from '@/utils/moonPalette';
 
 import { applyEntityToggles, MOON_KIND_TO_ENT_ID } from './applyEntityToggles';
-
 import { createMoonMaterial, type MoonMaterialHandle } from './MoonMaterial';
 import type { GpuLifecycleHook } from './SceneManager';
 

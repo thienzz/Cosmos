@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
+import { NAMED_ASTEROID_NAIF_IDS } from '../namedAsteroids';
 import {
   DWARF_PLANETS,
   MAJOR_MOONS,
@@ -12,7 +13,6 @@ import {
   renderableBodies,
   solarSystemBodyCount,
 } from '../solarSystemCatalog';
-import { NAMED_ASTEROID_NAIF_IDS } from '../namedAsteroids';
 
 describe('solarSystemCatalog composition', () => {
   it('contains the Sun + 8 planets + dwarf planets + major moons', () => {

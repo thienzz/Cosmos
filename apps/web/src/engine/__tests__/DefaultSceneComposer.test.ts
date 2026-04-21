@@ -1,5 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
+import { useCameraStore } from '@/stores/cameraStore';
+import { useModeStore } from '@/stores/modeStore';
+import { useUIStore } from '@/stores/uiStore';
+
 import {
   DefaultSceneComposer,
   isLayerVisible,
@@ -7,9 +11,6 @@ import {
   type SceneLayerHandles,
   type VisibilityHandle,
 } from '../DefaultSceneComposer';
-import { useCameraStore } from '@/stores/cameraStore';
-import { useModeStore } from '@/stores/modeStore';
-import { useUIStore } from '@/stores/uiStore';
 
 type FullHandles = Record<SceneLayer, VisibilityHandle>;
 

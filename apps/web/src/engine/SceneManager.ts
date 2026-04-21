@@ -10,8 +10,8 @@ import {
   type WsEphemerisPushMessage,
 } from '@/api';
 import { entityDataByNaif, entityPreviewByNaif } from '@/data/bodyToEntity';
-import { bodyById } from '@/data/solarSystemCatalog';
 import { IAU_NAMED_STARS } from '@/data/constellations';
+import { bodyById } from '@/data/solarSystemCatalog';
 import { generateStarSeed, type StarAnchor } from '@/data/starSeed';
 import { useCameraStore } from '@/stores/cameraStore';
 import { useModeStore } from '@/stores/modeStore';
@@ -20,6 +20,7 @@ import { useSettingsStore } from '@/stores/settingsStore';
 import { useTileStore } from '@/stores/tileStore';
 import { useTimeStore } from '@/stores/timeStore';
 import type { TileAddress } from '@/stores/types';
+import type { AppMode, ScaleRegime } from '@/stores/types';
 import { useUIStore } from '@/stores/uiStore';
 
 import { BlackHoleLensingPass } from './BlackHoleLensingPass';
@@ -29,31 +30,31 @@ import {
   ConstellationRenderer,
   type ConstellationRendererOptions,
 } from './ConstellationRenderer';
-import { DefaultSceneComposer, type SceneLayerHandles } from './DefaultSceneComposer';
 import {
   CosmicWebRenderer,
   DEFAULT_COSMIC_WEB,
   type CosmicWebRendererOptions,
 } from './CosmicWebRenderer';
-import { EntityLabelOverlay } from './EntityLabelOverlay';
-import {
-  LargeScaleStructureRenderer,
-  type LargeScaleStructureRendererOptions,
-} from './LargeScaleStructureRenderer';
+import { DefaultSceneComposer, type SceneLayerHandles } from './DefaultSceneComposer';
 import { registerEngineBridge } from './engineBridge';
+import { EntityLabelOverlay } from './EntityLabelOverlay';
 import { EphemerisSampler, type EphemerisSamplerEvent } from './EphemerisSampler';
+import { ExoplanetGalleryRenderer } from './ExoplanetGalleryRenderer';
 import {
   ExoticGalleryRenderer,
   type ExoticGalleryOptions,
 } from './ExoticGalleryRenderer';
 import { approachDistanceForRadius } from './FlyToAnimator';
-import { SearchTargetMarker } from './SearchTargetMarker';
 import {
   GalaxyGalleryRenderer,
   type GalaxyGalleryOptions,
 } from './GalaxyGalleryRenderer';
 import { probeGpu, type GpuProbe, type GpuTier } from './gpuDetection';
 import type { GpuLifecycleHook } from './gpuLifecycle';
+import {
+  LargeScaleStructureRenderer,
+  type LargeScaleStructureRendererOptions,
+} from './LargeScaleStructureRenderer';
 import {
   MilkyWayInteriorComposer,
   type MilkyWayInteriorOptions,
@@ -74,6 +75,7 @@ import {
   type PerformanceSnapshot,
   type QualityLevel,
 } from './performanceMonitor';
+import { PhenomenaGalleryRenderer } from './PhenomenaGalleryRenderer';
 import { PickingController } from './PickingController';
 import { PlanetGalleryRenderer } from './PlanetGalleryRenderer';
 import {
@@ -86,7 +88,15 @@ import {
   type RegimeTransition,
   type ScaleRegimeControllerOptions,
 } from './ScaleRegimeController';
-import type { AppMode, ScaleRegime } from '@/stores/types';
+import { SearchTargetMarker } from './SearchTargetMarker';
+import { createProceduralSkybox } from './Skybox';
+import { SolarSystemRenderer } from './SolarSystemRenderer';
+import { StarFieldRenderer } from './StarFieldRenderer';
+import { StarTileRenderer, type StarTileRendererOptions } from './StarTileRenderer';
+import { StarTypeGalleryRenderer } from './StarTypeGalleryRenderer';
+import { TileStreamingManager, tilePriorityHintsFromWsUrls, type TileStreamingManagerOptions } from './TileStreamingManager';
+import { TimeEngine } from './TimeEngine';
+import { TourEngine } from './TourEngine';
 
 /**
  * P4 — base WASD translation speed (units/sec) per regime. The solar-system
@@ -180,16 +190,6 @@ const MODE_MOON_ORBIT_SCALE: Record<AppMode, number> = {
   research: 60,           // Doc 23 §3.3 — Luna at 60 R_earth
   guided_tour: 6,
 };
-import { createProceduralSkybox } from './Skybox';
-import { SolarSystemRenderer } from './SolarSystemRenderer';
-import { ExoplanetGalleryRenderer } from './ExoplanetGalleryRenderer';
-import { PhenomenaGalleryRenderer } from './PhenomenaGalleryRenderer';
-import { StarFieldRenderer } from './StarFieldRenderer';
-import { StarTypeGalleryRenderer } from './StarTypeGalleryRenderer';
-import { StarTileRenderer, type StarTileRendererOptions } from './StarTileRenderer';
-import { TileStreamingManager, tilePriorityHintsFromWsUrls, type TileStreamingManagerOptions } from './TileStreamingManager';
-import { TimeEngine } from './TimeEngine';
-import { TourEngine } from './TourEngine';
 
 /**
  * SceneManager bootstraps Three.js r184 with the hard requirements from

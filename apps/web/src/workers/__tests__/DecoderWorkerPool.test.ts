@@ -6,6 +6,7 @@ import {
   type DecodeRequest,
   type DecodeResponse,
 } from '../tileDecoder.worker';
+
 import { buildStarTileBuffer } from './fixtures';
 
 /**

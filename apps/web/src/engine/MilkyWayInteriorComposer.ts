@@ -8,9 +8,10 @@ import mwBandFragSource from '@/shaders/mw-band.frag';
 import mwBandVertSource from '@/shaders/mw-band.vert';
 import zodiacalLightFragSource from '@/shaders/zodiacal-light.frag';
 
+import type { ScaleRegime } from '../stores/types';
+
 import { applyEntityToggles } from './applyEntityToggles';
 import type { GpuLifecycleHook } from './gpuLifecycle';
-import type { ScaleRegime } from '../stores/types';
 
 /**
  * T46a — Milky Way interior view composer (Doc 17 ENT-6010, Doc 19 §S2-S4,
