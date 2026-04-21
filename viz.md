@@ -114,12 +114,36 @@ Verify nothing is listening on the ports we'll grab:
 
 ```bash
 # Windows
-netstat -ano | findstr "5432 6379 9200 3000 3001 3002 5173"
+netstat -ano | findstr "5432 6379 9200 3010 3001 3002 5173"
 # Unix
-lsof -iTCP -sTCP:LISTEN -n -P | egrep ':5432|:6379|:9200|:3000|:3001|:3002|:5173'
+lsof -iTCP -sTCP:LISTEN -n -P | egrep ':5432|:6379|:9200|:3010|:3001|:3002|:5173'
 ```
 
 Expected output: only the Vite dev server on `:5173` (that's ours). Anything else → free the port first.
+
+### 1.4.1 Port conventions — host vs container
+
+The API service runs on container port **3000** but is published on host port
+**3010** by `infra/docker/docker-compose.yml`. The remap exists because host
+port 3000 is routinely held by other local dev servers on this workstation
+(an unrelated WSL-attached Vite instance). Keeping container ports on their
+native values means inter-service URLs inside the compose network stay
+unchanged (`http://api:3000`, etc.); only **host-side verify commands** need
+3010.
+
+| Service | Container port | Host port | Host URL used by verify commands |
+|---|---|---|---|
+| postgres | 5432 | 5432 | `postgresql://cosmos:…@localhost:5432/cosmos` |
+| redis | 6379 | 6379 | `redis://localhost:6379` |
+| elasticsearch | 9200 | 9200 | `http://localhost:9200` |
+| **api** | **3000** | **3010** | `http://localhost:3010/…` |
+| tile-server | 3001 | 3001 | `http://localhost:3001/…` |
+| ephemeris | 3002 | 3002 | `http://localhost:3002/…` |
+
+All subsequent `curl http://localhost:3000/…` references in this file and
+`viz-tasks.md` have been rewritten to **3010** on the host side. If you see
+bare `3000` inside a `Dockerfile` HEALTHCHECK or inside a container-to-container
+URL, it's correct — that's container-internal.
 
 ### 1.5 References
 
@@ -157,7 +181,7 @@ Each phase has:
 
 ### Phase A — Docker bring-up + Postgres schema (P_BE_A)
 
-**Goal:** `docker compose up -d` on a clean checkout starts Postgres 16 + PostGIS 3.4 + Redis 7 + Elasticsearch 8 + api stub + tile-server stub + ephemeris stub. Schemas created. `curl localhost:3000/health` returns 200.
+**Goal:** `docker compose up -d` on a clean checkout starts Postgres 16 + PostGIS 3.4 + Redis 7 + Elasticsearch 8 + api stub + tile-server stub + ephemeris stub. Schemas created. `curl localhost:3010/health` returns 200.
 
 **Files touched:**
 - `infra/docker/docker-compose.yml` — add healthchecks, volume mounts, `.env` support
@@ -229,7 +253,7 @@ curl -sf http://localhost:9200/_cluster/health | jq '.status'
 # Expect: "green" or "yellow"
 
 # A.5 API health
-curl -sf http://localhost:3000/health | jq
+curl -sf http://localhost:3010/health | jq
 # Expect: { "status": "ok", "uptime": <number>, "version": "0.1.0" }
 
 # A.6 Typecheck still clean
@@ -252,7 +276,7 @@ git revert <phase-a-sha>
 
 ### Phase B — API Gateway MVP (P_BE_B)
 
-**Goal:** `/entities/ent/{ent_id}` and `/search/autocomplete` work against Postgres + Elasticsearch. Client can toggle `VITE_API_BASE_URL=http://localhost:3000/v1` and search/lookups hit the backend instead of TS fallback. Client fallback path still works when backend is down.
+**Goal:** `/entities/ent/{ent_id}` and `/search/autocomplete` work against Postgres + Elasticsearch. Client can toggle `VITE_API_BASE_URL=http://localhost:3010/v1` and search/lookups hit the backend instead of TS fallback. Client fallback path still works when backend is down.
 
 **Files touched:**
 - `apps/api/src/routes/entities.ts` — GET /entities/ent/:ent_id, GET /entities/:id
@@ -263,7 +287,7 @@ git revert <phase-a-sha>
 - `apps/api/src/middleware/rate-limit.ts` — Redis-backed token bucket (Doc 26 §13)
 - `apps/api/tests/*.test.ts` — integration tests with testcontainers
 - `apps/web/src/api/apiClient.ts` — already exists; add automatic fallback to `localSearchIndex` on 5xx / network error
-- `apps/web/.env.development` — `VITE_API_BASE_URL=http://localhost:3000/v1`
+- `apps/web/.env.development` — `VITE_API_BASE_URL=http://localhost:3010/v1`
 
 **Steps:**
 
@@ -291,15 +315,15 @@ VALUES('TEST-andromeda', 'Andromeda Galaxy', 'spiral', 'galaxies',
 "
 
 # B.2 Fetch it via API
-curl -sf http://localhost:3000/v1/entities/ent/TEST-andromeda | jq
+curl -sf http://localhost:3010/v1/entities/ent/TEST-andromeda | jq
 # Expect: { ent_id: 'TEST-andromeda', name: 'Andromeda Galaxy', kind: 'spiral', ... }
 
 # B.3 Autocomplete hits Elasticsearch
-curl -sf 'http://localhost:3000/v1/search/autocomplete?q=androm' | jq '.suggestions[0]'
+curl -sf 'http://localhost:3010/v1/search/autocomplete?q=androm' | jq '.suggestions[0]'
 # Expect: { text: 'Andromeda Galaxy', ent_id: 'TEST-andromeda', ... }
 
 # B.4 Rate limiting
-for i in {1..100}; do curl -so /dev/null -w "%{http_code}\n" http://localhost:3000/v1/search/autocomplete?q=x; done | sort | uniq -c
+for i in {1..100}; do curl -so /dev/null -w "%{http_code}\n" http://localhost:3010/v1/search/autocomplete?q=x; done | sort | uniq -c
 # Expect: some 429s once you pass 60/min
 ```
 
@@ -309,7 +333,7 @@ for i in {1..100}; do curl -so /dev/null -w "%{http_code}\n" http://localhost:30
 // B.5 — inside preview_eval. Client should route via API and succeed.
 (async () => {
   // Flip to real API
-  localStorage.setItem('VITE_API_BASE_URL_OVERRIDE', 'http://localhost:3000/v1');
+  localStorage.setItem('VITE_API_BASE_URL_OVERRIDE', 'http://localhost:3010/v1');
   window.location.reload();
   await new Promise(r => setTimeout(r, 3500));
   // Now perform a search
@@ -405,7 +429,7 @@ SELECT category, count(*) FROM entities GROUP BY category ORDER BY 2 DESC;
 # Expect: galaxies 38+, nebulae 40+, stars 180+, exotic 18+, small_bodies 20+, etc.
 
 # C.4 Andromeda via API matches TS values
-curl -sf http://localhost:3000/v1/entities/ent/GAL-m31 | jq '{ra_deg, dec_deg, distance_pc}'
+curl -sf http://localhost:3010/v1/entities/ent/GAL-m31 | jq '{ra_deg, dec_deg, distance_pc}'
 # Expect: { ra_deg: 10.6847, dec_deg: 41.2688, distance_pc: 778000 }
 
 # C.5 Elasticsearch index populated
@@ -419,7 +443,7 @@ curl -sf http://localhost:9200/entities_autocomplete/_count | jq
 // C.6 — same search should now hit backend (not fallback) and return identical results.
 (async () => {
   // Ensure API is the source
-  localStorage.setItem('VITE_API_BASE_URL_OVERRIDE', 'http://localhost:3000/v1');
+  localStorage.setItem('VITE_API_BASE_URL_OVERRIDE', 'http://localhost:3010/v1');
   window.location.reload();
   await new Promise(r => setTimeout(r, 3500));
 
@@ -502,7 +526,7 @@ SELECT ent_id, name, distance_pc FROM entities WHERE name IN ('Sirius', 'Vega', 
 # Expect: 3 rows with values close to the existing TS catalog (Doc 33 tolerance ±5%).
 
 # D.3 Cone search returns neighbors of Sirius within 5 pc
-curl -sf 'http://localhost:3000/v1/search/cone?ra=101.2875&dec=-16.7161&radius_deg=10&max_distance_pc=5' | jq '.count, .items[0]'
+curl -sf 'http://localhost:3010/v1/search/cone?ra=101.2875&dec=-16.7161&radius_deg=10&max_distance_pc=5' | jq '.count, .items[0]'
 # Expect: count ≥ 5 (Procyon, Ross 614, etc.)
 ```
 
@@ -1013,7 +1037,7 @@ At end-state, the client seed catalog becomes what it was always meant to be: a 
 # Quick state check
 docker compose ps
 docker exec cosmos-postgres psql -U cosmos -d cosmos -c "SELECT count(*) FROM entities;"
-curl -sf http://localhost:3000/health
+curl -sf http://localhost:3010/health
 curl -sf http://localhost:3001/health
 curl -sf http://localhost:9200/_cluster/health
 
