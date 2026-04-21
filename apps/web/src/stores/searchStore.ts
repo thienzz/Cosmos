@@ -223,6 +223,10 @@ export const useSearchStore = create<SearchState>()((set, get) => ({
       // Backend unreachable — fall back to the local in-memory catalog so the
       // user can still resolve Sun + planets + named bodies + notable
       // exoplanets. The message stays visible as a dev hint but results flow.
+      if (!localFallbackActive) {
+        // eslint-disable-next-line no-console
+        console.warn('[api] falling back to local seed (autocomplete)', err);
+      }
       localFallbackActive = true;
       const local = searchLocalAutocomplete(trimmed, {
         category: filters.category ?? null,
@@ -284,6 +288,10 @@ export const useSearchStore = create<SearchState>()((set, get) => ({
     } catch (err) {
       if (myId !== searchRequestId) return;
       // Offline-dev fallback: scan the local catalog for the same query.
+      if (!localFallbackActive) {
+        // eslint-disable-next-line no-console
+        console.warn('[api] falling back to local seed (text search)', err);
+      }
       localFallbackActive = true;
       const local = searchLocalText(trimmed, {
         category: filters.category ?? null,

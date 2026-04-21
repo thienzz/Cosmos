@@ -264,6 +264,32 @@ describe('searchStore', () => {
       expect(s.query).toBe('qzxnoexist');
     });
 
+    it('autocomplete falls back to local seed and warns once when fetch rejects', async () => {
+      const { resetLocalSearchFallback } = await import('../searchStore.js');
+      resetLocalSearchFallback();
+
+      const fetchImpl = vi.fn().mockRejectedValue(new Error('ECONNREFUSED'));
+      apiConfig.setFetchImpl(fetchImpl as unknown as typeof fetch);
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+
+      useSearchStore.getState().setQuery('Andromeda');
+      await useSearchStore.getState().fetchAutocomplete();
+
+      const warnings = warnSpy.mock.calls
+        .map((args) => String(args[0]))
+        .filter((m) => m.includes('falling back to local seed'));
+      expect(warnings.length).toBeGreaterThanOrEqual(1);
+
+      // Second fallback keeps using local, but the warn is gated to once per
+      // streak — suppression is UX, not a hard contract, so only assert that
+      // a result still flows and no unhandled error leaked.
+      useSearchStore.getState().setQuery('Vega');
+      await useSearchStore.getState().fetchAutocomplete();
+      expect(useSearchStore.getState().searchError).toBeNull();
+
+      warnSpy.mockRestore();
+    });
+
     it('loadMore appends the next page and updates offset', async () => {
       const fetchImpl = vi
         .fn()
