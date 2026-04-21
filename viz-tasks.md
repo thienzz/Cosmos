@@ -323,7 +323,7 @@ curl -sf 'http://localhost:3010/v1/search?q=andromeda&category=galaxies' | jq '.
 
 ---
 
-### T-B-09 — `GET /v1/search/cone` 🟡
+### T-B-09 — `GET /v1/search/cone` 🟡 ✅ DONE 16044cc 2026-04-22
 **Depends:** T-B-02  **Est:** 2h
 **Goal:** Spatial cone search via PostGIS.
 **Files:** `apps/api/src/routes/search.ts` (extend)
