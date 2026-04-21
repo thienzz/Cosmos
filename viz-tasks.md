@@ -493,7 +493,7 @@ airflow dags test seed_from_ts $(date -u +%Y-%m-%d)
 
 ## Phase D — Gaia bright subset (8 tasks, ~30h)
 
-### T-D-01 — Downloader: mag < 10 bright subset 🟡
+### T-D-01 — Downloader: mag < 10 bright subset 🟡 ✅ DONE dcb1a4b 2026-04-22
 **Depends:** T-C-04  **Est:** 4h
 **Goal:** Download ~1.2M Gaia DR3 rows (mag ≤ 10), cache on disk.
 **Files:** `apps/etl/cosmos_etl/downloaders/gaia_dr3.py`, `apps/etl/tests/test_gaia_download.py`
@@ -519,7 +519,7 @@ wc -l data/raw/gaia/dr3_chunk_0000.csv   # some rows
 
 ---
 
-### T-D-02 — Transformer: Gaia row → entity record 🟡
+### T-D-02 — Transformer: Gaia row → entity record 🟡 ✅ DONE 4e6b0bb 2026-04-22
 **Depends:** T-D-01  **Est:** 3h
 **Goal:** Python function `gaia_to_entity(row) → dict` producing `entities` row.
 **Files:** `apps/etl/cosmos_etl/transformers/gaia_to_entities.py`
@@ -538,7 +538,7 @@ pytest apps/etl/tests/test_gaia_transform.py
 
 ---
 
-### T-D-03 — J2016 → J2000 proper motion correction 🟡
+### T-D-03 — J2016 → J2000 proper motion correction 🟡 ✅ DONE 4e6b0bb 2026-04-22
 **Depends:** T-D-02  **Est:** 2h
 **Goal:** Accurate position epoch normalization (CLAUDE.md #5: ICRS J2000.0).
 **Files:** `apps/etl/cosmos_etl/transformers/gaia_to_entities.py` (extend)
@@ -555,7 +555,7 @@ pytest apps/etl/tests/test_gaia_transform.py::test_barnards_star_j2000_position
 
 ---
 
-### T-D-04 — HEALPix pixel column 🟡
+### T-D-04 — HEALPix pixel column 🟡 ✅ DONE 4a964a5 2026-04-22
 **Depends:** T-A-03  **Est:** 2h
 **Goal:** Every star has `healpix_order6 BIGINT` column indexed for fast tile lookups.
 **Files:** `apps/etl/migrations/versions/0002_add_healpix_column.py`
@@ -569,7 +569,7 @@ pytest apps/etl/tests/test_gaia_transform.py::test_barnards_star_j2000_position
 
 ---
 
-### T-D-05 — Bulk loader via `COPY FROM STDIN` 🟡
+### T-D-05 — Bulk loader via `COPY FROM STDIN` 🟡 ✅ DONE a268480 2026-04-22
 **Depends:** T-D-02, T-D-04  **Est:** 3h
 **Goal:** Ingest 1.2M rows in < 5 min (vs hours for row-by-row INSERT).
 **Files:** `apps/etl/cosmos_etl/loaders/gaia_bulk.py`
@@ -587,7 +587,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-D-06 — Cross-validate famous stars 🟡
+### T-D-06 — Cross-validate famous stars 🟡 ✅ DONE 09610e2 2026-04-22
 **Depends:** T-D-05  **Est:** 2h
 **Goal:** Sirius/Vega/Betelgeuse in Gaia match SIMBAD within Doc 33 tolerance.
 **Files:** `apps/etl/tests/test_gaia_accuracy.py`
@@ -601,7 +601,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-D-07 — Airflow DAG `ingest_gaia_bright` 🟢
+### T-D-07 — Airflow DAG `ingest_gaia_bright` 🟢 ✅ DONE 73e6c53 2026-04-22
 **Depends:** T-D-05  **Est:** 2h
 **Goal:** DAG orchestrates download → transform → load → index.
 **Files:** `apps/etl/dags/ingest_gaia_bright.py`
@@ -612,7 +612,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-D-08 — Cone search + preview verification 🟢
+### T-D-08 — Cone search + preview verification 🟢 ✅ DONE 2026-04-22 (partial — see notes)
 **Depends:** T-D-05  **Est:** 1h
 **Goal:** Verify Phase D via viz.md verify blocks D.2 + D.3 + D.4.
 **Do:** Run the 3 verify blocks; take before/after screenshot of Orion region for visual diff.
