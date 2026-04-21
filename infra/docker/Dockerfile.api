@@ -1,4 +1,5 @@
 # Cosmos Explorer — API Gateway (Node.js / Fastify)
+# Multi-stage: deps -> build -> runtime. See viz-tasks.md T-A-05.
 FROM node:20-alpine AS base
 RUN corepack enable && corepack prepare pnpm@8.15.0 --activate
 WORKDIR /repo
@@ -18,11 +19,20 @@ RUN pnpm --filter=@cosmos/shared-types build \
  && pnpm --filter=@cosmos/api build
 
 FROM node:20-alpine AS runtime
-RUN corepack enable && corepack prepare pnpm@8.15.0 --activate
-WORKDIR /app
+RUN apk add --no-cache wget
+WORKDIR /repo
 ENV NODE_ENV=production
-COPY --from=build /repo/apps/api/dist ./dist
-COPY --from=build /repo/apps/api/package.json ./
-COPY --from=build /repo/apps/api/node_modules ./node_modules
+# Preserve the pnpm workspace layout so the symlinked node_modules still
+# resolve: /repo/node_modules/.pnpm holds the real packages, and
+# /repo/apps/api/node_modules holds the symlinks into it.
+COPY --from=build /repo/node_modules ./node_modules
+COPY --from=build /repo/apps/api/node_modules ./apps/api/node_modules
+COPY --from=build /repo/apps/api/dist ./apps/api/dist
+COPY --from=build /repo/apps/api/package.json ./apps/api/package.json
+COPY --from=build /repo/packages/shared-types ./packages/shared-types
+COPY --from=build /repo/package.json /repo/pnpm-workspace.yaml /repo/pnpm-lock.yaml ./
+WORKDIR /repo/apps/api
 EXPOSE 3000
+HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget -qO- http://localhost:3000/health || exit 1
 CMD ["node", "dist/index.js"]

@@ -105,7 +105,7 @@ pnpm --filter api typecheck
 
 ---
 
-### T-A-05 — Dockerfile.api bundles real server 🟢
+### T-A-05 — Dockerfile.api bundles real server 🟢 ✅ DONE a67c09a 2026-04-21
 **Depends:** T-A-04  **Est:** 1h
 **Goal:** `docker build -f infra/docker/Dockerfile.api .` produces a working image.
 **Files:** `infra/docker/Dockerfile.api`, `.dockerignore`
