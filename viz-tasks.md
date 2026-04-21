@@ -49,7 +49,7 @@ cd infra/docker && docker compose config --quiet   # no warnings
 
 ---
 
-### T-A-03 — Write initial Alembic migration 🟡
+### T-A-03 — Write initial Alembic migration 🟡 ✅ DONE 83b523b 2026-04-21
 **Depends:** T-A-02  **Est:** 3h
 **Goal:** `alembic upgrade head` creates all 8 entity tables + indexes from scratch.
 **Files:**
