@@ -596,8 +596,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-D-07 — Airflow DAG `ingest_gaia_bright` 🟢
-**Depends:** T-D-05  **Est:** 2h
+### T-D-07 — Airflow DAG `ingest_gaia_bright` 🟢 ✅ DONE 0a8fa84 2026-04-22
 **Goal:** DAG orchestrates download → transform → load → index.
 **Files:** `apps/etl/dags/ingest_gaia_bright.py`
 
