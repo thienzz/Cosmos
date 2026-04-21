@@ -342,6 +342,14 @@ export default defineConfig(({ mode }) => ({
     // Override the target via `VITE_DEV_API_TARGET` if you front a remote
     // environment (staging, colleague's tunnel).
     proxy: {
+      // T-H-05: ephemeris service lives on :3002 (Doc 25 §9). Declare it
+      // BEFORE the generic `/v1` proxy so the more-specific prefix wins.
+      // Override via `VITE_DEV_EPHEMERIS_TARGET` for remote environments.
+      '/v1/ephemeris': {
+        target: process.env.VITE_DEV_EPHEMERIS_TARGET ?? 'http://localhost:3002',
+        changeOrigin: true,
+        secure: false,
+      },
       '/v1': {
         target: process.env.VITE_DEV_API_TARGET ?? 'http://localhost:8080',
         changeOrigin: true,
