@@ -583,8 +583,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-D-06 — Cross-validate famous stars 🟡
-**Depends:** T-D-05  **Est:** 2h
+### T-D-06 — Cross-validate famous stars 🟡 ✅ DONE 436e44c 2026-04-22
 **Goal:** Sirius/Vega/Betelgeuse in Gaia match SIMBAD within Doc 33 tolerance.
 **Files:** `apps/etl/tests/test_gaia_accuracy.py`
 
