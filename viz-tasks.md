@@ -77,7 +77,7 @@ docker exec cosmos-postgres psql -U cosmos -d cosmos -c "SELECT postgis_version(
 
 ---
 
-### T-A-04 — Fastify server scaffold + `/health` 🟢
+### T-A-04 — Fastify server scaffold + `/health` 🟢 ✅ DONE 33c6a22 2026-04-21
 **Depends:** T-A-02  **Est:** 2h
 **Goal:** Replace the 5-line stub with a real Fastify server. `/health` returns 200.
 **Files:**
