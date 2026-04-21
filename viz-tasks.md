@@ -566,8 +566,7 @@ pytest apps/etl/tests/test_gaia_transform.py::test_barnards_star_j2000_position
 
 ---
 
-### T-D-05 — Bulk loader via `COPY FROM STDIN` 🟡
-**Depends:** T-D-02, T-D-04  **Est:** 3h
+### T-D-05 — Bulk loader via `COPY FROM STDIN` 🟡 ✅ DONE 4115aed 2026-04-22
 **Goal:** Ingest 1.2M rows in < 5 min (vs hours for row-by-row INSERT).
 **Files:** `apps/etl/cosmos_etl/loaders/gaia_bulk.py`
 
