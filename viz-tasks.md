@@ -694,7 +694,7 @@ xxd /tmp/tile.bin | head -1
 
 ---
 
-### T-E-06 — wrk benchmark → 50k req/s 🟡
+### T-E-06 — wrk benchmark → 50k req/s 🟡 ✅ DONE 4888f24 2026-04-22 (84k req/s via oha)
 **Depends:** T-E-05  **Est:** 2h
 **Goal:** Meet Doc 25 §5 throughput target.
 **Do:**
