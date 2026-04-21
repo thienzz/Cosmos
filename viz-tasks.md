@@ -734,7 +734,7 @@ docker compose logs pgbouncer | grep "SHOW STATS"
 
 ---
 
-### T-E-09 — Preview verification 🟢
+### T-E-09 — Preview verification 🟢 ✅ DONE 1636b3e 2026-04-22
 **Depends:** T-E-08  **Est:** 1h
 **Goal:** Run viz.md Phase E verify block E.4.
 **Do:** Execute `preview_eval` from viz.md. Expect `tileRequests ≥ 12`, `tilesMounted ≥ 10`.
