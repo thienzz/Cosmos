@@ -225,7 +225,7 @@ curl -sf http://localhost:9200/entities_autocomplete/_mapping | jq '.entities_au
 
 ---
 
-### T-B-04 — Redis-backed rate-limit middleware 🟡
+### T-B-04 — Redis-backed rate-limit middleware 🟡 ✅ DONE b54ac22 2026-04-22
 **Depends:** T-B-01  **Est:** 2h
 **Goal:** `@fastify/rate-limit` with Redis store. 60/min anonymous, 300/min authenticated, per Doc 26 §13.
 **Files:** `apps/api/src/middleware/rate-limit.ts`, `apps/api/src/plugins/redis.ts`
