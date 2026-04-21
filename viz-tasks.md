@@ -704,7 +704,7 @@ xxd /tmp/tile.bin | head -1
 
 ---
 
-### T-E-07 — Add pgbouncer to docker-compose 🟡
+### T-E-07 — Add pgbouncer to docker-compose 🟡 ✅ DONE fed7a60 2026-04-22
 **Depends:** T-E-06  **Est:** 2h
 **Goal:** Prevent Postgres connection exhaustion at tile-server scale.
 **Files:** `infra/docker/docker-compose.yml`, `infra/docker/pgbouncer.ini`
