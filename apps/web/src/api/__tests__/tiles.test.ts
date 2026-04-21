@@ -90,6 +90,35 @@ describe('api/tiles', () => {
     expect(response.contentType).toContain('octet-stream');
   });
 
+  it('fetchStarTile routes to VITE_TILE_SERVER_URL when set (T-E-08)', async () => {
+    const buffer = new ArrayBuffer(16);
+    const fetchMock = vi.fn(async () =>
+      binaryResponse(buffer, { headers: { 'x-cache': 'HIT' } }),
+    );
+    apiConfig.setFetchImpl(fetchMock);
+    // VITE_TILE_SERVER_URL includes the `/v1` prefix per .env.example.
+    apiConfig.setTileServerBaseUrl('http://localhost:3001/v1');
+
+    const response = await fetchStarTile('6/12345');
+    expect(response.buffer.byteLength).toBe(16);
+    expect(response.serverCache).toBe('HIT');
+    expect(response.fetchDurationMs).toBeGreaterThanOrEqual(0);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const url = String((fetchMock.mock.calls[0] as unknown as [unknown])[0]);
+    expect(url).toBe('http://localhost:3001/v1/tiles/stars/6/12345');
+  });
+
+  it('fetchStarTile stays on the API gateway when VITE_TILE_SERVER_URL unset', async () => {
+    const buffer = new ArrayBuffer(16);
+    const fetchMock = vi.fn(async () => binaryResponse(buffer));
+    apiConfig.setFetchImpl(fetchMock);
+    // Default: tileServerBaseUrl = null → baseUrl is used.
+    const response = await fetchStarTile('3/12/5/2');
+    expect(response.buffer.byteLength).toBe(16);
+    const url = String((fetchMock.mock.calls[0] as unknown as [unknown])[0]);
+    expect(url).toBe('https://api.test/v1/tiles/stars/3/12/5/2');
+  });
+
   it('fetchStarTile surfaces 404 as an ApiError (TS-TILE-005)', async () => {
     const errorBody = JSON.stringify({
       error: { code: 'TILE_NOT_FOUND', message: 'no such tile', status: 404, request_id: 'r' },

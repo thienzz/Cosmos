@@ -89,6 +89,17 @@ export class TileStreamingManager {
    *  the active regime. Exposed as a counter for smoke tests + telemetry. */
   private regimeFilteredCount = 0;
 
+  // T-E-08 network-stat telemetry. Counters feed `/metrics` and the
+  // streaming smoke-test `preview_eval` block; they're distinct from the
+  // local-disk hit counters because a server-side cache (`x-cache: HIT`)
+  // still counts as a network fetch — it just shows how effective the
+  // CDN / Rust L1 is, not our IDB layer.
+  private networkFetches = 0;
+  private networkFetchMsTotal = 0;
+  private networkFetchMsLastSample = 0;
+  private serverCacheHits = 0;
+  private serverCacheMisses = 0;
+
   constructor(options: TileStreamingManagerOptions = {}) {
     this.maxConcurrent = options.maxConcurrent ?? DEFAULT_MAX_CONCURRENT_FETCHES;
     this.diskCache = options.diskCache ?? new TileDiskCache();
@@ -122,6 +133,35 @@ export class TileStreamingManager {
    *  filter since construction. */
   getRegimeFilteredCount(): number {
     return this.regimeFilteredCount;
+  }
+
+  /**
+   * Snapshot of network fetch stats (T-E-08). Exposes rollup numbers the
+   * smoke tests and `/metrics` can use to verify tile streaming is
+   * actually hitting the Rust tile server and getting warm responses.
+   *
+   * `serverCacheHitRate` is the rate of `x-cache: HIT` responses across
+   * fetches that returned an `x-cache` header — `null` when no server
+   * reported it (older server, misconfigured edge, or mock fetcher).
+   */
+  getNetworkStats(): {
+    fetches: number;
+    avgFetchMs: number;
+    lastFetchMs: number;
+    serverCacheHits: number;
+    serverCacheMisses: number;
+    serverCacheHitRate: number | null;
+  } {
+    const total = this.serverCacheHits + this.serverCacheMisses;
+    return {
+      fetches: this.networkFetches,
+      avgFetchMs:
+        this.networkFetches === 0 ? 0 : this.networkFetchMsTotal / this.networkFetches,
+      lastFetchMs: this.networkFetchMsLastSample,
+      serverCacheHits: this.serverCacheHits,
+      serverCacheMisses: this.serverCacheMisses,
+      serverCacheHitRate: total === 0 ? null : this.serverCacheHits / total,
+    };
   }
 
   /**
@@ -292,6 +332,16 @@ export class TileStreamingManager {
       const manifestVersion = useTileStore.getState().manifestVersion ?? 'unknown';
       const response = await this.fetcher(address, { signal: controller.signal });
       if (controller.signal.aborted) return;
+
+      // Roll up network-fetch telemetry (T-E-08).
+      this.networkFetches += 1;
+      this.networkFetchMsLastSample = response.fetchDurationMs;
+      this.networkFetchMsTotal += response.fetchDurationMs;
+      if (response.serverCache === 'HIT') {
+        this.serverCacheHits += 1;
+      } else if (response.serverCache === 'MISS') {
+        this.serverCacheMisses += 1;
+      }
 
       // Stamp the disk copy with the CURRENT manifest version so a later
       // data_version_update can sweep stale tiles without diffing individual

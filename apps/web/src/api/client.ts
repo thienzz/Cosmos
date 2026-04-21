@@ -397,13 +397,33 @@ export interface BinaryResponse {
   version: string | null;
   /** Content-Type header (diagnostic only). */
   contentType: string | null;
+  /**
+   * `X-Cache` hint from the edge/CDN/tile-server: typically "HIT" for a
+   * cached response, "MISS" for a cold compute, or `null` when absent
+   * (e.g. a custom mock or an older server). The tile streaming manager
+   * uses this to track remote-cache hit rate (T-E-08).
+   */
+  serverCache: string | null;
+  /** Wall-clock duration of the fetch (ms), measured around `fetch()`. */
+  fetchDurationMs: number;
+}
+
+export interface BinaryRequestOptions
+  extends Pick<RequestOptions, 'signal' | 'query' | 'maxRetries'> {
+  /**
+   * Replace `apiConfig.baseUrl` for this request only. Used by
+   * `fetchTileByAddress` to point binary reads at `VITE_TILE_SERVER_URL`
+   * (the Rust tile server) while JSON reads still go through the API
+   * gateway. `null` / unset → use the default base URL.
+   */
+  baseUrlOverride?: string | null;
 }
 
 export async function apiGetBinary(
   path: string,
-  opts: Pick<RequestOptions, 'signal' | 'query' | 'maxRetries'> = {},
+  opts: BinaryRequestOptions = {},
 ): Promise<BinaryResponse> {
-  const url = buildUrl(path, opts.query);
+  const url = buildBinaryUrl(path, opts.baseUrlOverride, opts.query);
   const headers: Record<string, string> = {
     accept: 'application/octet-stream',
   };
@@ -415,6 +435,7 @@ export async function apiGetBinary(
 
   let lastError: ApiError | null = null;
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    const startedAt = nowMs();
     let response: Response;
     try {
       response = await apiConfig.fetchImpl(url, init);
@@ -440,7 +461,34 @@ export async function apiGetBinary(
       buffer,
       version: response.headers.get('x-tile-version'),
       contentType: response.headers.get('content-type'),
+      serverCache: response.headers.get('x-cache'),
+      fetchDurationMs: nowMs() - startedAt,
     };
   }
   throw lastError ?? ApiError.network('exhausted retries');
+}
+
+function buildBinaryUrl(
+  path: string,
+  baseUrlOverride: string | null | undefined,
+  query: RequestOptions['query'],
+): string {
+  if (baseUrlOverride) {
+    const trimmed = baseUrlOverride.replace(/\/+$/, '');
+    const joined = path.startsWith('/') ? `${trimmed}${path}` : `${trimmed}/${path}`;
+    if (!query) return joined;
+    const qs = Object.entries(query)
+      .filter(([, v]) => v !== null && v !== undefined && v !== '')
+      .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
+      .join('&');
+    return qs ? `${joined}?${qs}` : joined;
+  }
+  return buildUrl(path, query);
+}
+
+function nowMs(): number {
+  if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+    return performance.now();
+  }
+  return Date.now();
 }

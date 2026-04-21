@@ -48,8 +48,19 @@ class MemoryDiskCache {
   }
 }
 
-function binaryResponse(buffer: ArrayBuffer, version = 'v1'): BinaryResponse {
-  return { buffer, version, contentType: 'application/octet-stream' };
+function binaryResponse(
+  buffer: ArrayBuffer,
+  version = 'v1',
+  overrides: Partial<BinaryResponse> = {},
+): BinaryResponse {
+  return {
+    buffer,
+    version,
+    contentType: 'application/octet-stream',
+    serverCache: null,
+    fetchDurationMs: 3,
+    ...overrides,
+  };
 }
 
 async function flush(): Promise<void> {
@@ -407,6 +418,64 @@ describe('TileStreamingManager.reprioritize — P3 distance-based updates', () =
     expect(mgr.pendingCount()).toBe(2);
     mgr.reprioritize((a) => (a === 'stars/drop' ? -1 : undefined));
     expect(mgr.pendingCount()).toBe(1);
+    mgr.dispose();
+  });
+
+  it('records network telemetry on network miss (T-E-08)', async () => {
+    const disk = new MemoryDiskCache();
+    const fetcher = vi.fn(async (_address: string) =>
+      binaryResponse(new ArrayBuffer(32), 'v1', {
+        serverCache: 'MISS',
+        fetchDurationMs: 42,
+      }),
+    );
+    const mgr = new TileStreamingManager({
+      diskCache: disk as unknown as never,
+      fetcher: fetcher as unknown as never,
+    });
+    mgr.enqueue([{ address: 'stars/0/0/0/0', priority: 1.0 }]);
+    await flush();
+    await flush();
+
+    const stats = mgr.getNetworkStats();
+    expect(stats.fetches).toBe(1);
+    expect(stats.avgFetchMs).toBe(42);
+    expect(stats.lastFetchMs).toBe(42);
+    expect(stats.serverCacheHits).toBe(0);
+    expect(stats.serverCacheMisses).toBe(1);
+    expect(stats.serverCacheHitRate).toBe(0);
+    mgr.dispose();
+  });
+
+  it('tracks x-cache HIT responses as server-cache hits', async () => {
+    const disk = new MemoryDiskCache();
+    let call = 0;
+    const fetcher = vi.fn(async (_address: string) => {
+      call += 1;
+      return binaryResponse(new ArrayBuffer(16), 'v1', {
+        serverCache: call === 1 ? 'MISS' : 'HIT',
+        fetchDurationMs: call * 10,
+      });
+    });
+    const mgr = new TileStreamingManager({
+      diskCache: disk as unknown as never,
+      fetcher: fetcher as unknown as never,
+      maxConcurrent: 1,
+    });
+    mgr.enqueue([
+      { address: 'stars/a', priority: 1 },
+      { address: 'stars/b', priority: 0.9 },
+      { address: 'stars/c', priority: 0.8 },
+    ]);
+    for (let i = 0; i < 8; i++) await flush();
+
+    const stats = mgr.getNetworkStats();
+    expect(stats.fetches).toBe(3);
+    // Avg of 10 + 20 + 30 = 20.
+    expect(stats.avgFetchMs).toBe(20);
+    expect(stats.serverCacheHits).toBe(2);
+    expect(stats.serverCacheMisses).toBe(1);
+    expect(stats.serverCacheHitRate).toBeCloseTo(2 / 3, 5);
     mgr.dispose();
   });
 
