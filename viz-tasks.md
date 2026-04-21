@@ -13,7 +13,7 @@
 
 ## Phase A — Docker bring-up (7 tasks, ~12h)
 
-### T-A-01 — Create `.env.example` 🟢
+### T-A-01 — Create `.env.example` 🟢 ✅ DONE c52d066 2026-04-21
 **Depends:** —  **Est:** 30m
 **Goal:** One canonical source of env vars for local dev.
 **Files:** `.env.example`, `.gitignore` (add `.env`)
