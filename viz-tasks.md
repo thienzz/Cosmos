@@ -31,7 +31,7 @@ grep -F '.env' .gitignore
 
 ---
 
-### T-A-02 — Docker-compose healthchecks + volume mounts 🟢
+### T-A-02 — Docker-compose healthchecks + volume mounts 🟢 ✅ DONE 5273d23 2026-04-21
 **Depends:** T-A-01  **Est:** 1h
 **Goal:** `docker compose up -d` starts all 6 services and they reach `healthy` status.
 **Files:** `infra/docker/docker-compose.yml`
