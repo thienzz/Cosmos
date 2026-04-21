@@ -244,7 +244,7 @@ for i in {1..70}; do curl -s -o /dev/null -w '%{http_code}\n' http://localhost:3
 
 ---
 
-### T-B-05 — `GET /v1/entities/ent/:ent_id` 🟡
+### T-B-05 — `GET /v1/entities/ent/:ent_id` 🟡 ✅ DONE 0542ba5 2026-04-22
 **Depends:** T-B-02, T-B-04  **Est:** 2h
 **Goal:** Fetch entity by string ent_id. Doc 26 §5.2 exact response schema.
 **Files:**
