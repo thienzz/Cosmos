@@ -1,0 +1,9071 @@
+[
+  {
+    "ent_id": "NAIF-10",
+    "name": "Sun",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "10"
+    ],
+    "catalog_ids": {
+      "client_seed": 10
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-199",
+    "name": "Mercury",
+    "entity_type": null,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "199"
+    ],
+    "catalog_ids": {
+      "client_seed": 199
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-299",
+    "name": "Venus",
+    "entity_type": null,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "299"
+    ],
+    "catalog_ids": {
+      "client_seed": 299
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-399",
+    "name": "Earth",
+    "entity_type": null,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "399"
+    ],
+    "catalog_ids": {
+      "client_seed": 399
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-499",
+    "name": "Mars",
+    "entity_type": null,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "499"
+    ],
+    "catalog_ids": {
+      "client_seed": 499
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-599",
+    "name": "Jupiter",
+    "entity_type": null,
+    "category": 3,
+    "category_name": "Gas giants",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "599"
+    ],
+    "catalog_ids": {
+      "client_seed": 599
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-699",
+    "name": "Saturn",
+    "entity_type": null,
+    "category": 3,
+    "category_name": "Gas giants",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "699"
+    ],
+    "catalog_ids": {
+      "client_seed": 699
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-799",
+    "name": "Uranus",
+    "entity_type": null,
+    "category": 3,
+    "category_name": "Gas giants",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "799"
+    ],
+    "catalog_ids": {
+      "client_seed": 799
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-899",
+    "name": "Neptune",
+    "entity_type": null,
+    "category": 3,
+    "category_name": "Gas giants",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "899"
+    ],
+    "catalog_ids": {
+      "client_seed": 899
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-999",
+    "name": "Pluto",
+    "entity_type": null,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "999"
+    ],
+    "catalog_ids": {
+      "client_seed": 999
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-136199",
+    "name": "Eris",
+    "entity_type": null,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "136199"
+    ],
+    "catalog_ids": {
+      "client_seed": 136199
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-136108",
+    "name": "Haumea",
+    "entity_type": null,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "136108"
+    ],
+    "catalog_ids": {
+      "client_seed": 136108
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-136472",
+    "name": "Makemake",
+    "entity_type": null,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "136472"
+    ],
+    "catalog_ids": {
+      "client_seed": 136472
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2000001",
+    "name": "Ceres",
+    "entity_type": null,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2000001"
+    ],
+    "catalog_ids": {
+      "client_seed": 2000001
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-90377",
+    "name": "Sedna",
+    "entity_type": null,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "90377"
+    ],
+    "catalog_ids": {
+      "client_seed": 90377
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2012113",
+    "name": "2012 VP113",
+    "entity_type": null,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2012113"
+    ],
+    "catalog_ids": {
+      "client_seed": 2012113
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-301",
+    "name": "Moon",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "301"
+    ],
+    "catalog_ids": {
+      "client_seed": 301
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-401",
+    "name": "Phobos",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "401"
+    ],
+    "catalog_ids": {
+      "client_seed": 401
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-402",
+    "name": "Deimos",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "402"
+    ],
+    "catalog_ids": {
+      "client_seed": 402
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-501",
+    "name": "Io",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "501"
+    ],
+    "catalog_ids": {
+      "client_seed": 501
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-502",
+    "name": "Europa",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "502"
+    ],
+    "catalog_ids": {
+      "client_seed": 502
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-503",
+    "name": "Ganymede",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "503"
+    ],
+    "catalog_ids": {
+      "client_seed": 503
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-504",
+    "name": "Callisto",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "504"
+    ],
+    "catalog_ids": {
+      "client_seed": 504
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-601",
+    "name": "Mimas",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "601"
+    ],
+    "catalog_ids": {
+      "client_seed": 601
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-602",
+    "name": "Enceladus",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "602"
+    ],
+    "catalog_ids": {
+      "client_seed": 602
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-603",
+    "name": "Tethys",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "603"
+    ],
+    "catalog_ids": {
+      "client_seed": 603
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-604",
+    "name": "Dione",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "604"
+    ],
+    "catalog_ids": {
+      "client_seed": 604
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-605",
+    "name": "Rhea",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "605"
+    ],
+    "catalog_ids": {
+      "client_seed": 605
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-606",
+    "name": "Titan",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "606"
+    ],
+    "catalog_ids": {
+      "client_seed": 606
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-607",
+    "name": "Hyperion",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "607"
+    ],
+    "catalog_ids": {
+      "client_seed": 607
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-608",
+    "name": "Iapetus",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "608"
+    ],
+    "catalog_ids": {
+      "client_seed": 608
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-701",
+    "name": "Miranda",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "701"
+    ],
+    "catalog_ids": {
+      "client_seed": 701
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-702",
+    "name": "Ariel",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "702"
+    ],
+    "catalog_ids": {
+      "client_seed": 702
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-703",
+    "name": "Umbriel",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "703"
+    ],
+    "catalog_ids": {
+      "client_seed": 703
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-704",
+    "name": "Titania",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "704"
+    ],
+    "catalog_ids": {
+      "client_seed": 704
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-705",
+    "name": "Oberon",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "705"
+    ],
+    "catalog_ids": {
+      "client_seed": 705
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-801",
+    "name": "Triton",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "801"
+    ],
+    "catalog_ids": {
+      "client_seed": 801
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-901",
+    "name": "Charon",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "901"
+    ],
+    "catalog_ids": {
+      "client_seed": 901
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-505",
+    "name": "Amalthea",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "505"
+    ],
+    "catalog_ids": {
+      "client_seed": 505
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-506",
+    "name": "Himalia",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "506"
+    ],
+    "catalog_ids": {
+      "client_seed": 506
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-514",
+    "name": "Thebe",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "514"
+    ],
+    "catalog_ids": {
+      "client_seed": 514
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-515",
+    "name": "Adrastea",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "515"
+    ],
+    "catalog_ids": {
+      "client_seed": 515
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-516",
+    "name": "Metis",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "516"
+    ],
+    "catalog_ids": {
+      "client_seed": 516
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-609",
+    "name": "Phoebe",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "609"
+    ],
+    "catalog_ids": {
+      "client_seed": 609
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-610",
+    "name": "Janus",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "610"
+    ],
+    "catalog_ids": {
+      "client_seed": 610
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-611",
+    "name": "Epimetheus",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "611"
+    ],
+    "catalog_ids": {
+      "client_seed": 611
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-612",
+    "name": "Helene",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "612"
+    ],
+    "catalog_ids": {
+      "client_seed": 612
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-615",
+    "name": "Atlas",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "615"
+    ],
+    "catalog_ids": {
+      "client_seed": 615
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-616",
+    "name": "Prometheus",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "616"
+    ],
+    "catalog_ids": {
+      "client_seed": 616
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-617",
+    "name": "Pandora",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "617"
+    ],
+    "catalog_ids": {
+      "client_seed": 617
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-706",
+    "name": "Puck",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "706"
+    ],
+    "catalog_ids": {
+      "client_seed": 706
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-707",
+    "name": "Sycorax",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "707"
+    ],
+    "catalog_ids": {
+      "client_seed": 707
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-802",
+    "name": "Nereid",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "802"
+    ],
+    "catalog_ids": {
+      "client_seed": 802
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-803",
+    "name": "Naiad",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "803"
+    ],
+    "catalog_ids": {
+      "client_seed": 803
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-804",
+    "name": "Thalassa",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "804"
+    ],
+    "catalog_ids": {
+      "client_seed": 804
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-805",
+    "name": "Despina",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "805"
+    ],
+    "catalog_ids": {
+      "client_seed": 805
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-806",
+    "name": "Galatea",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "806"
+    ],
+    "catalog_ids": {
+      "client_seed": 806
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-807",
+    "name": "Larissa",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "807"
+    ],
+    "catalog_ids": {
+      "client_seed": 807
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-808",
+    "name": "Proteus",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "808"
+    ],
+    "catalog_ids": {
+      "client_seed": 808
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-902",
+    "name": "Nix",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "902"
+    ],
+    "catalog_ids": {
+      "client_seed": 902
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-903",
+    "name": "Hydra",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "903"
+    ],
+    "catalog_ids": {
+      "client_seed": 903
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-904",
+    "name": "Kerberos",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "904"
+    ],
+    "catalog_ids": {
+      "client_seed": 904
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-905",
+    "name": "Styx",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "905"
+    ],
+    "catalog_ids": {
+      "client_seed": 905
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-120002",
+    "name": "Dysnomia",
+    "entity_type": null,
+    "category": 4,
+    "category_name": "Moons",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "120002"
+    ],
+    "catalog_ids": {
+      "client_seed": 120002
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2000002",
+    "name": "Pallas",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2000002"
+    ],
+    "catalog_ids": {
+      "client_seed": 2000002
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2000004",
+    "name": "Vesta",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2000004"
+    ],
+    "catalog_ids": {
+      "client_seed": 2000004
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2000016",
+    "name": "Psyche",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2000016"
+    ],
+    "catalog_ids": {
+      "client_seed": 2000016
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2000433",
+    "name": "Eros",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2000433"
+    ],
+    "catalog_ids": {
+      "client_seed": 2000433
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2025143",
+    "name": "Itokawa",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2025143"
+    ],
+    "catalog_ids": {
+      "client_seed": 2025143
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2101955",
+    "name": "Bennu",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2101955"
+    ],
+    "catalog_ids": {
+      "client_seed": 2101955
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2162173",
+    "name": "Ryugu",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2162173"
+    ],
+    "catalog_ids": {
+      "client_seed": 2162173
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2099942",
+    "name": "Apophis",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2099942"
+    ],
+    "catalog_ids": {
+      "client_seed": 2099942
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2000003",
+    "name": "Juno",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2000003"
+    ],
+    "catalog_ids": {
+      "client_seed": 2000003
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2000010",
+    "name": "Hygiea",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2000010"
+    ],
+    "catalog_ids": {
+      "client_seed": 2000010
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2000951",
+    "name": "Gaspra",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2000951"
+    ],
+    "catalog_ids": {
+      "client_seed": 2000951
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2000243",
+    "name": "Ida",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2000243"
+    ],
+    "catalog_ids": {
+      "client_seed": 2000243
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2000253",
+    "name": "Mathilde",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2000253"
+    ],
+    "catalog_ids": {
+      "client_seed": 2000253
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2010199",
+    "name": "Chariklo",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2010199"
+    ],
+    "catalog_ids": {
+      "client_seed": 2010199
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-2486958",
+    "name": "Arrokoth",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "2486958"
+    ],
+    "catalog_ids": {
+      "client_seed": 2486958
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-1000001",
+    "name": "1P/Halley",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "1000001"
+    ],
+    "catalog_ids": {
+      "client_seed": 1000001
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-1000002",
+    "name": "2P/Encke",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "1000002"
+    ],
+    "catalog_ids": {
+      "client_seed": 1000002
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-1000003",
+    "name": "67P/Churyumov–Gerasimenko",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "1000003"
+    ],
+    "catalog_ids": {
+      "client_seed": 1000003
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-1000004",
+    "name": "C/1995 O1 (Hale-Bopp)",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "1000004"
+    ],
+    "catalog_ids": {
+      "client_seed": 1000004
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-1000005",
+    "name": "C/2020 F3 (NEOWISE)",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "1000005"
+    ],
+    "catalog_ids": {
+      "client_seed": 1000005
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-1000006",
+    "name": "C/2022 E3 (ZTF)",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "1000006"
+    ],
+    "catalog_ids": {
+      "client_seed": 1000006
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-1000007",
+    "name": "2I/Borisov",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "1000007"
+    ],
+    "catalog_ids": {
+      "client_seed": 1000007
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-1000008",
+    "name": "C/1996 B2 (Hyakutake)",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "1000008"
+    ],
+    "catalog_ids": {
+      "client_seed": 1000008
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-1000009",
+    "name": "9P/Tempel 1",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "1000009"
+    ],
+    "catalog_ids": {
+      "client_seed": 1000009
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NAIF-1000010",
+    "name": "D/1993 F2 (Shoemaker-Levy 9)",
+    "entity_type": null,
+    "category": 7,
+    "category_name": "Small bodies",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "1000010"
+    ],
+    "catalog_ids": {
+      "client_seed": 1000010
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "ENT-2035",
+    "name": "TRAPPIST-1b",
+    "entity_type": 2035,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "trappist-1",
+      "gaia:dr3:2635476908753563008"
+    ],
+    "catalog_ids": {
+      "client_seed": "gaia:dr3:2635476908753563008"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "ENT-2031",
+    "name": "TRAPPIST-1c",
+    "entity_type": 2031,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "trappist-1",
+      "gaia:dr3:2635476908753563008"
+    ],
+    "catalog_ids": {
+      "client_seed": "gaia:dr3:2635476908753563008"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "ENT-2043",
+    "name": "TRAPPIST-1d",
+    "entity_type": 2043,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "trappist-1",
+      "gaia:dr3:2635476908753563008"
+    ],
+    "catalog_ids": {
+      "client_seed": "gaia:dr3:2635476908753563008"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "ENT-2037",
+    "name": "Proxima Centauri c",
+    "entity_type": 2037,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "proxima centauri",
+      "gaia:dr3:5853498713190525696"
+    ],
+    "catalog_ids": {
+      "client_seed": "gaia:dr3:5853498713190525696"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "ENT-2030",
+    "name": "51 Pegasi b",
+    "entity_type": 2030,
+    "category": 3,
+    "category_name": "Gas giants",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "51 pegasi",
+      "gaia:dr3:2835289413583597440"
+    ],
+    "catalog_ids": {
+      "client_seed": "gaia:dr3:2835289413583597440"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "ENT-2032",
+    "name": "Kepler-90d",
+    "entity_type": 2032,
+    "category": 3,
+    "category_name": "Gas giants",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "kepler-90",
+      "gaia:dr3:2100000000000000005"
+    ],
+    "catalog_ids": {
+      "client_seed": "gaia:dr3:2100000000000000005"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "ENT-2020",
+    "name": "Kepler-90g",
+    "entity_type": 2020,
+    "category": 3,
+    "category_name": "Gas giants",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "kepler-90",
+      "gaia:dr3:2100000000000000005"
+    ],
+    "catalog_ids": {
+      "client_seed": "gaia:dr3:2100000000000000005"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "ENT-2044",
+    "name": "LHS 1140 b",
+    "entity_type": 2044,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "lhs 1140",
+      "gaia:dr3:2510000000000000002"
+    ],
+    "catalog_ids": {
+      "client_seed": "gaia:dr3:2510000000000000002"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "ENT-2033",
+    "name": "K2-18 b",
+    "entity_type": 2033,
+    "category": 2,
+    "category_name": "Rocky planets",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "k2-18",
+      "gaia:dr3:3820000000000000003"
+    ],
+    "catalog_ids": {
+      "client_seed": "gaia:dr3:3820000000000000003"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "ENT-2046",
+    "name": "Kepler-16 (AB) b",
+    "entity_type": 2046,
+    "category": 3,
+    "category_name": "Gas giants",
+    "ra_deg": null,
+    "dec_deg": null,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "kepler-16",
+      "gaia:dr3:2130000000000000004"
+    ],
+    "catalog_ids": {
+      "client_seed": "gaia:dr3:2130000000000000004"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-32349",
+    "name": "Sirius",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 101.2875,
+    "dec_deg": -16.7161,
+    "distance_pc": 2.637,
+    "magnitude": -1.46,
+    "aliases": [
+      "α cma",
+      "9 cma",
+      "hip32349",
+      "hip 32349",
+      "hd48915",
+      "hd 48915"
+    ],
+    "catalog_ids": {
+      "client_seed": 32349
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-30438",
+    "name": "Canopus",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 95.988,
+    "dec_deg": -52.6957,
+    "distance_pc": 95,
+    "magnitude": -0.74,
+    "aliases": [
+      "α car",
+      "hip30438",
+      "hip 30438",
+      "hd45348",
+      "hd 45348"
+    ],
+    "catalog_ids": {
+      "client_seed": 30438
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-69673",
+    "name": "Arcturus",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 213.9153,
+    "dec_deg": 19.1824,
+    "distance_pc": 11.26,
+    "magnitude": -0.05,
+    "aliases": [
+      "α boo",
+      "16 boo",
+      "hip69673",
+      "hip 69673",
+      "hd124897",
+      "hd 124897"
+    ],
+    "catalog_ids": {
+      "client_seed": 69673
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-71683",
+    "name": "Rigil Kentaurus",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 219.9042,
+    "dec_deg": -60.8339,
+    "distance_pc": 1.339,
+    "magnitude": -0.01,
+    "aliases": [
+      "α cen a",
+      "hip71683",
+      "hip 71683",
+      "hd128620",
+      "hd 128620"
+    ],
+    "catalog_ids": {
+      "client_seed": 71683
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-71681",
+    "name": "Toliman",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 219.8963,
+    "dec_deg": -60.8373,
+    "distance_pc": 1.339,
+    "magnitude": 1.35,
+    "aliases": [
+      "α cen b",
+      "hip71681",
+      "hip 71681",
+      "hd128621",
+      "hd 128621"
+    ],
+    "catalog_ids": {
+      "client_seed": 71681
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-70890",
+    "name": "Proxima Centauri",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 217.429,
+    "dec_deg": -62.6795,
+    "distance_pc": 1.301,
+    "magnitude": 11.13,
+    "aliases": [
+      "α cen c",
+      "hip70890",
+      "hip 70890"
+    ],
+    "catalog_ids": {
+      "client_seed": 70890
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-91262",
+    "name": "Vega",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 279.2347,
+    "dec_deg": 38.7837,
+    "distance_pc": 7.68,
+    "magnitude": 0.03,
+    "aliases": [
+      "α lyr",
+      "3 lyr",
+      "hip91262",
+      "hip 91262",
+      "hd172167",
+      "hd 172167"
+    ],
+    "catalog_ids": {
+      "client_seed": 91262
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-24608",
+    "name": "Capella",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 79.1723,
+    "dec_deg": 45.998,
+    "distance_pc": 13.2,
+    "magnitude": 0.08,
+    "aliases": [
+      "α aur",
+      "13 aur",
+      "hip24608",
+      "hip 24608",
+      "hd34029",
+      "hd 34029"
+    ],
+    "catalog_ids": {
+      "client_seed": 24608
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-24436",
+    "name": "Rigel",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 78.6345,
+    "dec_deg": -8.2016,
+    "distance_pc": 264,
+    "magnitude": 0.13,
+    "aliases": [
+      "β ori",
+      "19 ori",
+      "hip24436",
+      "hip 24436",
+      "hd34085",
+      "hd 34085"
+    ],
+    "catalog_ids": {
+      "client_seed": 24436
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-37279",
+    "name": "Procyon",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 114.8255,
+    "dec_deg": 5.225,
+    "distance_pc": 3.51,
+    "magnitude": 0.34,
+    "aliases": [
+      "α cmi",
+      "10 cmi",
+      "hip37279",
+      "hip 37279",
+      "hd61421",
+      "hd 61421"
+    ],
+    "catalog_ids": {
+      "client_seed": 37279
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-7588",
+    "name": "Achernar",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 24.4286,
+    "dec_deg": -57.2367,
+    "distance_pc": 42.8,
+    "magnitude": 0.46,
+    "aliases": [
+      "α eri",
+      "hip7588",
+      "hip 7588",
+      "hd10144",
+      "hd 10144"
+    ],
+    "catalog_ids": {
+      "client_seed": 7588
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-27989",
+    "name": "Betelgeuse",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 88.7929,
+    "dec_deg": 7.4069,
+    "distance_pc": 168,
+    "magnitude": 0.5,
+    "aliases": [
+      "α ori",
+      "58 ori",
+      "hip27989",
+      "hip 27989",
+      "hd39801",
+      "hd 39801"
+    ],
+    "catalog_ids": {
+      "client_seed": 27989
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-68702",
+    "name": "Hadar",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 210.9559,
+    "dec_deg": -60.373,
+    "distance_pc": 120,
+    "magnitude": 0.61,
+    "aliases": [
+      "β cen",
+      "hip68702",
+      "hip 68702",
+      "hd122451",
+      "hd 122451"
+    ],
+    "catalog_ids": {
+      "client_seed": 68702
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-97649",
+    "name": "Altair",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 297.6958,
+    "dec_deg": 8.8683,
+    "distance_pc": 5.13,
+    "magnitude": 0.77,
+    "aliases": [
+      "α aql",
+      "53 aql",
+      "hip97649",
+      "hip 97649",
+      "hd187642",
+      "hd 187642"
+    ],
+    "catalog_ids": {
+      "client_seed": 97649
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-60718",
+    "name": "Acrux",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 186.6495,
+    "dec_deg": -63.0991,
+    "distance_pc": 99,
+    "magnitude": 0.76,
+    "aliases": [
+      "α cru",
+      "hip60718",
+      "hip 60718",
+      "hd108248",
+      "hd 108248"
+    ],
+    "catalog_ids": {
+      "client_seed": 60718
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-21421",
+    "name": "Aldebaran",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 68.9801,
+    "dec_deg": 16.5093,
+    "distance_pc": 20.4,
+    "magnitude": 0.86,
+    "aliases": [
+      "α tau",
+      "87 tau",
+      "hip21421",
+      "hip 21421",
+      "hd29139",
+      "hd 29139"
+    ],
+    "catalog_ids": {
+      "client_seed": 21421
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-80763",
+    "name": "Antares",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 247.3519,
+    "dec_deg": -26.432,
+    "distance_pc": 170,
+    "magnitude": 0.96,
+    "aliases": [
+      "α sco",
+      "21 sco",
+      "hip80763",
+      "hip 80763",
+      "hd148478",
+      "hd 148478"
+    ],
+    "catalog_ids": {
+      "client_seed": 80763
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-65474",
+    "name": "Spica",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 201.2983,
+    "dec_deg": -11.1613,
+    "distance_pc": 77.3,
+    "magnitude": 0.97,
+    "aliases": [
+      "α vir",
+      "67 vir",
+      "hip65474",
+      "hip 65474",
+      "hd116658",
+      "hd 116658"
+    ],
+    "catalog_ids": {
+      "client_seed": 65474
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-37826",
+    "name": "Pollux",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 116.3289,
+    "dec_deg": 28.0262,
+    "distance_pc": 10.4,
+    "magnitude": 1.14,
+    "aliases": [
+      "β gem",
+      "78 gem",
+      "hip37826",
+      "hip 37826",
+      "hd62509",
+      "hd 62509"
+    ],
+    "catalog_ids": {
+      "client_seed": 37826
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-113368",
+    "name": "Fomalhaut",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 344.4127,
+    "dec_deg": -29.6222,
+    "distance_pc": 7.7,
+    "magnitude": 1.16,
+    "aliases": [
+      "α psa",
+      "24 psa",
+      "hip113368",
+      "hip 113368",
+      "hd216956",
+      "hd 216956"
+    ],
+    "catalog_ids": {
+      "client_seed": 113368
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-102098",
+    "name": "Deneb",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 310.358,
+    "dec_deg": 45.2803,
+    "distance_pc": 802,
+    "magnitude": 1.25,
+    "aliases": [
+      "α cyg",
+      "50 cyg",
+      "hip102098",
+      "hip 102098",
+      "hd197345",
+      "hd 197345"
+    ],
+    "catalog_ids": {
+      "client_seed": 102098
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-62434",
+    "name": "Mimosa",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 191.9303,
+    "dec_deg": -59.6887,
+    "distance_pc": 85,
+    "magnitude": 1.25,
+    "aliases": [
+      "β cru",
+      "hip62434",
+      "hip 62434",
+      "hd111123",
+      "hd 111123"
+    ],
+    "catalog_ids": {
+      "client_seed": 62434
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-49669",
+    "name": "Regulus",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 152.0929,
+    "dec_deg": 11.9672,
+    "distance_pc": 24.3,
+    "magnitude": 1.36,
+    "aliases": [
+      "α leo",
+      "32 leo",
+      "hip49669",
+      "hip 49669",
+      "hd87901",
+      "hd 87901"
+    ],
+    "catalog_ids": {
+      "client_seed": 49669
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-33579",
+    "name": "Adhara",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 104.6564,
+    "dec_deg": -28.9721,
+    "distance_pc": 132,
+    "magnitude": 1.5,
+    "aliases": [
+      "ε cma",
+      "21 cma",
+      "hip33579",
+      "hip 33579",
+      "hd52089",
+      "hd 52089"
+    ],
+    "catalog_ids": {
+      "client_seed": 33579
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-36850",
+    "name": "Castor",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 113.65,
+    "dec_deg": 31.8883,
+    "distance_pc": 15.8,
+    "magnitude": 1.58,
+    "aliases": [
+      "α gem",
+      "66 gem",
+      "hip36850",
+      "hip 36850",
+      "hd60178",
+      "hd 60178"
+    ],
+    "catalog_ids": {
+      "client_seed": 36850
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-85927",
+    "name": "Shaula",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 263.4022,
+    "dec_deg": -37.1038,
+    "distance_pc": 174,
+    "magnitude": 1.62,
+    "aliases": [
+      "λ sco",
+      "hip85927",
+      "hip 85927",
+      "hd158926",
+      "hd 158926"
+    ],
+    "catalog_ids": {
+      "client_seed": 85927
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-61084",
+    "name": "Gacrux",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 187.7915,
+    "dec_deg": -57.1133,
+    "distance_pc": 27.2,
+    "magnitude": 1.64,
+    "aliases": [
+      "γ cru",
+      "hip61084",
+      "hip 61084",
+      "hd108903",
+      "hd 108903"
+    ],
+    "catalog_ids": {
+      "client_seed": 61084
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-25336",
+    "name": "Bellatrix",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 81.2828,
+    "dec_deg": 6.3497,
+    "distance_pc": 77.3,
+    "magnitude": 1.64,
+    "aliases": [
+      "γ ori",
+      "24 ori",
+      "hip25336",
+      "hip 25336",
+      "hd35468",
+      "hd 35468"
+    ],
+    "catalog_ids": {
+      "client_seed": 25336
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-25428",
+    "name": "Elnath",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 81.5729,
+    "dec_deg": 28.6075,
+    "distance_pc": 40.2,
+    "magnitude": 1.65,
+    "aliases": [
+      "β tau",
+      "112 tau",
+      "hip25428",
+      "hip 25428",
+      "hd35497",
+      "hd 35497"
+    ],
+    "catalog_ids": {
+      "client_seed": 25428
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-45238",
+    "name": "Miaplacidus",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 138.3,
+    "dec_deg": -69.7171,
+    "distance_pc": 34.1,
+    "magnitude": 1.68,
+    "aliases": [
+      "β car",
+      "hip45238",
+      "hip 45238",
+      "hd80007",
+      "hd 80007"
+    ],
+    "catalog_ids": {
+      "client_seed": 45238
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-26311",
+    "name": "Alnilam",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 84.0534,
+    "dec_deg": -1.2019,
+    "distance_pc": 411,
+    "magnitude": 1.69,
+    "aliases": [
+      "ε ori",
+      "46 ori",
+      "hip26311",
+      "hip 26311",
+      "hd37128",
+      "hd 37128"
+    ],
+    "catalog_ids": {
+      "client_seed": 26311
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-109268",
+    "name": "Alnair",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 332.0583,
+    "dec_deg": -46.9611,
+    "distance_pc": 31.1,
+    "magnitude": 1.74,
+    "aliases": [
+      "α gru",
+      "hip109268",
+      "hip 109268",
+      "hd209952",
+      "hd 209952"
+    ],
+    "catalog_ids": {
+      "client_seed": 109268
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-26727",
+    "name": "Alnitak",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 85.1896,
+    "dec_deg": -1.9426,
+    "distance_pc": 225,
+    "magnitude": 1.77,
+    "aliases": [
+      "ζ ori",
+      "50 ori",
+      "hip26727",
+      "hip 26727",
+      "hd37742",
+      "hd 37742"
+    ],
+    "catalog_ids": {
+      "client_seed": 26727
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-62956",
+    "name": "Alioth",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 193.5073,
+    "dec_deg": 55.9598,
+    "distance_pc": 25.3,
+    "magnitude": 1.77,
+    "aliases": [
+      "ε uma",
+      "77 uma",
+      "hip62956",
+      "hip 62956",
+      "hd112185",
+      "hd 112185"
+    ],
+    "catalog_ids": {
+      "client_seed": 62956
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-54061",
+    "name": "Dubhe",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 165.9319,
+    "dec_deg": 61.751,
+    "distance_pc": 37.7,
+    "magnitude": 1.79,
+    "aliases": [
+      "α uma",
+      "50 uma",
+      "hip54061",
+      "hip 54061",
+      "hd95689",
+      "hd 95689"
+    ],
+    "catalog_ids": {
+      "client_seed": 54061
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-15863",
+    "name": "Mirfak",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 51.0807,
+    "dec_deg": 49.8612,
+    "distance_pc": 155,
+    "magnitude": 1.79,
+    "aliases": [
+      "α per",
+      "33 per",
+      "hip15863",
+      "hip 15863",
+      "hd20902",
+      "hd 20902"
+    ],
+    "catalog_ids": {
+      "client_seed": 15863
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-34444",
+    "name": "Wezen",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 107.0977,
+    "dec_deg": -26.3932,
+    "distance_pc": 490,
+    "magnitude": 1.83,
+    "aliases": [
+      "δ cma",
+      "25 cma",
+      "hip34444",
+      "hip 34444",
+      "hd54605",
+      "hd 54605"
+    ],
+    "catalog_ids": {
+      "client_seed": 34444
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-90185",
+    "name": "Kaus Australis",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 276.043,
+    "dec_deg": -34.3846,
+    "distance_pc": 44,
+    "magnitude": 1.85,
+    "aliases": [
+      "ε sgr",
+      "20 sgr",
+      "hip90185",
+      "hip 90185",
+      "hd169022",
+      "hd 169022"
+    ],
+    "catalog_ids": {
+      "client_seed": 90185
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-67301",
+    "name": "Alkaid",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 206.8852,
+    "dec_deg": 49.3133,
+    "distance_pc": 32.4,
+    "magnitude": 1.86,
+    "aliases": [
+      "η uma",
+      "85 uma",
+      "hip67301",
+      "hip 67301",
+      "hd120315",
+      "hd 120315"
+    ],
+    "catalog_ids": {
+      "client_seed": 67301
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-28360",
+    "name": "Menkalinan",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 89.8822,
+    "dec_deg": 44.9475,
+    "distance_pc": 25.1,
+    "magnitude": 1.9,
+    "aliases": [
+      "β aur",
+      "34 aur",
+      "hip28360",
+      "hip 28360",
+      "hd40183",
+      "hd 40183"
+    ],
+    "catalog_ids": {
+      "client_seed": 28360
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-82273",
+    "name": "Atria",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 252.1662,
+    "dec_deg": -69.0278,
+    "distance_pc": 120,
+    "magnitude": 1.92,
+    "aliases": [
+      "α tra",
+      "hip82273",
+      "hip 82273",
+      "hd150798",
+      "hd 150798"
+    ],
+    "catalog_ids": {
+      "client_seed": 82273
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-31681",
+    "name": "Alhena",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 99.4279,
+    "dec_deg": 16.3993,
+    "distance_pc": 33.7,
+    "magnitude": 1.93,
+    "aliases": [
+      "γ gem",
+      "24 gem",
+      "hip31681",
+      "hip 31681",
+      "hd47105",
+      "hd 47105"
+    ],
+    "catalog_ids": {
+      "client_seed": 31681
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-100751",
+    "name": "Peacock",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 306.412,
+    "dec_deg": -56.735,
+    "distance_pc": 55.6,
+    "magnitude": 1.94,
+    "aliases": [
+      "α pav",
+      "hip100751",
+      "hip 100751",
+      "hd193924",
+      "hd 193924"
+    ],
+    "catalog_ids": {
+      "client_seed": 100751
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-30324",
+    "name": "Mirzam",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 95.6749,
+    "dec_deg": -17.9559,
+    "distance_pc": 152,
+    "magnitude": 1.98,
+    "aliases": [
+      "β cma",
+      "2 cma",
+      "hip30324",
+      "hip 30324",
+      "hd44743",
+      "hd 44743"
+    ],
+    "catalog_ids": {
+      "client_seed": 30324
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-46390",
+    "name": "Alphard",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 141.8969,
+    "dec_deg": -8.6586,
+    "distance_pc": 55,
+    "magnitude": 1.98,
+    "aliases": [
+      "α hya",
+      "30 hya",
+      "hip46390",
+      "hip 46390",
+      "hd81797",
+      "hd 81797"
+    ],
+    "catalog_ids": {
+      "client_seed": 46390
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-11767",
+    "name": "Polaris",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 37.9546,
+    "dec_deg": 89.2642,
+    "distance_pc": 133,
+    "magnitude": 1.98,
+    "aliases": [
+      "α umi",
+      "1 umi",
+      "hip11767",
+      "hip 11767",
+      "hd8890",
+      "hd 8890"
+    ],
+    "catalog_ids": {
+      "client_seed": 11767
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-9884",
+    "name": "Hamal",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 31.7933,
+    "dec_deg": 23.4624,
+    "distance_pc": 20.2,
+    "magnitude": 2,
+    "aliases": [
+      "α ari",
+      "13 ari",
+      "hip9884",
+      "hip 9884",
+      "hd12929",
+      "hd 12929"
+    ],
+    "catalog_ids": {
+      "client_seed": 9884
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-677",
+    "name": "Alpheratz",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 2.0968,
+    "dec_deg": 29.0905,
+    "distance_pc": 29.7,
+    "magnitude": 2.06,
+    "aliases": [
+      "α and",
+      "21 and",
+      "hip677",
+      "hip 677",
+      "hd358",
+      "hd 358"
+    ],
+    "catalog_ids": {
+      "client_seed": 677
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-5447",
+    "name": "Mirach",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 17.433,
+    "dec_deg": 35.6206,
+    "distance_pc": 60.2,
+    "magnitude": 2.05,
+    "aliases": [
+      "β and",
+      "43 and",
+      "hip5447",
+      "hip 5447",
+      "hd6860",
+      "hd 6860"
+    ],
+    "catalog_ids": {
+      "client_seed": 5447
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-72607",
+    "name": "Kochab",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 222.6763,
+    "dec_deg": 74.1555,
+    "distance_pc": 40.1,
+    "magnitude": 2.08,
+    "aliases": [
+      "β umi",
+      "7 umi",
+      "hip72607",
+      "hip 72607",
+      "hd131873",
+      "hd 131873"
+    ],
+    "catalog_ids": {
+      "client_seed": 72607
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-86032",
+    "name": "Rasalhague",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 263.7335,
+    "dec_deg": 12.56,
+    "distance_pc": 14.7,
+    "magnitude": 2.07,
+    "aliases": [
+      "α oph",
+      "55 oph",
+      "hip86032",
+      "hip 86032",
+      "hd159561",
+      "hd 159561"
+    ],
+    "catalog_ids": {
+      "client_seed": 86032
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-14576",
+    "name": "Algol",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 47.0423,
+    "dec_deg": 40.9556,
+    "distance_pc": 28.5,
+    "magnitude": 2.12,
+    "aliases": [
+      "β per",
+      "26 per",
+      "hip14576",
+      "hip 14576",
+      "hd19356",
+      "hd 19356"
+    ],
+    "catalog_ids": {
+      "client_seed": 14576
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-9640",
+    "name": "Almach",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 30.9747,
+    "dec_deg": 42.3296,
+    "distance_pc": 109,
+    "magnitude": 2.14,
+    "aliases": [
+      "γ and",
+      "57 and",
+      "hip9640",
+      "hip 9640",
+      "hd12533",
+      "hd 12533"
+    ],
+    "catalog_ids": {
+      "client_seed": 9640
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-57632",
+    "name": "Denebola",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 177.2649,
+    "dec_deg": 14.572,
+    "distance_pc": 11,
+    "magnitude": 2.14,
+    "aliases": [
+      "β leo",
+      "94 leo",
+      "hip57632",
+      "hip 57632",
+      "hd102647",
+      "hd 102647"
+    ],
+    "catalog_ids": {
+      "client_seed": 57632
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-87833",
+    "name": "Eltanin",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 269.1516,
+    "dec_deg": 51.4889,
+    "distance_pc": 47.3,
+    "magnitude": 2.24,
+    "aliases": [
+      "γ dra",
+      "33 dra",
+      "hip87833",
+      "hip 87833",
+      "hd164058",
+      "hd 164058"
+    ],
+    "catalog_ids": {
+      "client_seed": 87833
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-3179",
+    "name": "Schedar",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 10.1269,
+    "dec_deg": 56.5373,
+    "distance_pc": 70.1,
+    "magnitude": 2.24,
+    "aliases": [
+      "α cas",
+      "18 cas",
+      "hip3179",
+      "hip 3179",
+      "hd3712",
+      "hd 3712"
+    ],
+    "catalog_ids": {
+      "client_seed": 3179
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-25930",
+    "name": "Mintaka",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 83.0017,
+    "dec_deg": -0.2991,
+    "distance_pc": 380,
+    "magnitude": 2.23,
+    "aliases": [
+      "δ ori",
+      "34 ori",
+      "hip25930",
+      "hip 25930",
+      "hd36486",
+      "hd 36486"
+    ],
+    "catalog_ids": {
+      "client_seed": 25930
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-746",
+    "name": "Caph",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 2.2949,
+    "dec_deg": 59.1498,
+    "distance_pc": 16.8,
+    "magnitude": 2.27,
+    "aliases": [
+      "β cas",
+      "11 cas",
+      "hip746",
+      "hip 746",
+      "hd432",
+      "hd 432"
+    ],
+    "catalog_ids": {
+      "client_seed": 746
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-72105",
+    "name": "Izar",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 221.2467,
+    "dec_deg": 27.0742,
+    "distance_pc": 61.5,
+    "magnitude": 2.37,
+    "aliases": [
+      "ε boo",
+      "36 boo",
+      "hip72105",
+      "hip 72105",
+      "hd129989",
+      "hd 129989"
+    ],
+    "catalog_ids": {
+      "client_seed": 72105
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-107315",
+    "name": "Enif",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 326.0465,
+    "dec_deg": 9.875,
+    "distance_pc": 211,
+    "magnitude": 2.39,
+    "aliases": [
+      "ε peg",
+      "8 peg",
+      "hip107315",
+      "hip 107315",
+      "hd206778",
+      "hd 206778"
+    ],
+    "catalog_ids": {
+      "client_seed": 107315
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-58001",
+    "name": "Phecda",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 178.4579,
+    "dec_deg": 53.6948,
+    "distance_pc": 25.6,
+    "magnitude": 2.44,
+    "aliases": [
+      "γ uma",
+      "64 uma",
+      "hip58001",
+      "hip 58001",
+      "hd103287",
+      "hd 103287"
+    ],
+    "catalog_ids": {
+      "client_seed": 58001
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-113963",
+    "name": "Markab",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 346.1902,
+    "dec_deg": 15.2053,
+    "distance_pc": 42.8,
+    "magnitude": 2.49,
+    "aliases": [
+      "α peg",
+      "54 peg",
+      "hip113963",
+      "hip 113963",
+      "hd218045",
+      "hd 218045"
+    ],
+    "catalog_ids": {
+      "client_seed": 113963
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-53910",
+    "name": "Merak",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 165.4602,
+    "dec_deg": 56.3824,
+    "distance_pc": 24.4,
+    "magnitude": 2.37,
+    "aliases": [
+      "β uma",
+      "48 uma",
+      "hip53910",
+      "hip 53910",
+      "hd95418",
+      "hd 95418"
+    ],
+    "catalog_ids": {
+      "client_seed": 53910
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-59774",
+    "name": "Megrez",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 183.8566,
+    "dec_deg": 57.0325,
+    "distance_pc": 24.7,
+    "magnitude": 3.31,
+    "aliases": [
+      "δ uma",
+      "69 uma",
+      "hip59774",
+      "hip 59774",
+      "hd106591",
+      "hd 106591"
+    ],
+    "catalog_ids": {
+      "client_seed": 59774
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-65378",
+    "name": "Mizar",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 200.9814,
+    "dec_deg": 54.9254,
+    "distance_pc": 25.6,
+    "magnitude": 2.04,
+    "aliases": [
+      "ζ uma",
+      "79 uma",
+      "hip65378",
+      "hip 65378",
+      "hd116656",
+      "hd 116656"
+    ],
+    "catalog_ids": {
+      "client_seed": 65378
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-65477",
+    "name": "Alcor",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 201.306,
+    "dec_deg": 54.9876,
+    "distance_pc": 25.3,
+    "magnitude": 3.99,
+    "aliases": [
+      "80 uma",
+      "hip65477",
+      "hip 65477",
+      "hd116842",
+      "hd 116842"
+    ],
+    "catalog_ids": {
+      "client_seed": 65477
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-68756",
+    "name": "Thuban",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 211.0973,
+    "dec_deg": 64.3758,
+    "distance_pc": 92.9,
+    "magnitude": 3.65,
+    "aliases": [
+      "α dra",
+      "11 dra",
+      "hip68756",
+      "hip 68756",
+      "hd123299",
+      "hd 123299"
+    ],
+    "catalog_ids": {
+      "client_seed": 68756
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-95947",
+    "name": "Albireo",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 292.6803,
+    "dec_deg": 27.9597,
+    "distance_pc": 130,
+    "magnitude": 3.05,
+    "aliases": [
+      "β cyg",
+      "6 cyg",
+      "hip95947",
+      "hip 95947",
+      "hd183912",
+      "hd 183912"
+    ],
+    "catalog_ids": {
+      "client_seed": 95947
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-105199",
+    "name": "Alderamin",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 319.6449,
+    "dec_deg": 62.5855,
+    "distance_pc": 15,
+    "magnitude": 2.45,
+    "aliases": [
+      "α cep",
+      "5 cep",
+      "hip105199",
+      "hip 105199",
+      "hd203280",
+      "hd 203280"
+    ],
+    "catalog_ids": {
+      "client_seed": 105199
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-2081",
+    "name": "Ankaa",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 6.5708,
+    "dec_deg": -42.306,
+    "distance_pc": 25.5,
+    "magnitude": 2.4,
+    "aliases": [
+      "α phe",
+      "hip2081",
+      "hip 2081",
+      "hd2261",
+      "hd 2261"
+    ],
+    "catalog_ids": {
+      "client_seed": 2081
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-76267",
+    "name": "Alphecca",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 233.6717,
+    "dec_deg": 26.7147,
+    "distance_pc": 22.9,
+    "magnitude": 2.23,
+    "aliases": [
+      "α crb",
+      "5 crb",
+      "hip76267",
+      "hip 76267",
+      "hd139006",
+      "hd 139006"
+    ],
+    "catalog_ids": {
+      "client_seed": 76267
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-50583",
+    "name": "Algieba",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 154.993,
+    "dec_deg": 19.8415,
+    "distance_pc": 40,
+    "magnitude": 2.28,
+    "aliases": [
+      "γ leo",
+      "41 leo",
+      "hip50583",
+      "hip 50583",
+      "hd89484",
+      "hd 89484"
+    ],
+    "catalog_ids": {
+      "client_seed": 50583
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-44816",
+    "name": "Suhail",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 136.999,
+    "dec_deg": -43.4326,
+    "distance_pc": 164,
+    "magnitude": 2.21,
+    "aliases": [
+      "λ vel",
+      "hip44816",
+      "hip 44816",
+      "hd78647",
+      "hd 78647"
+    ],
+    "catalog_ids": {
+      "client_seed": 44816
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-97278",
+    "name": "Tarazed",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 296.5649,
+    "dec_deg": 10.6133,
+    "distance_pc": 140,
+    "magnitude": 2.72,
+    "aliases": [
+      "γ aql",
+      "50 aql",
+      "hip97278",
+      "hip 97278",
+      "hd186791",
+      "hd 186791"
+    ],
+    "catalog_ids": {
+      "client_seed": 97278
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-100453",
+    "name": "Sadr",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 305.5571,
+    "dec_deg": 40.2567,
+    "distance_pc": 560,
+    "magnitude": 2.23,
+    "aliases": [
+      "γ cyg",
+      "37 cyg",
+      "hip100453",
+      "hip 100453",
+      "hd194093",
+      "hd 194093"
+    ],
+    "catalog_ids": {
+      "client_seed": 100453
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-85670",
+    "name": "Rastaban",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 262.608,
+    "dec_deg": 52.3014,
+    "distance_pc": 116,
+    "magnitude": 2.79,
+    "aliases": [
+      "β dra",
+      "23 dra",
+      "hip85670",
+      "hip 85670",
+      "hd159181",
+      "hd 159181"
+    ],
+    "catalog_ids": {
+      "client_seed": 85670
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-92855",
+    "name": "Nunki",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 283.8163,
+    "dec_deg": -26.2968,
+    "distance_pc": 69.8,
+    "magnitude": 2.05,
+    "aliases": [
+      "σ sgr",
+      "34 sgr",
+      "hip92855",
+      "hip 92855",
+      "hd175191",
+      "hd 175191"
+    ],
+    "catalog_ids": {
+      "client_seed": 92855
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-78401",
+    "name": "Dschubba",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 240.0833,
+    "dec_deg": -22.6217,
+    "distance_pc": 150,
+    "magnitude": 2.32,
+    "aliases": [
+      "δ sco",
+      "7 sco",
+      "hip78401",
+      "hip 78401",
+      "hd143275",
+      "hd 143275"
+    ],
+    "catalog_ids": {
+      "client_seed": 78401
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-14135",
+    "name": "Menkar",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 45.5699,
+    "dec_deg": 4.0897,
+    "distance_pc": 76.4,
+    "magnitude": 2.53,
+    "aliases": [
+      "α cet",
+      "92 cet",
+      "hip14135",
+      "hip 14135",
+      "hd18884",
+      "hd 18884"
+    ],
+    "catalog_ids": {
+      "client_seed": 14135
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-72622",
+    "name": "Zubenelgenubi",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 222.7195,
+    "dec_deg": -16.0418,
+    "distance_pc": 23.2,
+    "magnitude": 2.75,
+    "aliases": [
+      "α lib",
+      "9 lib",
+      "hip72622",
+      "hip 72622",
+      "hd130841",
+      "hd 130841"
+    ],
+    "catalog_ids": {
+      "client_seed": 72622
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-77070",
+    "name": "Unukalhai",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 236.067,
+    "dec_deg": 6.4256,
+    "distance_pc": 22.7,
+    "magnitude": 2.63,
+    "aliases": [
+      "α ser",
+      "24 ser",
+      "hip77070",
+      "hip 77070",
+      "hd140573",
+      "hd 140573"
+    ],
+    "catalog_ids": {
+      "client_seed": 77070
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-84345",
+    "name": "Rasalgethi",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 258.662,
+    "dec_deg": 14.3904,
+    "distance_pc": 110,
+    "magnitude": 3.14,
+    "aliases": [
+      "α her",
+      "64 her",
+      "hip84345",
+      "hip 84345",
+      "hd156014",
+      "hd 156014"
+    ],
+    "catalog_ids": {
+      "client_seed": 84345
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-27366",
+    "name": "Saiph",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 86.9391,
+    "dec_deg": -9.6697,
+    "distance_pc": 198,
+    "magnitude": 2.09,
+    "aliases": [
+      "κ ori",
+      "53 ori",
+      "hip27366",
+      "hip 27366",
+      "hd38771",
+      "hd 38771"
+    ],
+    "catalog_ids": {
+      "client_seed": 27366
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-19849",
+    "name": "Keid",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 63.818,
+    "dec_deg": -7.6529,
+    "distance_pc": 5.042,
+    "magnitude": 4.43,
+    "aliases": [
+      "40 eri a",
+      "hip19849",
+      "hip 19849",
+      "hd26965",
+      "hd 26965"
+    ],
+    "catalog_ids": {
+      "client_seed": 19849
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-8102",
+    "name": "Tau Ceti",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 26.017,
+    "dec_deg": -15.937,
+    "distance_pc": 3.603,
+    "magnitude": 3.5,
+    "aliases": [
+      "τ cet",
+      "52 cet",
+      "hip8102",
+      "hip 8102",
+      "hd10700",
+      "hd 10700"
+    ],
+    "catalog_ids": {
+      "client_seed": 8102
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-16537",
+    "name": "Ran",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 53.2327,
+    "dec_deg": -9.4583,
+    "distance_pc": 3.216,
+    "magnitude": 3.73,
+    "aliases": [
+      "ε eri",
+      "18 eri",
+      "hip16537",
+      "hip 16537",
+      "hd22049",
+      "hd 22049"
+    ],
+    "catalog_ids": {
+      "client_seed": 16537
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-87937",
+    "name": "Barnard’s Star",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 269.4521,
+    "dec_deg": 4.6934,
+    "distance_pc": 1.834,
+    "magnitude": 9.53,
+    "aliases": [
+      "hip87937",
+      "hip 87937"
+    ],
+    "catalog_ids": {
+      "client_seed": 87937
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-54211",
+    "name": "Lalande 21185",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 165.8347,
+    "dec_deg": 35.9697,
+    "distance_pc": 2.547,
+    "magnitude": 7.49,
+    "aliases": [
+      "hip54211",
+      "hip 54211",
+      "hd95735",
+      "hd 95735"
+    ],
+    "catalog_ids": {
+      "client_seed": 54211
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-10826",
+    "name": "Mira",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 34.8367,
+    "dec_deg": -2.9776,
+    "distance_pc": 92,
+    "magnitude": 3.04,
+    "aliases": [
+      "ο cet",
+      "68 cet",
+      "hip10826",
+      "hip 10826",
+      "hd14386",
+      "hd 14386"
+    ],
+    "catalog_ids": {
+      "client_seed": 10826
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-63125",
+    "name": "Cor Caroli",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 194.0074,
+    "dec_deg": 38.3184,
+    "distance_pc": 34.8,
+    "magnitude": 2.89,
+    "aliases": [
+      "α cvn",
+      "12 cvn",
+      "hip63125",
+      "hip 63125",
+      "hd112413",
+      "hd 112413"
+    ],
+    "catalog_ids": {
+      "client_seed": 63125
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "HIP-17702",
+    "name": "Alcyone",
+    "entity_type": null,
+    "category": 1,
+    "category_name": "Stars",
+    "ra_deg": 56.8711,
+    "dec_deg": 24.1051,
+    "distance_pc": 136,
+    "magnitude": 2.87,
+    "aliases": [
+      "η tau",
+      "25 tau",
+      "hip17702",
+      "hip 17702",
+      "hd23630",
+      "hd 23630"
+    ],
+    "catalog_ids": {
+      "client_seed": 17702
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m31",
+    "name": "Andromeda Galaxy",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 10.6847,
+    "dec_deg": 41.2688,
+    "distance_pc": 778000,
+    "magnitude": 3.44,
+    "aliases": [
+      "m31",
+      "m 31",
+      "messier 31",
+      "ngc224",
+      "ngc 224",
+      "pgc2557",
+      "pgc 2557",
+      "andromeda"
+    ],
+    "catalog_ids": {
+      "client_seed": "m31"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m101",
+    "name": "Pinwheel Galaxy",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 210.8023,
+    "dec_deg": 54.3486,
+    "distance_pc": 6400000,
+    "magnitude": 7.86,
+    "aliases": [
+      "m101",
+      "m 101",
+      "messier 101",
+      "ngc5457",
+      "ngc 5457"
+    ],
+    "catalog_ids": {
+      "client_seed": "m101"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m51",
+    "name": "Whirlpool Galaxy",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 202.4696,
+    "dec_deg": 47.1952,
+    "distance_pc": 8400000,
+    "magnitude": 8.4,
+    "aliases": [
+      "m51",
+      "m 51",
+      "messier 51",
+      "ngc5194",
+      "ngc 5194"
+    ],
+    "catalog_ids": {
+      "client_seed": "m51"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m87",
+    "name": "M87 (Virgo A)",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 187.7059,
+    "dec_deg": 12.3911,
+    "distance_pc": 16800000,
+    "magnitude": 8.6,
+    "aliases": [
+      "m87",
+      "m 87",
+      "messier 87",
+      "ngc4486",
+      "ngc 4486",
+      "virgo a"
+    ],
+    "catalog_ids": {
+      "client_seed": "m87"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m49",
+    "name": "Messier 49",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 187.4448,
+    "dec_deg": 8.0004,
+    "distance_pc": 16500000,
+    "magnitude": 8.4,
+    "aliases": [
+      "m49",
+      "m 49",
+      "messier 49",
+      "ngc4472",
+      "ngc 4472"
+    ],
+    "catalog_ids": {
+      "client_seed": "m49"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m32",
+    "name": "Messier 32",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 10.6742,
+    "dec_deg": 40.865,
+    "distance_pc": 805000,
+    "magnitude": 8.08,
+    "aliases": [
+      "m32",
+      "m 32",
+      "messier 32",
+      "ngc221",
+      "ngc 221"
+    ],
+    "catalog_ids": {
+      "client_seed": "m32"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-lmc",
+    "name": "Large Magellanic Cloud",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 80.8938,
+    "dec_deg": -69.7561,
+    "distance_pc": 50000,
+    "magnitude": 0.9,
+    "aliases": [
+      "pgc17223",
+      "pgc 17223",
+      "lmc",
+      "nubecula major"
+    ],
+    "catalog_ids": {
+      "client_seed": "lmc"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-smc",
+    "name": "Small Magellanic Cloud",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 13.1867,
+    "dec_deg": -72.8286,
+    "distance_pc": 62000,
+    "magnitude": 2.7,
+    "aliases": [
+      "pgc3085",
+      "pgc 3085",
+      "smc",
+      "ngc 292",
+      "nubecula minor"
+    ],
+    "catalog_ids": {
+      "client_seed": "smc"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-ngc4449",
+    "name": "NGC 4449",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 187.0463,
+    "dec_deg": 44.0933,
+    "distance_pc": 3900000,
+    "magnitude": 9.6,
+    "aliases": [
+      "ngc4449",
+      "ngc 4449"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc4449"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-ngc5866",
+    "name": "NGC 5866 (Spindle)",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 226.6229,
+    "dec_deg": 55.7632,
+    "distance_pc": 15100000,
+    "magnitude": 9.89,
+    "aliases": [
+      "m102",
+      "m 102",
+      "messier 102",
+      "ngc5866",
+      "ngc 5866",
+      "spindle galaxy"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc5866"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-ngc3115",
+    "name": "NGC 3115 (Spindle)",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 151.3083,
+    "dec_deg": -7.7183,
+    "distance_pc": 9700000,
+    "magnitude": 9.2,
+    "aliases": [
+      "ngc3115",
+      "ngc 3115"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc3115"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m85",
+    "name": "Messier 85",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 186.3504,
+    "dec_deg": 18.1912,
+    "distance_pc": 18500000,
+    "magnitude": 9.1,
+    "aliases": [
+      "m85",
+      "m 85",
+      "messier 85",
+      "ngc4382",
+      "ngc 4382"
+    ],
+    "catalog_ids": {
+      "client_seed": "m85"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-ngc1068",
+    "name": "NGC 1068 (M77)",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 40.6696,
+    "dec_deg": -0.0133,
+    "distance_pc": 14400000,
+    "magnitude": 8.87,
+    "aliases": [
+      "m77",
+      "m 77",
+      "messier 77",
+      "ngc1068",
+      "ngc 1068",
+      "seyfert 2 archetype"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc1068"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-3c273",
+    "name": "3C 273 (Quasar)",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 187.2779,
+    "dec_deg": 2.0523,
+    "distance_pc": 749000000,
+    "magnitude": 12.9,
+    "aliases": [
+      "3c 273",
+      "pg 1226+023",
+      "3c273"
+    ],
+    "catalog_ids": {
+      "client_seed": "3c273"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-centaurus-a",
+    "name": "Centaurus A (NGC 5128)",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 201.365,
+    "dec_deg": -43.0192,
+    "distance_pc": 3800000,
+    "magnitude": 6.84,
+    "aliases": [
+      "ngc5128",
+      "ngc 5128",
+      "cen a",
+      "centaurus-a"
+    ],
+    "catalog_ids": {
+      "client_seed": "centaurus-a"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m82",
+    "name": "Cigar Galaxy (M82)",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 148.9687,
+    "dec_deg": 69.6797,
+    "distance_pc": 3530000,
+    "magnitude": 8.41,
+    "aliases": [
+      "m82",
+      "m 82",
+      "messier 82",
+      "ngc3034",
+      "ngc 3034",
+      "cigar"
+    ],
+    "catalog_ids": {
+      "client_seed": "m82"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-arp220",
+    "name": "Arp 220",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 233.7383,
+    "dec_deg": 23.5033,
+    "distance_pc": 77000000,
+    "magnitude": 13.94,
+    "aliases": [
+      "arp 220",
+      "ugc 9913",
+      "ic 4553",
+      "arp220"
+    ],
+    "catalog_ids": {
+      "client_seed": "arp220"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-hoags-object",
+    "name": "Hoag's Object",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 241.6754,
+    "dec_deg": 21.683,
+    "distance_pc": 183000000,
+    "magnitude": 16,
+    "aliases": [
+      "pgc54559",
+      "pgc 54559",
+      "hoag's object",
+      "hoags-object"
+    ],
+    "catalog_ids": {
+      "client_seed": "hoags-object"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-cartwheel",
+    "name": "Cartwheel Galaxy",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 9.4262,
+    "dec_deg": -33.7158,
+    "distance_pc": 152000000,
+    "magnitude": 15.2,
+    "aliases": [
+      "pgc2248",
+      "pgc 2248",
+      "cartwheel",
+      "eso 350-40"
+    ],
+    "catalog_ids": {
+      "client_seed": "cartwheel"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-antennae",
+    "name": "Antennae Galaxies",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 180.4708,
+    "dec_deg": -18.8683,
+    "distance_pc": 13800000,
+    "magnitude": 10.3,
+    "aliases": [
+      "ngc4038",
+      "ngc 4038",
+      "ngc 4038/4039",
+      "antennae"
+    ],
+    "catalog_ids": {
+      "client_seed": "antennae"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-dragonfly-44",
+    "name": "Dragonfly 44",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 195.2414,
+    "dec_deg": 26.9739,
+    "distance_pc": 101000000,
+    "magnitude": 19.4,
+    "aliases": [
+      "dragonfly 44",
+      "df44",
+      "dragonfly-44"
+    ],
+    "catalog_ids": {
+      "client_seed": "dragonfly-44"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m33",
+    "name": "Triangulum Galaxy",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 23.4621,
+    "dec_deg": 30.66,
+    "distance_pc": 859000,
+    "magnitude": 5.72,
+    "aliases": [
+      "m33",
+      "m 33",
+      "messier 33",
+      "ngc598",
+      "ngc 598",
+      "pgc5818",
+      "pgc 5818",
+      "triangulum"
+    ],
+    "catalog_ids": {
+      "client_seed": "m33"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m104",
+    "name": "Sombrero Galaxy",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 189.9976,
+    "dec_deg": -11.6231,
+    "distance_pc": 9550000,
+    "magnitude": 8.98,
+    "aliases": [
+      "m104",
+      "m 104",
+      "messier 104",
+      "ngc4594",
+      "ngc 4594",
+      "pgc42407",
+      "pgc 42407",
+      "sombrero"
+    ],
+    "catalog_ids": {
+      "client_seed": "m104"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m81",
+    "name": "Bode's Galaxy",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 148.8883,
+    "dec_deg": 69.0653,
+    "distance_pc": 3630000,
+    "magnitude": 6.94,
+    "aliases": [
+      "m81",
+      "m 81",
+      "messier 81",
+      "ngc3031",
+      "ngc 3031",
+      "pgc28630",
+      "pgc 28630",
+      "bode"
+    ],
+    "catalog_ids": {
+      "client_seed": "m81"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-ngc1300",
+    "name": "NGC 1300",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 49.9208,
+    "dec_deg": -19.4111,
+    "distance_pc": 18800000,
+    "magnitude": 10.4,
+    "aliases": [
+      "ngc1300",
+      "ngc 1300",
+      "pgc12412",
+      "pgc 12412"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc1300"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-m110",
+    "name": "Messier 110",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 10.0917,
+    "dec_deg": 41.6853,
+    "distance_pc": 824000,
+    "magnitude": 8.07,
+    "aliases": [
+      "m110",
+      "m 110",
+      "messier 110",
+      "ngc205",
+      "ngc 205",
+      "pgc2429",
+      "pgc 2429"
+    ],
+    "catalog_ids": {
+      "client_seed": "m110"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-sculptor-dwarf",
+    "name": "Sculptor Dwarf",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 15.0392,
+    "dec_deg": -33.7092,
+    "distance_pc": 86000,
+    "magnitude": 10.1,
+    "aliases": [
+      "pgc3589",
+      "pgc 3589",
+      "sculptor dsph",
+      "eso 351-30",
+      "sculptor-dwarf"
+    ],
+    "catalog_ids": {
+      "client_seed": "sculptor-dwarf"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-fornax-dwarf",
+    "name": "Fornax Dwarf",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 39.9971,
+    "dec_deg": -34.4492,
+    "distance_pc": 147000,
+    "magnitude": 9.3,
+    "aliases": [
+      "pgc10074",
+      "pgc 10074",
+      "fornax dsph",
+      "eso 356-4",
+      "fornax-dwarf"
+    ],
+    "catalog_ids": {
+      "client_seed": "fornax-dwarf"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-sagittarius-dwarf",
+    "name": "Sagittarius Dwarf Spheroidal",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 283.8312,
+    "dec_deg": -30.5453,
+    "distance_pc": 24000,
+    "magnitude": 4.5,
+    "aliases": [
+      "pgc63287",
+      "pgc 63287",
+      "sagdeg",
+      "sagittarius dsph",
+      "sagittarius-dwarf"
+    ],
+    "catalog_ids": {
+      "client_seed": "sagittarius-dwarf"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-leo-i",
+    "name": "Leo I",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 152.1171,
+    "dec_deg": 12.3064,
+    "distance_pc": 254000,
+    "magnitude": 9.8,
+    "aliases": [
+      "pgc29488",
+      "pgc 29488",
+      "leo i",
+      "ugc 5470",
+      "regulus dwarf",
+      "leo-i"
+    ],
+    "catalog_ids": {
+      "client_seed": "leo-i"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-leo-ii",
+    "name": "Leo II",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 168.3708,
+    "dec_deg": 22.1517,
+    "distance_pc": 233000,
+    "magnitude": 12.6,
+    "aliases": [
+      "pgc34176",
+      "pgc 34176",
+      "leo ii",
+      "ugc 6253",
+      "leo-ii"
+    ],
+    "catalog_ids": {
+      "client_seed": "leo-ii"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-draco-dwarf",
+    "name": "Draco Dwarf",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 260.0517,
+    "dec_deg": 57.9153,
+    "distance_pc": 76000,
+    "magnitude": 10.9,
+    "aliases": [
+      "pgc60095",
+      "pgc 60095",
+      "draco dsph",
+      "ugc 10822",
+      "draco-dwarf"
+    ],
+    "catalog_ids": {
+      "client_seed": "draco-dwarf"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-ursa-minor-dwarf",
+    "name": "Ursa Minor Dwarf",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 227.2854,
+    "dec_deg": 67.2225,
+    "distance_pc": 66000,
+    "magnitude": 11.9,
+    "aliases": [
+      "pgc54074",
+      "pgc 54074",
+      "ursa minor dsph",
+      "umi dsph",
+      "ursa-minor-dwarf"
+    ],
+    "catalog_ids": {
+      "client_seed": "ursa-minor-dwarf"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-ngc6822",
+    "name": "Barnard's Galaxy",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 296.2375,
+    "dec_deg": -14.8031,
+    "distance_pc": 500000,
+    "magnitude": 9.3,
+    "aliases": [
+      "ngc6822",
+      "ngc 6822",
+      "pgc63616",
+      "pgc 63616",
+      "barnard galaxy",
+      "ic 4895"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc6822"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-ic10",
+    "name": "IC 10",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 5.0728,
+    "dec_deg": 59.3031,
+    "distance_pc": 790000,
+    "magnitude": 10.4,
+    "aliases": [
+      "pgc1305",
+      "pgc 1305",
+      "ic 10",
+      "ugc 192",
+      "ic10"
+    ],
+    "catalog_ids": {
+      "client_seed": "ic10"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-stephans-quintet",
+    "name": "Stephan's Quintet",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 338.9875,
+    "dec_deg": 33.9625,
+    "distance_pc": 85000000,
+    "magnitude": 13.9,
+    "aliases": [
+      "stephan's quintet",
+      "hcg 92",
+      "arp 319",
+      "stephans-quintet"
+    ],
+    "catalog_ids": {
+      "client_seed": "stephans-quintet"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GAL-mice",
+    "name": "Mice Galaxies",
+    "entity_type": null,
+    "category": 6,
+    "category_name": "Galaxies",
+    "ra_deg": 191.544,
+    "dec_deg": 30.7276,
+    "distance_pc": 90000000,
+    "magnitude": 13.3,
+    "aliases": [
+      "ngc4676",
+      "ngc 4676",
+      "mice galaxies",
+      "arp 242",
+      "mice"
+    ],
+    "catalog_ids": {
+      "client_seed": "mice"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-m42",
+    "name": "Orion Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 83.8221,
+    "dec_deg": -5.3911,
+    "distance_pc": 412,
+    "magnitude": 4,
+    "aliases": [
+      "m42",
+      "m 42",
+      "messier 42",
+      "ngc1976",
+      "ngc 1976",
+      "sh2-281",
+      "orion nebula",
+      "great orion nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "m42"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-m16",
+    "name": "Eagle Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 274.7,
+    "dec_deg": -13.8,
+    "distance_pc": 2000,
+    "magnitude": 6,
+    "aliases": [
+      "m16",
+      "m 16",
+      "messier 16",
+      "ngc6611",
+      "ngc 6611",
+      "sh2-49",
+      "eagle nebula",
+      "pillars of creation",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "m16"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ngc3372",
+    "name": "Carina Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 161.265,
+    "dec_deg": -59.867,
+    "distance_pc": 2300,
+    "magnitude": 1,
+    "aliases": [
+      "ngc3372",
+      "ngc 3372",
+      "sh2-318",
+      "eta carinae nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc3372"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-w49a",
+    "name": "W49A",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 287.57,
+    "dec_deg": 9.12,
+    "distance_pc": 11100,
+    "magnitude": null,
+    "aliases": [
+      "w49a",
+      "gal 043.17+00.00",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "w49a"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ngc6334",
+    "name": "Cat's Paw Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 260.08,
+    "dec_deg": -35.83,
+    "distance_pc": 1700,
+    "magnitude": null,
+    "aliases": [
+      "ngc6334",
+      "ngc 6334",
+      "sh2-8",
+      "cat's paw",
+      "bear claw",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc6334"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-localhi",
+    "name": "Local Interstellar Cloud",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 262,
+    "dec_deg": -25,
+    "distance_pc": 0.5,
+    "magnitude": null,
+    "aliases": [
+      "lic",
+      "local fluff",
+      "local interstellar medium",
+      "localhi",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "localhi"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-m57",
+    "name": "Ring Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 283.396,
+    "dec_deg": 33.0293,
+    "distance_pc": 787,
+    "magnitude": 8.8,
+    "aliases": [
+      "m57",
+      "m 57",
+      "messier 57",
+      "ngc6720",
+      "ngc 6720",
+      "ring nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "m57"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-m97",
+    "name": "Owl Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 168.6988,
+    "dec_deg": 55.019,
+    "distance_pc": 700,
+    "magnitude": 9.9,
+    "aliases": [
+      "m97",
+      "m 97",
+      "messier 97",
+      "ngc3587",
+      "ngc 3587",
+      "owl nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "m97"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ngc6543",
+    "name": "Cat's Eye Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 269.639,
+    "dec_deg": 66.633,
+    "distance_pc": 1000,
+    "magnitude": 8.1,
+    "aliases": [
+      "ngc6543",
+      "ngc 6543",
+      "cat's eye",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc6543"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ngc6302",
+    "name": "Butterfly Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 258.44,
+    "dec_deg": -37.1,
+    "distance_pc": 1140,
+    "magnitude": 9.6,
+    "aliases": [
+      "ngc6302",
+      "ngc 6302",
+      "bug nebula",
+      "butterfly nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc6302"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ngc7293",
+    "name": "Helix Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 337.4108,
+    "dec_deg": -20.8372,
+    "distance_pc": 215,
+    "magnitude": 7.6,
+    "aliases": [
+      "ngc7293",
+      "ngc 7293",
+      "helix nebula",
+      "eye of god",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc7293"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ngc246",
+    "name": "Skull Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 11.766,
+    "dec_deg": -11.872,
+    "distance_pc": 610,
+    "magnitude": 8,
+    "aliases": [
+      "ngc246",
+      "ngc 246",
+      "skull nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc246"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-m45",
+    "name": "Pleiades Reflection Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 56.75,
+    "dec_deg": 24.1167,
+    "distance_pc": 136,
+    "magnitude": 1.6,
+    "aliases": [
+      "m45",
+      "m 45",
+      "messier 45",
+      "pleiades",
+      "seven sisters",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "m45"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ic2118",
+    "name": "Witch Head Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 76.5,
+    "dec_deg": -7.75,
+    "distance_pc": 275,
+    "magnitude": 13,
+    "aliases": [
+      "ic2118",
+      "ic 2118",
+      "lbn959",
+      "witch head",
+      "lbn 959",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ic2118"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-b33",
+    "name": "Horsehead Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 85.247,
+    "dec_deg": -2.458,
+    "distance_pc": 422,
+    "magnitude": null,
+    "aliases": [
+      "ic434",
+      "ic 434",
+      "b33",
+      "barnard 33",
+      "horsehead",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "b33"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-coalsack",
+    "name": "Coalsack Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 186,
+    "dec_deg": -62.5,
+    "distance_pc": 180,
+    "magnitude": null,
+    "aliases": [
+      "coalsack",
+      "caldwell 99",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "coalsack"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ldn1622",
+    "name": "Boogeyman Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 89.87,
+    "dec_deg": 1.78,
+    "distance_pc": 152,
+    "magnitude": null,
+    "aliases": [
+      "ldn1622",
+      "ldn 1622",
+      "boogeyman nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ldn1622"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-b68",
+    "name": "Barnard 68",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 260.2633,
+    "dec_deg": -23.84,
+    "distance_pc": 125,
+    "magnitude": null,
+    "aliases": [
+      "b68",
+      "barnard 68",
+      "ldn 57",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "b68"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-b72",
+    "name": "Barnard's S Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 261.28,
+    "dec_deg": -23.63,
+    "distance_pc": 200,
+    "magnitude": null,
+    "aliases": [
+      "b72",
+      "snake nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "b72"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-veil",
+    "name": "Cygnus Loop",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 311.833,
+    "dec_deg": 30.717,
+    "distance_pc": 735,
+    "magnitude": 7,
+    "aliases": [
+      "ngc6960",
+      "ngc 6960",
+      "sh2-103",
+      "cygnus loop",
+      "veil nebula",
+      "veil",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "veil"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-tycho",
+    "name": "Tycho SNR",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 6.33,
+    "dec_deg": 64.14,
+    "distance_pc": 2400,
+    "magnitude": null,
+    "aliases": [
+      "sn 1572",
+      "tycho snr",
+      "3c 10",
+      "g120.1+1.4",
+      "tycho",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "tycho"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-m1",
+    "name": "Crab Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 83.6331,
+    "dec_deg": 22.0145,
+    "distance_pc": 2000,
+    "magnitude": 8.4,
+    "aliases": [
+      "m1",
+      "m 1",
+      "messier 1",
+      "ngc1952",
+      "ngc 1952",
+      "crab nebula",
+      "sn 1054",
+      "taurus a",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "m1"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-velapwn",
+    "name": "Vela Pulsar Wind Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 128.838,
+    "dec_deg": -45.178,
+    "distance_pc": 290,
+    "magnitude": null,
+    "aliases": [
+      "vela pwn",
+      "psr b0833-45",
+      "velapwn",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "velapwn"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ngc6888",
+    "name": "Crescent Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 303.11,
+    "dec_deg": 38.36,
+    "distance_pc": 1900,
+    "magnitude": 7.4,
+    "aliases": [
+      "ngc6888",
+      "ngc 6888",
+      "sh2-105",
+      "crescent nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc6888"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-m167",
+    "name": "M1-67",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 292.11,
+    "dec_deg": 4.12,
+    "distance_pc": 1400,
+    "magnitude": 13.2,
+    "aliases": [
+      "m1-67",
+      "wr 124 nebula",
+      "merrill's star",
+      "m167",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "m167"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-hltau",
+    "name": "HL Tauri Disk",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 67.9102,
+    "dec_deg": 18.2336,
+    "distance_pc": 140,
+    "magnitude": null,
+    "aliases": [
+      "hl tau",
+      "hl tauri",
+      "hltau",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "hltau"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-twhya",
+    "name": "TW Hydrae Disk",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 165.466,
+    "dec_deg": -34.705,
+    "distance_pc": 60,
+    "magnitude": null,
+    "aliases": [
+      "tw hya",
+      "tw hydrae",
+      "twhya",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "twhya"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-localbubble",
+    "name": "Local Bubble",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 0,
+    "dec_deg": 0,
+    "distance_pc": 0,
+    "magnitude": null,
+    "aliases": [
+      "local bubble",
+      "local cavity",
+      "localbubble",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "localbubble"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-30dor",
+    "name": "30 Doradus Superbubble",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 84.675,
+    "dec_deg": -69.101,
+    "distance_pc": 49970,
+    "magnitude": 8,
+    "aliases": [
+      "ngc2070",
+      "ngc 2070",
+      "30 dor",
+      "tarantula nebula",
+      "30dor",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "30dor"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-goulds-belt",
+    "name": "Gould's Belt",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 270,
+    "dec_deg": 0,
+    "distance_pc": 300,
+    "magnitude": null,
+    "aliases": [
+      "gould belt",
+      "gould's belt",
+      "goulds-belt",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "goulds-belt"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-m8",
+    "name": "Lagoon Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 270.9042,
+    "dec_deg": -24.3867,
+    "distance_pc": 1250,
+    "magnitude": 6,
+    "aliases": [
+      "m8",
+      "m 8",
+      "messier 8",
+      "ngc6523",
+      "ngc 6523",
+      "sh2-25",
+      "lagoon nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "m8"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-m20",
+    "name": "Trifid Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 270.6083,
+    "dec_deg": -23.0303,
+    "distance_pc": 1680,
+    "magnitude": 6.3,
+    "aliases": [
+      "m20",
+      "m 20",
+      "messier 20",
+      "ngc6514",
+      "ngc 6514",
+      "sh2-30",
+      "trifid nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "m20"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-m17",
+    "name": "Omega Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 275.1958,
+    "dec_deg": -16.1728,
+    "distance_pc": 1700,
+    "magnitude": 6,
+    "aliases": [
+      "m17",
+      "m 17",
+      "messier 17",
+      "ngc6618",
+      "ngc 6618",
+      "sh2-45",
+      "omega nebula",
+      "swan nebula",
+      "horseshoe nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "m17"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ngc2237",
+    "name": "Rosette Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 97.9708,
+    "dec_deg": 4.9517,
+    "distance_pc": 1600,
+    "magnitude": 9,
+    "aliases": [
+      "ngc2237",
+      "ngc 2237",
+      "sh2-275",
+      "ngc 2244",
+      "rosette nebula",
+      "caldwell 49",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc2237"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ngc2264",
+    "name": "Cone Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 100.242,
+    "dec_deg": 9.895,
+    "distance_pc": 800,
+    "magnitude": 3.9,
+    "aliases": [
+      "ngc2264",
+      "ngc 2264",
+      "sh2-273",
+      "cone nebula",
+      "christmas tree cluster",
+      "caldwell 50",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc2264"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ngc1499",
+    "name": "California Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 60,
+    "dec_deg": 36.4167,
+    "distance_pc": 450,
+    "magnitude": 6,
+    "aliases": [
+      "ngc1499",
+      "ngc 1499",
+      "sh2-220",
+      "california nebula",
+      "caldwell 24",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc1499"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ngc7000",
+    "name": "North America Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 314.75,
+    "dec_deg": 44.3333,
+    "distance_pc": 795,
+    "magnitude": 4,
+    "aliases": [
+      "ngc7000",
+      "ngc 7000",
+      "sh2-117",
+      "north america nebula",
+      "caldwell 20",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ngc7000"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-ic5070",
+    "name": "Pelican Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 313,
+    "dec_deg": 44.3667,
+    "distance_pc": 795,
+    "magnitude": 8,
+    "aliases": [
+      "ic5070",
+      "ic 5070",
+      "sh2-117",
+      "pelican nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "ic5070"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-m27",
+    "name": "Dumbbell Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 299.9016,
+    "dec_deg": 22.7214,
+    "distance_pc": 380,
+    "magnitude": 7.5,
+    "aliases": [
+      "m27",
+      "m 27",
+      "messier 27",
+      "ngc6853",
+      "ngc 6853",
+      "dumbbell nebula",
+      "apple core nebula",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "m27"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-cas-a",
+    "name": "Cassiopeia A",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 350.85,
+    "dec_deg": 58.815,
+    "distance_pc": 3400,
+    "magnitude": null,
+    "aliases": [
+      "cas a",
+      "cassiopeia a",
+      "3c 461",
+      "sn 1680",
+      "cas-a",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "cas-a"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-sn1006",
+    "name": "SN 1006 SNR",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 225.7,
+    "dec_deg": -41.9333,
+    "distance_pc": 2200,
+    "magnitude": null,
+    "aliases": [
+      "sn 1006",
+      "pks 1459-41",
+      "g327.6+14.6",
+      "sn1006",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "sn1006"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-kepler-snr",
+    "name": "Kepler's Supernova SNR",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 262.675,
+    "dec_deg": -21.4833,
+    "distance_pc": 6100,
+    "magnitude": null,
+    "aliases": [
+      "sn 1604",
+      "kepler snr",
+      "g4.5+6.8",
+      "3c 358",
+      "kepler-snr",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "kepler-snr"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "NEB-boomerang",
+    "name": "Boomerang Nebula",
+    "entity_type": null,
+    "category": 5,
+    "category_name": "Nebulae",
+    "ra_deg": 186.625,
+    "dec_deg": -54.2333,
+    "distance_pc": 1500,
+    "magnitude": null,
+    "aliases": [
+      "boomerang nebula",
+      "eso 172-7",
+      "bow tie nebula",
+      "boomerang",
+      "nebula"
+    ],
+    "catalog_ids": {
+      "client_seed": "boomerang"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-sgr-a-star",
+    "name": "Sagittarius A*",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 266.4168,
+    "dec_deg": -29.0078,
+    "distance_pc": 8178,
+    "magnitude": null,
+    "aliases": [
+      "sgr a*",
+      "sgra*",
+      "galactic centre",
+      "sgr-a-star",
+      "black hole",
+      "blackhole",
+      "bh"
+    ],
+    "catalog_ids": {
+      "client_seed": "sgr-a-star"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-m87-star",
+    "name": "M87*",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 187.7059,
+    "dec_deg": 12.3911,
+    "distance_pc": 16800000,
+    "magnitude": null,
+    "aliases": [
+      "pōwehi",
+      "virgo a bh",
+      "ngc 4486 bh",
+      "m87-star",
+      "black hole",
+      "blackhole",
+      "bh"
+    ],
+    "catalog_ids": {
+      "client_seed": "m87-star"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-cygnus-x-1",
+    "name": "Cygnus X-1",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 299.5903,
+    "dec_deg": 35.2016,
+    "distance_pc": 2220,
+    "magnitude": 8.95,
+    "aliases": [
+      "hde 226868",
+      "cyg x-1",
+      "cygnus-x-1",
+      "black hole",
+      "blackhole",
+      "bh"
+    ],
+    "catalog_ids": {
+      "client_seed": "cygnus-x-1"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-v404-cyg",
+    "name": "V404 Cygni",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 306.0158,
+    "dec_deg": 33.8672,
+    "distance_pc": 2390,
+    "magnitude": 18.4,
+    "aliases": [
+      "gs 2023+338",
+      "v404-cyg",
+      "black hole",
+      "blackhole",
+      "bh"
+    ],
+    "catalog_ids": {
+      "client_seed": "v404-cyg"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-crab-pulsar",
+    "name": "Crab Pulsar",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 83.633,
+    "dec_deg": 22.0145,
+    "distance_pc": 2000,
+    "magnitude": null,
+    "aliases": [
+      "psr b0531+21",
+      "psr j0534+2200",
+      "crab-pulsar",
+      "pulsar",
+      "neutron star"
+    ],
+    "catalog_ids": {
+      "client_seed": "crab-pulsar"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-vela-pulsar",
+    "name": "Vela Pulsar",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 128.8363,
+    "dec_deg": -45.1764,
+    "distance_pc": 287,
+    "magnitude": null,
+    "aliases": [
+      "psr b0833-45",
+      "psr j0835-4510",
+      "vela-pulsar",
+      "pulsar",
+      "neutron star"
+    ],
+    "catalog_ids": {
+      "client_seed": "vela-pulsar"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-psr-b1919",
+    "name": "PSR B1919+21",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 290.3,
+    "dec_deg": 21.883,
+    "distance_pc": 1000,
+    "magnitude": null,
+    "aliases": [
+      "cp 1919",
+      "psr-b1919",
+      "pulsar",
+      "neutron star"
+    ],
+    "catalog_ids": {
+      "client_seed": "psr-b1919"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-psr-j0437",
+    "name": "PSR J0437-4715",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 69.3158,
+    "dec_deg": -47.2525,
+    "distance_pc": 156.8,
+    "magnitude": null,
+    "aliases": [
+      "psr b0437-47",
+      "psr-j0437",
+      "pulsar",
+      "neutron star"
+    ],
+    "catalog_ids": {
+      "client_seed": "psr-j0437"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-sgr-1806-20",
+    "name": "SGR 1806-20",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 272.163,
+    "dec_deg": -20.4111,
+    "distance_pc": 8700,
+    "magnitude": null,
+    "aliases": [
+      "sgr j1806-20",
+      "sgr-1806-20",
+      "magnetar",
+      "neutron star"
+    ],
+    "catalog_ids": {
+      "client_seed": "sgr-1806-20"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-sgr-0418",
+    "name": "SGR 0418+5729",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 64.7117,
+    "dec_deg": 57.4916,
+    "distance_pc": 2000,
+    "magnitude": null,
+    "aliases": [
+      "sgr-0418",
+      "magnetar",
+      "neutron star"
+    ],
+    "catalog_ids": {
+      "client_seed": "sgr-0418"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-magnetar-1e-1048",
+    "name": "1E 1048.1-5937",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 162.36,
+    "dec_deg": -59.8833,
+    "distance_pc": 9000,
+    "magnitude": null,
+    "aliases": [
+      "magnetar-1e-1048",
+      "magnetar",
+      "neutron star"
+    ],
+    "catalog_ids": {
+      "client_seed": "magnetar-1e-1048"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-gw150914",
+    "name": "GW150914 Merger Remnant",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 112.5,
+    "dec_deg": -70,
+    "distance_pc": 440000000,
+    "magnitude": null,
+    "aliases": [
+      "gw150914",
+      "first ligo detection",
+      "black hole",
+      "blackhole",
+      "bh"
+    ],
+    "catalog_ids": {
+      "client_seed": "gw150914"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-geminga",
+    "name": "Geminga",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 98.4756,
+    "dec_deg": 17.77,
+    "distance_pc": 250,
+    "magnitude": null,
+    "aliases": [
+      "psr b0633+17",
+      "psr j0633+1746",
+      "geminga",
+      "pulsar",
+      "neutron star"
+    ],
+    "catalog_ids": {
+      "client_seed": "geminga"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-psr-b1937",
+    "name": "PSR B1937+21",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 294.9108,
+    "dec_deg": 21.583,
+    "distance_pc": 3500,
+    "magnitude": null,
+    "aliases": [
+      "psr b1937+21",
+      "psr j1939+2134",
+      "psr-b1937",
+      "pulsar",
+      "neutron star"
+    ],
+    "catalog_ids": {
+      "client_seed": "psr-b1937"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-psr-j0740",
+    "name": "PSR J0740+6620",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 115.1917,
+    "dec_deg": 66.3417,
+    "distance_pc": 1140,
+    "magnitude": null,
+    "aliases": [
+      "psr j0740+6620",
+      "psr-j0740",
+      "pulsar",
+      "neutron star"
+    ],
+    "catalog_ids": {
+      "client_seed": "psr-j0740"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-gro-j1655",
+    "name": "GRO J1655-40",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 253.5,
+    "dec_deg": -39.8458,
+    "distance_pc": 3200,
+    "magnitude": 14.2,
+    "aliases": [
+      "gro j1655-40",
+      "nova scorpii 1994",
+      "v1033 sco",
+      "gro-j1655",
+      "black hole",
+      "blackhole",
+      "bh"
+    ],
+    "catalog_ids": {
+      "client_seed": "gro-j1655"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-lmc-x-3",
+    "name": "LMC X-3",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 84.7358,
+    "dec_deg": -64.0839,
+    "distance_pc": 50000,
+    "magnitude": null,
+    "aliases": [
+      "lmc x-3",
+      "lmc-x-3",
+      "black hole",
+      "blackhole",
+      "bh"
+    ],
+    "catalog_ids": {
+      "client_seed": "lmc-x-3"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "EXO-ic10-x1",
+    "name": "IC 10 X-1",
+    "entity_type": null,
+    "category": 9,
+    "category_name": "Exotic objects",
+    "ra_deg": 5.0963,
+    "dec_deg": 59.2928,
+    "distance_pc": 790000,
+    "magnitude": null,
+    "aliases": [
+      "ic 10 x-1",
+      "ic10-x1",
+      "black hole",
+      "blackhole",
+      "bh"
+    ],
+    "catalog_ids": {
+      "client_seed": "ic10-x1"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-gg-local",
+    "name": "Local Group",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 10.68,
+    "dec_deg": 41.27,
+    "distance_pc": 780000,
+    "magnitude": null,
+    "aliases": [
+      "gg-local",
+      "group",
+      "galaxy group"
+    ],
+    "catalog_ids": {
+      "client_seed": "gg-local"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-virgo",
+    "name": "Virgo Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 187.7,
+    "dec_deg": 12.33,
+    "distance_pc": 16500000,
+    "magnitude": null,
+    "aliases": [
+      "cl-virgo",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-virgo"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-coma",
+    "name": "Coma Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 194.95,
+    "dec_deg": 27.98,
+    "distance_pc": 100000000,
+    "magnitude": null,
+    "aliases": [
+      "abell 1656",
+      "cl-coma",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-coma"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-perseus",
+    "name": "Perseus Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 49.95,
+    "dec_deg": 41.51,
+    "distance_pc": 75000000,
+    "magnitude": null,
+    "aliases": [
+      "abell 426",
+      "cl-perseus",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-perseus"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-a2029",
+    "name": "Abell 2029",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 227.73,
+    "dec_deg": 5.74,
+    "distance_pc": 311000000,
+    "magnitude": null,
+    "aliases": [
+      "cl-a2029",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-a2029"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-a2218",
+    "name": "Abell 2218",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 248.95,
+    "dec_deg": 66.21,
+    "distance_pc": 770000000,
+    "magnitude": null,
+    "aliases": [
+      "cl-a2218",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-a2218"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-sc-laniakea",
+    "name": "Laniakea Supercluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 158,
+    "dec_deg": -46,
+    "distance_pc": 80000000,
+    "magnitude": null,
+    "aliases": [
+      "sc-laniakea",
+      "supercluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "sc-laniakea"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-sc-shapley",
+    "name": "Shapley Supercluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 201.25,
+    "dec_deg": -30.3,
+    "distance_pc": 210000000,
+    "magnitude": null,
+    "aliases": [
+      "sc-shapley",
+      "supercluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "sc-shapley"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-fornax",
+    "name": "Fornax Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 54.62,
+    "dec_deg": -35.45,
+    "distance_pc": 19300000,
+    "magnitude": null,
+    "aliases": [
+      "abell s 0373",
+      "cl-fornax",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-fornax"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-hydra",
+    "name": "Hydra Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 159.17,
+    "dec_deg": -27.53,
+    "distance_pc": 55000000,
+    "magnitude": null,
+    "aliases": [
+      "abell 1060",
+      "cl-hydra",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-hydra"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-centaurus",
+    "name": "Centaurus Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 192.2,
+    "dec_deg": -41.31,
+    "distance_pc": 48000000,
+    "magnitude": null,
+    "aliases": [
+      "abell 3526",
+      "cl-centaurus",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-centaurus"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-norma",
+    "name": "Norma Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 243.55,
+    "dec_deg": -60.88,
+    "distance_pc": 70000000,
+    "magnitude": null,
+    "aliases": [
+      "abell 3627 / great attractor",
+      "cl-norma",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-norma"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-sc-hercules",
+    "name": "Hercules Supercluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 241,
+    "dec_deg": 18,
+    "distance_pc": 154000000,
+    "magnitude": null,
+    "aliases": [
+      "sc-hercules",
+      "supercluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "sc-hercules"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-a2744",
+    "name": "Pandora's Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 3.58,
+    "dec_deg": -30.4,
+    "distance_pc": 1220000000,
+    "magnitude": null,
+    "aliases": [
+      "abell 2744",
+      "cl-a2744",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-a2744"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-elgordo",
+    "name": "El Gordo",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 15.71,
+    "dec_deg": -49.27,
+    "distance_pc": 2800000000,
+    "magnitude": null,
+    "aliases": [
+      "act-cl j0102-4915",
+      "cl-elgordo",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-elgordo"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cl-j1001",
+    "name": "CL J1001+0220",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 150.25,
+    "dec_deg": 2.33,
+    "distance_pc": 3900000000,
+    "magnitude": null,
+    "aliases": [
+      "cl-j1001",
+      "cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cl-j1001"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-pleiades",
+    "name": "Pleiades",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 56.75,
+    "dec_deg": 24.12,
+    "distance_pc": 136,
+    "magnitude": null,
+    "aliases": [
+      "m45 / melotte 22",
+      "oc-pleiades",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-pleiades"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-hyades",
+    "name": "Hyades",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 66.75,
+    "dec_deg": 15.87,
+    "distance_pc": 47,
+    "magnitude": null,
+    "aliases": [
+      "melotte 25",
+      "oc-hyades",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-hyades"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-praesepe",
+    "name": "Praesepe (Beehive)",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 130.03,
+    "dec_deg": 19.98,
+    "distance_pc": 187,
+    "magnitude": null,
+    "aliases": [
+      "m44 / ngc 2632",
+      "oc-praesepe",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-praesepe"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-double-cluster",
+    "name": "Double Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 35,
+    "dec_deg": 57.13,
+    "distance_pc": 2300,
+    "magnitude": null,
+    "aliases": [
+      "ngc 869 / ngc 884",
+      "oc-double-cluster",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-double-cluster"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-m11",
+    "name": "Wild Duck Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 282.77,
+    "dec_deg": -6.27,
+    "distance_pc": 1877,
+    "magnitude": null,
+    "aliases": [
+      "m11 / ngc 6705",
+      "oc-m11",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-m11"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-jewelbox",
+    "name": "Jewel Box",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 193.42,
+    "dec_deg": -60.37,
+    "distance_pc": 2100,
+    "magnitude": null,
+    "aliases": [
+      "ngc 4755",
+      "oc-jewelbox",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-jewelbox"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-m67",
+    "name": "M67",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 132.82,
+    "dec_deg": 11.8,
+    "distance_pc": 860,
+    "magnitude": null,
+    "aliases": [
+      "ngc 2682",
+      "oc-m67",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-m67"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-alpha-per",
+    "name": "α Persei Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 51.08,
+    "dec_deg": 49.87,
+    "distance_pc": 172,
+    "magnitude": null,
+    "aliases": [
+      "melotte 20",
+      "oc-alpha-per",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-alpha-per"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-ngc2516",
+    "name": "Southern Beehive",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 119.52,
+    "dec_deg": -60.75,
+    "distance_pc": 346,
+    "magnitude": null,
+    "aliases": [
+      "ngc 2516",
+      "oc-ngc2516",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-ngc2516"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-m35",
+    "name": "M35",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 92.22,
+    "dec_deg": 24.33,
+    "distance_pc": 912,
+    "magnitude": null,
+    "aliases": [
+      "ngc 2168",
+      "oc-m35",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-m35"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-ic2602",
+    "name": "Southern Pleiades",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 160.5,
+    "dec_deg": -64.4,
+    "distance_pc": 150,
+    "magnitude": null,
+    "aliases": [
+      "ic 2602 / caldwell 102",
+      "oc-ic2602",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-ic2602"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OC-oc-ic2391",
+    "name": "Omicron Velorum Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 130.13,
+    "dec_deg": -53.03,
+    "distance_pc": 147,
+    "magnitude": null,
+    "aliases": [
+      "ic 2391 / caldwell 85",
+      "oc-ic2391",
+      "open cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "oc-ic2391"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GC-gc-omega-cen",
+    "name": "ω Centauri",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 201.7,
+    "dec_deg": -47.48,
+    "distance_pc": 5200,
+    "magnitude": null,
+    "aliases": [
+      "ngc 5139",
+      "gc-omega-cen",
+      "globular cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "gc-omega-cen"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GC-gc-47tuc",
+    "name": "47 Tucanae",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 6.02,
+    "dec_deg": -72.08,
+    "distance_pc": 4500,
+    "magnitude": null,
+    "aliases": [
+      "ngc 104",
+      "gc-47tuc",
+      "globular cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "gc-47tuc"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GC-gc-m13",
+    "name": "M13",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 250.42,
+    "dec_deg": 36.46,
+    "distance_pc": 7100,
+    "magnitude": null,
+    "aliases": [
+      "ngc 6205",
+      "gc-m13",
+      "globular cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "gc-m13"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GC-gc-m22",
+    "name": "M22",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 279.1,
+    "dec_deg": -23.9,
+    "distance_pc": 3200,
+    "magnitude": null,
+    "aliases": [
+      "ngc 6656",
+      "gc-m22",
+      "globular cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "gc-m22"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GC-gc-m15",
+    "name": "M15",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 322.49,
+    "dec_deg": 12.17,
+    "distance_pc": 10400,
+    "magnitude": null,
+    "aliases": [
+      "ngc 7078",
+      "gc-m15",
+      "globular cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "gc-m15"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GC-gc-m3",
+    "name": "M3",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 205.55,
+    "dec_deg": 28.38,
+    "distance_pc": 10200,
+    "magnitude": null,
+    "aliases": [
+      "ngc 5272",
+      "gc-m3",
+      "globular cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "gc-m3"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GC-gc-m5",
+    "name": "M5",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 229.64,
+    "dec_deg": 2.08,
+    "distance_pc": 7500,
+    "magnitude": null,
+    "aliases": [
+      "ngc 5904",
+      "gc-m5",
+      "globular cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "gc-m5"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GC-gc-m92",
+    "name": "M92",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 259.28,
+    "dec_deg": 43.14,
+    "distance_pc": 8300,
+    "magnitude": null,
+    "aliases": [
+      "ngc 6341",
+      "gc-m92",
+      "globular cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "gc-m92"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GC-gc-m4",
+    "name": "M4",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 245.9,
+    "dec_deg": -26.53,
+    "distance_pc": 2200,
+    "magnitude": null,
+    "aliases": [
+      "ngc 6121",
+      "gc-m4",
+      "globular cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "gc-m4"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "GC-gc-ngc2808",
+    "name": "NGC 2808",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 138.01,
+    "dec_deg": -64.86,
+    "distance_pc": 9600,
+    "magnitude": null,
+    "aliases": [
+      "gc-ngc2808",
+      "globular cluster",
+      "star cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "gc-ngc2808"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OB-ob-orion-ob1",
+    "name": "Orion OB1",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 83.82,
+    "dec_deg": -5.39,
+    "distance_pc": 400,
+    "magnitude": null,
+    "aliases": [
+      "ob association",
+      "stellar association",
+      "ob-orion-ob1"
+    ],
+    "catalog_ids": {
+      "client_seed": "ob-orion-ob1"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OB-ob-upper-sco",
+    "name": "Upper Scorpius",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 243,
+    "dec_deg": -22.5,
+    "distance_pc": 145,
+    "magnitude": null,
+    "aliases": [
+      "ob association",
+      "stellar association",
+      "ob-upper-sco"
+    ],
+    "catalog_ids": {
+      "client_seed": "ob-upper-sco"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OB-ob-cyg-ob2",
+    "name": "Cygnus OB2",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 308.3,
+    "dec_deg": 41.32,
+    "distance_pc": 1700,
+    "magnitude": null,
+    "aliases": [
+      "ob association",
+      "stellar association",
+      "ob-cyg-ob2"
+    ],
+    "catalog_ids": {
+      "client_seed": "ob-cyg-ob2"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OB-ob-carina-ob1",
+    "name": "Carina OB1",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 161,
+    "dec_deg": -59.7,
+    "distance_pc": 2300,
+    "magnitude": null,
+    "aliases": [
+      "ob association",
+      "stellar association",
+      "ob-carina-ob1"
+    ],
+    "catalog_ids": {
+      "client_seed": "ob-carina-ob1"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "OB-ob-cep-ob3",
+    "name": "Cepheus OB3",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 342.5,
+    "dec_deg": 62.5,
+    "distance_pc": 750,
+    "magnitude": null,
+    "aliases": [
+      "ob association",
+      "stellar association",
+      "ob-cep-ob3"
+    ],
+    "catalog_ids": {
+      "client_seed": "ob-cep-ob3"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cc-bullet",
+    "name": "Bullet Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 104.63,
+    "dec_deg": -55.95,
+    "distance_pc": 1240000000,
+    "magnitude": null,
+    "aliases": [
+      "1e 0657-558",
+      "cc-bullet",
+      "colliding cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cc-bullet"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-cc-musket",
+    "name": "Musket Ball Cluster",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 139.04,
+    "dec_deg": 29.85,
+    "distance_pc": 1700000000,
+    "magnitude": null,
+    "aliases": [
+      "dlscl j0916.2+2951",
+      "cc-musket",
+      "colliding cluster",
+      "galaxy cluster"
+    ],
+    "catalog_ids": {
+      "client_seed": "cc-musket"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-gw-sloan",
+    "name": "Sloan Great Wall",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 200,
+    "dec_deg": 0,
+    "distance_pc": 350000000,
+    "magnitude": null,
+    "aliases": [
+      "great wall",
+      "filament",
+      "cosmic wall",
+      "gw-sloan"
+    ],
+    "catalog_ids": {
+      "client_seed": "gw-sloan"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-gw-cfa2",
+    "name": "CfA2 Great Wall",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 195,
+    "dec_deg": 28,
+    "distance_pc": 270000000,
+    "magnitude": null,
+    "aliases": [
+      "great wall",
+      "filament",
+      "cosmic wall",
+      "gw-cfa2"
+    ],
+    "catalog_ids": {
+      "client_seed": "gw-cfa2"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-gw-boss",
+    "name": "BOSS Great Wall",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 160,
+    "dec_deg": 35,
+    "distance_pc": 1800000000,
+    "magnitude": null,
+    "aliases": [
+      "great wall",
+      "filament",
+      "cosmic wall",
+      "gw-boss"
+    ],
+    "catalog_ids": {
+      "client_seed": "gw-boss"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-vd-bootes",
+    "name": "Boötes Void",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 222.5,
+    "dec_deg": 46,
+    "distance_pc": 250000000,
+    "magnitude": null,
+    "aliases": [
+      "void",
+      "cosmic void",
+      "vd-bootes"
+    ],
+    "catalog_ids": {
+      "client_seed": "vd-bootes"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-vd-local",
+    "name": "Local Void",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 279.5,
+    "dec_deg": 18,
+    "distance_pc": 23000000,
+    "magnitude": null,
+    "aliases": [
+      "void",
+      "cosmic void",
+      "vd-local"
+    ],
+    "catalog_ids": {
+      "client_seed": "vd-local"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-vd-eridanus",
+    "name": "Eridanus Supervoid",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 48.75,
+    "dec_deg": -19,
+    "distance_pc": 650000000,
+    "magnitude": null,
+    "aliases": [
+      "void",
+      "cosmic void",
+      "vd-eridanus"
+    ],
+    "catalog_ids": {
+      "client_seed": "vd-eridanus"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-vd-giant-cvn",
+    "name": "Giant Void (Canes Venatici)",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 195,
+    "dec_deg": 35,
+    "distance_pc": 120000000,
+    "magnitude": null,
+    "aliases": [
+      "void",
+      "cosmic void",
+      "vd-giant-cvn"
+    ],
+    "catalog_ids": {
+      "client_seed": "vd-giant-cvn"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-vd-sculptor",
+    "name": "Sculptor Void",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 12.5,
+    "dec_deg": -28,
+    "distance_pc": 44000000,
+    "magnitude": null,
+    "aliases": [
+      "void",
+      "cosmic void",
+      "vd-sculptor"
+    ],
+    "catalog_ids": {
+      "client_seed": "vd-sculptor"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-vd-kbc",
+    "name": "KBC Void",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 180,
+    "dec_deg": 30,
+    "distance_pc": 300000000,
+    "magnitude": null,
+    "aliases": [
+      "void",
+      "cosmic void",
+      "vd-kbc"
+    ],
+    "catalog_ids": {
+      "client_seed": "vd-kbc"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-lab-1",
+    "name": "LAB-1",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 334.37,
+    "dec_deg": 0.24,
+    "distance_pc": 6700000000,
+    "magnitude": null,
+    "aliases": [
+      "lyman-alpha blob",
+      "lab",
+      "lyman alpha",
+      "lab-1"
+    ],
+    "catalog_ids": {
+      "client_seed": "lab-1"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-lab-himiko",
+    "name": "Himiko",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 33.22,
+    "dec_deg": -5.08,
+    "distance_pc": 9400000000,
+    "magnitude": null,
+    "aliases": [
+      "lyman-alpha blob",
+      "lab",
+      "lyman alpha",
+      "lab-himiko"
+    ],
+    "catalog_ids": {
+      "client_seed": "lab-himiko"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "LSS-lab-mammoth-1",
+    "name": "MAMMOTH-1",
+    "entity_type": null,
+    "category": 8,
+    "category_name": "Large-scale structure",
+    "ra_deg": 217.63,
+    "dec_deg": 53.22,
+    "distance_pc": 4200000000,
+    "magnitude": null,
+    "aliases": [
+      "lyman-alpha blob",
+      "lab",
+      "lyman alpha",
+      "lab-mammoth-1"
+    ],
+    "catalog_ids": {
+      "client_seed": "lab-mammoth-1"
+    },
+    "data_source": "ts-catalog"
+  },
+  {
+    "ent_id": "CON-And",
+    "name": "Andromeda",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 10,
+    "dec_deg": 37.4,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "and",
+      "andromedae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "And"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "And"
+  },
+  {
+    "ent_id": "CON-Ant",
+    "name": "Antlia",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 157.7,
+    "dec_deg": -32.5,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "ant",
+      "antliae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Ant"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Ant"
+  },
+  {
+    "ent_id": "CON-Aps",
+    "name": "Apus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 247.9,
+    "dec_deg": -75.3,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "aps",
+      "apodis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Aps"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Aps"
+  },
+  {
+    "ent_id": "CON-Aqr",
+    "name": "Aquarius",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 332.6,
+    "dec_deg": -10.8,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "aqr",
+      "aquarii",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Aqr"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Aqr"
+  },
+  {
+    "ent_id": "CON-Aql",
+    "name": "Aquila",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 297.7,
+    "dec_deg": 3.4,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "aql",
+      "aquilae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Aql"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Aql"
+  },
+  {
+    "ent_id": "CON-Ara",
+    "name": "Ara",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 261,
+    "dec_deg": -56.6,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "ara",
+      "arae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Ara"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Ara"
+  },
+  {
+    "ent_id": "CON-Ari",
+    "name": "Aries",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 37.4,
+    "dec_deg": 20.8,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "ari",
+      "arietis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Ari"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Ari"
+  },
+  {
+    "ent_id": "CON-Aur",
+    "name": "Auriga",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 89.5,
+    "dec_deg": 41.6,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "aur",
+      "aurigae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Aur"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Aur"
+  },
+  {
+    "ent_id": "CON-Boo",
+    "name": "Boötes",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 215,
+    "dec_deg": 31.2,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "boo",
+      "boötis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Boo"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Boo"
+  },
+  {
+    "ent_id": "CON-Cae",
+    "name": "Caelum",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 70.5,
+    "dec_deg": -37.9,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cae",
+      "caeli",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cae"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cae"
+  },
+  {
+    "ent_id": "CON-Cam",
+    "name": "Camelopardalis",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 90,
+    "dec_deg": 69.4,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cam",
+      "camelopardalis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cam"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cam"
+  },
+  {
+    "ent_id": "CON-Cnc",
+    "name": "Cancer",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 130.2,
+    "dec_deg": 19.8,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cnc",
+      "cancri",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cnc"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cnc"
+  },
+  {
+    "ent_id": "CON-CVn",
+    "name": "Canes Venatici",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 195.7,
+    "dec_deg": 40.1,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cvn",
+      "canum venaticorum",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "CVn"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "CVn"
+  },
+  {
+    "ent_id": "CON-CMa",
+    "name": "Canis Major",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 104.3,
+    "dec_deg": -22.1,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cma",
+      "canis majoris",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "CMa"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "CMa"
+  },
+  {
+    "ent_id": "CON-CMi",
+    "name": "Canis Minor",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 113.5,
+    "dec_deg": 6.4,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cmi",
+      "canis minoris",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "CMi"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "CMi"
+  },
+  {
+    "ent_id": "CON-Cap",
+    "name": "Capricornus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 320.7,
+    "dec_deg": -18,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cap",
+      "capricorni",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cap"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cap"
+  },
+  {
+    "ent_id": "CON-Car",
+    "name": "Carina",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 130,
+    "dec_deg": -63.2,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "car",
+      "carinae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Car"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Car"
+  },
+  {
+    "ent_id": "CON-Cas",
+    "name": "Cassiopeia",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 14.5,
+    "dec_deg": 61.7,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cas",
+      "cassiopeiae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cas"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cas"
+  },
+  {
+    "ent_id": "CON-Cen",
+    "name": "Centaurus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 201.5,
+    "dec_deg": -48.9,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cen",
+      "centauri",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cen"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cen"
+  },
+  {
+    "ent_id": "CON-Cep",
+    "name": "Cepheus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 330,
+    "dec_deg": 71,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cep",
+      "cephei",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cep"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cep"
+  },
+  {
+    "ent_id": "CON-Cet",
+    "name": "Cetus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 25,
+    "dec_deg": -7,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cet",
+      "ceti",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cet"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cet"
+  },
+  {
+    "ent_id": "CON-Cha",
+    "name": "Chamaeleon",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 160,
+    "dec_deg": -79.2,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cha",
+      "chamaeleontis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cha"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cha"
+  },
+  {
+    "ent_id": "CON-Cir",
+    "name": "Circinus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 222.6,
+    "dec_deg": -63,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cir",
+      "circini",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cir"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cir"
+  },
+  {
+    "ent_id": "CON-Col",
+    "name": "Columba",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 85.7,
+    "dec_deg": -35.1,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "col",
+      "columbae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Col"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Col"
+  },
+  {
+    "ent_id": "CON-Com",
+    "name": "Coma Berenices",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 187.4,
+    "dec_deg": 23.3,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "com",
+      "comae berenices",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Com"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Com"
+  },
+  {
+    "ent_id": "CON-CrA",
+    "name": "Corona Australis",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 283.8,
+    "dec_deg": -41.1,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cra",
+      "coronae australis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "CrA"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "CrA"
+  },
+  {
+    "ent_id": "CON-CrB",
+    "name": "Corona Borealis",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 236,
+    "dec_deg": 32.6,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "crb",
+      "coronae borealis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "CrB"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "CrB"
+  },
+  {
+    "ent_id": "CON-Crv",
+    "name": "Corvus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 187.5,
+    "dec_deg": -18.4,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "crv",
+      "corvi",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Crv"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Crv"
+  },
+  {
+    "ent_id": "CON-Crt",
+    "name": "Crater",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 170,
+    "dec_deg": -15.9,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "crt",
+      "crateris",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Crt"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Crt"
+  },
+  {
+    "ent_id": "CON-Cru",
+    "name": "Crux",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 187.5,
+    "dec_deg": -60.2,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cru",
+      "crucis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cru"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cru"
+  },
+  {
+    "ent_id": "CON-Cyg",
+    "name": "Cygnus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 305,
+    "dec_deg": 42.8,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "cyg",
+      "cygni",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Cyg"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Cyg"
+  },
+  {
+    "ent_id": "CON-Del",
+    "name": "Delphinus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 310.4,
+    "dec_deg": 12,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "del",
+      "delphini",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Del"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Del"
+  },
+  {
+    "ent_id": "CON-Dor",
+    "name": "Dorado",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 79,
+    "dec_deg": -59.3,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "dor",
+      "doradus",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Dor"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Dor"
+  },
+  {
+    "ent_id": "CON-Dra",
+    "name": "Draco",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 220,
+    "dec_deg": 67,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "dra",
+      "draconis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Dra"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Dra"
+  },
+  {
+    "ent_id": "CON-Equ",
+    "name": "Equuleus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 318.5,
+    "dec_deg": 7.8,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "equ",
+      "equulei",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Equ"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Equ"
+  },
+  {
+    "ent_id": "CON-Eri",
+    "name": "Eridanus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 56.5,
+    "dec_deg": -28.8,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "eri",
+      "eridani",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Eri"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Eri"
+  },
+  {
+    "ent_id": "CON-For",
+    "name": "Fornax",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 40,
+    "dec_deg": -31.6,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "for",
+      "fornacis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "For"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "For"
+  },
+  {
+    "ent_id": "CON-Gem",
+    "name": "Gemini",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 105,
+    "dec_deg": 22.6,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "gem",
+      "geminorum",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Gem"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Gem"
+  },
+  {
+    "ent_id": "CON-Gru",
+    "name": "Grus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 332,
+    "dec_deg": -46.4,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "gru",
+      "gruis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Gru"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Gru"
+  },
+  {
+    "ent_id": "CON-Her",
+    "name": "Hercules",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 257.5,
+    "dec_deg": 27.5,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "her",
+      "herculis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Her"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Her"
+  },
+  {
+    "ent_id": "CON-Hor",
+    "name": "Horologium",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 47.5,
+    "dec_deg": -53.3,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "hor",
+      "horologii",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Hor"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Hor"
+  },
+  {
+    "ent_id": "CON-Hya",
+    "name": "Hydra",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 175,
+    "dec_deg": -14.5,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "hya",
+      "hydrae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Hya"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Hya"
+  },
+  {
+    "ent_id": "CON-Hyi",
+    "name": "Hydrus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 37.5,
+    "dec_deg": -70,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "hyi",
+      "hydri",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Hyi"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Hyi"
+  },
+  {
+    "ent_id": "CON-Ind",
+    "name": "Indus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 318.5,
+    "dec_deg": -60,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "ind",
+      "indi",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Ind"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Ind"
+  },
+  {
+    "ent_id": "CON-Lac",
+    "name": "Lacerta",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 338.3,
+    "dec_deg": 46,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "lac",
+      "lacertae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Lac"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Lac"
+  },
+  {
+    "ent_id": "CON-Leo",
+    "name": "Leo",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 160,
+    "dec_deg": 13.1,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "leo",
+      "leonis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Leo"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Leo"
+  },
+  {
+    "ent_id": "CON-LMi",
+    "name": "Leo Minor",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 157.5,
+    "dec_deg": 32.1,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "lmi",
+      "leonis minoris",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "LMi"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "LMi"
+  },
+  {
+    "ent_id": "CON-Lep",
+    "name": "Lepus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 82,
+    "dec_deg": -19,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "lep",
+      "leporis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Lep"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Lep"
+  },
+  {
+    "ent_id": "CON-Lib",
+    "name": "Libra",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 227.5,
+    "dec_deg": -15.2,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "lib",
+      "librae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Lib"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Lib"
+  },
+  {
+    "ent_id": "CON-Lup",
+    "name": "Lupus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 229,
+    "dec_deg": -42.7,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "lup",
+      "lupi",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Lup"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Lup"
+  },
+  {
+    "ent_id": "CON-Lyn",
+    "name": "Lynx",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 120,
+    "dec_deg": 47.5,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "lyn",
+      "lyncis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Lyn"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Lyn"
+  },
+  {
+    "ent_id": "CON-Lyr",
+    "name": "Lyra",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 283.8,
+    "dec_deg": 36.7,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "lyr",
+      "lyrae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Lyr"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Lyr"
+  },
+  {
+    "ent_id": "CON-Men",
+    "name": "Mensa",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 82.5,
+    "dec_deg": -77.5,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "men",
+      "mensae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Men"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Men"
+  },
+  {
+    "ent_id": "CON-Mic",
+    "name": "Microscopium",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 314,
+    "dec_deg": -36.3,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "mic",
+      "microscopii",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Mic"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Mic"
+  },
+  {
+    "ent_id": "CON-Mon",
+    "name": "Monoceros",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 104,
+    "dec_deg": 0.3,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "mon",
+      "monocerotis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Mon"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Mon"
+  },
+  {
+    "ent_id": "CON-Mus",
+    "name": "Musca",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 190.7,
+    "dec_deg": -70.2,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "mus",
+      "muscae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Mus"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Mus"
+  },
+  {
+    "ent_id": "CON-Nor",
+    "name": "Norma",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 241.6,
+    "dec_deg": -51.4,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "nor",
+      "normae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Nor"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Nor"
+  },
+  {
+    "ent_id": "CON-Oct",
+    "name": "Octans",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 330,
+    "dec_deg": -82.2,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "oct",
+      "octantis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Oct"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Oct"
+  },
+  {
+    "ent_id": "CON-Oph",
+    "name": "Ophiuchus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 257.5,
+    "dec_deg": -7.9,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "oph",
+      "ophiuchi",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Oph"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Oph"
+  },
+  {
+    "ent_id": "CON-Ori",
+    "name": "Orion",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 83.2,
+    "dec_deg": 5.9,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "ori",
+      "orionis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Ori"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Ori"
+  },
+  {
+    "ent_id": "CON-Pav",
+    "name": "Pavo",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 280,
+    "dec_deg": -65.8,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "pav",
+      "pavonis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Pav"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Pav"
+  },
+  {
+    "ent_id": "CON-Peg",
+    "name": "Pegasus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 340,
+    "dec_deg": 19.5,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "peg",
+      "pegasi",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Peg"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Peg"
+  },
+  {
+    "ent_id": "CON-Per",
+    "name": "Perseus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 52.5,
+    "dec_deg": 45,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "per",
+      "persei",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Per"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Per"
+  },
+  {
+    "ent_id": "CON-Phe",
+    "name": "Phoenix",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 15,
+    "dec_deg": -48.6,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "phe",
+      "phoenicis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Phe"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Phe"
+  },
+  {
+    "ent_id": "CON-Pic",
+    "name": "Pictor",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 87,
+    "dec_deg": -53.5,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "pic",
+      "pictoris",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Pic"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Pic"
+  },
+  {
+    "ent_id": "CON-Psc",
+    "name": "Pisces",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 5,
+    "dec_deg": 13.7,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "psc",
+      "piscium",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Psc"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Psc"
+  },
+  {
+    "ent_id": "CON-PsA",
+    "name": "Piscis Austrinus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 340,
+    "dec_deg": -30.6,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "psa",
+      "piscis austrini",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "PsA"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "PsA"
+  },
+  {
+    "ent_id": "CON-Pup",
+    "name": "Puppis",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 116.5,
+    "dec_deg": -31.2,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "pup",
+      "puppis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Pup"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Pup"
+  },
+  {
+    "ent_id": "CON-Pyx",
+    "name": "Pyxis",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 133.5,
+    "dec_deg": -27.4,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "pyx",
+      "pyxidis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Pyx"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Pyx"
+  },
+  {
+    "ent_id": "CON-Ret",
+    "name": "Reticulum",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 60.7,
+    "dec_deg": -60,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "ret",
+      "reticuli",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Ret"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Ret"
+  },
+  {
+    "ent_id": "CON-Sge",
+    "name": "Sagitta",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 297.5,
+    "dec_deg": 18.9,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "sge",
+      "sagittae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Sge"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Sge"
+  },
+  {
+    "ent_id": "CON-Sgr",
+    "name": "Sagittarius",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 285,
+    "dec_deg": -28.5,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "sgr",
+      "sagittarii",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Sgr"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Sgr"
+  },
+  {
+    "ent_id": "CON-Sco",
+    "name": "Scorpius",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 252.5,
+    "dec_deg": -27,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "sco",
+      "scorpii",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Sco"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Sco"
+  },
+  {
+    "ent_id": "CON-Scl",
+    "name": "Sculptor",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 5,
+    "dec_deg": -32.1,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "scl",
+      "sculptoris",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Scl"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Scl"
+  },
+  {
+    "ent_id": "CON-Sct",
+    "name": "Scutum",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 282.5,
+    "dec_deg": -9.9,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "sct",
+      "scuti",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Sct"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Sct"
+  },
+  {
+    "ent_id": "CON-Ser",
+    "name": "Serpens",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 252.5,
+    "dec_deg": 6.1,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "ser",
+      "serpentis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Ser"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Ser"
+  },
+  {
+    "ent_id": "CON-Sex",
+    "name": "Sextans",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 157.5,
+    "dec_deg": -2.6,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "sex",
+      "sextantis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Sex"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Sex"
+  },
+  {
+    "ent_id": "CON-Tau",
+    "name": "Taurus",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 67.5,
+    "dec_deg": 14.9,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "tau",
+      "tauri",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Tau"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Tau"
+  },
+  {
+    "ent_id": "CON-Tel",
+    "name": "Telescopium",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 287.5,
+    "dec_deg": -51,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "tel",
+      "telescopii",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Tel"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Tel"
+  },
+  {
+    "ent_id": "CON-Tri",
+    "name": "Triangulum",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 31.5,
+    "dec_deg": 31.5,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "tri",
+      "trianguli",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Tri"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Tri"
+  },
+  {
+    "ent_id": "CON-TrA",
+    "name": "Triangulum Australe",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 252.5,
+    "dec_deg": -65.4,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "tra",
+      "trianguli australis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "TrA"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "TrA"
+  },
+  {
+    "ent_id": "CON-Tuc",
+    "name": "Tucana",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 355,
+    "dec_deg": -65.8,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "tuc",
+      "tucanae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Tuc"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Tuc"
+  },
+  {
+    "ent_id": "CON-UMa",
+    "name": "Ursa Major",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 172.5,
+    "dec_deg": 50.7,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "uma",
+      "ursae majoris",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "UMa"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "UMa"
+  },
+  {
+    "ent_id": "CON-UMi",
+    "name": "Ursa Minor",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 232.5,
+    "dec_deg": 77.7,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "umi",
+      "ursae minoris",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "UMi"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "UMi"
+  },
+  {
+    "ent_id": "CON-Vel",
+    "name": "Vela",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 142.5,
+    "dec_deg": -47.2,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "vel",
+      "velorum",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Vel"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Vel"
+  },
+  {
+    "ent_id": "CON-Vir",
+    "name": "Virgo",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 195,
+    "dec_deg": -4.2,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "vir",
+      "virginis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Vir"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Vir"
+  },
+  {
+    "ent_id": "CON-Vol",
+    "name": "Volans",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 118,
+    "dec_deg": -69.8,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "vol",
+      "volantis",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Vol"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Vol"
+  },
+  {
+    "ent_id": "CON-Vul",
+    "name": "Vulpecula",
+    "entity_type": null,
+    "category": 10,
+    "category_name": "Constellations",
+    "ra_deg": 300,
+    "dec_deg": 24.4,
+    "distance_pc": null,
+    "magnitude": null,
+    "aliases": [
+      "vul",
+      "vulpeculae",
+      "constellation"
+    ],
+    "catalog_ids": {
+      "client_seed": "Vul"
+    },
+    "data_source": "ts-catalog",
+    "constellation_abbr": "Vul"
+  }
+]

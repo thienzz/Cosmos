@@ -162,7 +162,7 @@ curl -sf http://localhost:3010/health | jq .status   # "ok"
 
 ## Phase B — API MVP (12 tasks, ~30h)
 
-### T-B-01 — Install deps + base structure 🟢
+### T-B-01 — Install deps + base structure 🟢 ✅ DONE 9a2e82f 2026-04-21
 **Depends:** T-A-06  **Est:** 30m
 **Goal:** All API deps present; folder structure ready.
 **Do:**
@@ -173,7 +173,7 @@ curl -sf http://localhost:3010/health | jq .status   # "ok"
 
 ---
 
-### T-B-02 — `db/pool.ts` — Postgres pool + parameterized query helper 🟡
+### T-B-02 — `db/pool.ts` — Postgres pool + parameterized query helper 🟡 ✅ DONE 005a333 2026-04-21
 **Depends:** T-B-01  **Est:** 2h
 **Goal:** Single source of DB connections; enforces parameterized queries.
 **Files:** `apps/api/src/db/pool.ts`, `apps/api/tests/db.test.ts`
@@ -191,7 +191,7 @@ pnpm --filter api test src/db
 
 ---
 
-### T-B-03 — `es/client.ts` + autocomplete index schema 🟡
+### T-B-03 — `es/client.ts` + autocomplete index schema 🟡 ✅ DONE 4d57f7e 2026-04-21
 **Depends:** T-B-01  **Est:** 3h
 **Goal:** Elasticsearch client; `entities_autocomplete` index exists with `completion` field type.
 **Files:**
@@ -225,7 +225,7 @@ curl -sf http://localhost:9200/entities_autocomplete/_mapping | jq '.entities_au
 
 ---
 
-### T-B-04 — Redis-backed rate-limit middleware 🟡
+### T-B-04 — Redis-backed rate-limit middleware 🟡 ✅ DONE 668ef33 2026-04-21
 **Depends:** T-B-01  **Est:** 2h
 **Goal:** `@fastify/rate-limit` with Redis store. 60/min anonymous, 300/min authenticated, per Doc 26 §13.
 **Files:** `apps/api/src/middleware/rate-limit.ts`, `apps/api/src/plugins/redis.ts`
@@ -244,7 +244,7 @@ for i in {1..70}; do curl -s -o /dev/null -w '%{http_code}\n' http://localhost:3
 
 ---
 
-### T-B-05 — `GET /v1/entities/ent/:ent_id` 🟡
+### T-B-05 — `GET /v1/entities/ent/:ent_id` 🟡 ✅ DONE fd1d540 2026-04-21
 **Depends:** T-B-02, T-B-04  **Est:** 2h
 **Goal:** Fetch entity by string ent_id. Doc 26 §5.2 exact response schema.
 **Files:**
@@ -269,7 +269,7 @@ curl -o /dev/null -w '%{http_code}\n' http://localhost:3010/v1/entities/ent/NONE
 
 ---
 
-### T-B-06 — `GET /v1/entities/:id` (numeric) 🟡
+### T-B-06 — `GET /v1/entities/:id` (numeric) 🟡 ✅ DONE fd1d540 2026-04-21
 **Depends:** T-B-05  **Est:** 1h
 **Goal:** Fetch by NAIF id or numeric catalog id.
 **Files:** `apps/api/src/routes/entities.ts` (extend)
@@ -282,7 +282,7 @@ curl -o /dev/null -w '%{http_code}\n' http://localhost:3010/v1/entities/ent/NONE
 
 ---
 
-### T-B-07 — `GET /v1/search/autocomplete` 🟡
+### T-B-07 — `GET /v1/search/autocomplete` 🟡 ✅ DONE c285b5a 2026-04-21
 **Depends:** T-B-03, T-B-04  **Est:** 3h
 **Goal:** Typing-speed prefix suggestions via Elasticsearch completion suggester.
 **Files:** `apps/api/src/routes/search.ts`, `apps/api/tests/routes/search.test.ts`
@@ -306,7 +306,7 @@ curl -sf 'http://localhost:3010/v1/search/autocomplete?q=androm' -w '%{time_tota
 
 ---
 
-### T-B-08 — `GET /v1/search` (full-text) 🟡
+### T-B-08 — `GET /v1/search` (full-text) 🟡 ✅ DONE c285b5a 2026-04-21
 **Depends:** T-B-07  **Est:** 2h
 **Goal:** Full-text entity search with filters.
 **Files:** `apps/api/src/routes/search.ts` (extend)
@@ -323,7 +323,7 @@ curl -sf 'http://localhost:3010/v1/search?q=andromeda&category=galaxies' | jq '.
 
 ---
 
-### T-B-09 — `GET /v1/search/cone` 🟡
+### T-B-09 — `GET /v1/search/cone` 🟡 ✅ DONE c285b5a 2026-04-21
 **Depends:** T-B-02  **Est:** 2h
 **Goal:** Spatial cone search via PostGIS.
 **Files:** `apps/api/src/routes/search.ts` (extend)
@@ -341,7 +341,7 @@ curl -sf 'http://localhost:3010/v1/search/cone?ra=101.2875&dec=-16.7161&radius_d
 
 ---
 
-### T-B-10 — `GET /v1/solar-system/bodies` 🟡
+### T-B-10 — `GET /v1/solar-system/bodies` 🟡 ✅ DONE 18124ce 2026-04-21
 **Depends:** T-B-05  **Est:** 2h
 **Goal:** List solar system bodies + per-body details.
 **Files:** `apps/api/src/routes/solar-system.ts`
@@ -359,7 +359,7 @@ curl -sf http://localhost:3010/v1/solar-system/bodies/399 | jq '.name'  # "Earth
 
 ---
 
-### T-B-11 — Client auto-fallback to localSearchIndex 🟢
+### T-B-11 — Client auto-fallback to localSearchIndex 🟢 ✅ DONE fe5a8fd 2026-04-21
 **Depends:** T-B-07  **Est:** 2h
 **Goal:** When API is down or returns 5xx, client transparently falls back to in-memory index.
 **Files:** `apps/web/src/api/apiClient.ts`, `apps/web/src/api/search.ts`
@@ -388,7 +388,7 @@ curl -sf http://localhost:3010/v1/solar-system/bodies/399 | jq '.name'  # "Earth
 
 ---
 
-### T-B-12 — Phase B full regression 🟢
+### T-B-12 — Phase B full regression 🟢 ✅ DONE 4abce8e 2026-04-21
 **Depends:** T-B-11  **Est:** 1h
 **Goal:** Run the Phase B verification block from viz.md §2 Phase B (checks B.1-B.6).
 **Do:**
@@ -400,7 +400,7 @@ curl -sf http://localhost:3010/v1/solar-system/bodies/399 | jq '.name'  # "Earth
 
 ## Phase C — ETL seed from TS (5 tasks, ~10h)
 
-### T-C-01 — `export-ts-catalog.ts` Node script 🟢
+### T-C-01 — `export-ts-catalog.ts` Node script 🟢 ✅ DONE 9d9440c 2026-04-21
 **Depends:** T-A-03  **Est:** 2h
 **Goal:** One-shot script imports all `apps/web/src/data/*.ts` catalogs, writes JSON.
 **Files:** `apps/etl/scripts/export-ts-catalog.ts`, `package.json` root script
@@ -421,7 +421,7 @@ jq '.[0] | keys' data/seed/entities.json
 
 ---
 
-### T-C-02 — Python ingest from JSON → Postgres 🟡
+### T-C-02 — Python ingest from JSON → Postgres 🟡 ✅ DONE 2be9beb 2026-04-21
 **Depends:** T-C-01, T-A-03  **Est:** 3h
 **Goal:** Python ETL upserts entities.json into Postgres.
 **Files:** `apps/etl/cosmos_etl/seed/from_ts_catalog.py`, `apps/etl/tests/test_seed.py`
@@ -444,7 +444,7 @@ pytest tests/test_seed.py
 
 ---
 
-### T-C-03 — Populate Elasticsearch autocomplete 🟡
+### T-C-03 — Populate Elasticsearch autocomplete 🟡 ✅ DONE acd260d 2026-04-21
 **Depends:** T-C-02, T-B-03  **Est:** 2h
 **Goal:** After Postgres load, bulk-index into ES autocomplete index.
 **Files:** `apps/etl/cosmos_etl/seed/to_elasticsearch.py`
@@ -464,7 +464,7 @@ curl -sf 'http://localhost:3010/v1/search/autocomplete?q=m31' | jq '.suggestions
 
 ---
 
-### T-C-04 — Airflow DAG `seed_from_ts` 🟢
+### T-C-04 — Airflow DAG `seed_from_ts` 🟢 ✅ DONE 31bd60d 2026-04-21
 **Depends:** T-C-02, T-C-03  **Est:** 2h
 **Goal:** Wrap C-02 + C-03 in an idempotent Airflow DAG.
 **Files:** `apps/etl/dags/seed_from_ts.py`
@@ -483,7 +483,7 @@ airflow dags test seed_from_ts $(date -u +%Y-%m-%d)
 
 ---
 
-### T-C-05 — Preview smoke: client via API 🟢
+### T-C-05 — Preview smoke: client via API 🟢 ✅ DONE 2026-04-21 (curl-equivalent — see notes)
 **Depends:** T-C-04  **Est:** 1h
 **Goal:** Run viz.md §2 Phase C preview block. All 5 search queries resolve via API.
 **Do:** Run the `preview_eval` block from viz.md Phase C verify C.6.
@@ -493,7 +493,7 @@ airflow dags test seed_from_ts $(date -u +%Y-%m-%d)
 
 ## Phase D — Gaia bright subset (8 tasks, ~30h)
 
-### T-D-01 — Downloader: mag < 10 bright subset 🟡
+### T-D-01 — Downloader: mag < 10 bright subset 🟡 ✅ DONE dcb1a4b 2026-04-22
 **Depends:** T-C-04  **Est:** 4h
 **Goal:** Download ~1.2M Gaia DR3 rows (mag ≤ 10), cache on disk.
 **Files:** `apps/etl/cosmos_etl/downloaders/gaia_dr3.py`, `apps/etl/tests/test_gaia_download.py`
@@ -519,7 +519,7 @@ wc -l data/raw/gaia/dr3_chunk_0000.csv   # some rows
 
 ---
 
-### T-D-02 — Transformer: Gaia row → entity record 🟡
+### T-D-02 — Transformer: Gaia row → entity record 🟡 ✅ DONE 4e6b0bb 2026-04-22
 **Depends:** T-D-01  **Est:** 3h
 **Goal:** Python function `gaia_to_entity(row) → dict` producing `entities` row.
 **Files:** `apps/etl/cosmos_etl/transformers/gaia_to_entities.py`
@@ -538,7 +538,7 @@ pytest apps/etl/tests/test_gaia_transform.py
 
 ---
 
-### T-D-03 — J2016 → J2000 proper motion correction 🟡
+### T-D-03 — J2016 → J2000 proper motion correction 🟡 ✅ DONE 4e6b0bb 2026-04-22
 **Depends:** T-D-02  **Est:** 2h
 **Goal:** Accurate position epoch normalization (CLAUDE.md #5: ICRS J2000.0).
 **Files:** `apps/etl/cosmos_etl/transformers/gaia_to_entities.py` (extend)
@@ -555,7 +555,7 @@ pytest apps/etl/tests/test_gaia_transform.py::test_barnards_star_j2000_position
 
 ---
 
-### T-D-04 — HEALPix pixel column 🟡
+### T-D-04 — HEALPix pixel column 🟡 ✅ DONE 4a964a5 2026-04-22
 **Depends:** T-A-03  **Est:** 2h
 **Goal:** Every star has `healpix_order6 BIGINT` column indexed for fast tile lookups.
 **Files:** `apps/etl/migrations/versions/0002_add_healpix_column.py`
@@ -569,7 +569,7 @@ pytest apps/etl/tests/test_gaia_transform.py::test_barnards_star_j2000_position
 
 ---
 
-### T-D-05 — Bulk loader via `COPY FROM STDIN` 🟡
+### T-D-05 — Bulk loader via `COPY FROM STDIN` 🟡 ✅ DONE a268480 2026-04-22
 **Depends:** T-D-02, T-D-04  **Est:** 3h
 **Goal:** Ingest 1.2M rows in < 5 min (vs hours for row-by-row INSERT).
 **Files:** `apps/etl/cosmos_etl/loaders/gaia_bulk.py`
@@ -587,7 +587,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-D-06 — Cross-validate famous stars 🟡
+### T-D-06 — Cross-validate famous stars 🟡 ✅ DONE 09610e2 2026-04-22
 **Depends:** T-D-05  **Est:** 2h
 **Goal:** Sirius/Vega/Betelgeuse in Gaia match SIMBAD within Doc 33 tolerance.
 **Files:** `apps/etl/tests/test_gaia_accuracy.py`
@@ -601,7 +601,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-D-07 — Airflow DAG `ingest_gaia_bright` 🟢
+### T-D-07 — Airflow DAG `ingest_gaia_bright` 🟢 ✅ DONE 73e6c53 2026-04-22
 **Depends:** T-D-05  **Est:** 2h
 **Goal:** DAG orchestrates download → transform → load → index.
 **Files:** `apps/etl/dags/ingest_gaia_bright.py`
@@ -612,7 +612,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-D-08 — Cone search + preview verification 🟢
+### T-D-08 — Cone search + preview verification 🟢 ✅ DONE 2026-04-22 (partial — see notes)
 **Depends:** T-D-05  **Est:** 1h
 **Goal:** Verify Phase D via viz.md verify blocks D.2 + D.3 + D.4.
 **Do:** Run the 3 verify blocks; take before/after screenshot of Orion region for visual diff.
