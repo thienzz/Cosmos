@@ -11,7 +11,8 @@
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
-    "migrate:up": "node dist/migrate.js up"
+    "migrate:up": "node dist/migrate.js up",
+    "es:bootstrap": "tsx scripts/bootstrap-es.ts"
   },
   "dependencies": {
     "@cosmos/shared-types": "workspace:*",

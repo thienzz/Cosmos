@@ -1,4 +1,5 @@
 import { closePool } from './db/pool.js';
+import { closeEsClient } from './es/client.js';
 import { buildServer } from './server.js';
 
 const port = Number(process.env.API_PORT ?? 3000);
@@ -12,6 +13,7 @@ async function main(): Promise<void> {
     try {
       await app.close();
       await closePool();
+      await closeEsClient();
       process.exit(0);
     } catch (err) {
       app.log.error({ err }, 'shutdown: error while closing');
