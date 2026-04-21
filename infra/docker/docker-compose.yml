@@ -1,3 +1,6 @@
+# Cosmos Explorer — local bring-up (viz.md Phase A)
+# Paths in `volumes:` and `env_file:` are relative to THIS file
+# (infra/docker/), not the repo root.
 services:
   postgres:
     image: postgis/postgis:16-3.4
@@ -7,7 +10,10 @@ services:
     environment:
       POSTGRES_DB: cosmos
       POSTGRES_USER: cosmos
-      POSTGRES_PASSWORD: cosmos_dev
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cosmos_dev}
+    env_file:
+      - path: ../../.env
+        required: false
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -47,6 +53,7 @@ services:
       context: ../..
       dockerfile: infra/docker/Dockerfile.api
     container_name: cosmos-api
+    restart: unless-stopped
     ports:
       - "3000:3000"
     depends_on:
@@ -56,6 +63,9 @@ services:
         condition: service_healthy
       elasticsearch:
         condition: service_healthy
+    env_file:
+      - path: ../../.env
+        required: false
     environment:
       DATABASE_URL: postgresql://cosmos:cosmos_dev@postgres:5432/cosmos
       REDIS_URL: redis://redis:6379
@@ -63,12 +73,15 @@ services:
       API_PORT: 3000
       LOG_LEVEL: debug
       CORS_ORIGIN: http://localhost:5173
+    volumes:
+      - ../../data/seed:/var/cosmos/seed:ro
 
   tile-server:
     build:
       context: ../..
       dockerfile: infra/docker/Dockerfile.tile-server
     container_name: cosmos-tile-server
+    restart: unless-stopped
     ports:
       - "3001:3001"
     depends_on:
@@ -76,6 +89,9 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    env_file:
+      - path: ../../.env
+        required: false
     environment:
       DATABASE_URL: postgresql://cosmos:cosmos_dev@postgres:5432/cosmos
       REDIS_URL: redis://redis:6379
@@ -86,8 +102,12 @@ services:
       context: ../..
       dockerfile: infra/docker/Dockerfile.ephemeris
     container_name: cosmos-ephemeris
+    restart: unless-stopped
     ports:
       - "3002:3002"
+    env_file:
+      - path: ../../.env
+        required: false
     volumes:
       - ../../data/spice:/data/spice:ro
     environment:
