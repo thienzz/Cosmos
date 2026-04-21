@@ -721,7 +721,7 @@ docker compose logs pgbouncer | grep "SHOW STATS"
 
 ---
 
-### T-E-08 — Wire `TileStreamingManager.ts` to new endpoint 🟢
+### T-E-08 — Wire `TileStreamingManager.ts` to new endpoint 🟢 ✅ DONE a0891c9 2026-04-22
 **Depends:** T-E-04  **Est:** 3h
 **Goal:** Client fetches real tiles.
 **Files:** `apps/web/src/engine/TileStreamingManager.ts`
