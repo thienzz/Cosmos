@@ -162,7 +162,7 @@ curl -sf http://localhost:3010/health | jq .status   # "ok"
 
 ## Phase B — API MVP (12 tasks, ~30h)
 
-### T-B-01 — Install deps + base structure 🟢
+### T-B-01 — Install deps + base structure 🟢 ✅ DONE 61dfe49 2026-04-22
 **Depends:** T-A-06  **Est:** 30m
 **Goal:** All API deps present; folder structure ready.
 **Do:**
