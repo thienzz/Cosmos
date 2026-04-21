@@ -1,0 +1,105 @@
+name: ci-backend
+
+# Runs docker-compose up -d + alembic upgrade head + /health smoke
+# whenever backend-shaped files change. Mirrors viz-tasks.md T-A-06 verify.
+
+on:
+  pull_request:
+    paths:
+      - "apps/api/**"
+      - "apps/etl/migrations/**"
+      - "infra/docker/**"
+      - ".github/workflows/ci-backend.yml"
+  push:
+    branches: [main]
+    paths:
+      - "apps/api/**"
+      - "apps/etl/migrations/**"
+      - "infra/docker/**"
+      - ".github/workflows/ci-backend.yml"
+  workflow_dispatch:
+
+jobs:
+  compose-up-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install alembic + psycopg2
+        run: pip install "alembic==1.13.1" "sqlalchemy==2.0.29" "psycopg2-binary==2.9.9"
+
+      - name: Bring up datastores
+        working-directory: infra/docker
+        run: docker compose up -d postgres redis elasticsearch
+
+      - name: Wait for datastores healthy
+        run: |
+          for _ in $(seq 1 60); do
+            healthy=$(docker inspect cosmos-postgres cosmos-redis cosmos-elasticsearch \
+              --format '{{.State.Health.Status}}' 2>/dev/null \
+              | grep -c '^healthy$' || true)
+            if [ "$healthy" = "3" ]; then
+              echo "all 3 healthy"
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "timed out waiting for healthchecks"
+          docker compose -f infra/docker/docker-compose.yml ps
+          docker logs cosmos-postgres --tail 30
+          docker logs cosmos-elasticsearch --tail 30
+          exit 1
+
+      - name: Apply alembic migration
+        working-directory: apps/etl
+        env:
+          DATABASE_URL: postgresql://cosmos:cosmos_dev@localhost:5432/cosmos
+        run: alembic upgrade head
+
+      - name: Confirm PostGIS + tables
+        run: |
+          docker exec cosmos-postgres psql -U cosmos -d cosmos \
+            -c "SELECT postgis_version();"
+          docker exec cosmos-postgres psql -U cosmos -d cosmos \
+            -c "SELECT COUNT(*) AS entity_tables FROM pg_tables \
+                WHERE schemaname='public' \
+                  AND tablename IN ('entities','stars','galaxies','nebulae', \
+                                    'exoplanets','clusters','cosmic_web_nodes', \
+                                    'binary_systems');"
+
+      - name: Build + start api
+        working-directory: infra/docker
+        run: docker compose up -d --build api
+
+      - name: Wait for api healthy
+        run: |
+          for _ in $(seq 1 40); do
+            status=$(docker inspect cosmos-api --format '{{.State.Health.Status}}' 2>/dev/null || echo none)
+            if [ "$status" = "healthy" ]; then
+              echo "api healthy"
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "timed out waiting for api"
+          docker compose -f infra/docker/docker-compose.yml ps
+          docker logs cosmos-api --tail 80
+          exit 1
+
+      - name: Curl /health
+        run: |
+          body=$(curl -sf http://localhost:3010/health)
+          echo "$body"
+          echo "$body" | python -c "import json,sys; d=json.load(sys.stdin); assert d['status']=='ok', d"
+
+      - name: Tear down
+        if: always()
+        working-directory: infra/docker
+        run: docker compose down -v
