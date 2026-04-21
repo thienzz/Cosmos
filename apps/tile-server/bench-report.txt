@@ -1,0 +1,52 @@
+﻿fixture: 8016 bytes at C:\Users\thien\AppData\Local\Temp\cosmos-bench-f80a37cd-b225-430f-bfee-43284ff878a6\stars\healpix\6\12345.bin
+server ready on http://127.0.0.1:3099/v1/tiles/stars/healpix/6/12345
+L1 warmed (10 priming requests)
+running oha: threads=4 connections=100 duration=30s
+Summary:
+  Success rate:	100.00%
+  Total:	30005.8643 ms
+  Slowest:	15.6253 ms
+  Fastest:	0.0491 ms
+  Average:	1.1841 ms
+  Requests/sec:	84254.5969
+
+  Total data:	18.87 GiB
+  Size/request:	7.83 KiB
+  Size/sec:	644.07 MiB
+
+Response time histogram:
+   0.049 ms [1]       |
+   1.607 ms [2015991] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+   3.164 ms [456536]  |■■■■■■■
+   4.722 ms [45099]   |
+   6.280 ms [8535]    |
+   7.837 ms [1505]    |
+   9.395 ms [294]     |
+  10.952 ms [58]      |
+  12.510 ms [10]      |
+  14.068 ms [1]       |
+  15.625 ms [2]       |
+
+Response time distribution:
+  10.00% in 0.4611 ms
+  25.00% in 0.6820 ms
+  50.00% in 1.0436 ms
+  75.00% in 1.4837 ms
+  90.00% in 2.0241 ms
+  95.00% in 2.4906 ms
+  99.00% in 3.8921 ms
+  99.90% in 6.0137 ms
+  99.99% in 8.1542 ms
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	1.0230 ms, 0.2624 ms, 2.9545 ms
+  DNS-lookup:	0.0059 ms, 0.0008 ms, 0.0715 ms
+
+Status code distribution:
+  [200] 2528032 responses
+
+Error distribution:
+  [100] aborted due to deadline
+fixture kept at: C:\Users\thien\AppData\Local\Temp\cosmos-bench-f80a37cd-b225-430f-bfee-43284ff878a6
+server log:      C:\Users\thien\AppData\Local\Temp\cosmos-bench-f80a37cd-b225-430f-bfee-43284ff878a6\server.log
