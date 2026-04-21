@@ -9,6 +9,7 @@
 pub mod config;
 pub mod error;
 pub mod handlers;
+pub mod healpix;
 pub mod router;
 pub mod store;
 
