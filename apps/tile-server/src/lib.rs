@@ -13,11 +13,14 @@ pub mod error;
 pub mod handlers;
 pub mod healpix;
 pub mod router;
+pub mod routes;
 pub mod store;
 
+pub use cache::{LayeredTileCache, RedisTileCache};
 pub use config::AppConfig;
 pub use error::TileError;
-pub use router::{build_router, AppState};
+pub use router::{build_router, build_router_with_healpix, AppState};
+pub use routes::{FilesystemHealpixStarStore, HealpixStarTileStore, SharedHealpixStarStore};
 pub use store::{
     FilesystemTileStore, InMemoryLruCache, PostgresTileStore, TileBytes, TileHotCache, TileRow,
     TileRowStore, TileStore,
