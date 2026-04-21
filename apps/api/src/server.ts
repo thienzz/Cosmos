@@ -7,6 +7,7 @@ import redisPlugin from './plugins/redis.js';
 import entitiesRoutes from './routes/entities.js';
 import { healthRoutes } from './routes/health.js';
 import searchRoutes from './routes/search.js';
+import solarSystemRoutes from './routes/solar-system.js';
 
 export interface BuildServerOptions {
   readonly logLevel?: string;
@@ -32,6 +33,7 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
   await app.register(healthRoutes);
   await app.register(entitiesRoutes);
   await app.register(searchRoutes);
+  await app.register(solarSystemRoutes);
 
   return app;
 }
