@@ -685,7 +685,7 @@ xxd /tmp/tile.bin | head -1
 
 ---
 
-### T-E-05 — Encoding round-trip integration test 🟢
+### T-E-05 — Encoding round-trip integration test 🟢 ✅ DONE b0bc6f7 2026-04-22
 **Depends:** T-E-04  **Est:** 1h
 **Goal:** End-to-end: request tile via HTTP → decode via packages/tile-decoder → assert star positions match Postgres.
 **Files:** `apps/tile-server/tests/e2e_star_tile.rs`
