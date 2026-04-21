@@ -400,7 +400,7 @@ curl -sf http://localhost:3010/v1/solar-system/bodies/399 | jq '.name'  # "Earth
 
 ## Phase C — ETL seed from TS (5 tasks, ~10h)
 
-### T-C-01 — `export-ts-catalog.ts` Node script 🟢
+### T-C-01 — `export-ts-catalog.ts` Node script 🟢 ✅ DONE 04428d9 2026-04-22
 **Depends:** T-A-03  **Est:** 2h
 **Goal:** One-shot script imports all `apps/web/src/data/*.ts` catalogs, writes JSON.
 **Files:** `apps/etl/scripts/export-ts-catalog.ts`, `package.json` root script
