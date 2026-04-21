@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosmos Explorer - 38 Entity Reference Gallery</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a0a1a;
+    color: #e0e0f0;
+    line-height: 1.6;
+  }
+  .header {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1b2838 100%);
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 2px solid #2a3a5a;
+  }
+  .header h1 {
+    font-size: 2rem;
+    background: linear-gradient(90deg, #7ab8ff, #ff7ab8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+  .header p { color: #8899bb; font-size: 0.95rem; }
+  .stats {
+    display: flex; justify-content: center; gap: 2rem;
+    margin-top: 1rem; flex-wrap: wrap;
+  }
+  .stat {
+    background: rgba(255,255,255,0.05);
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+  }
+  .stat strong { color: #7ab8ff; }
+  .nav {
+    background: #0d1222;
+    padding: 1rem 2rem;
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    justify-content: center;
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid #1a2a4a;
+  }
+  .nav a {
+    color: #8899bb; text-decoration: none;
+    padding: 0.4rem 1rem; border-radius: 20px;
+    font-size: 0.85rem; transition: all 0.2s;
+    border: 1px solid #2a3a5a;
+  }
+  .nav a:hover, .nav a.active {
+    background: #1a2a5a; color: #7ab8ff;
+    border-color: #4a6a9a;
+  }
+  .category {
+    max-width: 1400px; margin: 2rem auto; padding: 0 1.5rem;
+  }
+  .category h2 {
+    font-size: 1.4rem; margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #2a3a5a;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .category h2 .icon { font-size: 1.6rem; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    background: #111828;
+    border: 1px solid #1a2a4a;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,100,255,0.15);
+    border-color: #3a5a8a;
+  }
+  .card-img {
+    width: 100%; height: 240px;
+    object-fit: cover;
+    background: #0a0f1a;
+    display: block;
+  }
+  .card-img-placeholder {
+    width: 100%; height: 240px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #0a0f1a, #151f30);
+    color: #4a5a7a; font-size: 0.9rem;
+    flex-direction: column; gap: 0.5rem;
+  }
+  .card-body { padding: 1.2rem; }
+  .card-body h3 {
+    font-size: 1.1rem; margin-bottom: 0.3rem;
+    color: #c0d0ff;
+  }
+  .card-body .subtitle {
+    font-size: 0.8rem; color: #6a7a9a;
+    margin-bottom: 0.8rem;
+  }
+  .card-body .desc {
+    font-size: 0.85rem; color: #8899aa;
+    margin-bottom: 1rem;
+  }
+  .card-body .colors {
+    display: flex; gap: 0.4rem; margin-bottom: 0.8rem;
+    flex-wrap: wrap; align-items: center;
+  }
+  .color-swatch {
+    width: 24px; height: 24px; border-radius: 6px;
+    border: 2px solid rgba(255,255,255,0.15);
+    display: inline-block;
+    position: relative;
+  }
+  .color-swatch:hover::after {
+    content: attr(data-label);
+    position: absolute; bottom: 110%; left: 50%;
+    transform: translateX(-50%);
+    background: #1a2a4a; color: #c0d0ff;
+    padding: 2px 8px; border-radius: 4px;
+    font-size: 0.7rem; white-space: nowrap;
+    z-index: 10;
+  }
+  .links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .links a {
+    font-size: 0.78rem; color: #5a8aff;
+    text-decoration: none; padding: 0.25rem 0.6rem;
+    background: rgba(90,138,255,0.1);
+    border-radius: 6px; transition: all 0.2s;
+  }
+  .links a:hover {
+    background: rgba(90,138,255,0.25);
+    color: #7ab8ff;
+  }
+  .accuracy {
+    display: inline-block; padding: 0.2rem 0.6rem;
+    border-radius: 12px; font-size: 0.75rem;
+    font-weight: 600; margin-left: auto;
+  }
+  .accuracy-high { background: rgba(0,200,100,0.15); color: #4ae08a; }
+  .accuracy-med { background: rgba(255,200,0,0.15); color: #ffd04a; }
+  .accuracy-low { background: rgba(255,80,80,0.15); color: #ff6a6a; }
+  .badge {
+    display: inline-block; padding: 0.15rem 0.5rem;
+    border-radius: 10px; font-size: 0.7rem;
+    background: rgba(120,100,255,0.15); color: #a0b0ff;
+    margin-right: 0.3rem;
+  }
+  .badge.critical { background: rgba(255,60,60,0.2); color: #ff8a8a; }
+  .title-row { display: flex; align-items: center; gap: 0.5rem; }
+  footer {
+    text-align: center; padding: 2rem;
+    color: #4a5a7a; font-size: 0.8rem;
+    border-top: 1px solid #1a2a4a; margin-top: 3rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Cosmos Explorer - Real Reference Gallery</h1>
+  <p>38 Entity Cross-Reference with NASA/ESA/JWST/Hubble Imagery</p>
+  <p style="color:#6a7a9a; font-size:0.8rem; margin-top:0.3rem;">Document v3.1 | Cross-referenced 2026-04-17</p>
+  <div class="stats">
+    <div class="stat"><strong>38</strong> Entities</div>
+    <div class="stat"><strong>47</strong> Color Corrections</div>
+    <div class="stat"><strong>12</strong> Animation Fixes</div>
+    <div class="stat"><strong>8</strong> Critical Fixes</div>
+    <div class="stat"><strong>4</strong> Default-State Changes</div>
+  </div>
+</div>
+
+<div class="nav">
+  <a href="#stars">Stars (7)</a>
+  <a href="#rocky">Rocky Planets (5)</a>
+  <a href="#gas-giants">Gas Giants (5)</a>
+  <a href="#moons">Moons (6)</a>
+  <a href="#nebulae">Nebulae (5)</a>
+  <a href="#galaxies">Galaxies (4)</a>
+  <a href="#small-bodies">Small Bodies (3)</a>
+  <a href="#exotic">Exotic (3)</a>
+</div>
+
+<!-- ===================== STARS ===================== -->
+<div class="category" id="stars">
+  <h2><span class="icon">&#9733;</span> Stars (7)</h2>
+  <div class="grid">
+
+    <!-- 1. G-Type Main Sequence (Sun) -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem">&#9788;</span>
+        <span>NASA SDO — Solar Dynamics Observatory</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>1. G-Type Main Sequence (Sun)</h3>
+          <span class="accuracy accuracy-high">95%</span>
+        </div>
+        <div class="subtitle">SDO AIA 171/304/193 composite</div>
+        <div class="desc">Golden-yellow photosphere with limb darkening, granulation, sunspots, prominences. Convection speed corrected from 0.025 to 0.003 rad/s. Prominence colors shifted from yellow (#FFD700) to red (#FF5A5A).</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#FFF4E0" data-label="Photosphere"></span>
+          <span class="color-swatch" style="background:#FF8844" data-label="Limb (corrected)"></span>
+          <span class="color-swatch" style="background:#FF5A5A" data-label="Prominence (corrected)"></span>
+          <span class="color-swatch" style="background:#FF8B6A" data-label="Chromosphere"></span>
+        </div>
+        <div class="links">
+          <a href="https://sdo.gsfc.nasa.gov/gallery/main" target="_blank">SDO Gallery</a>
+          <a href="https://svs.gsfc.nasa.gov/3412/" target="_blank">NASA SVS</a>
+          <a href="https://science.nasa.gov/sun/" target="_blank">NASA Sun</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Red Giant (Betelgeuse) -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#FF7A2D">&#9679;</span>
+        <span>ESO VLT SPHERE — Betelgeuse Surface</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>2. Red Giant (Betelgeuse)</h3>
+          <span class="accuracy accuracy-high">92%</span>
+        </div>
+        <div class="subtitle">ESO SPHERE adaptive optics, first resolved surface image</div>
+        <div class="desc">Orange-red photosphere with convection cells. TiO bands corrected to ON (defining M-class feature). Pulsation amplitude increased to 8%. Base color shifted to #FF7A2D (3600K).</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#FF7A2D" data-label="Photosphere (corrected)"></span>
+          <span class="color-swatch" style="background:#B85A2A" data-label="Limb (corrected)"></span>
+          <span class="color-swatch" style="background:#FF4500" data-label="Hot Spot"></span>
+        </div>
+        <div class="links">
+          <a href="https://www.eso.org/public/images/eso2003b/" target="_blank">ESO SPHERE Image</a>
+          <a href="https://www.eso.org/public/images/eso2109c/" target="_blank">ESO Great Dimming</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Blue Supergiant (Rigel) -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#A0C8FF">&#9679;</span>
+        <span>Blue Supergiant — Rigel / Deneb type</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>3. Blue Supergiant (Rigel)</h3>
+          <span class="accuracy accuracy-med">88%</span>
+        </div>
+        <div class="subtitle">B8Ia, ~12,000 K photosphere</div>
+        <div class="desc"><span class="badge critical">CRITICAL FIX</span> H-alpha nebulosity corrected from blue (#7BA8FF) to red-pink (#FF5A5A) — H-alpha 656.3nm is always red. Clumpy wind structure set to ON by default.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#A0C8FF" data-label="Photosphere"></span>
+          <span class="color-swatch" style="background:#FF5A5A" data-label="H-alpha (CORRECTED)"></span>
+        </div>
+        <div class="links">
+          <a href="https://apod.nasa.gov/apod/ap241031.html" target="_blank">APOD Rigel + Witch Head</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. White Dwarf (Sirius B) -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:1.5rem; color:#D8D0FF">&#9679;</span>
+        <span>HST — Sirius A and B</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>4. White Dwarf (Sirius B)</h3>
+          <span class="accuracy accuracy-high">93%</span>
+        </div>
+        <div class="subtitle">DA spectral type, ~8,000 K</div>
+        <div class="desc">Photosphere color corrected to #D8D0FF. Subtle blue-white with gravitational lensing distortion of background star field.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#D8D0FF" data-label="Photosphere (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/asset/hubble/the-dog-star-sirius-and-its-tiny-companion/" target="_blank">Hubble Sirius A+B</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Neutron Star (Crab Pulsar) -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#C0D8FF">&#10040;</span>
+        <span>JWST + Hubble — Crab Nebula Pulsar</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>5. Neutron Star (Crab Pulsar)</h3>
+          <span class="accuracy accuracy-med">85%</span>
+        </div>
+        <div class="subtitle">PSR B0531+21, 30 Hz rotation</div>
+        <div class="desc"><span class="badge critical">CRITICAL FIX</span> Vela period corrected from 8s to 89ms. Beam color changed to #C0D8FF→#FFFFFF. Polar caps unified to #FF8B7B.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#FFFAF0" data-label="Surface"></span>
+          <span class="color-swatch" style="background:#C0D8FF" data-label="Beam (corrected)"></span>
+          <span class="color-swatch" style="background:#FF8B7B" data-label="Polar Cap (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://esawebb.org/images/weic2326a/" target="_blank">JWST Crab Nebula</a>
+          <a href="https://science.nasa.gov/asset/webb/crab-nebula-nircam-and-miri-image/" target="_blank">JWST NIRCam+MIRI</a>
+          <a href="https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-1/" target="_blank">Hubble M1</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Wolf-Rayet -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#5BA8FF">&#9679;</span>
+        <span>JWST NIRCam+MIRI — WR 124</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>6. Wolf-Rayet (WR 124)</h3>
+          <span class="accuracy accuracy-high">90%</span>
+        </div>
+        <div class="subtitle">WN8h, 45,000 K, 15,000 ly</div>
+        <div class="desc">Wind colors shifted: WN #5BA8FF, WC #7BA8FF. Clumpy nebula of ejected material surrounding 30 solar-mass star.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#5BA8FF" data-label="WN Wind (corrected)"></span>
+          <span class="color-swatch" style="background:#7BA8FF" data-label="WC Wind (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/asset/webb/wr-124-nircam-and-miri-composite-image/" target="_blank">JWST Composite</a>
+          <a href="https://esawebb.org/images/weic2307a/" target="_blank">ESA Webb WR 124</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Black Hole -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#FF8844">&#9679;</span>
+        <span>EHT — M87* First Black Hole Image</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>7. Black Hole (M87*)</h3>
+          <span class="accuracy accuracy-high">92%</span>
+        </div>
+        <div class="subtitle">6.5 billion solar mass, EHT 2019</div>
+        <div class="desc">Accretion disk precession set to ON. Outer disk color corrected to #FFF8E8. Doppler beaming and photon ring accurately depicted.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#FFF8E8" data-label="Outer Disk (corrected)"></span>
+          <span class="color-swatch" style="background:#FF8844" data-label="Inner Disk"></span>
+          <span class="color-swatch" style="background:#000000" data-label="Shadow"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/resource/first-image-of-a-black-hole/" target="_blank">NASA EHT M87*</a>
+          <a href="https://eventhorizontelescope.org/" target="_blank">EHT Project</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== ROCKY PLANETS ===================== -->
+<div class="category" id="rocky">
+  <h2><span class="icon">&#127759;</span> Rocky Planets (5)</h2>
+  <div class="grid">
+
+    <!-- 8. Mercury -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#8A8A8A">&#9679;</span>
+        <span>NASA MESSENGER — Mercury Global Mosaic</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>8. Mercury</h3>
+          <span class="accuracy accuracy-high">93%</span>
+        </div>
+        <div class="subtitle">MESSENGER MDIS WAC global color</div>
+        <div class="desc">Sodium tail extended from 5 to 10-20 planet radii anti-sunward per MESSENGER observations. Gray surface with subtle color variations.</div>
+        <div class="links">
+          <a href="https://science.nasa.gov/image-detail/amf-pia11406/" target="_blank">NASA PIA11406</a>
+          <a href="https://science.nasa.gov/mercury/" target="_blank">NASA Mercury</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Venus -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#F5E6D3">&#9679;</span>
+        <span>NASA Mariner 10 / JAXA Akatsuki</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>9. Venus</h3>
+          <span class="accuracy accuracy-high">91%</span>
+        </div>
+        <div class="subtitle">Akatsuki UV, Mariner 10 true color</div>
+        <div class="desc">Haze color corrected to #F5E6D3. Lightning flash corrected to blue-white (#A8D8FF). Dense sulfuric acid cloud deck over surface not visible in optical.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#F5E6D3" data-label="Haze (corrected)"></span>
+          <span class="color-swatch" style="background:#A8D8FF" data-label="Lightning (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/resource/newly-processed-views-of-venus-from-mariner-10/" target="_blank">Mariner 10 Venus</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Mars -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#C8602A">&#9679;</span>
+        <span>NASA MRO / Viking — Mars Global Color</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>10. Mars</h3>
+          <span class="accuracy accuracy-high">94%</span>
+        </div>
+        <div class="subtitle">MRO HiRISE/CTX, Viking Orbiter</div>
+        <div class="desc">Seasonal sublimation set to ON. Iron oxide surface well-matched. Dust storms, polar ice caps, Valles Marineris, Olympus Mons all represented.</div>
+        <div class="links">
+          <a href="https://mars.nasa.gov/resources/7808/global-color-views-of-mars/" target="_blank">Mars Global Color</a>
+          <a href="https://www.nasa.gov/missions/mars-reconnaissance-orbiter/new-interactive-mosaic-uses-nasa-imagery-to-show-mars-in-vivid-detail/" target="_blank">MRO Mosaic</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Magma World -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#FF4400">&#9679;</span>
+        <span>NASA/JPL — 55 Cancri e (Artist's Concept)</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>11. Magma World (55 Cancri e)</h3>
+          <span class="accuracy accuracy-med">87%</span>
+        </div>
+        <div class="subtitle">JWST thermal emission, artist illustrations</div>
+        <div class="desc">Molten coverage increased to 85-95%. Active magma center corrected to #FF4400. Cooling crust now uses temperature-dependent gradient (1500K-cooled).</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#FF4400" data-label="Active Magma (corrected)"></span>
+          <span class="color-swatch" style="background:#FF6B4A" data-label="Cooling 1500K"></span>
+          <span class="color-swatch" style="background:#1A0806" data-label="Cooled Crust"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/resource/55-cancri-e-skies-sparkle-above-a-never-ending-ocean-of-lava/" target="_blank">NASA 55 Cancri e</a>
+          <a href="https://www.jpl.nasa.gov/images/pia20068-hot-lava-world-illustration/" target="_blank">JPL Hot Lava World</a>
+          <a href="https://science.nasa.gov/asset/webb/super-earth-exoplanet-55-cancri-e-artists-concept/" target="_blank">JWST Artist Concept</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Ocean World -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#2266AA">&#9679;</span>
+        <span>NASA/JPL — TRAPPIST-1 / Kepler-138d (Artist)</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>12. Ocean World</h3>
+          <span class="accuracy accuracy-med">85%</span>
+        </div>
+        <div class="subtitle">Hypothetical, based on TRAPPIST-1e / Kepler-138d</div>
+        <div class="desc">Wave amplitude corrected from 1-5km to 100m-1km. Global ocean with ice at terminator for tidally locked variant.</div>
+        <div class="links">
+          <a href="https://science.nasa.gov/exoplanets/trappist1/" target="_blank">TRAPPIST-1 System</a>
+          <a href="https://www.jpl.nasa.gov/news/two-exoplanets-may-be-mostly-water-nasas-hubble-and-spitzer-find/" target="_blank">Kepler Water Worlds</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== GAS GIANTS ===================== -->
+<div class="category" id="gas-giants">
+  <h2><span class="icon">&#127756;</span> Gas Giants (5)</h2>
+  <div class="grid">
+
+    <!-- 13. Jupiter -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#D4A06A">&#9679;</span>
+        <span>NASA Juno JunoCam — True Color</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>13. Jupiter</h3>
+          <span class="accuracy accuracy-high">94%</span>
+        </div>
+        <div class="subtitle">Juno PJ7, July 2017 true color</div>
+        <div class="desc">Ammonia cloud color corrected to #F0E8D8. Belt/zone structure, Great Red Spot, cyclonic storms, atmospheric bands well-represented.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#F0E8D8" data-label="Ammonia (corrected)"></span>
+          <span class="color-swatch" style="background:#C88040" data-label="Belt"></span>
+          <span class="color-swatch" style="background:#CC4422" data-label="GRS"></span>
+        </div>
+        <div class="links">
+          <a href="https://www.jpl.nasa.gov/images/pia21775-jupiters-great-red-spot-in-true-color/" target="_blank">Jupiter GRS True Color</a>
+          <a href="https://science.nasa.gov/gallery/junocam-images/" target="_blank">JunoCam Gallery</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. Saturn -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#D4B878">&#9679;</span>
+        <span>NASA Cassini — Grand Mosaic Oct 2004</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>14. Saturn</h3>
+          <span class="accuracy accuracy-high">93%</span>
+        </div>
+        <div class="subtitle">Cassini ISS 126-image mosaic</div>
+        <div class="desc">Hexagon edge jets corrected to #8A7A70. B-Ring opacity to 0.95. Ring shadows on blue northern hemisphere, F-ring thread visible.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#8A7A70" data-label="Hexagon (corrected)"></span>
+          <span class="color-swatch" style="background:#D4B878" data-label="Globe"></span>
+        </div>
+        <div class="links">
+          <a href="https://svs.gsfc.nasa.gov/30348/" target="_blank">NASA SVS True Saturn</a>
+          <a href="https://science.nasa.gov/resource/true-colors/" target="_blank">Saturn True Colors</a>
+          <a href="https://science.nasa.gov/mission/cassini/multimedia/images/" target="_blank">Cassini Gallery</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15. Uranus -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#6AAFCA">&#9679;</span>
+        <span>Oxford 2024 Reprocessing — True Color</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>15. Uranus</h3>
+          <span class="accuracy accuracy-med">88%</span>
+        </div>
+        <div class="subtitle"><span class="badge critical">CRITICAL FIX</span> Oxford 2024 reprocessed Voyager 2</div>
+        <div class="desc">Base color completely replaced: #98E0D9 (too cyan) to #6AAFCA (greenish-blue). Both ice giants are similar shade of greenish blue per 2024 Oxford study using HST STIS + VLT MUSE.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#98E0D9" data-label="OLD (wrong)"></span>
+          <span style="color:#ff6a6a; font-size:1.2rem">&#10140;</span>
+          <span class="color-swatch" style="background:#6AAFCA" data-label="NEW (correct)"></span>
+        </div>
+        <div class="links">
+          <a href="https://www.ox.ac.uk/news/2024-01-05-new-images-reveal-what-neptune-and-uranus-really-look-0" target="_blank">Oxford 2024 Study</a>
+          <a href="https://www.physics.ox.ac.uk/news/true-colours-neptune-and-uranus" target="_blank">Oxford Physics</a>
+          <a href="https://science.nasa.gov/image-detail/pia00032/" target="_blank">NASA PIA00032</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 16. Neptune -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#5A7FA8">&#9679;</span>
+        <span>Oxford 2024 Reprocessing — True Color</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>16. Neptune</h3>
+          <span class="accuracy accuracy-med">88%</span>
+        </div>
+        <div class="subtitle"><span class="badge critical">CRITICAL FIX</span> Oxford 2024 reprocessed Voyager 2</div>
+        <div class="desc">Base color completely replaced: #3C5F9C (too deep blue) to #5A7FA8 (greenish-blue). Neptune was made "too blue" in original Voyager composites. Both planets are similar shade.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#3C5F9C" data-label="OLD (wrong)"></span>
+          <span style="color:#ff6a6a; font-size:1.2rem">&#10140;</span>
+          <span class="color-swatch" style="background:#5A7FA8" data-label="NEW (correct)"></span>
+        </div>
+        <div class="links">
+          <a href="https://www.ox.ac.uk/news/2024-01-05-new-images-reveal-what-neptune-and-uranus-really-look-0" target="_blank">Oxford 2024 Study</a>
+          <a href="https://users.ox.ac.uk/~atmp0035/planet_colour.html" target="_blank">Planet Colour Data</a>
+          <a href="https://www.jpl.nasa.gov/images/pia00063-neptune-true-color-of-clouds/" target="_blank">JPL Neptune True Color</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 17. Hot Jupiter -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#4488FF">&#9679;</span>
+        <span>NASA/HST — HD 189733b (Artist)</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>17. Hot Jupiter (HD 189733b)</h3>
+          <span class="accuracy accuracy-med">86%</span>
+        </div>
+        <div class="subtitle">Hubble measured deep blue color, silicate rain</div>
+        <div class="desc">Hypothetical class. Hubble confirmed deep blue color from silicate glass scattering at 2,000F. Tidally locked with permanent day/night hemispheres.</div>
+        <div class="links">
+          <a href="https://www.nasa.gov/image-article/exoplanet-hd-189733b/" target="_blank">NASA HD 189733b</a>
+          <a href="https://www.jpl.nasa.gov/images/pia20056-artists-impression-of-hot-jupiter-exoplanets/" target="_blank">JPL Hot Jupiters</a>
+          <a href="https://science.nasa.gov/exoplanet-catalog/hd-189733-b/" target="_blank">Exoplanet Catalog</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== MOONS ===================== -->
+<div class="category" id="moons">
+  <h2><span class="icon">&#9789;</span> Moons (6)</h2>
+  <div class="grid">
+
+    <!-- 18. Luna -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#C8C0B0">&#9790;</span>
+        <span>NASA LRO LROC — Global Color Mosaic</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>18. Luna (Earth's Moon)</h3>
+          <span class="accuracy accuracy-high">93%</span>
+        </div>
+        <div class="subtitle">LRO WAC 643/566/415nm color map</div>
+        <div class="desc">Maria coverage corrected from ~15% to ~31% of visible nearside. Ejecta ray color brightened to #E8E0D8. Highland/maria contrast well represented.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#E8E0D8" data-label="Ejecta (corrected)"></span>
+          <span class="color-swatch" style="background:#4A4A50" data-label="Maria"></span>
+        </div>
+        <div class="links">
+          <a href="https://svs.gsfc.nasa.gov/5001" target="_blank">NASA SVS Moon Mosaic</a>
+          <a href="https://science.nasa.gov/photojournal/color-of-the-moon/" target="_blank">Color of the Moon</a>
+          <a href="https://svs.gsfc.nasa.gov/4720" target="_blank">CGI Moon Kit</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 19. Io -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#F8E68E">&#9679;</span>
+        <span>NASA Galileo SSI — True Color Global</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>19. Io</h3>
+          <span class="accuracy accuracy-high">91%</span>
+        </div>
+        <div class="subtitle">Galileo SSI July 1999, 1.3 km/px</div>
+        <div class="desc">Sulfur color desaturated to #F8E68E. SO2 frost corrected to #F5F0D8. Pastel surface with volcanic dark spots. Complex sulfur + silicate lava flows.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#F8E68E" data-label="Sulfur (corrected)"></span>
+          <span class="color-swatch" style="background:#F5F0D8" data-label="SO2 frost (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/resource/global-image-of-io-true-color/" target="_blank">Io True Color Global</a>
+          <a href="https://www.jpl.nasa.gov/images/pia02308-global-image-of-io-true-color/" target="_blank">JPL PIA02308</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 20. Europa -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#EEF0F0">&#9679;</span>
+        <span>NASA Galileo SSI — Remastered 2014</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>20. Europa</h3>
+          <span class="accuracy accuracy-high">91%</span>
+        </div>
+        <div class="subtitle">Galileo SSI, reprocessed realistic color</div>
+        <div class="desc">Surface ice corrected to #EEF0F0. Salt deposits shifted to #B8A880. Blue-white pure ice, brownish non-ice deposits. Linear cracks and disrupted terrain.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#EEF0F0" data-label="Ice (corrected)"></span>
+          <span class="color-swatch" style="background:#B8A880" data-label="Salt (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/resource/europas-stunning-surface/" target="_blank">Europa Surface</a>
+          <a href="https://europa.nasa.gov/resources/154/europas-frozen-surface/" target="_blank">Europa Clipper</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 21. Titan -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#D8A85F">&#9679;</span>
+        <span>NASA Cassini ISS — True Color Haze</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>21. Titan</h3>
+          <span class="accuracy accuracy-high">90%</span>
+        </div>
+        <div class="subtitle">Cassini ISS, orange haze + blue detached haze</div>
+        <div class="desc">Upper atmosphere color corrected to #D8A85F. Surface NOT optically visible (radar only). Orange main haze, blue high-altitude detached haze layer, photochemical smog.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#D8A85F" data-label="Upper atm (corrected)"></span>
+          <span class="color-swatch" style="background:#CC8830" data-label="Orange haze"></span>
+          <span class="color-swatch" style="background:#6688BB" data-label="Blue detached haze"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/resource/high-haze-in-color/" target="_blank">High Haze in Color</a>
+          <a href="https://science.nasa.gov/resource/hazy-all-over/" target="_blank">Hazy All Over</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 22. Enceladus -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#F5FAFF">&#9679;</span>
+        <span>NASA Cassini ISS — Tiger Stripes + Geysers</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>22. Enceladus</h3>
+          <span class="accuracy accuracy-high">92%</span>
+        </div>
+        <div class="subtitle">Cassini ISS, 2005-2017 flyby images</div>
+        <div class="desc">Ice surface corrected from pure #FFFFFF to subtle blue tint #F5FAFF. Tiger stripe fissures with 30+ individual geysers, V-shaped 300m deep fractures.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#F5FAFF" data-label="Ice (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/resource/bursting-at-the-seams-the-geyser-basin-of-enceladus/" target="_blank">Geyser Basin</a>
+          <a href="https://science.nasa.gov/resource/jet-spots-in-tiger-stripes/" target="_blank">Tiger Stripe Jets</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 23. Ganymede -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#8A8A90">&#9679;</span>
+        <span>NASA Juno JunoCam — June 2021 Flyby</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>23. Ganymede</h3>
+          <span class="accuracy accuracy-high">90%</span>
+        </div>
+        <div class="subtitle">Juno 2021 flyby, 600-900m/px</div>
+        <div class="desc">Dark terrain corrected to #5A5A6A. Bright/dark terrain contrast, craters, tectonic grooved terrain. Closest approach in 20+ years at 1,038 km.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#5A5A6A" data-label="Dark terrain (corrected)"></span>
+          <span class="color-swatch" style="background:#C0C0C8" data-label="Bright terrain"></span>
+        </div>
+        <div class="links">
+          <a href="https://www.jpl.nasa.gov/images/pia25028-enhanced-ganymede-enhanced-image/" target="_blank">Juno Enhanced</a>
+          <a href="https://www.jpl.nasa.gov/images/pia24681-junos-ganymede-close-up/" target="_blank">Ganymede Close-up</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== NEBULAE ===================== -->
+<div class="category" id="nebulae">
+  <h2><span class="icon">&#9729;</span> Nebulae (5)</h2>
+  <div class="grid">
+
+    <!-- 24. Emission Nebula -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#FF5540">&#9729;</span>
+        <span>NASA Hubble — Orion Nebula M42</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>24. Emission Nebula (Orion/M42)</h3>
+          <span class="accuracy accuracy-high">91%</span>
+        </div>
+        <div class="subtitle">Hubble ACS 520-exposure mosaic, 1 billion pixels</div>
+        <div class="desc">H-alpha color corrected to #FF5540 (was too magenta). Orange=hydrogen, green=oxygen, red=sulfur+IR. 1,500 ly away, 3,000+ stars visible.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#FF5540" data-label="H-alpha (corrected)"></span>
+          <span class="color-swatch" style="background:#00CC77" data-label="OIII 500.7nm"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-42/" target="_blank">Hubble M42</a>
+          <a href="https://science.nasa.gov/asset/hubble/hubbles-sharpest-view-of-the-orion-nebula/" target="_blank">Sharpest View</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 25. Planetary Nebula -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#4A7FFF">&#9711;</span>
+        <span>JWST + Hubble — Ring Nebula M57</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>25. Planetary Nebula (Ring/M57)</h3>
+          <span class="accuracy accuracy-high">90%</span>
+        </div>
+        <div class="subtitle">Hubble WFPC2 + JWST NIRCam/MIRI</div>
+        <div class="desc">FLIER color corrected to #4A7FFF. Football-shaped inner structure piercing doughnut ring. Dense knots in inner rim. Hot helium blue haze near central star.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#4A7FFF" data-label="FLIER (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/asset/hubble/the-ring-nebula-m57/" target="_blank">Hubble M57</a>
+          <a href="https://esawebb.org/images/weic2320b/" target="_blank">JWST Ring Nebula</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 26. Reflection Nebula -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#7A8FFF">&#9729;</span>
+        <span>NASA Hubble — Pleiades/Merope Nebula</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>26. Reflection Nebula (Pleiades)</h3>
+          <span class="accuracy accuracy-high">91%</span>
+        </div>
+        <div class="subtitle">Hubble WFPC2, IC 349 / Barnard's Merope</div>
+        <div class="desc">Extended halo corrected to #7A8FFF. Blue from carbon dust Rayleigh scattering. Light reflects off cold gas + dust clouds. Wispy tendrils destroyed by Merope starlight.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#7A8FFF" data-label="Halo (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/asset/hubble/ghostly-reflections-in-the-pleiades/" target="_blank">Pleiades Reflection</a>
+          <a href="https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-45/" target="_blank">Hubble M45</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 27. Dark Nebula -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#2A1A0A">&#9608;</span>
+        <span>Hubble + JWST — Horsehead (Barnard 33)</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>27. Dark Nebula (Horsehead/B33)</h3>
+          <span class="accuracy accuracy-high">92%</span>
+        </div>
+        <div class="subtitle">Hubble near-IR + JWST high detail, 1,500 ly</div>
+        <div class="desc">Cold dark cloud silhouetted against IC 434 emission. IR reveals transparent/ethereal structure. Young stars peek from exposed nurseries along upper ridge.</div>
+        <div class="links">
+          <a href="https://science.nasa.gov/asset/hubble/the-horsehead-nebula/" target="_blank">Hubble Horsehead</a>
+          <a href="https://science.nasa.gov/missions/webb/webb-captures-top-of-iconic-horsehead-nebula-in-unprecedented-detail/" target="_blank">JWST Horsehead Detail</a>
+          <a href="https://esawebb.org/images/weic2411c/" target="_blank">Euclid+Hubble+Webb</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 28. Supernova Remnant -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#FF8844">&#10038;</span>
+        <span>JWST NIRCam+MIRI — Crab Nebula M1</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>28. Supernova Remnant (Crab/M1)</h3>
+          <span class="accuracy accuracy-high">91%</span>
+        </div>
+        <div class="subtitle">JWST 2023 + Hubble 2005, SN 1054 AD</div>
+        <div class="desc">Orange hydrogen filaments, blue mottled oxygen, red/green sulfur material. JWST reveals milky synchrotron emission interior. Central 30 Hz pulsar visible.</div>
+        <div class="links">
+          <a href="https://esawebb.org/images/weic2326a/" target="_blank">JWST Crab Nebula</a>
+          <a href="https://science.nasa.gov/asset/webb/crab-nebula-webb-and-hubble-comparison/" target="_blank">Webb vs Hubble</a>
+          <a href="https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-1/" target="_blank">Hubble M1</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== GALAXIES ===================== -->
+<div class="category" id="galaxies">
+  <h2><span class="icon">&#127756;</span> Galaxies (4)</h2>
+  <div class="grid">
+
+    <!-- 29. Spiral Galaxy -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#AABBDD">&#127744;</span>
+        <span>NASA Hubble ACS — Whirlpool M51</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>29. Spiral Galaxy (Whirlpool/M51)</h3>
+          <span class="accuracy accuracy-high">92%</span>
+        </div>
+        <div class="subtitle">Hubble ACS Jan 2005, 31 Mly</div>
+        <div class="desc">Red=IR+hydrogen star-forming, blue=young hot stars, yellow=old population. Graceful spiral arms as star-formation factories compressing hydrogen gas.</div>
+        <div class="links">
+          <a href="https://science.nasa.gov/asset/hubble/out-of-this-whirl-the-whirlpool-galaxy-m51-and-companion-galaxy/" target="_blank">Hubble M51</a>
+          <a href="https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-51/" target="_blank">Messier 51</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 30. Elliptical Galaxy -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#DDCC88">&#9673;</span>
+        <span>NASA Hubble ACS — M87 (Virgo A)</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>30. Elliptical Galaxy (M87)</h3>
+          <span class="accuracy accuracy-high">90%</span>
+        </div>
+        <div class="subtitle">Hubble ACS, ~15,000 globular clusters</div>
+        <div class="desc">Blue GC clusters corrected to #8AB0FF. Yellow glow from trillions of unresolved old stars. Blue relativistic jet from central 3-billion-solar-mass black hole.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#8AB0FF" data-label="Blue GC (corrected)"></span>
+          <span class="color-swatch" style="background:#DDCC88" data-label="Stellar glow"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/asset/hubble/hubble-acs-image-of-elliptical-galaxy-m87/" target="_blank">Hubble M87</a>
+          <a href="https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-87/" target="_blank">Messier 87</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 31. Irregular Galaxy -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#99AACC">&#10022;</span>
+        <span>NASA/Hubble — Large Magellanic Cloud</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>31. Irregular Galaxy (LMC)</h3>
+          <span class="accuracy accuracy-high">90%</span>
+        </div>
+        <div class="subtitle">Hubble WFC3, 200,000 ly satellite galaxy</div>
+        <div class="desc">Ablaze with star-forming regions. Tarantula Nebula (30 Doradus), R136 massive cluster. Chaotic structure from Milky Way tidal interaction.</div>
+        <div class="links">
+          <a href="https://science.nasa.gov/missions/hubble/large-magellanic-cloud/" target="_blank">Hubble LMC</a>
+          <a href="https://www.nasa.gov/image-article/large-magellanic-cloud/" target="_blank">NASA LMC</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 32. AGN -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#FF6644">&#9055;</span>
+        <span>NASA Hubble WFC3 — Centaurus A (NGC 5128)</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>32. AGN (Centaurus A)</h3>
+          <span class="accuracy accuracy-high">90%</span>
+        </div>
+        <div class="subtitle">Hubble WFC3 July 2010, 11 Mly</div>
+        <div class="desc">Jet synchrotron color corrected to #4A7FFF. Collision remnant with dramatic dust lane. Tilted hot gas disk 130 ly across feeding central SMBH. Radio/X-ray/optical composite available.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#4A7FFF" data-label="Jet synchrotron (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/asset/hubble/active-galaxy-centaurus-a/" target="_blank">Hubble Cen A</a>
+          <a href="https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-caldwell-catalog/caldwell-77/" target="_blank">Caldwell 77</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== SMALL BODIES ===================== -->
+<div class="category" id="small-bodies">
+  <h2><span class="icon">&#9737;</span> Small Bodies (3)</h2>
+  <div class="grid">
+
+    <!-- 33. Asteroid -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#0F0F0E">&#9679;</span>
+        <span>NASA OSIRIS-REx — Bennu (C-type)</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>33. Asteroid (C/S/M types)</h3>
+          <span class="accuracy accuracy-med">88%</span>
+        </div>
+        <div class="subtitle"><span class="badge critical">CRITICAL FIX</span> OSIRIS-REx, Hayabusa2, NEAR</div>
+        <div class="desc">C-type dramatically darkened: #3A3530 to #0F0F0E (albedo 0.03-0.09). S-type to #6A5A4A, M-type to #8A7A6A. Bennu surface loose rubble pile barely held by gravity.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#0F0F0E" data-label="C-type (corrected)"></span>
+          <span class="color-swatch" style="background:#6A5A4A" data-label="S-type (corrected)"></span>
+          <span class="color-swatch" style="background:#8A7A6A" data-label="M-type (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/mission/osiris-rex/" target="_blank">OSIRIS-REx Mission</a>
+          <a href="https://svs.gsfc.nasa.gov/4857/" target="_blank">Bennu Global Views</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 34. Comet -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#D0C8B8">&#9734;</span>
+        <span>ESA Rosetta OSIRIS — 67P/C-G</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>34. Comet (67P/C-G)</h3>
+          <span class="accuracy accuracy-high">90%</span>
+        </div>
+        <div class="subtitle">ESA Rosetta NAVCAM/OSIRIS, first orbited comet</div>
+        <div class="desc">Nucleus color corrected to #1A1308 (very dark). Ice deposits to #D0C8B8. Rubber duck shape, jets from heated surface. Active pits with dusty streams.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#1A1308" data-label="Nucleus (corrected)"></span>
+          <span class="color-swatch" style="background:#D0C8B8" data-label="Ice deposits (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Comet_67P_Churyumov-Gerasimenko" target="_blank">ESA Rosetta 67P</a>
+          <a href="https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/" target="_blank">NASA 67P</a>
+          <a href="https://sci.esa.int/web/rosetta/-/56626-comet-67p-jet-in-3d-osiris-nac" target="_blank">ESA Jet 3D</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 35. Dwarf Planet (Pluto) -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#D4A078">&#9679;</span>
+        <span>NASA New Horizons MVIC — True Color</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>35. Dwarf Planet (Pluto)</h3>
+          <span class="accuracy accuracy-high">91%</span>
+        </div>
+        <div class="subtitle">New Horizons MVIC July 2015, highest res true color</div>
+        <div class="desc">Cthulhu Macula darkened to #3A2F25. Sputnik Planitia ice to #F5F5F5. Methane frost to pale yellow-tan #F5EDD5. Mostly brown from tholin chemistry.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#3A2F25" data-label="Cthulhu (corrected)"></span>
+          <span class="color-swatch" style="background:#F5F5F5" data-label="Sputnik ice (corrected)"></span>
+          <span class="color-swatch" style="background:#F5EDD5" data-label="Methane frost (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/resource/true-colors-of-pluto/" target="_blank">True Colors of Pluto</a>
+          <a href="https://www.nasa.gov/image-article/10-years-ago-nasas-new-horizons-captures-plutos-heart/" target="_blank">Pluto's Heart</a>
+          <a href="https://science.nasa.gov/gallery/pluto/" target="_blank">Pluto Gallery</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== EXOTIC ===================== -->
+<div class="category" id="exotic">
+  <h2><span class="icon">&#10024;</span> Exotic (3)</h2>
+  <div class="grid">
+
+    <!-- 36. Magnetar -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#FFFAF0">&#10040;</span>
+        <span>NASA/CXC — SGR 1806-20 (Artist)</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>36. Magnetar (SGR 1806-20)</h3>
+          <span class="accuracy accuracy-med">85%</span>
+        </div>
+        <div class="subtitle"><span class="badge critical">CRITICAL FIX</span> Artist illustrations, X-ray observations</div>
+        <div class="desc">Surface color corrected from tan #D4A67D to white #FFFAF0 — at 10^6 K a magnetar surface radiates white/blue-white, not tan. 1000 trillion gauss magnetic field.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#D4A67D" data-label="OLD (wrong)"></span>
+          <span style="color:#ff6a6a; font-size:1.2rem">&#10140;</span>
+          <span class="color-swatch" style="background:#FFFAF0" data-label="NEW (correct)"></span>
+        </div>
+        <div class="links">
+          <a href="https://science.nasa.gov/asset/hubble/illustration-of-magnetar/" target="_blank">Hubble Magnetar Illustration</a>
+          <a href="https://www.jpl.nasa.gov/images/pia26274-a-magnetar-loses-mass-artists-concept/" target="_blank">JPL Magnetar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 37. Binary Star -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#FFFEF5">&#9733;&#9733;</span>
+        <span>NASA SVS — Eclipsing Binary Light Curves</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>37. Binary Star (Algol / Sirius type)</h3>
+          <span class="accuracy accuracy-high">90%</span>
+        </div>
+        <div class="subtitle">NASA SVS eclipsing binary visualizations</div>
+        <div class="desc">Hot primary color corrected to #FFFEF5. Accretion inner to #FFFFF0. Roche lobe overflow, mass transfer stream, accretion disk dynamics.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#FFFEF5" data-label="Hot primary (corrected)"></span>
+          <span class="color-swatch" style="background:#FFFFF0" data-label="Accretion inner (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://svs.gsfc.nasa.gov/5290" target="_blank">NASA SVS Eclipsing Binaries</a>
+          <a href="https://science.nasa.gov/asset/hubble/the-dog-star-sirius-and-its-tiny-companion/" target="_blank">Sirius A+B</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 38. Protoplanetary Disk -->
+    <div class="card">
+      <div class="card-img-placeholder">
+        <span style="font-size:2rem; color:#C8B8A8">&#9711;</span>
+        <span>ESO/ALMA — HL Tauri Protoplanetary Disk</span>
+      </div>
+      <div class="card-body">
+        <div class="title-row">
+          <h3>38. Protoplanetary Disk (HL Tauri)</h3>
+          <span class="accuracy accuracy-med">87%</span>
+        </div>
+        <div class="subtitle">ALMA 2014, sharpest submm image ever</div>
+        <div class="desc">Inner disk color to #C8B8A8. Gap color brightened to #5A4A3A (gaps not empty, just depleted). Concentric ring/gap system from forming planets at only 1 Myr age.</div>
+        <div class="colors">
+          <span class="color-swatch" style="background:#C8B8A8" data-label="Inner disk (corrected)"></span>
+          <span class="color-swatch" style="background:#5A4A3A" data-label="Gaps (corrected)"></span>
+        </div>
+        <div class="links">
+          <a href="https://www.eso.org/public/images/eso1436a/" target="_blank">ALMA HL Tauri</a>
+          <a href="https://www.eso.org/public/news/eso1436/" target="_blank">ESO Press Release</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>Cosmos Explorer Reference Gallery v3.1 | Cross-referenced 2026-04-17</p>
+  <p>All imagery credits: NASA, ESA, JWST, Hubble, Cassini, Juno, MESSENGER, New Horizons, Galileo, ALMA/ESO, EHT, Oxford Univ.</p>
+  <p>See <code>22-cross-reference-report.md</code> for full analysis details</p>
+</footer>
+
+</body>
+</html>

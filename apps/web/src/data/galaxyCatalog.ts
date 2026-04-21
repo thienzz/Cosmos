@@ -1,0 +1,581 @@
+/**
+ * T29 — Galaxy catalog (Doc 23 §20.1 Local Group + Doc 26 §6 search targets).
+ *
+ * Minimum viable catalog for the ?demo=galaxies gallery and for TS-DATA-002
+ * (Andromeda distance 778 kpc ±5%). The full ingestion pipeline (SDSS DR18,
+ * Illustris) ships with the tile-decoder ETL; these entries cover the
+ * Hubble sequence (spiral, elliptical, irregular, lenticular) with
+ * well-known exemplars so the gallery renderer has a deterministic set of
+ * real galaxies to mount.
+ *
+ * Distances follow the NED (NASA/IPAC Extragalactic Database) consensus
+ * values. Doc 23 §17.3 quotes Andromeda at 780 kpc, but the headline value
+ * everyone refers to is 778 kpc — that's what TS-DATA-002 expects.
+ */
+
+import type { GalaxyKind } from '@/utils/galaxyPalette';
+
+export interface GalaxyCatalogEntry {
+  /** Stable internal id (catalog-agnostic). */
+  id: string;
+  /** Common name. */
+  name: string;
+  /** Messier number if any. */
+  messier?: number;
+  /** NGC id if any. */
+  ngc?: number;
+  /** PGC id if any. */
+  pgc?: number;
+  /** Hubble-sequence classification (e.g., SA(s)b, E0, Irr, S0). */
+  hubble?: string;
+  /** Morphological family used to drive the renderer. */
+  kind: GalaxyKind;
+  /** Right ascension (J2000, degrees). */
+  ra_deg: number;
+  /** Declination (J2000, degrees). */
+  dec_deg: number;
+  /** Distance from the Milky Way (kpc). */
+  distance_kpc: number;
+  /** Apparent magnitude (V-band). */
+  magnitude: number;
+  /** Apparent diameter on the sky (arcminutes). */
+  angular_diameter_arcmin?: number;
+  /** Common aliases for search. */
+  aliases?: string[];
+}
+
+/**
+ * NOTE on distances — all figures below are the NED consensus as of
+ * 2026-04-19. The 778 kpc Andromeda value is cited in both Doc 23 §20.1
+ * and Doc 30 TS-DATA-002 and lines up with Riess 2019 Cepheid + TRGB
+ * averages.
+ */
+export const GALAXY_CATALOG: GalaxyCatalogEntry[] = [
+  {
+    id: 'm31',
+    name: 'Andromeda Galaxy',
+    messier: 31,
+    ngc: 224,
+    pgc: 2557,
+    hubble: 'SA(s)b',
+    kind: 'spiral',
+    ra_deg: 10.6847,
+    dec_deg: 41.2688,
+    distance_kpc: 778,
+    magnitude: 3.44,
+    angular_diameter_arcmin: 190,
+    aliases: ['M31', 'NGC 224', 'Andromeda'],
+  },
+  {
+    id: 'm101',
+    name: 'Pinwheel Galaxy',
+    messier: 101,
+    ngc: 5457,
+    hubble: 'SAB(rs)cd',
+    kind: 'spiral',
+    ra_deg: 210.8023,
+    dec_deg: 54.3486,
+    distance_kpc: 6400,
+    magnitude: 7.86,
+    angular_diameter_arcmin: 28.8,
+    aliases: ['M101', 'NGC 5457'],
+  },
+  {
+    id: 'm51',
+    name: 'Whirlpool Galaxy',
+    messier: 51,
+    ngc: 5194,
+    hubble: 'SA(s)bc',
+    kind: 'spiral',
+    ra_deg: 202.4696,
+    dec_deg: 47.1952,
+    distance_kpc: 8400,
+    magnitude: 8.4,
+    angular_diameter_arcmin: 11.2,
+    aliases: ['M51', 'NGC 5194'],
+  },
+  {
+    id: 'm87',
+    name: 'M87 (Virgo A)',
+    messier: 87,
+    ngc: 4486,
+    hubble: 'E+0-1 pec',
+    kind: 'elliptical',
+    ra_deg: 187.7059,
+    dec_deg: 12.3911,
+    distance_kpc: 16800,
+    magnitude: 8.6,
+    angular_diameter_arcmin: 7.2,
+    aliases: ['M87', 'NGC 4486', 'Virgo A'],
+  },
+  {
+    id: 'm49',
+    name: 'Messier 49',
+    messier: 49,
+    ngc: 4472,
+    hubble: 'E2/S0(2)',
+    kind: 'elliptical',
+    ra_deg: 187.4448,
+    dec_deg: 8.0004,
+    distance_kpc: 16500,
+    magnitude: 8.4,
+    angular_diameter_arcmin: 10.2,
+    aliases: ['M49', 'NGC 4472'],
+  },
+  {
+    id: 'm32',
+    name: 'Messier 32',
+    messier: 32,
+    ngc: 221,
+    hubble: 'cE2',
+    kind: 'elliptical',
+    ra_deg: 10.6742,
+    dec_deg: 40.8650,
+    distance_kpc: 805,
+    magnitude: 8.08,
+    angular_diameter_arcmin: 8.5,
+    aliases: ['M32', 'NGC 221'],
+  },
+  {
+    id: 'lmc',
+    name: 'Large Magellanic Cloud',
+    pgc: 17223,
+    hubble: 'SB(s)m',
+    kind: 'irregular',
+    ra_deg: 80.8938,
+    dec_deg: -69.7561,
+    distance_kpc: 50,
+    magnitude: 0.9,
+    angular_diameter_arcmin: 645,
+    aliases: ['LMC', 'Nubecula Major'],
+  },
+  {
+    id: 'smc',
+    name: 'Small Magellanic Cloud',
+    pgc: 3085,
+    hubble: 'SB(s)m pec',
+    kind: 'irregular',
+    ra_deg: 13.1867,
+    dec_deg: -72.8286,
+    distance_kpc: 62,
+    magnitude: 2.7,
+    angular_diameter_arcmin: 320,
+    aliases: ['SMC', 'NGC 292', 'Nubecula Minor'],
+  },
+  {
+    id: 'ngc4449',
+    name: 'NGC 4449',
+    ngc: 4449,
+    hubble: 'IBm',
+    kind: 'irregular',
+    ra_deg: 187.0463,
+    dec_deg: 44.0933,
+    distance_kpc: 3900,
+    magnitude: 9.6,
+    angular_diameter_arcmin: 6.2,
+    aliases: ['NGC 4449'],
+  },
+  {
+    id: 'ngc5866',
+    name: 'NGC 5866 (Spindle)',
+    ngc: 5866,
+    messier: 102,
+    hubble: 'S0_3',
+    kind: 'lenticular',
+    ra_deg: 226.6229,
+    dec_deg: 55.7632,
+    distance_kpc: 15100,
+    magnitude: 9.89,
+    angular_diameter_arcmin: 4.7,
+    aliases: ['NGC 5866', 'M102', 'Spindle Galaxy'],
+  },
+  {
+    id: 'ngc3115',
+    name: 'NGC 3115 (Spindle)',
+    ngc: 3115,
+    hubble: 'S0-',
+    kind: 'lenticular',
+    ra_deg: 151.3083,
+    dec_deg: -7.7183,
+    distance_kpc: 9700,
+    magnitude: 9.2,
+    angular_diameter_arcmin: 7.2,
+    aliases: ['NGC 3115'],
+  },
+  {
+    id: 'm85',
+    name: 'Messier 85',
+    messier: 85,
+    ngc: 4382,
+    hubble: 'SA(s)0+',
+    kind: 'lenticular',
+    ra_deg: 186.3504,
+    dec_deg: 18.1912,
+    distance_kpc: 18500,
+    magnitude: 9.1,
+    angular_diameter_arcmin: 7.1,
+    aliases: ['M85', 'NGC 4382'],
+  },
+  // --- T46 AGN / Starburst / Morphology-special exemplars -----------------
+  {
+    id: 'ngc1068',
+    name: 'NGC 1068 (M77)',
+    messier: 77,
+    ngc: 1068,
+    hubble: '(R)SA(rs)b (Sy2)',
+    kind: 'agn',
+    ra_deg: 40.6696,
+    dec_deg: -0.0133,
+    distance_kpc: 14400,
+    magnitude: 8.87,
+    angular_diameter_arcmin: 7.1,
+    aliases: ['M77', 'NGC 1068', 'Seyfert 2 archetype'],
+  },
+  {
+    id: '3c273',
+    name: '3C 273 (Quasar)',
+    hubble: 'QSO',
+    kind: 'agn',
+    ra_deg: 187.2779,
+    dec_deg: 2.0523,
+    distance_kpc: 749000,
+    magnitude: 12.9,
+    aliases: ['3C 273', 'PG 1226+023'],
+  },
+  {
+    id: 'centaurus-a',
+    name: 'Centaurus A (NGC 5128)',
+    ngc: 5128,
+    hubble: 'S0 pec (FR I)',
+    kind: 'agn',
+    ra_deg: 201.3650,
+    dec_deg: -43.0192,
+    distance_kpc: 3800,
+    magnitude: 6.84,
+    angular_diameter_arcmin: 25.7,
+    aliases: ['NGC 5128', 'Cen A'],
+  },
+  {
+    id: 'm82',
+    name: 'Cigar Galaxy (M82)',
+    messier: 82,
+    ngc: 3034,
+    hubble: 'I0 (starburst)',
+    kind: 'starburst',
+    ra_deg: 148.9687,
+    dec_deg: 69.6797,
+    distance_kpc: 3530,
+    magnitude: 8.41,
+    angular_diameter_arcmin: 11.2,
+    aliases: ['M82', 'NGC 3034', 'Cigar'],
+  },
+  {
+    id: 'arp220',
+    name: 'Arp 220',
+    hubble: 'Pec (ULIRG)',
+    kind: 'starburst',
+    ra_deg: 233.7383,
+    dec_deg: 23.5033,
+    distance_kpc: 77000,
+    magnitude: 13.94,
+    aliases: ['Arp 220', 'UGC 9913', 'IC 4553'],
+  },
+  {
+    id: 'hoags-object',
+    name: "Hoag's Object",
+    pgc: 54559,
+    hubble: 'S0 (ring)',
+    kind: 'morphology-special',
+    ra_deg: 241.6754,
+    dec_deg: 21.6830,
+    distance_kpc: 183000,
+    magnitude: 16.0,
+    aliases: ["Hoag's Object", 'PGC 54559'],
+  },
+  {
+    id: 'cartwheel',
+    name: 'Cartwheel Galaxy',
+    pgc: 2248,
+    hubble: 'S pec (ring)',
+    kind: 'morphology-special',
+    ra_deg: 9.4262,
+    dec_deg: -33.7158,
+    distance_kpc: 152000,
+    magnitude: 15.2,
+    aliases: ['Cartwheel', 'ESO 350-40'],
+  },
+  {
+    id: 'antennae',
+    name: 'Antennae Galaxies',
+    ngc: 4038,
+    hubble: 'SB(s)m pec (merging)',
+    kind: 'morphology-special',
+    ra_deg: 180.4708,
+    dec_deg: -18.8683,
+    distance_kpc: 13800,
+    magnitude: 10.3,
+    angular_diameter_arcmin: 5.2,
+    aliases: ['NGC 4038/4039', 'Antennae'],
+  },
+  {
+    id: 'dragonfly-44',
+    name: 'Dragonfly 44',
+    hubble: 'UDG',
+    kind: 'morphology-special',
+    ra_deg: 195.2414,
+    dec_deg: 26.9739,
+    distance_kpc: 101000,
+    magnitude: 19.4,
+    aliases: ['Dragonfly 44', 'DF44'],
+  },
+  // ---- Phase 1 additions (P2G) — famous named galaxies per audit -----------
+  // Local Group + canonical spirals / ellipticals that should show up in any
+  // "galaxies you've heard of" search. Distances from NED consensus as of
+  // 2026-04-21; angular diameters from SIMBAD `galdim_maj` where available.
+  {
+    id: 'm33',
+    name: 'Triangulum Galaxy',
+    messier: 33,
+    ngc: 598,
+    pgc: 5818,
+    hubble: 'SA(s)cd',
+    kind: 'spiral',
+    ra_deg: 23.4621,
+    dec_deg: 30.6600,
+    distance_kpc: 859,
+    magnitude: 5.72,
+    angular_diameter_arcmin: 70.8,
+    aliases: ['M33', 'NGC 598', 'Triangulum'],
+  },
+  {
+    id: 'm104',
+    name: 'Sombrero Galaxy',
+    messier: 104,
+    ngc: 4594,
+    pgc: 42407,
+    hubble: 'SA(s)a',
+    kind: 'lenticular',
+    ra_deg: 189.9976,
+    dec_deg: -11.6231,
+    distance_kpc: 9550,
+    magnitude: 8.98,
+    angular_diameter_arcmin: 8.7,
+    aliases: ['M104', 'NGC 4594', 'Sombrero'],
+  },
+  {
+    id: 'm81',
+    name: "Bode's Galaxy",
+    messier: 81,
+    ngc: 3031,
+    pgc: 28630,
+    hubble: 'SA(s)ab',
+    kind: 'spiral',
+    ra_deg: 148.8883,
+    dec_deg: 69.0653,
+    distance_kpc: 3630,
+    magnitude: 6.94,
+    angular_diameter_arcmin: 26.9,
+    aliases: ['M81', 'NGC 3031', 'Bode'],
+  },
+  {
+    id: 'ngc1300',
+    name: 'NGC 1300',
+    ngc: 1300,
+    pgc: 12412,
+    hubble: 'SB(rs)bc',
+    kind: 'spiral',
+    ra_deg: 49.9208,
+    dec_deg: -19.4111,
+    distance_kpc: 18800,
+    magnitude: 10.4,
+    angular_diameter_arcmin: 6.2,
+    aliases: ['NGC 1300'],
+  },
+  {
+    id: 'm110',
+    name: 'Messier 110',
+    messier: 110,
+    ngc: 205,
+    pgc: 2429,
+    hubble: 'E5 pec',
+    kind: 'elliptical',
+    ra_deg: 10.0917,
+    dec_deg: 41.6853,
+    distance_kpc: 824,
+    magnitude: 8.07,
+    angular_diameter_arcmin: 21.9,
+    aliases: ['M110', 'NGC 205'],
+  },
+  // Local Group dwarf spheroidals. Distances from Cohen+2018 / McConnachie 2012.
+  {
+    id: 'sculptor-dwarf',
+    name: 'Sculptor Dwarf',
+    pgc: 3589,
+    hubble: 'dSph',
+    kind: 'elliptical',
+    ra_deg: 15.0392,
+    dec_deg: -33.7092,
+    distance_kpc: 86,
+    magnitude: 10.1,
+    angular_diameter_arcmin: 39.0,
+    aliases: ['Sculptor dSph', 'ESO 351-30'],
+  },
+  {
+    id: 'fornax-dwarf',
+    name: 'Fornax Dwarf',
+    pgc: 10074,
+    hubble: 'dSph',
+    kind: 'elliptical',
+    ra_deg: 39.9971,
+    dec_deg: -34.4492,
+    distance_kpc: 147,
+    magnitude: 9.3,
+    angular_diameter_arcmin: 17.0,
+    aliases: ['Fornax dSph', 'ESO 356-4'],
+  },
+  {
+    id: 'sagittarius-dwarf',
+    name: 'Sagittarius Dwarf Spheroidal',
+    pgc: 63287,
+    hubble: 'dSph',
+    kind: 'elliptical',
+    ra_deg: 283.8312,
+    dec_deg: -30.5453,
+    distance_kpc: 24,
+    magnitude: 4.5,
+    angular_diameter_arcmin: 450,
+    aliases: ['SagDEG', 'Sagittarius dSph'],
+  },
+  {
+    id: 'leo-i',
+    name: 'Leo I',
+    pgc: 29488,
+    hubble: 'dSph',
+    kind: 'elliptical',
+    ra_deg: 152.1171,
+    dec_deg: 12.3064,
+    distance_kpc: 254,
+    magnitude: 9.8,
+    angular_diameter_arcmin: 9.8,
+    aliases: ['Leo I', 'UGC 5470', 'Regulus dwarf'],
+  },
+  {
+    id: 'leo-ii',
+    name: 'Leo II',
+    pgc: 34176,
+    hubble: 'dSph',
+    kind: 'elliptical',
+    ra_deg: 168.3708,
+    dec_deg: 22.1517,
+    distance_kpc: 233,
+    magnitude: 12.6,
+    angular_diameter_arcmin: 12.0,
+    aliases: ['Leo II', 'UGC 6253'],
+  },
+  {
+    id: 'draco-dwarf',
+    name: 'Draco Dwarf',
+    pgc: 60095,
+    hubble: 'dSph',
+    kind: 'elliptical',
+    ra_deg: 260.0517,
+    dec_deg: 57.9153,
+    distance_kpc: 76,
+    magnitude: 10.9,
+    angular_diameter_arcmin: 35.5,
+    aliases: ['Draco dSph', 'UGC 10822'],
+  },
+  {
+    id: 'ursa-minor-dwarf',
+    name: 'Ursa Minor Dwarf',
+    pgc: 54074,
+    hubble: 'dSph',
+    kind: 'elliptical',
+    ra_deg: 227.2854,
+    dec_deg: 67.2225,
+    distance_kpc: 66,
+    magnitude: 11.9,
+    angular_diameter_arcmin: 30.2,
+    aliases: ['Ursa Minor dSph', 'UMi dSph'],
+  },
+  {
+    id: 'ngc6822',
+    name: "Barnard's Galaxy",
+    ngc: 6822,
+    pgc: 63616,
+    hubble: 'IB(s)m',
+    kind: 'irregular',
+    ra_deg: 296.2375,
+    dec_deg: -14.8031,
+    distance_kpc: 500,
+    magnitude: 9.3,
+    angular_diameter_arcmin: 15.5,
+    aliases: ['NGC 6822', 'Barnard Galaxy', 'IC 4895'],
+  },
+  {
+    id: 'ic10',
+    name: 'IC 10',
+    pgc: 1305,
+    hubble: 'IBm (starburst)',
+    kind: 'starburst',
+    ra_deg: 5.0728,
+    dec_deg: 59.3031,
+    distance_kpc: 790,
+    magnitude: 10.4,
+    angular_diameter_arcmin: 6.3,
+    aliases: ['IC 10', 'UGC 192'],
+  },
+  {
+    id: 'stephans-quintet',
+    name: "Stephan's Quintet",
+    hubble: 'Compact group (merging)',
+    kind: 'morphology-special',
+    ra_deg: 338.9875,
+    dec_deg: 33.9625,
+    distance_kpc: 85000,
+    magnitude: 13.9,
+    angular_diameter_arcmin: 3.2,
+    aliases: ["Stephan's Quintet", 'HCG 92', 'Arp 319'],
+  },
+  {
+    id: 'mice',
+    name: 'Mice Galaxies',
+    ngc: 4676,
+    hubble: 'S0/a pec (merging)',
+    kind: 'morphology-special',
+    ra_deg: 191.5440,
+    dec_deg: 30.7276,
+    distance_kpc: 90000,
+    magnitude: 13.3,
+    angular_diameter_arcmin: 2.3,
+    aliases: ['NGC 4676', 'Mice Galaxies', 'Arp 242'],
+  },
+];
+
+/** Return the first entry whose `id` matches, or null. */
+export function findGalaxyById(id: string): GalaxyCatalogEntry | null {
+  return GALAXY_CATALOG.find((g) => g.id === id) ?? null;
+}
+
+/** Return all entries of a given morphology. */
+export function galaxiesByKind(kind: GalaxyKind): GalaxyCatalogEntry[] {
+  return GALAXY_CATALOG.filter((g) => g.kind === kind);
+}
+
+/**
+ * Doc 22 category labels for the galaxy entries + TS-DATA-005 coverage
+ * helper — pairs with `ALL_ENTITY_CATEGORIES` below.
+ */
+export const ALL_ENTITY_CATEGORIES = [
+  'stars',
+  'rocky_planets',
+  'gas_giants',
+  'moons',
+  'small_bodies',
+  'nebulae',
+  'galaxies',
+  'large_scale_structure',
+  'exotic',
+] as const;
+
+export type EntityCategoryKey = (typeof ALL_ENTITY_CATEGORIES)[number];

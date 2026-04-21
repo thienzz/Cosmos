@@ -1,0 +1,98 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: cosmos-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: cosmos
+      POSTGRES_USER: cosmos
+      POSTGRES_PASSWORD: cosmos_dev
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cosmos -d cosmos"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: cosmos-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  elasticsearch:
+    image: elasticsearch:8.12.0
+    container_name: cosmos-elasticsearch
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ../..
+      dockerfile: infra/docker/Dockerfile.api
+    container_name: cosmos-api
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://cosmos:cosmos_dev@postgres:5432/cosmos
+      REDIS_URL: redis://redis:6379
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      API_PORT: 3000
+      LOG_LEVEL: debug
+      CORS_ORIGIN: http://localhost:5173
+
+  tile-server:
+    build:
+      context: ../..
+      dockerfile: infra/docker/Dockerfile.tile-server
+    container_name: cosmos-tile-server
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://cosmos:cosmos_dev@postgres:5432/cosmos
+      REDIS_URL: redis://redis:6379
+      TILE_SERVER_PORT: 3001
+
+  ephemeris:
+    build:
+      context: ../..
+      dockerfile: infra/docker/Dockerfile.ephemeris
+    container_name: cosmos-ephemeris
+    ports:
+      - "3002:3002"
+    volumes:
+      - ../../data/spice:/data/spice:ro
+    environment:
+      SPICE_KERNEL_DIR: /data/spice
+      EPHEMERIS_PORT: 3002
+
+volumes:
+  pgdata:

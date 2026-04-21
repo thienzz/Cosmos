@@ -1,0 +1,19 @@
+# Cosmos Explorer — Tile Server (Rust)
+FROM rust:1.75-bookworm AS build
+WORKDIR /repo
+COPY apps/tile-server/Cargo.toml apps/tile-server/
+RUN mkdir -p apps/tile-server/src \
+ && echo 'fn main() {}' > apps/tile-server/src/main.rs \
+ && cd apps/tile-server && cargo fetch
+COPY apps/tile-server apps/tile-server
+RUN cd apps/tile-server && cargo build --release
+
+FROM debian:bookworm-slim AS runtime
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+COPY --from=build /repo/apps/tile-server/target/release/cosmos-tile-server /usr/local/bin/cosmos-tile-server
+EXPOSE 3001
+ENV TILE_SERVER_PORT=3001
+CMD ["cosmos-tile-server"]

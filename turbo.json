@@ -1,0 +1,59 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env", "**/.env.local", "tsconfig.base.json"],
+  "globalEnv": [
+    "NODE_ENV",
+    "CI",
+    "DATABASE_URL",
+    "REDIS_URL",
+    "ELASTICSEARCH_URL",
+    "SPICE_KERNEL_DIR",
+    "API_PORT",
+    "TILE_SERVER_PORT",
+    "EPHEMERIS_PORT",
+    "LOG_LEVEL",
+    "CORS_ORIGIN",
+    "RATE_LIMIT_ANONYMOUS",
+    "RATE_LIMIT_REGISTERED",
+    "VITE_API_BASE_URL",
+    "VITE_WS_URL",
+    "VITE_TILE_SERVER_URL",
+    "VITE_EPHEMERIS_URL",
+    "VITE_ENABLE_MOCK_API",
+    "VITE_ENABLE_DEVTOOLS",
+    "VITE_SENTRY_DSN",
+    "VITE_ANALYTICS_ENDPOINT"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "build/**"],
+      "inputs": ["src/**", "public/**", "tsconfig.json", "package.json", "vite.config.ts"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "outputs": [],
+      "inputs": ["src/**", ".eslintrc*", "eslint.config.*"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "inputs": ["src/**", "tsconfig.json"]
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"],
+      "inputs": ["src/**", "tests/**", "vitest.config.*"]
+    },
+    "test:e2e": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# Cosmos Explorer — Ephemeris Service (Python / FastAPI + SpiceyPy)
+FROM python:3.11-slim AS base
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends build-essential curl \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY apps/ephemeris/requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY apps/ephemeris/ ./
+EXPOSE 3002
+ENV EPHEMERIS_PORT=3002 \
+    SPICE_KERNEL_DIR=/data/spice
+CMD ["uvicorn", "ephemeris_service:app", "--host", "0.0.0.0", "--port", "3002"]

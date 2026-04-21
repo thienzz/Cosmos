@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "references": [
+    { "path": "./packages/shared-types" },
+    { "path": "./packages/coordinate-utils" },
+    { "path": "./packages/tile-decoder" },
+    { "path": "./packages/api-client" },
+    { "path": "./apps/web" },
+    { "path": "./apps/api" }
+  ],
+  "files": []
+}

@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+coverage
+.turbo
+.vite
+*.config.ts
+*.config.js
+*.config.cjs
+apps/tile-server
+apps/ephemeris
+apps/etl

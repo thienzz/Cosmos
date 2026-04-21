@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earth — Realistic Interactive Visualization</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:100%;height:100vh;background:#000;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;color:#b8ccee}
+canvas{display:block}
+
+#panel{position:absolute;top:0;right:0;bottom:0;width:235px;background:rgba(6,10,22,0.92);
+  backdrop-filter:blur(14px);border-left:1px solid rgba(50,100,200,0.15);
+  overflow-y:auto;overflow-x:hidden;z-index:100;padding:12px 10px 20px;
+  scrollbar-width:thin;scrollbar-color:rgba(60,120,255,0.2) transparent}
+#panel::-webkit-scrollbar{width:4px}
+#panel::-webkit-scrollbar-thumb{background:rgba(60,120,255,0.25);border-radius:2px}
+.sec{margin-bottom:10px;border-bottom:1px solid rgba(50,100,200,0.08);padding-bottom:8px}
+.sec:last-child{border-bottom:none}
+.sh{font-size:9px;font-weight:700;color:#4a80bb;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;padding:2px 0}
+.row{display:flex;align-items:center;gap:5px;padding:2px 3px;border-radius:3px;cursor:pointer;font-size:10px;color:#8aa8cc;transition:background 0.15s}
+.row:hover{background:rgba(50,100,200,0.06)}
+.row input[type=checkbox]{width:11px;height:11px;accent-color:#4a90dd;cursor:pointer;flex-shrink:0}
+.row label{cursor:pointer;flex:1}
+.slider-row{padding:2px 3px;margin-bottom:3px}
+.sl-label{font-size:9px;color:#5580aa;margin-bottom:1px}
+.sl{width:100%;height:3px;-webkit-appearance:none;appearance:none;background:rgba(50,100,200,0.1);
+  border-radius:2px;outline:none;cursor:pointer}
+.sl::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:#4a90dd;cursor:pointer}
+.badge{font-size:8px;padding:1px 4px;border-radius:3px;margin-left:auto;font-weight:600}
+.b-life{background:rgba(40,180,80,0.15);color:#4cc070}
+.b-int{background:rgba(255,170,50,0.15);color:#ddaa44}
+.b-mega{background:rgba(130,100,255,0.15);color:#9988ff}
+.b-weather{background:rgba(80,160,255,0.15);color:#66aaff}
+
+#info{position:absolute;bottom:12px;left:14px;right:250px;display:flex;justify-content:space-between;
+  font-size:10px;color:#3a6090;z-index:50}
+#coordText{position:absolute;top:12px;left:14px;font-size:10px;color:#5a90c0;z-index:50}
+#fpsText{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-size:9px;color:#2a4a66;z-index:50}
+</style>
+</head>
+<body>
+<div id="coordText"></div>
+<div id="fpsText"></div>
+<div id="info"><span>EARTH — R: 6,371 km | Procedural GLSL | Drag to rotate, scroll to zoom</span></div>
+
+<div id="panel">
+
+  <!-- CAMERA -->
+  <div class="sec">
+    <div class="sh">Camera</div>
+    <div class="slider-row"><div class="sl-label">Sun Direction</div><input type="range" class="sl" id="sunAz" min="0" max="360" value="45"></div>
+    <div class="slider-row"><div class="sl-label">Time Speed</div><input type="range" class="sl" id="timeSpd" min="0" max="300" value="100"></div>
+    <div class="row"><input type="checkbox" id="tRotate" checked><label for="tRotate">Auto-Rotate</label></div>
+  </div>
+
+  <!-- SURFACE -->
+  <div class="sec">
+    <div class="sh">Surface</div>
+    <div class="row"><input type="checkbox" id="tVeg" checked><label for="tVeg">Vegetation & Biomes</label></div>
+    <div class="row"><input type="checkbox" id="tDesert" checked><label for="tDesert">Deserts & Sand Dunes</label></div>
+    <div class="row"><input type="checkbox" id="tMountain" checked><label for="tMountain">Mountains & Snow Caps</label></div>
+    <div class="row"><input type="checkbox" id="tRiver" checked><label for="tRiver">River Systems</label></div>
+    <div class="row"><input type="checkbox" id="tVolcanic" checked><label for="tVolcanic">Volcanic Hotspots</label></div>
+    <div class="row"><input type="checkbox" id="tIce" checked><label for="tIce">Ice Caps & Glaciers</label></div>
+  </div>
+
+  <!-- OCEAN -->
+  <div class="sec">
+    <div class="sh">Ocean</div>
+    <div class="row"><input type="checkbox" id="tWaves" checked><label for="tWaves">Wave Animation</label></div>
+    <div class="row"><input type="checkbox" id="tShelf" checked><label for="tShelf">Continental Shelf</label></div>
+    <div class="row"><input type="checkbox" id="tCoral" checked><label for="tCoral">Coral Reefs (tropical)</label></div>
+    <div class="row"><input type="checkbox" id="tCurrents" checked><label for="tCurrents">Ocean Currents</label></div>
+  </div>
+
+  <!-- WEATHER -->
+  <div class="sec">
+    <div class="sh">Weather</div>
+    <div class="row"><input type="checkbox" id="tClouds" checked><label for="tClouds">Cloud Layer</label><span class="badge b-weather">atm</span></div>
+    <div class="row"><input type="checkbox" id="tHurr" checked><label for="tHurr">Hurricanes & Cyclones</label><span class="badge b-weather">3</span></div>
+    <div class="slider-row"><div class="sl-label">Hurricane Intensity</div><input type="range" class="sl" id="hurrInt" min="0" max="100" value="65"></div>
+    <div class="row"><input type="checkbox" id="tJet" checked><label for="tJet">Jet Stream</label></div>
+    <div class="row"><input type="checkbox" id="tCb" checked><label for="tCb">Cumulonimbus Towers</label></div>
+    <div class="row"><input type="checkbox" id="tItcz" checked><label for="tItcz">ITCZ Tropical Band</label></div>
+    <div class="row"><input type="checkbox" id="tDust" checked><label for="tDust">Dust Storms (Sahara)</label></div>
+    <div class="row"><input type="checkbox" id="tLightning" checked><label for="tLightning">Lightning</label></div>
+  </div>
+
+  <!-- ATMOSPHERE -->
+  <div class="sec">
+    <div class="sh">Atmosphere</div>
+    <div class="row"><input type="checkbox" id="tAtmo" checked><label for="tAtmo">Rayleigh Scattering</label></div>
+    <div class="row"><input type="checkbox" id="tMie" checked><label for="tMie">Mie Forward Scatter</label></div>
+    <div class="row"><input type="checkbox" id="tGodray" checked><label for="tGodray">God Rays</label></div>
+    <div class="row"><input type="checkbox" id="tSunset" checked><label for="tSunset">Sunset Glow</label></div>
+    <div class="row"><input type="checkbox" id="tAurora" checked><label for="tAurora">Aurora Borealis/Australis</label></div>
+  </div>
+
+  <!-- LIFE -->
+  <div class="sec">
+    <div class="sh">Life</div>
+    <div class="row"><input type="checkbox" id="tBio" checked><label for="tBio">Bioluminescence</label><span class="badge b-life">ocean</span></div>
+    <div class="row"><input type="checkbox" id="tAlgae" checked><label for="tAlgae">Algae Blooms</label><span class="badge b-life">ocean</span></div>
+  </div>
+
+  <!-- INTELLIGENCE -->
+  <div class="sec">
+    <div class="sh">Intelligence</div>
+    <div class="row"><input type="checkbox" id="tCampfire"><label for="tCampfire">L0 — Campfires</label><span class="badge b-int">pre</span></div>
+    <div class="row"><input type="checkbox" id="tCity" checked><label for="tCity">L1 — City Lights</label><span class="badge b-int">civ</span></div>
+    <div class="row"><input type="checkbox" id="tRoads" checked><label for="tRoads">L2 — Road Networks</label><span class="badge b-int">civ</span></div>
+    <div class="row"><input type="checkbox" id="tPollution" checked><label for="tPollution">L3 — Light Pollution</label><span class="badge b-int">civ</span></div>
+    <div class="row"><input type="checkbox" id="tRadio" checked><label for="tRadio">L4 — Radio Emissions</label><span class="badge b-int">tech</span></div>
+    <div class="row"><input type="checkbox" id="tSat" checked><label for="tSat">L5 — Satellites (ISS/GPS)</label><span class="badge b-int">tech</span></div>
+  </div>
+
+  <!-- MEGASTRUCTURES -->
+  <div class="sec">
+    <div class="sh">Megastructures</div>
+    <div class="row"><input type="checkbox" id="tGrid"><label for="tGrid">L6 — Energy Grid (Type I)</label><span class="badge b-mega">K1</span></div>
+    <div class="row"><input type="checkbox" id="tOrbital"><label for="tOrbital">L7 — Orbital Ring</label><span class="badge b-mega">K1</span></div>
+    <div class="row"><input type="checkbox" id="tDyson"><label for="tDyson">L8 — Dyson Swarm (Type II)</label><span class="badge b-mega">K2</span></div>
+    <div class="row"><input type="checkbox" id="tGalaxy"><label for="tGalaxy">L9 — Galactic Net (Type III)</label><span class="badge b-mega">K3</span></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ================================================================
+//  GLSL NOISE
+// ================================================================
+const N=`
+vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
+vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
+vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+float snoise(vec3 v){
+  const vec2 C=vec2(1.0/6.0,1.0/3.0);const vec4 D=vec4(0,0.5,1,2);
+  vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);
+  vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.0-g;vec3 i1=min(g,l.zxy);vec3 i2=max(g,l.zxy);
+  vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;
+  i=mod289(i);
+  vec4 p=permute(permute(permute(i.z+vec4(0,i1.z,i2.z,1))+i.y+vec4(0,i1.y,i2.y,1))+i.x+vec4(0,i1.x,i2.x,1));
+  float n_=0.142857142857;vec3 ns=n_*D.wyz-D.xzx;
+  vec4 j=p-49.0*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.0*x_);
+  vec4 xx=x_*ns.x+ns.yyyy;vec4 yy=y_*ns.x+ns.yyyy;
+  vec4 h=1.0-abs(xx)-abs(yy);vec4 b0=vec4(xx.xy,yy.xy);vec4 b1=vec4(xx.zw,yy.zw);
+  vec4 s0=floor(b0)*2.0+1.0;vec4 s1=floor(b1)*2.0+1.0;vec4 sh=-step(h,vec4(0));
+  vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+  vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
+  vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+  p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
+  vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);m=m*m;
+  return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
+}
+float fbm(vec3 p,int o){float v=0.0,a=0.5,f=1.0;for(int i=0;i<8;i++){if(i>=o)break;v+=a*snoise(p*f);a*=0.5;f*=2.0;}return v;}
+vec2 voronoi(vec3 p){vec3 n=floor(p);vec3 f=fract(p);float md=8.0,md2=8.0;
+for(int i=-1;i<=1;i++)for(int j=-1;j<=1;j++)for(int k=-1;k<=1;k++){
+vec3 g=vec3(float(i),float(j),float(k));vec3 o=vec3(snoise(n+g)*0.5+0.5,snoise((n+g)*1.3+vec3(33))*0.5+0.5,snoise((n+g)*1.7+vec3(77))*0.5+0.5);
+vec3 r=g+o-f;float d=dot(r,r);if(d<md){md2=md;md=d;}else if(d<md2){md2=d;}}return vec2(sqrt(md),sqrt(md2));}
+`;
+
+// ================================================================
+//  SCENE
+// ================================================================
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,0.01,5000);
+camera.position.set(0,0.4,2.8);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.15;
+renderer.outputEncoding=THREE.sRGBEncoding;
+document.body.appendChild(renderer.domElement);
+
+let timeScale=1.0;
+const ST={sunDir:new THREE.Vector3(1,0.15,0.3).normalize(),autoRotate:true,
+  theta:0,phi:Math.PI*0.45,dist:2.8,dragging:false,px:0,py:0};
+renderer.domElement.addEventListener('mousedown',e=>{ST.dragging=true;ST.px=e.clientX;ST.py=e.clientY});
+window.addEventListener('mouseup',()=>ST.dragging=false);
+window.addEventListener('mousemove',e=>{if(!ST.dragging)return;ST.theta-=(e.clientX-ST.px)*0.005;ST.phi-=(e.clientY-ST.py)*0.005;ST.phi=Math.max(0.15,Math.min(Math.PI-0.15,ST.phi));ST.px=e.clientX;ST.py=e.clientY});
+renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();ST.dist+=e.deltaY*0.003;ST.dist=Math.max(1.3,Math.min(80,ST.dist))},{passive:false});
+
+// ================================================================
+//  PLANET SHADER — per-feature uniforms
+// ================================================================
+const planetFrag=`
+precision highp float;
+uniform vec3 uSunDir;
+uniform float uTime;
+// Surface
+uniform float uVeg,uDesert,uMountain,uRiver,uVolcanic,uIce;
+// Ocean
+uniform float uWaves,uShelf,uCoral,uCurrents;
+// Life
+uniform float uBio,uAlgae;
+// Intelligence
+uniform float uCampfire,uCity,uRoads,uPollution,uRadio,uGrid;
+// Weather
+uniform float uDust;
+
+varying vec3 vPos,vWorldPos,vWorldNormal;
+${N}
+
+float continentRaw(vec3 p){float w=fbm(p*2.0+vec3(3.7,1.2,5.3),3)*0.4;return fbm(p*1.8+vec3(w),5);}
+float continentMask(vec3 p){return smoothstep(-0.05,0.12,continentRaw(p));}
+float shelfGrad(vec3 p){return smoothstep(-0.15,0.15,continentRaw(p));}
+
+vec3 oceanColor(vec3 p,float shelf,float nDotL,vec3 Nn,vec3 V){
+    vec3 base=vec3(0.02,0.08,0.28);
+    vec3 shallow=vec3(0.06,0.32,0.48);
+    float d=clamp(shelf*2.0,0.0,1.0);
+    vec3 col=mix(base,shallow,smoothstep(0.6,1.0,d)*uShelf);
+
+    // Waves — visible animated surface ripple
+    if(uWaves>0.5){
+        float w1=snoise(vec3(p.x*18.0+uTime*0.35,p.y*18.0,p.z*18.0-uTime*0.2))*0.5+0.5;
+        float w2=snoise(vec3(p.x*35.0-uTime*0.25,p.y*35.0+uTime*0.15,p.z*35.0))*0.5+0.5;
+        float w3=snoise(vec3(p.x*7.0+uTime*0.12,p.y*7.0-uTime*0.08,p.z*7.0+uTime*0.1))*0.5+0.5;
+        float wave=w1*0.45+w2*0.3+w3*0.25;
+        float wBright=(wave-0.5)*0.12;
+        col+=vec3(0.03,0.08,0.12)*wBright*smoothstep(-0.1,0.2,nDotL);
+        // Foam on wave crests near coast
+        float foam=smoothstep(0.72,0.85,wave)*smoothstep(0.5,0.9,d)*0.15;
+        col+=vec3(0.5,0.55,0.6)*foam;
+    }
+    // Currents
+    if(uCurrents>0.5){
+        float cur=snoise(vec3(p.x*3.0+uTime*0.015,p.y*2.0,p.z*3.0-uTime*0.01))*0.5+0.5;
+        cur*=snoise(vec3(p.x*8.0,p.y*8.0+uTime*0.02,p.z*8.0))*0.5+0.5;
+        col+=vec3(0.02,0.06,0.08)*smoothstep(0.6,0.8,cur)*0.5;
+    }
+    // Coral
+    if(uCoral>0.5){
+        float lat=asin(p.y);
+        if(abs(lat)<0.5&&shelf>0.7){
+            vec2 vor=voronoi(p*50.0);
+            float cr=smoothstep(0.15,0.05,vor.x)*smoothstep(0.7,0.9,shelf)*smoothstep(0.5,0.2,abs(lat));
+            col=mix(col,vec3(0.35,0.55,0.45),cr*0.3);
+        }
+    }
+    // Algae
+    if(uAlgae>0.5){
+        float al=snoise(p*6.0+vec3(uTime*0.005,0,0))*0.5+0.5;
+        col=mix(col,vec3(0.04,0.22,0.12),al*0.15*smoothstep(0.5,0.7,al));
+    }
+    // Fresnel
+    float fr=pow(1.0-max(dot(V,Nn),0.0),4.0);
+    col=mix(col,vec3(0.35,0.5,0.65),fr*0.35);
+    return col;
+}
+
+vec3 biomeColor(vec3 p,float lat){
+    float absLat=abs(lat);float d=snoise(p*12.0)*0.5+0.5;
+    vec3 barren=mix(vec3(0.35,0.3,0.25),vec3(0.45,0.4,0.32),d);
+    // Ice
+    if(absLat>1.25&&uIce>0.5){
+        float ice=smoothstep(1.25,1.4,absLat);
+        vec3 ic=mix(vec3(0.7,0.78,0.82),vec3(0.92,0.96,0.99),ice);
+        float crev=snoise(p*30.0)*0.5+0.5;
+        ic=mix(ic,vec3(0.5,0.7,0.9),smoothstep(0.7,0.85,crev)*0.2);
+        return mix(barren,ic,uVeg*0.5+0.5);
+    }
+    if(absLat>1.25)return barren;
+    // Vegetation-dependent biomes
+    if(uVeg<0.5)return barren;
+    if(absLat>1.0)return mix(vec3(0.42,0.5,0.4),vec3(0.58,0.62,0.55),d);
+    if(absLat>0.75)return mix(vec3(0.1,0.22,0.12),vec3(0.18,0.32,0.16),d);
+    if(absLat>0.4){float dry=smoothstep(0.55,0.7,snoise(p*6.0+vec3(10))*0.5+0.5);
+        return mix(mix(vec3(0.16,0.36,0.14),vec3(0.22,0.42,0.18),d),mix(vec3(0.58,0.48,0.28),vec3(0.72,0.62,0.38),d),dry*0.6);}
+    float rf=smoothstep(0.3,0.6,snoise(p*5.0+vec3(7))*0.5+0.5);
+    return mix(mix(vec3(0.06,0.26,0.08),vec3(0.13,0.33,0.1),d),mix(vec3(0.52,0.42,0.22),vec3(0.68,0.58,0.32),d),rf*0.4);
+}
+
+vec3 terrainDetail(vec3 p,float absLat,vec3 base){
+    // Desert
+    if(uDesert>0.5&&absLat<0.6&&absLat>0.15){
+        float dd=snoise(p*4.0+vec3(20,0,15))*0.5+0.5;
+        dd*=smoothstep(0.15,0.3,absLat)*smoothstep(0.6,0.45,absLat);
+        float dunes=snoise(vec3(p.x*60.0+p.z*30.0,p.y*10.0,p.z*60.0-p.x*30.0))*0.5+0.5;
+        vec3 sand=mix(vec3(0.78,0.68,0.42),vec3(0.92,0.84,0.6),dunes);
+        base=mix(base,sand,smoothstep(0.5,0.75,dd));
+    }
+    // Mountains
+    if(uMountain>0.5){
+        float mt=snoise(p*8.0+vec3(5,3,8))*0.5+0.5;
+        if(mt>0.6){float h=(mt-0.6)/0.4;
+            vec3 rock=mix(vec3(0.38,0.36,0.33),vec3(0.52,0.5,0.46),h);
+            vec3 snow=vec3(0.93,0.95,0.97);
+            float sl=smoothstep(0.75,0.9,mt)*smoothstep(0.3,0.8,absLat+0.3);
+            base=mix(base,mix(rock,snow,sl),smoothstep(0.6,0.75,mt));}
+    }
+    // Rivers
+    if(uRiver>0.5){
+        float rv=snoise(p*25.0+vec3(44,22,66));
+        base=mix(base,vec3(0.08,0.2,0.15),smoothstep(0.02,0.0,abs(rv))*0.3);
+    }
+    return base;
+}
+
+void main(){
+    vec3 Nn=normalize(vWorldNormal);vec3 V=normalize(cameraPosition-vWorldPos);
+    vec3 pos=normalize(vPos);
+    float lat=asin(pos.y);float absLat=abs(lat);
+    float shelf=shelfGrad(pos);float land=continentMask(pos);
+    float nDotL=dot(Nn,uSunDir);float halfL=nDotL*0.5+0.5;
+    vec3 H=normalize(uSunDir+V);float spec=pow(max(dot(Nn,H),0.0),128.0);
+
+    vec3 surfCol;
+    if(land<0.5){
+        surfCol=oceanColor(pos,shelf,nDotL,Nn,V);spec*=0.3;
+    } else {
+        surfCol=biomeColor(pos,lat);surfCol=terrainDetail(pos,absLat,surfCol);spec*=0.12;
+    }
+
+    vec3 color=surfCol*0.07+surfCol*halfL*0.93+vec3(1,0.95,0.88)*spec*0.5;
+
+    // Volcanic
+    if(uVolcanic>0.5){
+        float v=snoise(pos*10.0+vec3(77,33,55))*0.5+0.5;
+        v*=snoise(pos*20.0+vec3(11,22,33))*0.5+0.5;
+        if(v>0.73){float vi=pow((v-0.73)/0.27,3.0);color+=mix(vec3(1,0.3,0.05),vec3(1,0.7,0.2),vi)*vi*0.35;}
+    }
+
+    // Dust storms
+    if(uDust>0.5&&land>0.5&&absLat<0.55&&absLat>0.15){
+        float desert=snoise(pos*4.0+vec3(20,0,15))*0.5+0.5;
+        if(desert>0.55){float st=snoise(pos*3.0+vec3(uTime*0.04,uTime*0.02,0))*0.5+0.5;
+        st*=snoise(pos*7.0+vec3(uTime*0.06,0,uTime*0.03))*0.5+0.5;
+        if(st>0.5)color+=vec3(0.7,0.55,0.3)*(st-0.5)*0.3*smoothstep(0.55,0.7,desert);}
+    }
+
+    // ---- Night side features ----
+    float nightF=smoothstep(0.05,-0.3,nDotL);
+
+    // Campfires
+    if(uCampfire>0.5&&land>0.5&&nDotL<0.05){
+        float pop=snoise(pos*15.0+vec3(42))*0.5+0.5;
+        pop*=snoise(pos*30.0+vec3(99))*0.5+0.5;
+        float flicker=sin(uTime*8.0+snoise(pos*50.0)*20.0)*0.3+0.7;
+        color+=vec3(1.0,0.55,0.18)*step(0.82,pop)*nightF*0.35*flicker;
+    }
+
+    // City lights
+    if(uCity>0.5&&land>0.5&&nDotL<0.05){
+        float pop=snoise(pos*15.0+vec3(42))*0.5+0.5;
+        pop*=snoise(pos*30.0+vec3(99))*0.5+0.5;
+        float coast=1.0-smoothstep(0.0,0.3,land-0.5);
+        pop=pop*0.7+pop*coast*0.3;
+        float bright=smoothstep(0.2,0.5,pop);
+        vec3 warm=vec3(1.0,0.72,0.3);vec3 cool=vec3(0.9,0.92,1.0);
+        vec3 cCol=mix(warm,cool,smoothstep(0.4,0.8,bright));
+        color+=cCol*bright*nightF;
+
+        // Roads
+        if(uRoads>0.5){
+            vec2 vor=voronoi(pos*40.0);
+            float roads=smoothstep(0.12,0.04,vor.y-vor.x)*bright*0.4;
+            color+=cCol*roads*nightF;
+        }
+        // Light pollution halo
+        if(uPollution>0.5){
+            color+=vec3(1.0,0.85,0.6)*bright*bright*0.12*nightF;
+        }
+    }
+
+    // Bio
+    if(uBio>0.5&&land<0.5&&nDotL<-0.1){
+        float bl=snoise(pos*8.0+vec3(uTime*0.02,0,uTime*0.01))*0.5+0.5;
+        bl*=snoise(pos*16.0+vec3(0,uTime*0.03,0))*0.5+0.5;
+        if(bl>0.42)color+=vec3(0.08,0.85,0.55)*pow((bl-0.42)/0.58,2.0)*0.2*smoothstep(-0.1,-0.5,nDotL);
+    }
+
+    // Radio
+    if(uRadio>0.5&&land>0.5){
+        float pop=snoise(pos*15.0+vec3(42))*0.5+0.5*snoise(pos*30.0+vec3(99));
+        if(pop>0.45)color+=vec3(0.85,0.28,0.12)*pow((pop-0.45)/0.55,2.5)*0.06*smoothstep(0.1,-0.4,nDotL);
+    }
+
+    // Energy grid
+    if(uGrid>0.5){
+        vec3 sp=pos*20.0;
+        float gx=abs(fract(sp.x+sp.z*0.577)-0.5)*2.0;
+        float gy=abs(fract(sp.y+sp.z*0.577)-0.5)*2.0;
+        float gz=abs(fract(sp.x*0.577+sp.y)-0.5)*2.0;
+        float line=1.0-smoothstep(0.0,0.05,min(min(gx,gy),gz));
+        float pulse=sin(uTime*2.0+snoise(pos*5.0)*6.28)*0.3+0.7;
+        color+=mix(vec3(0.3,0.7,1),vec3(0.5,0.9,1),pulse)*line*0.5;
+    }
+
+    // Terminator SSS
+    float term=smoothstep(-0.05,0.05,nDotL);
+    color+=vec3(0.85,0.35,0.18)*(1.0-term)*smoothstep(-0.15,0.0,nDotL)*0.12;
+
+    gl_FragColor=vec4(color,1.0);
+}`;
+
+const planetVert=`varying vec3 vPos,vWorldPos,vWorldNormal;
+void main(){vPos=position;vWorldPos=(modelMatrix*vec4(position,1)).xyz;
+vWorldNormal=normalize((modelMatrix*vec4(normal,0)).xyz);
+gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1);}`;
+
+// ================================================================
+//  CLOUD SHADER
+// ================================================================
+const cloudFrag=`
+precision highp float;
+uniform vec3 uSunDir;uniform float uTime,uDensity,uHurr,uJet,uCb,uItcz,uLightning;
+varying vec3 vPos,vWorldNormal,vWorldPos;
+${N}
+float hurricane(vec3 p,vec3 eye,float rot,float sz){
+    vec3 d=p-eye;float dist=length(d);if(dist>sz)return 0.0;
+    float angle=atan(d.z,d.x)+rot;
+    float spiral=sin(angle*5.0-log(max(dist,0.001))*12.0)*0.5+0.5;
+    float ew=smoothstep(sz*0.06,sz*0.15,dist)*smoothstep(sz,sz*0.6,dist);
+    float feed=snoise(vec3(angle*3.0,dist*20.0,uTime*0.1))*0.5+0.5;
+    float cl=(spiral*0.7+feed*0.3)*ew*(1.0-smoothstep(sz*0.03,sz*0.08,dist));
+    return cl;
+}
+void main(){
+    vec3 p=vPos+vec3(uTime*0.006,uTime*0.002,0);
+    float lat=asin(vPos.y);float absLat=abs(lat);
+    float cum=snoise(p*3.0)*0.5+0.5;
+    float str=snoise(p*6.0+vec3(5))*0.5+0.5;
+    float cir=snoise(p*14.0+vec3(10,uTime*0.008,0))*0.5+0.5;
+    float cloud=cum*0.5+str*0.3+cir*0.2;
+    // ITCZ
+    cloud+=exp(-pow((lat-0.05)/0.15,2.0))*0.25*uItcz;
+    cloud*=0.7+0.3*exp(-pow((absLat-0.8)/0.3,2.0));
+    // Jet stream
+    if(uJet>0.5){float jl=smoothstep(0.5,0.65,absLat)*smoothstep(0.85,0.7,absLat);
+    float js=snoise(vec3(vPos.x*20.0+uTime*0.08,vPos.y*3.0,vPos.z*20.0-uTime*0.06))*0.5+0.5;
+    cloud+=smoothstep(0.55,0.8,js)*jl*0.3;}
+    // Hurricanes
+    if(uHurr>0.01){
+        float h1=hurricane(vPos,normalize(vec3(0.7,0.26,0.4)),uTime*0.15,0.18)*uHurr;
+        float h2=hurricane(vPos,normalize(vec3(-0.5,0.21,-0.7)),-uTime*0.12,0.22)*uHurr;
+        float c1=hurricane(vPos,normalize(vec3(0.3,-0.26,0.8)),-uTime*0.1,0.15)*uHurr*0.8;
+        cloud=max(cloud,max(h1,max(h2,c1)));
+    }
+    // Cumulonimbus
+    float cbV=0.0;
+    if(uCb>0.5){float cb=snoise(p*4.0+vec3(uTime*0.02,55,0))*0.5+0.5;
+    cb*=snoise(p*8.0+vec3(0,0,uTime*0.03))*0.5+0.5;
+    cbV=smoothstep(0.65,0.85,cb)*0.25;cloud+=cbV;}
+
+    float alpha=smoothstep(0.3,0.65,cloud)*uDensity;
+    float nDotL=dot(normalize(vWorldNormal),uSunDir);float lit=nDotL*0.5+0.5;
+    float thickness=smoothstep(0.3,0.9,cloud);
+    float ss=mix(1.0,0.55,thickness*(1.0-lit*0.5));
+    vec3 col=mix(vec3(0.45,0.45,0.5),vec3(1),lit)*ss;
+    col*=mix(0.1,1.0,smoothstep(-0.2,0.3,nDotL));
+    float term=smoothstep(-0.1,0.15,nDotL)*(1.0-smoothstep(0.15,0.4,nDotL));
+    col+=vec3(0.9,0.35,0.1)*term*0.5;
+    col+=vec3(1,0.98,0.95)*cbV*lit*2.0;
+
+    // Lightning
+    if(uLightning>0.5){
+        float ls=floor(uTime*4.0);float lr=snoise(vec3(ls*73.7,ls*31.3,ls*17.1));
+        vec3 lc=normalize(vec3(lr,snoise(vec3(ls*51.1,0,0))*0.5,snoise(vec3(0,ls*41.7,0))));
+        float lf=exp(-length(vPos-lc)*30.0)*step(0.88,fract(uTime*4.0+0.5))*step(0.45,cloud);
+        float hd1=length(vPos-normalize(vec3(0.7,0.26,0.4)));
+        float hd2=length(vPos-normalize(vec3(-0.5,0.21,-0.7)));
+        float hl=(exp(-hd1*15.0)+exp(-hd2*15.0))*step(0.7,fract(uTime*6.0+snoise(vec3(floor(uTime*6.0)*11.0,0,0))))*uHurr;
+        col+=vec3(0.75,0.8,1.0)*(lf*6.0+hl*3.0);
+    }
+    gl_FragColor=vec4(col,alpha*0.75);
+}`;
+const cloudVert=`varying vec3 vPos,vWorldNormal,vWorldPos;
+void main(){vPos=normalize(position);vWorldPos=(modelMatrix*vec4(position,1)).xyz;
+vWorldNormal=normalize((modelMatrix*vec4(normal,0)).xyz);
+gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1);}`;
+
+// ================================================================
+//  ATMOSPHERE SHADER
+// ================================================================
+const atmoFrag=`
+precision highp float;
+uniform vec3 uSunDir;uniform float uTime,uAurora,uMie,uGodray,uSunset;
+varying vec3 vWorldNormal,vWorldPos,vPos;
+${N}
+void main(){
+    vec3 Nn=normalize(vWorldNormal);vec3 V=normalize(cameraPosition-vWorldPos);
+    float rim=pow(1.0-max(dot(V,Nn),0.0),3.5);
+    float sunDot=dot(Nn,uSunDir);
+    vec3 rayleigh=vec3(0.28,0.58,1.0);
+    float VdotS=max(dot(V,uSunDir),0.0);
+    vec3 mieCol=vec3(1,0.9,0.7)*pow(VdotS,8.0)*0.15*uMie;
+    float sunsetZ=smoothstep(-0.15,0.1,sunDot)*(1.0-smoothstep(0.1,0.35,sunDot));
+    vec3 nightCol=vec3(0.02,0.03,0.1);
+    vec3 color=mix(nightCol,rayleigh,smoothstep(-0.4,0.1,sunDot));
+    color=mix(color,vec3(1,0.42,0.18),sunsetZ*0.8*uSunset);
+    color+=mieCol;
+    float alpha=rim*0.8*mix(0.15,1.0,smoothstep(-0.5,0.0,sunDot));
+    // God rays
+    color+=vec3(1,0.85,0.6)*pow(max(dot(Nn,uSunDir),0.0),4.0)*rim*0.4*uGodray;
+    // Aurora
+    if(uAurora>0.5){float aL=abs(vPos.y);
+    float az=smoothstep(0.55,0.7,aL)*smoothstep(0.92,0.78,aL);
+    float ac=snoise(vec3(vPos.x*8.0,vPos.z*8.0,uTime*0.3))*0.5+0.5;
+    ac*=snoise(vec3(vPos.x*15.0,uTime*0.5,vPos.z*15.0))*0.5+0.5;
+    float sh=snoise(vec3(vPos.x*25.0,uTime*2.0,vPos.z*25.0))*0.5+0.5;
+    float aI=az*smoothstep(0.25,0.65,ac)*smoothstep(0.1,-0.3,sunDot)*(0.7+sh*0.3);
+    vec3 aC=mix(vec3(0.1,0.95,0.35),vec3(0.4,0.1,0.85),snoise(vec3(vPos.x*4.0,uTime*0.15,vPos.z*4.0))*0.5+0.5);
+    aC=mix(aC,vec3(0.8,0.15,0.2),smoothstep(0.75,0.88,aL)*0.3);
+    color+=aC*aI*1.8;alpha=max(alpha,aI*0.65);}
+    gl_FragColor=vec4(color,alpha);
+}`;
+const atmoVert=`varying vec3 vWorldNormal,vWorldPos,vPos;
+void main(){vPos=normalize(position);vWorldPos=(modelMatrix*vec4(position,1)).xyz;
+vWorldNormal=normalize((modelMatrix*vec4(normal,0)).xyz);
+gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1);}`;
+
+// ================================================================
+//  MESHES
+// ================================================================
+const geo=new THREE.SphereGeometry(1,128,64);
+
+const pU={uSunDir:{value:ST.sunDir},uTime:{value:0},
+  uVeg:{value:1},uDesert:{value:1},uMountain:{value:1},uRiver:{value:1},uVolcanic:{value:1},uIce:{value:1},
+  uWaves:{value:1},uShelf:{value:1},uCoral:{value:1},uCurrents:{value:1},
+  uBio:{value:1},uAlgae:{value:1},
+  uCampfire:{value:0},uCity:{value:1},uRoads:{value:1},uPollution:{value:1},uRadio:{value:1},uGrid:{value:0},
+  uDust:{value:1}};
+const planetMat=new THREE.ShaderMaterial({vertexShader:planetVert,fragmentShader:planetFrag,uniforms:pU});
+const planet=new THREE.Mesh(geo,planetMat);scene.add(planet);
+
+const cU={uSunDir:{value:ST.sunDir},uTime:{value:0},uDensity:{value:0.55},
+  uHurr:{value:0.65},uJet:{value:1},uCb:{value:1},uItcz:{value:1},uLightning:{value:1}};
+const cloudMat=new THREE.ShaderMaterial({vertexShader:cloudVert,fragmentShader:cloudFrag,
+  uniforms:cU,transparent:true,depthWrite:false});
+const cloudMesh=new THREE.Mesh(new THREE.SphereGeometry(1.008,96,48),cloudMat);scene.add(cloudMesh);
+
+const aU={uSunDir:{value:ST.sunDir},uTime:{value:0},uAurora:{value:1},uMie:{value:1},uGodray:{value:1},uSunset:{value:1}};
+const atmoMat=new THREE.ShaderMaterial({vertexShader:atmoVert,fragmentShader:atmoFrag,
+  uniforms:aU,transparent:true,depthWrite:false,side:THREE.BackSide});
+const atmoMesh=new THREE.Mesh(new THREE.SphereGeometry(1.028,64,32),atmoMat);scene.add(atmoMesh);
+
+// ================================================================
+//  SATELLITES
+// ================================================================
+const satG=new THREE.Group();scene.add(satG);
+function mkO(n,r,inc,col,sz){const p=[];for(let i=0;i<n;i++){const a=i/n*Math.PI*2;p.push(r*Math.cos(a),r*Math.sin(a)*Math.sin(inc),r*Math.sin(a)*Math.cos(inc));}
+const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));
+return new THREE.Points(g,new THREE.PointsMaterial({color:col,size:sz,sizeAttenuation:true,transparent:true,opacity:0.9}));}
+const issO=mkO(1,1.063,0.9,0xffffff,0.025);satG.add(issO);
+const iTP=[];for(let i=0;i<200;i++){const a=i/200*Math.PI*2;iTP.push(new THREE.Vector3(1.063*Math.cos(a),1.063*Math.sin(a)*Math.sin(0.9),1.063*Math.sin(a)*Math.cos(0.9)));}
+const isTr=new THREE.Line(new THREE.BufferGeometry().setFromPoints(iTP),new THREE.LineBasicMaterial({color:0x4488dd,transparent:true,opacity:0.15}));satG.add(isTr);
+for(let p=0;p<6;p++){const r=mkO(4,1.15,0.96,0x8899cc,0.01);r.rotation.y=p/6*Math.PI*2;satG.add(r);}
+const dN=500,dP=new Float32Array(dN*3);for(let i=0;i<dN;i++){const r=1.04+Math.random()*0.14,t=Math.random()*Math.PI*2,p=Math.acos(2*Math.random()-1);dP[i*3]=r*Math.sin(p)*Math.cos(t);dP[i*3+1]=r*Math.sin(p)*Math.sin(t);dP[i*3+2]=r*Math.cos(p);}
+const dbG=new THREE.BufferGeometry();dbG.setAttribute('position',new THREE.Float32BufferAttribute(dP,3));
+const debris=new THREE.Points(dbG,new THREE.PointsMaterial({color:0x7788aa,size:0.004,sizeAttenuation:true,transparent:true,opacity:0.35}));satG.add(debris);
+
+// ================================================================
+//  ORBITAL RING
+// ================================================================
+const orbG=new THREE.Group();scene.add(orbG);
+orbG.add(new THREE.Mesh(new THREE.TorusGeometry(1.12,0.004,8,200),new THREE.MeshBasicMaterial({color:0x5599ff,transparent:true,opacity:0.6})).rotateX(Math.PI*0.5));
+const r2c=new THREE.Mesh(new THREE.TorusGeometry(1.12,0.004,8,200),new THREE.MeshBasicMaterial({color:0x5599ff,transparent:true,opacity:0.6}));r2c.rotation.x=Math.PI*0.5;r2c.rotation.z=0.4;orbG.add(r2c);
+for(let i=0;i<4;i++){const a=i/4*Math.PI*2;orbG.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(Math.cos(a),0,Math.sin(a)),new THREE.Vector3(1.12*Math.cos(a),0,1.12*Math.sin(a))]),new THREE.LineBasicMaterial({color:0x4477bb,transparent:true,opacity:0.3})));}
+
+// ================================================================
+//  DYSON SWARM
+// ================================================================
+const dyG=new THREE.Group();scene.add(dyG);
+dyG.add(new THREE.Mesh(new THREE.SphereGeometry(2,32,16),new THREE.MeshBasicMaterial({color:0xffdd44})).translateX(30).translateY(3).translateZ(8));
+dyG.add(new THREE.Mesh(new THREE.SphereGeometry(3.5,16,8),new THREE.MeshBasicMaterial({color:0xffaa22,transparent:true,opacity:0.12,side:THREE.BackSide})).translateX(30).translateY(3).translateZ(8));
+const dyN=800,dyPo=new Float32Array(dyN*3),dyC=new Float32Array(dyN*3);
+for(let i=0;i<dyN;i++){const r=4+Math.random()*3,t=Math.random()*Math.PI*2,p=(Math.random()-0.5)*1.5;
+dyPo[i*3]=30+r*Math.cos(t);dyPo[i*3+1]=3+p;dyPo[i*3+2]=8+r*Math.sin(t);dyC[i*3]=0.9;dyC[i*3+1]=0.8+Math.random()*0.2;dyC[i*3+2]=0.3+Math.random()*0.4;}
+const dyGeo=new THREE.BufferGeometry();dyGeo.setAttribute('position',new THREE.Float32BufferAttribute(dyPo,3));dyGeo.setAttribute('color',new THREE.Float32BufferAttribute(dyC,3));
+const dyson=new THREE.Points(dyGeo,new THREE.PointsMaterial({size:0.15,sizeAttenuation:true,vertexColors:true,transparent:true,opacity:0.8}));dyG.add(dyson);
+
+// ================================================================
+//  GALAXY
+// ================================================================
+const gaG=new THREE.Group();scene.add(gaG);
+const gaN=3000,gaP=new Float32Array(gaN*3),gaC=new Float32Array(gaN*3);
+for(let i=0;i<gaN;i++){const arm=Math.floor(Math.random()*4),aA=arm/4*Math.PI*2,r=5+Math.random()*60,tw=r*0.08,a=aA+tw+(Math.random()-0.5)*0.5;
+gaP[i*3]=r*Math.cos(a)+(Math.random()-0.5)*5;gaP[i*3+1]=(Math.random()-0.5)*2;gaP[i*3+2]=-120+r*Math.sin(a)+(Math.random()-0.5)*5;
+const b=0.3+Math.random()*0.7;gaC[i*3]=b*0.7;gaC[i*3+1]=b*0.75;gaC[i*3+2]=b;}
+const gaGeo=new THREE.BufferGeometry();gaGeo.setAttribute('position',new THREE.Float32BufferAttribute(gaP,3));gaGeo.setAttribute('color',new THREE.Float32BufferAttribute(gaC,3));
+gaG.add(new THREE.Points(gaGeo,new THREE.PointsMaterial({size:0.5,sizeAttenuation:true,vertexColors:true,transparent:true,opacity:0.5})));
+for(let i=0;i<15;i++){const a1=Math.random()*Math.PI*2,r1=10+Math.random()*40,a2=a1+(Math.random()-0.5)*1.5,r2=10+Math.random()*40;
+gaG.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(r1*Math.cos(a1),(Math.random()-0.5),-120+r1*Math.sin(a1)),new THREE.Vector3(r2*Math.cos(a2),(Math.random()-0.5),-120+r2*Math.sin(a2))]),new THREE.LineBasicMaterial({color:0x6644ff,transparent:true,opacity:0.25})));}
+gaG.add(new THREE.Mesh(new THREE.SphereGeometry(4,16,8),new THREE.MeshBasicMaterial({color:0xffeecc,transparent:true,opacity:0.2})).translateZ(-120));
+
+// ================================================================
+//  STARFIELD
+// ================================================================
+const sN=12000,sP=new Float32Array(sN*3),sC=new Float32Array(sN*3);
+for(let i=0;i<sN;i++){const r=80+Math.random()*200,t=Math.random()*Math.PI*2,p=Math.acos(2*Math.random()-1);
+sP[i*3]=r*Math.sin(p)*Math.cos(t);sP[i*3+1]=r*Math.sin(p)*Math.sin(t);sP[i*3+2]=r*Math.cos(p);
+const c=0.6+Math.random()*0.4;sC[i*3]=c;sC[i*3+1]=c;sC[i*3+2]=c;}
+const sGeo=new THREE.BufferGeometry();sGeo.setAttribute('position',new THREE.Float32BufferAttribute(sP,3));sGeo.setAttribute('color',new THREE.Float32BufferAttribute(sC,3));
+scene.add(new THREE.Points(sGeo,new THREE.PointsMaterial({size:0.12,sizeAttenuation:true,vertexColors:true})));
+
+// ================================================================
+//  DEFAULTS — off by default
+// ================================================================
+orbG.visible=false; dyG.visible=false; gaG.visible=false; satG.visible=true;
+
+// ================================================================
+//  UI BINDINGS
+// ================================================================
+const $=id=>document.getElementById(id);
+function bind(id,fn){$(id).addEventListener('change',e=>fn(e.target.checked));}
+function bindSl(id,fn){$(id).addEventListener('input',e=>fn(parseFloat(e.target.value)));}
+
+// Camera
+bindSl('sunAz',v=>{const a=v*Math.PI/180;ST.sunDir.set(Math.cos(a),0.15,Math.sin(a)).normalize();});
+bindSl('timeSpd',v=>{timeScale=v/100;});
+bind('tRotate',v=>{ST.autoRotate=v;});
+
+// Surface
+bind('tVeg',v=>{pU.uVeg.value=v?1:0;});
+bind('tDesert',v=>{pU.uDesert.value=v?1:0;});
+bind('tMountain',v=>{pU.uMountain.value=v?1:0;});
+bind('tRiver',v=>{pU.uRiver.value=v?1:0;});
+bind('tVolcanic',v=>{pU.uVolcanic.value=v?1:0;});
+bind('tIce',v=>{pU.uIce.value=v?1:0;});
+
+// Ocean
+bind('tWaves',v=>{pU.uWaves.value=v?1:0;});
+bind('tShelf',v=>{pU.uShelf.value=v?1:0;});
+bind('tCoral',v=>{pU.uCoral.value=v?1:0;});
+bind('tCurrents',v=>{pU.uCurrents.value=v?1:0;});
+
+// Weather
+bind('tClouds',v=>{cloudMesh.visible=v;});
+bind('tHurr',v=>{cU.uHurr.value=v?0.65:0;});
+bindSl('hurrInt',v=>{cU.uHurr.value=$('tHurr').checked?v/100:0;});
+bind('tJet',v=>{cU.uJet.value=v?1:0;});
+bind('tCb',v=>{cU.uCb.value=v?1:0;});
+bind('tItcz',v=>{cU.uItcz.value=v?1:0;});
+bind('tDust',v=>{pU.uDust.value=v?1:0;});
+bind('tLightning',v=>{cU.uLightning.value=v?1:0;});
+
+// Atmosphere
+bind('tAtmo',v=>{atmoMesh.visible=v;});
+bind('tMie',v=>{aU.uMie.value=v?1:0;});
+bind('tGodray',v=>{aU.uGodray.value=v?1:0;});
+bind('tSunset',v=>{aU.uSunset.value=v?1:0;});
+bind('tAurora',v=>{aU.uAurora.value=v?1:0;});
+
+// Life
+bind('tBio',v=>{pU.uBio.value=v?1:0;});
+bind('tAlgae',v=>{pU.uAlgae.value=v?1:0;});
+
+// Intelligence
+bind('tCampfire',v=>{pU.uCampfire.value=v?1:0;});
+bind('tCity',v=>{pU.uCity.value=v?1:0;});
+bind('tRoads',v=>{pU.uRoads.value=v?1:0;});
+bind('tPollution',v=>{pU.uPollution.value=v?1:0;});
+bind('tRadio',v=>{pU.uRadio.value=v?1:0;});
+bind('tSat',v=>{satG.visible=v;});
+
+// Megastructures
+bind('tGrid',v=>{pU.uGrid.value=v?1:0;});
+bind('tOrbital',v=>{orbG.visible=v;});
+bind('tDyson',v=>{dyG.visible=v;if(v)ST.dist=Math.max(ST.dist,8);});
+bind('tGalaxy',v=>{gaG.visible=v;if(v)ST.dist=Math.max(ST.dist,15);});
+
+// Mouse coords
+const rc=new THREE.Raycaster(),ms=new THREE.Vector2();
+window.addEventListener('mousemove',e=>{
+    if(e.clientX>innerWidth-240)return; // skip panel area
+    ms.x=(e.clientX/innerWidth)*2-1;ms.y=-(e.clientY/innerHeight)*2+1;
+    rc.setFromCamera(ms,camera);const h=rc.intersectObject(planet);
+    if(h.length){const p=h[0].point.clone().normalize();
+    const la=(Math.asin(p.y)*180/Math.PI).toFixed(1);const lo=(Math.atan2(p.z,p.x)*180/Math.PI).toFixed(1);
+    $('coordText').textContent=`${la>0?la+'\u00B0N':(-la)+'\u00B0S'}  ${lo>0?lo+'\u00B0E':(-lo)+'\u00B0W'}`;}
+    else $('coordText').textContent='';
+});
+
+// ================================================================
+//  ANIMATE
+// ================================================================
+let lastT=performance.now(),frames=0,fps=0,simT=0;
+function animate(){
+    requestAnimationFrame(animate);
+    const now=performance.now();frames++;
+    if(now-lastT>1000){fps=frames;frames=0;lastT=now;}
+    $('fpsText').textContent=fps+' FPS';
+    simT+=0.016*timeScale;
+    pU.uTime.value=simT;cU.uTime.value=simT;aU.uTime.value=simT;
+    planet.rotation.y+=0.00008*timeScale;
+    cloudMesh.rotation.y+=0.00012*timeScale;
+    issO.rotation.y=simT*0.15;isTr.rotation.y=simT*0.15;
+    debris.rotation.y+=0.00005*timeScale;
+    if(orbG.visible)orbG.rotation.y+=0.0001*timeScale;
+    if(dyG.visible)dyson.rotation.y+=0.0002*timeScale;
+    if(gaG.visible)gaG.rotation.y+=0.00003*timeScale;
+    if(ST.autoRotate)ST.theta+=0.0004*timeScale;
+    camera.position.set(
+        ST.dist*Math.sin(ST.phi)*Math.cos(ST.theta),
+        ST.dist*Math.cos(ST.phi),
+        ST.dist*Math.sin(ST.phi)*Math.sin(ST.theta));
+    const lz=gaG.visible?-20:0;
+    camera.lookAt(0,0,lz);
+    renderer.render(scene,camera);
+}
+animate();
+window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+</script>
+</body>
+</html>

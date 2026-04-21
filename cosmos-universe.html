@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Universe - The Observable Universe at Largest Scale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background: #000005;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: #e0e0ff;
+        }
+
+        #canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(10, 10, 26, 0.95);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-y: auto;
+            padding: 20px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar h1 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-section h2 {
+            font-size: 12px;
+            color: #ffa500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .sidebar-item {
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 13px;
+            border-radius: 3px;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-left-color: #ffd700;
+            transform: translateX(5px);
+        }
+
+        .sidebar-item.active {
+            background: rgba(255, 215, 0, 0.15);
+            border-left-color: #ffd700;
+            color: #fffde8;
+        }
+
+        .info-panel {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 300px;
+            max-height: 100vh;
+            background: rgba(10, 10, 26, 0.95);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .info-panel.active {
+            transform: translateX(0);
+        }
+
+        .info-panel-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #e0e0ff;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+
+        .info-panel-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .info-content {
+            margin-top: 40px;
+        }
+
+        .info-content h2 {
+            color: #ffd700;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .info-item-label {
+            color: #ffa500;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .info-item-value {
+            color: #e0e0ff;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .legend {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10, 10, 26, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            max-width: 250px;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+        }
+
+        .legend-title {
+            color: #ffd700;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .hud-info {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 10, 26, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-size: 13px;
+            text-align: center;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+        }
+
+        .hud-title {
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .hud-subtitle {
+            color: #ffa500;
+            font-size: 12px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 215, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <div class="sidebar">
+        <h1>Cosmic Web</h1>
+
+        <div class="sidebar-section">
+            <h2>Galaxy Clusters</h2>
+            <div class="sidebar-item" data-entity="virgo">Virgo Cluster</div>
+            <div class="sidebar-item" data-entity="coma">Coma Cluster</div>
+            <div class="sidebar-item" data-entity="perseus">Perseus Cluster</div>
+            <div class="sidebar-item" data-entity="abell2029">Abell 2029</div>
+            <div class="sidebar-item" data-entity="bullet">Bullet Cluster</div>
+            <div class="sidebar-item" data-entity="laniakea">Laniakea Center</div>
+        </div>
+
+        <div class="sidebar-section">
+            <h2>Cosmic Filaments</h2>
+            <div class="sidebar-item" data-entity="pisces">Pisces-Cetus</div>
+            <div class="sidebar-item" data-entity="sloan">Sloan Great Wall</div>
+            <div class="sidebar-item" data-entity="hercules">Hercules-Corona</div>
+            <div class="sidebar-item" data-entity="cfa2">CfA2 Great Wall</div>
+        </div>
+
+        <div class="sidebar-section">
+            <h2>Cosmic Voids</h2>
+            <div class="sidebar-item" data-entity="bootes">Boötes Void</div>
+            <div class="sidebar-item" data-entity="kbc">KBC Void</div>
+            <div class="sidebar-item" data-entity="canes">Giant Void</div>
+            <div class="sidebar-item" data-entity="eridanus">Eridanus Supervoid</div>
+        </div>
+
+        <div class="sidebar-section">
+            <h2>Special Structures</h2>
+            <div class="sidebar-item" data-entity="cmb">CMB Shell</div>
+            <div class="sidebar-item" data-entity="observable">Observable Boundary</div>
+            <div class="sidebar-item" data-entity="center">Universe Center</div>
+        </div>
+    </div>
+
+    <div class="info-panel" id="infoPanel">
+        <button class="info-panel-close" onclick="closeInfoPanel()">&times;</button>
+        <div class="info-content" id="infoContent"></div>
+    </div>
+
+    <div class="legend">
+        <div class="legend-title">Density Legend</div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #fffde8; box-shadow: 0 0 10px #fffde8;"></div>
+            <span>Filaments</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ffd700; box-shadow: 0 0 15px #ffd700;"></div>
+            <span>Galaxy Clusters</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ffa500; box-shadow: 0 0 10px #ffa500;"></div>
+            <span>Cluster Nodes</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #0a0a2e;"></div>
+            <span>Cosmic Voids</span>
+        </div>
+    </div>
+
+    <div class="hud-info">
+        <div class="hud-title">THE OBSERVABLE UNIVERSE</div>
+        <div class="hud-subtitle">Cosmic Web at Largest Scale | 93 Billion Light Years</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        // ===== SIMPLEX NOISE IMPLEMENTATION =====
+        class SimplexNoise {
+            constructor(seed = 0) {
+                this.p = [];
+                for (let i = 0; i < 256; i++) {
+                    this.p[i] = Math.floor(Math.random() * 256);
+                }
+                for (let i = 256; i < 512; i++) {
+                    this.p[i] = this.p[i - 256];
+                }
+
+                this.permutation = this.p;
+                this.p = this.p.concat(this.p);
+            }
+
+            fade(t) {
+                return t * t * t * (t * (t * 6 - 15) + 10);
+            }
+
+            lerp(t, a, b) {
+                return a + t * (b - a);
+            }
+
+            grad(hash, x, y, z) {
+                const h = hash & 15;
+                const u = h < 8 ? x : y;
+                const v = h < 8 ? y : z;
+                return ((h & 1) === 0 ? u : -u) + ((h & 2) === 0 ? v : -v);
+            }
+
+            noise(x, y, z) {
+                const xi = Math.floor(x) & 255;
+                const yi = Math.floor(y) & 255;
+                const zi = Math.floor(z) & 255;
+
+                const xf = x - Math.floor(x);
+                const yf = y - Math.floor(y);
+                const zf = z - Math.floor(z);
+
+                const u = this.fade(xf);
+                const v = this.fade(yf);
+                const w = this.fade(zf);
+
+                const p = this.p;
+                const aa = p[p[p[xi] + yi] + zi];
+                const ab = p[p[p[xi] + yi + 1] + zi];
+                const ba = p[p[p[xi + 1] + yi] + zi];
+                const bb = p[p[p[xi + 1] + yi + 1] + zi];
+                const aaa = p[aa + zi];
+                const aab = p[aa + zi + 1];
+                const aba = p[ab + zi];
+                const abb = p[ab + zi + 1];
+                const baa = p[ba + zi];
+                const bab = p[ba + zi + 1];
+                const bba = p[bb + zi];
+                const bbb = p[bb + zi + 1];
+
+                let x1 = this.lerp(u,
+                    this.grad(aaa, xf, yf, zf),
+                    this.grad(baa, xf - 1, yf, zf)
+                );
+                let x2 = this.lerp(u,
+                    this.grad(aba, xf, yf - 1, zf),
+                    this.grad(bba, xf - 1, yf - 1, zf)
+                );
+                let y1 = this.lerp(v, x1, x2);
+
+                x1 = this.lerp(u,
+                    this.grad(aab, xf, yf, zf - 1),
+                    this.grad(bab, xf - 1, yf, zf - 1)
+                );
+                x2 = this.lerp(u,
+                    this.grad(abb, xf, yf - 1, zf - 1),
+                    this.grad(bbb, xf - 1, yf - 1, zf - 1)
+                );
+                let y2 = this.lerp(v, x1, x2);
+
+                return this.lerp(w, y1, y2);
+            }
+
+            fractalNoise(x, y, z, octaves = 4, persistence = 0.5) {
+                let value = 0;
+                let amplitude = 1;
+                let frequency = 1;
+                let maxValue = 0;
+
+                for (let i = 0; i < octaves; i++) {
+                    value += amplitude * this.noise(
+                        x * frequency,
+                        y * frequency,
+                        z * frequency
+                    );
+                    maxValue += amplitude;
+                    amplitude *= persistence;
+                    frequency *= 2;
+                }
+
+                return value / maxValue;
+            }
+        }
+
+        // ===== SCENE SETUP =====
+        const canvas = document.getElementById('canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000000);
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, logarithmicDepthBuffer: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000005);
+        renderer.setPixelRatio(window.devicePixelRatio);
+
+        camera.position.set(0, 150, 150);
+        camera.lookAt(0, 0, 0);
+
+        // ===== ORBIT CONTROLS IMPLEMENTATION =====
+        class OrbitControls {
+            constructor(camera, domElement) {
+                this.camera = camera;
+                this.domElement = domElement;
+                this.target = new THREE.Vector3(0, 0, 0);
+                this.distance = camera.position.length();
+                this.autoRotate = false;
+                this.autoRotateSpeed = 0.0001;
+                this.enableDamping = true;
+                this.dampingFactor = 0.05;
+                this.enableZoom = true;
+                this.zoomSpeed = 0.1;
+
+                this.theta = 0;
+                this.phi = 0;
+                this.targetTheta = 0;
+                this.targetPhi = 0;
+                this.targetDistance = this.distance;
+
+                this.isDragging = false;
+                this.previousMousePosition = { x: 0, y: 0 };
+
+                this.domElement.addEventListener('mousedown', (e) => this.onMouseDown(e), false);
+                this.domElement.addEventListener('mousemove', (e) => this.onMouseMove(e), false);
+                this.domElement.addEventListener('mouseup', (e) => this.onMouseUp(e), false);
+                this.domElement.addEventListener('wheel', (e) => this.onMouseWheel(e), false);
+            }
+
+            onMouseDown(e) {
+                this.isDragging = true;
+                this.previousMousePosition = { x: e.clientX, y: e.clientY };
+            }
+
+            onMouseMove(e) {
+                if (!this.isDragging) return;
+
+                const deltaX = e.clientX - this.previousMousePosition.x;
+                const deltaY = e.clientY - this.previousMousePosition.y;
+
+                this.targetTheta -= deltaX * 0.005;
+                this.targetPhi -= deltaY * 0.005;
+                this.targetPhi = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, this.targetPhi));
+
+                this.previousMousePosition = { x: e.clientX, y: e.clientY };
+            }
+
+            onMouseUp(e) {
+                this.isDragging = false;
+            }
+
+            onMouseWheel(e) {
+                e.preventDefault();
+
+                const deltaY = e.deltaY;
+                const zoomDelta = 1 + deltaY * this.zoomSpeed * 0.001;
+                this.targetDistance *= zoomDelta;
+                this.targetDistance = Math.max(10, Math.min(5000, this.targetDistance));
+            }
+
+            update() {
+                if (this.autoRotate) {
+                    this.targetTheta += this.autoRotateSpeed;
+                }
+
+                if (this.enableDamping) {
+                    this.theta += (this.targetTheta - this.theta) * this.dampingFactor;
+                    this.phi += (this.targetPhi - this.phi) * this.dampingFactor;
+                    this.distance += (this.targetDistance - this.distance) * this.dampingFactor;
+                } else {
+                    this.theta = this.targetTheta;
+                    this.phi = this.targetPhi;
+                    this.distance = this.targetDistance;
+                }
+
+                const radius = this.distance;
+                this.camera.position.x = this.target.x + radius * Math.cos(this.phi) * Math.sin(this.theta);
+                this.camera.position.y = this.target.y + radius * Math.sin(this.phi);
+                this.camera.position.z = this.target.z + radius * Math.cos(this.phi) * Math.cos(this.theta);
+
+                this.camera.lookAt(this.target);
+            }
+
+            animateTo(position, duration = 2000) {
+                const startPosition = this.camera.position.clone();
+                const startTime = Date.now();
+
+                const animate = () => {
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeProgress = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+
+                    this.camera.position.lerpVectors(startPosition, position, easeProgress);
+                    this.camera.lookAt(this.target);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+
+                animate();
+            }
+        }
+
+        const controls = new OrbitControls(camera, canvas);
+        controls.autoRotate = true;
+
+        // ===== STAR FIELD =====
+        const starsGeometry = new THREE.BufferGeometry();
+        const starPositions = new Float32Array(30000 * 3);
+
+        for (let i = 0; i < 30000; i++) {
+            starPositions[i * 3] = (Math.random() - 0.5) * 6000;
+            starPositions[i * 3 + 1] = (Math.random() - 0.5) * 6000;
+            starPositions[i * 3 + 2] = (Math.random() - 0.5) * 6000;
+        }
+
+        starsGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 2, sizeAttenuation: true });
+        const stars = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(stars);
+
+        // ===== COSMIC WEB GENERATION =====
+        const noise = new SimplexNoise();
+        const webGroup = new THREE.Group();
+        scene.add(webGroup);
+
+        const particleCount = 750000;
+        const webGeometry = new THREE.BufferGeometry();
+        const webPositions = new Float32Array(particleCount * 3);
+        const webColors = new Float32Array(particleCount * 3);
+        const webSizes = new Float32Array(particleCount);
+
+        let particleIndex = 0;
+        const clusterPositions = [];
+
+        // Generate cosmic web with density-based coloring
+        for (let i = 0; i < particleCount; i++) {
+            const x = (Math.random() - 0.5) * 2000;
+            const y = (Math.random() - 0.5) * 2000;
+            const z = (Math.random() - 0.5) * 2000;
+
+            const density = noise.fractalNoise(x * 0.005, y * 0.005, z * 0.005, 5, 0.6) * 0.5 + 0.5;
+
+            if (Math.random() < density * 0.3) {
+                webPositions[particleIndex * 3] = x;
+                webPositions[particleIndex * 3 + 1] = y;
+                webPositions[particleIndex * 3 + 2] = z;
+
+                let color;
+                let size;
+
+                if (density > 0.7) {
+                    // Galaxy clusters - bright yellow-orange
+                    color = new THREE.Color().setHSL(0.13, 1, 0.5 + density * 0.3);
+                    size = 3 + density * 4;
+
+                    if (Math.random() < 0.01) {
+                        clusterPositions.push(new THREE.Vector3(x, y, z));
+                    }
+                } else if (density > 0.5) {
+                    // Filaments - warm white-yellow
+                    color = new THREE.Color().setHSL(0.12, 0.8, 0.6 + density * 0.2);
+                    size = 1 + density * 2;
+                } else if (density > 0.3) {
+                    // Walls - fainter
+                    color = new THREE.Color().setHSL(0.15, 0.5, 0.4 + density * 0.1);
+                    size = 0.5 + density * 1;
+                } else {
+                    // Voids - very faint blue
+                    color = new THREE.Color().setHSL(0.6, 0.4, 0.2 + density * 0.05);
+                    size = 0.1;
+                }
+
+                webColors[particleIndex * 3] = color.r;
+                webColors[particleIndex * 3 + 1] = color.g;
+                webColors[particleIndex * 3 + 2] = color.b;
+                webSizes[particleIndex] = size;
+                particleIndex++;
+            }
+        }
+
+        webGeometry.setAttribute('position', new THREE.BufferAttribute(webPositions.slice(0, particleIndex * 3), 3));
+        webGeometry.setAttribute('color', new THREE.BufferAttribute(webColors.slice(0, particleIndex * 3), 3));
+        webGeometry.setAttribute('size', new THREE.BufferAttribute(webSizes.slice(0, particleIndex), 1));
+
+        const webMaterial = new THREE.PointsMaterial({
+            vertexColors: true,
+            sizeAttenuation: true,
+            size: 2,
+            transparent: true,
+            opacity: 0.8,
+            sizeRange: [0.1, 10]
+        });
+
+        const webMesh = new THREE.Points(webGeometry, webMaterial);
+        webGroup.add(webMesh);
+
+        // ===== GALAXY CLUSTERS =====
+        const clusterGroup = new THREE.Group();
+        scene.add(clusterGroup);
+
+        const entityData = {
+            virgo: {
+                name: 'Virgo Cluster',
+                type: 'Galaxy Cluster',
+                distance: '54 Mpc',
+                galaxies: '~1300 galaxies',
+                position: new THREE.Vector3(-300, 150, 100),
+                vi: 'Cụm Virgo'
+            },
+            coma: {
+                name: 'Coma Cluster',
+                type: 'Galaxy Cluster',
+                distance: '99 Mpc',
+                galaxies: '~1000 galaxies',
+                position: new THREE.Vector3(400, 200, -150),
+                vi: 'Cụm Coma'
+            },
+            perseus: {
+                name: 'Perseus Cluster',
+                type: 'Galaxy Cluster',
+                distance: '73 Mpc',
+                galaxies: '~500 galaxies',
+                position: new THREE.Vector3(200, -180, 300),
+                vi: 'Cụm Perseus'
+            },
+            abell2029: {
+                name: 'Abell 2029',
+                type: 'Galaxy Cluster',
+                distance: '310 Mpc',
+                galaxies: 'Supergiant Central Galaxy',
+                position: new THREE.Vector3(-500, 100, 200),
+                vi: 'Abell 2029'
+            },
+            bullet: {
+                name: 'Bullet Cluster',
+                type: 'Galaxy Cluster',
+                distance: '1.14 Gpc',
+                galaxies: 'Dark Matter Separation Visible',
+                position: new THREE.Vector3(600, -250, -400),
+                vi: 'Cụm Bullet'
+            },
+            laniakea: {
+                name: 'Laniakea Supercluster',
+                type: 'Supercluster',
+                distance: '250 Mpc (center)',
+                galaxies: 'Our Home Supercluster',
+                position: new THREE.Vector3(-100, -100, -50),
+                vi: 'Laniakea'
+            },
+            pisces: {
+                name: 'Pisces-Cetus Supercluster',
+                type: 'Supercluster Complex',
+                distance: '300 Mpc',
+                galaxies: 'Extended Filament',
+                position: new THREE.Vector3(450, 300, 250),
+                vi: 'Cụm Pisces-Cetus'
+            },
+            sloan: {
+                name: 'Sloan Great Wall',
+                type: 'Cosmic Filament',
+                distance: '420 Mpc length',
+                galaxies: 'Largest Structure (older)',
+                position: new THREE.Vector3(-350, 250, -280),
+                vi: 'Bức Tường Sloan'
+            },
+            hercules: {
+                name: 'Hercules-Corona Borealis',
+                type: 'Cosmic Filament',
+                distance: '3 Gpc length',
+                galaxies: 'Largest Known Structure',
+                position: new THREE.Vector3(500, 400, 350),
+                vi: 'Bức Tường Hercules'
+            },
+            cfa2: {
+                name: 'CfA2 Great Wall',
+                type: 'Cosmic Filament',
+                distance: '200 Mpc',
+                galaxies: 'Multiple Superclusters',
+                position: new THREE.Vector3(-200, 300, 100),
+                vi: 'Bức Tường CfA2'
+            },
+            bootes: {
+                name: 'Boötes Void',
+                type: 'Cosmic Void',
+                diameter: '100 Mpc',
+                galaxies: 'Nearly Empty Region',
+                position: new THREE.Vector3(350, -200, 200),
+                vi: 'Khoảng Trống Boötes'
+            },
+            kbc: {
+                name: 'KBC Void',
+                type: 'Cosmic Void',
+                diameter: '600 Mpc',
+                galaxies: 'Contains Our Galaxy',
+                position: new THREE.Vector3(-400, 150, -300),
+                vi: 'Khoảng Trống KBC'
+            },
+            canes: {
+                name: 'Giant Void (Canes)',
+                type: 'Cosmic Void',
+                diameter: '90 Mpc',
+                galaxies: 'Extremely Low Density',
+                position: new THREE.Vector3(200, -350, 100),
+                vi: 'Khoảng Trống Canes'
+            },
+            eridanus: {
+                name: 'Eridanus Supervoid',
+                type: 'Cosmic Void',
+                diameter: '150 Mpc',
+                galaxies: 'CMB Cold Spot Region',
+                position: new THREE.Vector3(-300, -250, 400),
+                vi: 'Khoảng Trống Eridanus'
+            },
+            cmb: {
+                name: 'Cosmic Microwave Background',
+                type: 'Observable Universe Edge',
+                distance: '46.5 Gly',
+                galaxies: 'Temperature Anisotropy Map',
+                position: new THREE.Vector3(0, 0, 0),
+                vi: 'Bức Xạ Nền Vi Sóng'
+            },
+            observable: {
+                name: 'Observable Universe Boundary',
+                type: 'Cosmic Horizon',
+                distance: '93 Billion Light Years',
+                galaxies: 'Cosmological Event Horizon',
+                position: new THREE.Vector3(0, 0, 0),
+                vi: 'Biên Giới Vũ Trụ'
+            },
+            center: {
+                name: 'Universal Center',
+                type: 'Reference Point',
+                distance: 'Our Observation Point',
+                galaxies: 'Milky Way Location',
+                position: new THREE.Vector3(0, 0, 0),
+                vi: 'Trung Tâm Vũ Trụ'
+            }
+        };
+
+        // Create cluster visualizations
+        function createCluster(position, size, intensity = 1) {
+            const clusterGroup = new THREE.Group();
+
+            const geometry = new THREE.IcosahedronGeometry(size, 4);
+            const material = new THREE.PointsMaterial({
+                color: new THREE.Color().setHSL(0.13, 1, 0.6),
+                size: size * 0.15,
+                sizeAttenuation: true,
+                transparent: true,
+                opacity: 0.7
+            });
+
+            const positions = geometry.attributes.position.array;
+            const particles = new THREE.Points(geometry, material);
+            clusterGroup.add(particles);
+
+            // Glow
+            const glowGeometry = new THREE.IcosahedronGeometry(size * 1.5, 3);
+            const glowMaterial = new THREE.MeshBasicMaterial({
+                color: new THREE.Color().setHSL(0.13, 1, 0.5),
+                transparent: true,
+                opacity: 0.15 * intensity,
+                wireframe: false
+            });
+            const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial);
+            clusterGroup.add(glowMesh);
+
+            clusterGroup.position.copy(position);
+            return clusterGroup;
+        }
+
+        // Add clusters for major structures
+        const majorPositions = [
+            { pos: new THREE.Vector3(-300, 150, 100), size: 25 },
+            { pos: new THREE.Vector3(400, 200, -150), size: 20 },
+            { pos: new THREE.Vector3(200, -180, 300), size: 18 },
+            { pos: new THREE.Vector3(-500, 100, 200), size: 30 },
+            { pos: new THREE.Vector3(600, -250, -400), size: 28 },
+        ];
+
+        majorPositions.forEach(({ pos, size }) => {
+            clusterGroup.add(createCluster(pos, size));
+        });
+
+        // ===== CMB SHELL =====
+        const cmbGeometry = new THREE.IcosahedronGeometry(2000, 32);
+        const cmbMaterial = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: 0 }
+            },
+            vertexShader: `
+                varying vec3 vPosition;
+                void main() {
+                    vPosition = position;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform float time;
+                varying vec3 vPosition;
+
+                // Simplex noise (simplified)
+                float noise(vec3 p) {
+                    return sin(p.x * 0.02) * sin(p.y * 0.02) * sin(p.z * 0.02) * 0.5 + 0.5;
+                }
+
+                void main() {
+                    vec3 n = normalize(vPosition);
+                    float noiseVal = noise(vPosition + time * 0.001);
+
+                    // Cold to hot colormap
+                    vec3 color;
+                    if (noiseVal < 0.25) {
+                        color = mix(vec3(0.0, 0.0, 1.0), vec3(0.0, 1.0, 0.0), noiseVal * 4.0);
+                    } else if (noiseVal < 0.75) {
+                        color = mix(vec3(0.0, 1.0, 0.0), vec3(1.0, 1.0, 0.0), (noiseVal - 0.25) * 2.0);
+                    } else {
+                        color = mix(vec3(1.0, 1.0, 0.0), vec3(1.0, 0.0, 0.0), (noiseVal - 0.75) * 4.0);
+                    }
+
+                    gl_FragColor = vec4(color, 0.15);
+                }
+            `,
+            transparent: true,
+            side: THREE.BackSide,
+            wireframe: false
+        });
+
+        const cmbMesh = new THREE.Mesh(cmbGeometry, cmbMaterial);
+        scene.add(cmbMesh);
+
+        // ===== OBSERVABLE BOUNDARY =====
+        const boundaryGeometry = new THREE.IcosahedronGeometry(2000, 16);
+        const boundaryMaterial = new THREE.LineBasicMaterial({
+            color: 0xffd700,
+            transparent: true,
+            opacity: 0.1,
+            linewidth: 1
+        });
+
+        const boundaryEdges = new THREE.EdgesGeometry(boundaryGeometry, 30);
+        const boundaryLine = new THREE.LineSegments(boundaryEdges, boundaryMaterial);
+        scene.add(boundaryLine);
+
+        // ===== COSMIC VOIDS (SEMI-TRANSPARENT SPHERES) =====
+        const voidGroup = new THREE.Group();
+        scene.add(voidGroup);
+
+        const voids = [
+            { pos: new THREE.Vector3(350, -200, 200), size: 80, name: 'bootes' },
+            { pos: new THREE.Vector3(-400, 150, -300), size: 120, name: 'kbc' },
+            { pos: new THREE.Vector3(200, -350, 100), size: 70, name: 'canes' },
+            { pos: new THREE.Vector3(-300, -250, 400), size: 90, name: 'eridanus' },
+        ];
+
+        voids.forEach(({ pos, size, name }) => {
+            const voidGeo = new THREE.IcosahedronGeometry(size, 8);
+            const voidMat = new THREE.MeshBasicMaterial({
+                color: 0x0a0a2e,
+                transparent: true,
+                opacity: 0.05,
+                wireframe: false
+            });
+            const voidMesh = new THREE.Mesh(voidGeo, voidMat);
+            voidMesh.position.copy(pos);
+            voidMesh.userData.entityId = name;
+            voidGroup.add(voidMesh);
+        });
+
+        // ===== INTERACTION & UI =====
+        function showInfoPanel(entityId) {
+            const data = entityData[entityId];
+            if (!data) return;
+
+            const infoContent = document.getElementById('infoContent');
+            const panel = document.getElementById('infoPanel');
+
+            let html = `
+                <h2>${data.name}</h2>
+                <div class="info-item">
+                    <div class="info-item-label">Type</div>
+                    <div class="info-item-value">${data.type}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">Distance/Size</div>
+                    <div class="info-item-value">${data.distance}</div>
+                </div>
+            `;
+
+            if (data.galaxies) {
+                html += `
+                    <div class="info-item">
+                        <div class="info-item-label">Contents</div>
+                        <div class="info-item-value">${data.galaxies}</div>
+                    </div>
+                `;
+            }
+
+            if (data.vi) {
+                html += `
+                    <div class="info-item" style="border-top: 1px solid rgba(255, 215, 0, 0.2); padding-top: 15px; margin-top: 15px;">
+                        <div class="info-item-label">Vietnamese</div>
+                        <div class="info-item-value">${data.vi}</div>
+                    </div>
+                `;
+            }
+
+            infoContent.innerHTML = html;
+            panel.classList.add('active');
+        }
+
+        function closeInfoPanel() {
+            document.getElementById('infoPanel').classList.remove('active');
+        }
+
+        function flyToEntity(entityId) {
+            const data = entityData[entityId];
+            if (!data) return;
+
+            const position = data.position.clone();
+            const distance = 100 + position.length() * 0.3;
+            const direction = position.clone().normalize();
+            const cameraTarget = direction.multiplyScalar(distance).add(position);
+
+            controls.animateTo(cameraTarget, 2000);
+            showInfoPanel(entityId);
+        }
+
+        // Sidebar item clicks
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const entityId = item.dataset.entity;
+                document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                flyToEntity(entityId);
+            });
+        });
+
+        // Raycasting for clickable objects
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        window.addEventListener('click', (event) => {
+            if (event.target.closest('.sidebar') || event.target.closest('.info-panel')) return;
+
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(voidGroup.children);
+
+            if (intersects.length > 0) {
+                const entityId = intersects[0].object.userData.entityId;
+                document.querySelectorAll('.sidebar-item').forEach(item => {
+                    if (item.dataset.entity === entityId) {
+                        item.click();
+                    }
+                });
+            }
+        });
+
+        // Window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ===== ANIMATION LOOP =====
+        function animate() {
+            requestAnimationFrame(animate);
+
+            controls.update();
+
+            // Update CMB time uniform
+            cmbMaterial.uniforms.time.value += 1;
+
+            // Slow rotation of cosmic web
+            webGroup.rotation.x += 0.00002;
+            webGroup.rotation.y += 0.00003;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

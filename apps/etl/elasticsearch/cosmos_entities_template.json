@@ -1,0 +1,176 @@
+{
+  "index_patterns": ["cosmos_entities*"],
+  "priority": 100,
+  "template": {
+    "settings": {
+      "number_of_shards": 5,
+      "number_of_replicas": 1,
+      "max_ngram_diff": 13,
+      "analysis": {
+        "char_filter": {
+          "greek_letter_mapping": {
+            "type": "mapping",
+            "mappings": [
+              "α => alpha",
+              "β => beta",
+              "γ => gamma",
+              "δ => delta",
+              "ε => epsilon",
+              "ζ => zeta",
+              "η => eta",
+              "θ => theta",
+              "ι => iota",
+              "κ => kappa",
+              "λ => lambda",
+              "μ => mu",
+              "ν => nu",
+              "ξ => xi",
+              "ο => omicron",
+              "π => pi",
+              "ρ => rho",
+              "σ => sigma",
+              "τ => tau",
+              "υ => upsilon",
+              "φ => phi",
+              "χ => chi",
+              "ψ => psi",
+              "ω => omega"
+            ]
+          }
+        },
+        "tokenizer": {
+          "catalog_prefix_tokenizer": {
+            "type": "pattern",
+            "pattern": "[\\s\\-_/]+"
+          }
+        },
+        "filter": {
+          "entity_edge_ngram": {
+            "type": "edge_ngram",
+            "min_gram": 2,
+            "max_gram": 15
+          },
+          "bayer_designation_filter": {
+            "type": "pattern_replace",
+            "pattern": "^([A-Za-z]+)\\s*([A-Za-z]{3})$",
+            "replacement": "$1 $2"
+          }
+        },
+        "analyzer": {
+          "entity_name": {
+            "type": "custom",
+            "char_filter": ["greek_letter_mapping"],
+            "tokenizer": "standard",
+            "filter": ["lowercase", "asciifolding", "entity_edge_ngram"]
+          },
+          "entity_name_search": {
+            "type": "custom",
+            "char_filter": ["greek_letter_mapping"],
+            "tokenizer": "standard",
+            "filter": ["lowercase", "asciifolding"]
+          },
+          "catalog_id": {
+            "type": "custom",
+            "tokenizer": "keyword",
+            "filter": ["lowercase", "asciifolding"]
+          },
+          "catalog_prefix": {
+            "type": "custom",
+            "tokenizer": "catalog_prefix_tokenizer",
+            "filter": ["lowercase", "asciifolding"]
+          }
+        },
+        "normalizer": {
+          "catalog_key_normalizer": {
+            "type": "custom",
+            "filter": ["lowercase", "asciifolding"]
+          }
+        }
+      }
+    },
+    "mappings": {
+      "dynamic": "strict",
+      "properties": {
+        "ent_id":            { "type": "keyword" },
+        "entity_id":         { "type": "long" },
+        "entity_type":       { "type": "integer" },
+        "category":          { "type": "integer" },
+
+        "name": {
+          "type": "text",
+          "analyzer": "entity_name",
+          "search_analyzer": "entity_name_search",
+          "fields": {
+            "raw":    { "type": "keyword", "normalizer": "catalog_key_normalizer" },
+            "prefix": { "type": "text", "analyzer": "catalog_prefix" }
+          }
+        },
+        "aliases": {
+          "type": "text",
+          "analyzer": "entity_name",
+          "search_analyzer": "entity_name_search"
+        },
+        "constellation":     { "type": "keyword" },
+
+        "catalog_ids": {
+          "type": "object",
+          "properties": {
+            "messier":   { "type": "keyword", "normalizer": "catalog_key_normalizer" },
+            "ngc":       { "type": "keyword", "normalizer": "catalog_key_normalizer" },
+            "ic":        { "type": "keyword", "normalizer": "catalog_key_normalizer" },
+            "caldwell":  { "type": "keyword", "normalizer": "catalog_key_normalizer" },
+            "hd":        { "type": "keyword" },
+            "hip":       { "type": "keyword" },
+            "hr":        { "type": "keyword" },
+            "sao":       { "type": "keyword" },
+            "gaia_dr3":  { "type": "keyword" },
+            "bayer":     { "type": "keyword" },
+            "flamsteed": { "type": "keyword" },
+            "tyc":       { "type": "keyword" },
+            "wds":       { "type": "keyword" },
+            "gcvs":      { "type": "keyword" },
+            "sharpless": { "type": "keyword" },
+            "barnard":   { "type": "keyword" },
+            "lbn":       { "type": "keyword" },
+            "ldn":       { "type": "keyword" },
+            "pgc":       { "type": "keyword" },
+            "ugc":       { "type": "keyword" },
+            "abell":     { "type": "keyword" },
+            "simbad":    { "type": "keyword" },
+            "naif":      { "type": "integer" },
+            "mpc":       { "type": "integer" },
+            "atnf":      { "type": "keyword" }
+          }
+        },
+
+        "ra":                { "type": "double" },
+        "dec":               { "type": "double" },
+        "distance_pc":       { "type": "double" },
+        "distance_mpc":      { "type": "double" },
+        "galactic_l":        { "type": "double" },
+        "galactic_b":        { "type": "double" },
+        "position_geo":      { "type": "geo_point" },
+
+        "magnitude":         { "type": "float" },
+        "spectral_type":     { "type": "keyword" },
+        "temperature":       { "type": "float" },
+        "luminosity":        { "type": "float" },
+        "mass_solar":        { "type": "float" },
+        "redshift":          { "type": "float" },
+        "morphology":        { "type": "keyword" },
+
+        "data_source":       { "type": "keyword" },
+        "data_quality":      { "type": "float" },
+        "last_updated":      { "type": "date" },
+
+        "suggest": {
+          "type": "completion",
+          "analyzer": "entity_name_search",
+          "contexts": [
+            { "name": "category", "type": "category" }
+          ]
+        }
+      }
+    }
+  }
+}

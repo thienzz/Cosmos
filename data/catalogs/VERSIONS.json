@@ -1,0 +1,16 @@
+{
+  "catalogs": {
+    "hipparcos_bright": {
+      "ingested_at": "2026-04-19T19:24:51+00:00",
+      "license": "Public domain (ESA Hipparcos mission)",
+      "name": "hipparcos_bright",
+      "notes": "Bundled bright subset (V < 4) for T40 ETL foothold. Production ingest replaces this with the full VizieR I/311 table (117,955 rows).",
+      "record_count": 71,
+      "sha256": "f913509155de5e49712b8d3509421ce407e5ae0b8c6c2f7c7aa19ea771eb31af",
+      "source_url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/311",
+      "version": "v2007-reduction-bright-v1"
+    }
+  },
+  "global_version": "2026.Q1.3",
+  "schema_version": 1
+}

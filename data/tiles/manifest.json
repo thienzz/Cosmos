@@ -1,0 +1,311 @@
+{
+  "version": "2026.Q2.1",
+  "generated_at": "2026-04-19T00:00:00.000Z",
+  "stars": {
+    "total_tiles": 16,
+    "total_stars": 100000,
+    "max_depth": 1,
+    "lod_levels": 1,
+    "bounds": {
+      "min": {
+        "x": -200,
+        "y": -200,
+        "z": -200
+      },
+      "max": {
+        "x": 200,
+        "y": 200,
+        "z": 200
+      }
+    },
+    "tiles": [
+      {
+        "address": "1/2/2/0",
+        "bounds": {
+          "min": {
+            "x": -100,
+            "y": -100,
+            "z": -200
+          },
+          "max": {
+            "x": -50,
+            "y": -50,
+            "z": 200
+          }
+        },
+        "star_count": 1473,
+        "size_bytes": 23584
+      },
+      {
+        "address": "1/2/3/0",
+        "bounds": {
+          "min": {
+            "x": -100,
+            "y": -50,
+            "z": -200
+          },
+          "max": {
+            "x": -50,
+            "y": 0,
+            "z": 200
+          }
+        },
+        "star_count": 6295,
+        "size_bytes": 100736
+      },
+      {
+        "address": "1/2/4/0",
+        "bounds": {
+          "min": {
+            "x": -100,
+            "y": 0,
+            "z": -200
+          },
+          "max": {
+            "x": -50,
+            "y": 50,
+            "z": 200
+          }
+        },
+        "star_count": 6242,
+        "size_bytes": 99888
+      },
+      {
+        "address": "1/2/5/0",
+        "bounds": {
+          "min": {
+            "x": -100,
+            "y": 50,
+            "z": -200
+          },
+          "max": {
+            "x": -50,
+            "y": 100,
+            "z": 200
+          }
+        },
+        "star_count": 1438,
+        "size_bytes": 23024
+      },
+      {
+        "address": "1/3/2/0",
+        "bounds": {
+          "min": {
+            "x": -50,
+            "y": -100,
+            "z": -200
+          },
+          "max": {
+            "x": 0,
+            "y": -50,
+            "z": 200
+          }
+        },
+        "star_count": 6280,
+        "size_bytes": 100496
+      },
+      {
+        "address": "1/3/3/0",
+        "bounds": {
+          "min": {
+            "x": -50,
+            "y": -50,
+            "z": -200
+          },
+          "max": {
+            "x": 0,
+            "y": 0,
+            "z": 200
+          }
+        },
+        "star_count": 10903,
+        "size_bytes": 174464
+      },
+      {
+        "address": "1/3/4/0",
+        "bounds": {
+          "min": {
+            "x": -50,
+            "y": 0,
+            "z": -200
+          },
+          "max": {
+            "x": 0,
+            "y": 50,
+            "z": 200
+          }
+        },
+        "star_count": 10923,
+        "size_bytes": 174784
+      },
+      {
+        "address": "1/3/5/0",
+        "bounds": {
+          "min": {
+            "x": -50,
+            "y": 50,
+            "z": -200
+          },
+          "max": {
+            "x": 0,
+            "y": 100,
+            "z": 200
+          }
+        },
+        "star_count": 6451,
+        "size_bytes": 103232
+      },
+      {
+        "address": "1/4/2/0",
+        "bounds": {
+          "min": {
+            "x": 0,
+            "y": -100,
+            "z": -200
+          },
+          "max": {
+            "x": 50,
+            "y": -50,
+            "z": 200
+          }
+        },
+        "star_count": 6286,
+        "size_bytes": 100592
+      },
+      {
+        "address": "1/4/3/0",
+        "bounds": {
+          "min": {
+            "x": 0,
+            "y": -50,
+            "z": -200
+          },
+          "max": {
+            "x": 50,
+            "y": 0,
+            "z": 200
+          }
+        },
+        "star_count": 11001,
+        "size_bytes": 176032
+      },
+      {
+        "address": "1/4/4/0",
+        "bounds": {
+          "min": {
+            "x": 0,
+            "y": 0,
+            "z": -200
+          },
+          "max": {
+            "x": 50,
+            "y": 50,
+            "z": 200
+          }
+        },
+        "star_count": 10713,
+        "size_bytes": 171424
+      },
+      {
+        "address": "1/4/5/0",
+        "bounds": {
+          "min": {
+            "x": 0,
+            "y": 50,
+            "z": -200
+          },
+          "max": {
+            "x": 50,
+            "y": 100,
+            "z": 200
+          }
+        },
+        "star_count": 6295,
+        "size_bytes": 100736
+      },
+      {
+        "address": "1/5/2/0",
+        "bounds": {
+          "min": {
+            "x": 50,
+            "y": -100,
+            "z": -200
+          },
+          "max": {
+            "x": 100,
+            "y": -50,
+            "z": 200
+          }
+        },
+        "star_count": 1397,
+        "size_bytes": 22368
+      },
+      {
+        "address": "1/5/3/0",
+        "bounds": {
+          "min": {
+            "x": 50,
+            "y": -50,
+            "z": -200
+          },
+          "max": {
+            "x": 100,
+            "y": 0,
+            "z": 200
+          }
+        },
+        "star_count": 6406,
+        "size_bytes": 102512
+      },
+      {
+        "address": "1/5/4/0",
+        "bounds": {
+          "min": {
+            "x": 50,
+            "y": 0,
+            "z": -200
+          },
+          "max": {
+            "x": 100,
+            "y": 50,
+            "z": 200
+          }
+        },
+        "star_count": 6329,
+        "size_bytes": 101280
+      },
+      {
+        "address": "1/5/5/0",
+        "bounds": {
+          "min": {
+            "x": 50,
+            "y": 50,
+            "z": -200
+          },
+          "max": {
+            "x": 100,
+            "y": 100,
+            "z": 200
+          }
+        },
+        "star_count": 1568,
+        "size_bytes": 25104
+      }
+    ]
+  },
+  "galaxies": {
+    "total_tiles": 0,
+    "total_galaxies": 0,
+    "healpix_nside": 256,
+    "tiles": []
+  },
+  "cosmic_web": {
+    "total_sectors": 0,
+    "grid": [
+      4,
+      4,
+      4
+    ],
+    "sectors": []
+  }
+}

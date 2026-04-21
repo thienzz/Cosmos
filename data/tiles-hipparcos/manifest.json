@@ -1,0 +1,207 @@
+{
+  "version": "hipparcos-2026-04-19",
+  "totalTiles": 11,
+  "source": "hipparcos_bright",
+  "rootBoundsPc": {
+    "min": {
+      "x": -200,
+      "y": -200,
+      "z": -200
+    },
+    "max": {
+      "x": 200,
+      "y": 200,
+      "z": 200
+    }
+  },
+  "tiles": [
+    {
+      "address": "stars/1/2/3/0",
+      "boundsPc": {
+        "min": {
+          "x": -100,
+          "y": -50,
+          "z": -200
+        },
+        "max": {
+          "x": -50,
+          "y": 0,
+          "z": 200
+        }
+      },
+      "starCount": 2,
+      "sizeBytes": 48
+    },
+    {
+      "address": "stars/1/3/2/0",
+      "boundsPc": {
+        "min": {
+          "x": -50,
+          "y": -100,
+          "z": -200
+        },
+        "max": {
+          "x": 0,
+          "y": -50,
+          "z": 200
+        }
+      },
+      "starCount": 1,
+      "sizeBytes": 32
+    },
+    {
+      "address": "stars/1/3/3/0",
+      "boundsPc": {
+        "min": {
+          "x": -50,
+          "y": -50,
+          "z": -200
+        },
+        "max": {
+          "x": 0,
+          "y": 0,
+          "z": 200
+        }
+      },
+      "starCount": 13,
+      "sizeBytes": 224
+    },
+    {
+      "address": "stars/1/3/4/0",
+      "boundsPc": {
+        "min": {
+          "x": -50,
+          "y": 0,
+          "z": -200
+        },
+        "max": {
+          "x": 0,
+          "y": 50,
+          "z": 200
+        }
+      },
+      "starCount": 9,
+      "sizeBytes": 160
+    },
+    {
+      "address": "stars/1/3/5/0",
+      "boundsPc": {
+        "min": {
+          "x": -50,
+          "y": 50,
+          "z": -200
+        },
+        "max": {
+          "x": 0,
+          "y": 100,
+          "z": 200
+        }
+      },
+      "starCount": 1,
+      "sizeBytes": 32
+    },
+    {
+      "address": "stars/1/4/3/0",
+      "boundsPc": {
+        "min": {
+          "x": 0,
+          "y": -50,
+          "z": -200
+        },
+        "max": {
+          "x": 50,
+          "y": 0,
+          "z": 200
+        }
+      },
+      "starCount": 8,
+      "sizeBytes": 144
+    },
+    {
+      "address": "stars/1/4/4/0",
+      "boundsPc": {
+        "min": {
+          "x": 0,
+          "y": 0,
+          "z": -200
+        },
+        "max": {
+          "x": 50,
+          "y": 50,
+          "z": 200
+        }
+      },
+      "starCount": 14,
+      "sizeBytes": 240
+    },
+    {
+      "address": "stars/1/4/5/0",
+      "boundsPc": {
+        "min": {
+          "x": 0,
+          "y": 50,
+          "z": -200
+        },
+        "max": {
+          "x": 50,
+          "y": 100,
+          "z": 200
+        }
+      },
+      "starCount": 1,
+      "sizeBytes": 32
+    },
+    {
+      "address": "stars/1/5/3/0",
+      "boundsPc": {
+        "min": {
+          "x": 50,
+          "y": -50,
+          "z": -200
+        },
+        "max": {
+          "x": 100,
+          "y": 0,
+          "z": 200
+        }
+      },
+      "starCount": 1,
+      "sizeBytes": 32
+    },
+    {
+      "address": "stars/1/5/4/0",
+      "boundsPc": {
+        "min": {
+          "x": 50,
+          "y": 0,
+          "z": -200
+        },
+        "max": {
+          "x": 100,
+          "y": 50,
+          "z": 200
+        }
+      },
+      "starCount": 2,
+      "sizeBytes": 48
+    },
+    {
+      "address": "stars/1/5/5/0",
+      "boundsPc": {
+        "min": {
+          "x": 50,
+          "y": 50,
+          "z": -200
+        },
+        "max": {
+          "x": 100,
+          "y": 100,
+          "z": 200
+        }
+      },
+      "starCount": 3,
+      "sizeBytes": 64
+    }
+  ],
+  "generatedAt": "2026-04-19T19:22:57.980Z"
+}
