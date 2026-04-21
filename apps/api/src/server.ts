@@ -4,6 +4,7 @@ import Fastify, { type FastifyInstance } from 'fastify';
 
 import rateLimitPlugin from './middleware/rate-limit.js';
 import redisPlugin from './plugins/redis.js';
+import entitiesRoutes from './routes/entities.js';
 import { healthRoutes } from './routes/health.js';
 
 export interface BuildServerOptions {
@@ -28,6 +29,7 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
   await app.register(rateLimitPlugin);
 
   await app.register(healthRoutes);
+  await app.register(entitiesRoutes);
 
   return app;
 }
