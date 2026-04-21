@@ -191,7 +191,7 @@ pnpm --filter api test src/db
 
 ---
 
-### T-B-03 — `es/client.ts` + autocomplete index schema 🟡
+### T-B-03 — `es/client.ts` + autocomplete index schema 🟡 ✅ DONE a39ec79 2026-04-22
 **Depends:** T-B-01  **Est:** 3h
 **Goal:** Elasticsearch client; `entities_autocomplete` index exists with `completion` field type.
 **Files:**
