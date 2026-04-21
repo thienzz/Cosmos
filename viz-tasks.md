@@ -173,7 +173,7 @@ curl -sf http://localhost:3010/health | jq .status   # "ok"
 
 ---
 
-### T-B-02 — `db/pool.ts` — Postgres pool + parameterized query helper 🟡
+### T-B-02 — `db/pool.ts` — Postgres pool + parameterized query helper 🟡 ✅ DONE b9d7125 2026-04-22
 **Depends:** T-B-01  **Est:** 2h
 **Goal:** Single source of DB connections; enforces parameterized queries.
 **Files:** `apps/api/src/db/pool.ts`, `apps/api/tests/db.test.ts`
