@@ -606,8 +606,7 @@ time python -m cosmos_etl.loaders.gaia_bulk
 
 ---
 
-### T-D-08 — Cone search + preview verification 🟢
-**Depends:** T-D-05  **Est:** 1h
+### T-D-08 — Cone search + preview verification 🟢 ✅ DONE (live-verified) 2026-04-22
 **Goal:** Verify Phase D via viz.md verify blocks D.2 + D.3 + D.4.
 **Do:** Run the 3 verify blocks; take before/after screenshot of Orion region for visual diff.
 **Done when:** All 3 pass; screenshots archived at `tests/visual/orion-{pre,post}-gaia.jpg`.
