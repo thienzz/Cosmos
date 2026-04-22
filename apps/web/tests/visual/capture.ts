@@ -94,6 +94,11 @@ function parseArgs(argv: string[]): Args {
  */
 function familyForRow(row: EntCoverageRow): string {
   const id = row.id;
+  // Shader-first routing: a few rows live outside their ENT-ID prefix's
+  // natural family (e.g. ENT-1032 "Black Hole (stellar)" uses
+  // exotic-blackhole, not a star shader). File those by shader so the
+  // folder layout matches the visual class.
+  if (row.shader?.startsWith('exotic-')) return 'exotic';
   if (id.startsWith('ENT-1')) return 'star';
   if (id.startsWith('ENT-2')) {
     if (row.shader === 'planet-gas') return 'gas-giant';

@@ -130,6 +130,18 @@ function buildMesh(kind: CaptureGeometry): THREE.Object3D {
       const geom = new THREE.PlaneGeometry(2.2, 2.2);
       return new THREE.Mesh(geom, material);
     }
+    case 'tilted-plane': {
+      // Plane shader (reads v_uv) but tilted away from the camera so the
+      // canvas shows it as a 3D sheet rather than a flat square stamp.
+      // Sized smaller (1.4×1.4) so there's visible black margin around
+      // the wall — important for shaders like lss-great-wall whose
+      // texture-fill effect would otherwise read as a square pattern.
+      const geom = new THREE.PlaneGeometry(1.4, 1.4);
+      const m = new THREE.Mesh(geom, material);
+      m.rotation.set(-0.45, 0.7, 0); // tilt + yaw
+      material.side = THREE.DoubleSide;
+      return m;
+    }
     case 'fullscreen-quad': {
       // Render a true fullscreen quad — bypass camera projection by using
       // an ortho setup. Currently unused (all 'plane' cases tile well
@@ -152,6 +164,12 @@ function buildMesh(kind: CaptureGeometry): THREE.Object3D {
       const geom = new THREE.BufferGeometry();
       geom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       return new THREE.Points(geom, material);
+    }
+    case 'small-sphere': {
+      // Radius 0.5 — for shaders whose density shell only fires at
+      // length(v_modelPos) < 1 (transient fireballs, lss-void NFW).
+      const geom = new THREE.SphereGeometry(0.5, 64, 64);
+      return new THREE.Mesh(geom, material);
     }
     case 'sphere':
     default: {

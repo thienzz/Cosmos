@@ -44,7 +44,19 @@ import type { NebulaKind, NebulaSubtype } from '@/utils/nebulaPalette';
 import type { PlanetKind } from '@/utils/planetPalette';
 import type { StarFamilyKind } from '@/utils/starFamilyPalette';
 
-export type CaptureGeometry = 'sphere' | 'box-raymarch' | 'points' | 'plane' | 'fullscreen-quad';
+export type CaptureGeometry =
+  | 'sphere'
+  | 'small-sphere'   // Sphere of radius 0.5 — for shaders that compute a
+                     // density shell at length(v_modelPos) < 1 and would
+                     // discard every fragment on a unit sphere
+                     // (transient fireballs, lss-void NFW dimming).
+  | 'box-raymarch'
+  | 'points'
+  | 'plane'
+  | 'tilted-plane'   // Plane shrunk + rotated so the shader doesn't fill the
+                     // canvas as a flat square stamp; used for v_uv-driven
+                     // sheets like lss-great-wall + lss-filament.
+  | 'fullscreen-quad';
 
 /**
  * Normalised per-frame tick context. Exotic / galaxy / nebula raymarchers
@@ -327,28 +339,42 @@ const GEOMETRY_BY_SHADER: Record<string, CaptureGeometry> = {
   'exotic-primordial': 'box-raymarch',
   'exotic-quasi-star': 'box-raymarch',
   'exotic-planck': 'box-raymarch',
-  // Large-scale structure is planar or line-y.
-  'lss-supercluster': 'plane',
-  'lss-filament': 'plane',
-  'lss-void': 'plane',
-  'lss-great-wall': 'plane',
-  // Point-cloud shaders — render as sphere still (point shaders don't
-  // meaningfully work on any non-Points mesh, but sphere + baseline tint is
-  // better than a black 1826-byte PNG).
-  'cluster-open': 'plane',
+  // Large-scale structure: shader-by-shader.
+  // Supercluster + void read v_modelPos / v_normalW / v_viewDirW —
+  // sphere is the natural fit. PlaneGeometry fills the full canvas as
+  // a flat square (the shader paints every fragment), which read as a
+  // stamped grid rather than a 3D structure.
+  'lss-supercluster': 'sphere',
+  // lss-void.frag computes `dim = smoothstep(1.0, 0.3, length(v_modelPos))`
+  // and discards fragments where dim < 0.01 — needs r < 1 to render.
+  'lss-void': 'small-sphere',
+  // great-wall + filament read v_uv (planar UV coords) — shader is
+  // designed for a 2D sheet. Tilted-plane geometry shrinks + rotates so
+  // the sheet reads as a 3D wall, not a square stamp.
+  'lss-great-wall': 'tilted-plane',
+  'lss-filament': 'tilted-plane',
+  // Point-cloud shaders — cluster-open/ob/collision are painted onto
+  // 2D UV space (v_uv-driven hash field). Sphere discards every
+  // fragment because the shader density goes to 0 off the UV range.
+  // Tilted-plane gives them a 3D-looking stamp without the flat square.
+  // cluster-globular reads v_modelPos and does work on sphere.
+  'cluster-open': 'tilted-plane',
   'cluster-globular': 'sphere',
-  'cluster-ob': 'plane',
-  'cluster-collision': 'plane',
-  'smallbody-field-points': 'plane',
-  // Transients — screen-space effects.
-  'transient-grb': 'plane',
-  'transient-frb': 'plane',
-  'transient-tde': 'plane',
-  'transient-kilonova': 'plane',
-  'transient-xrb': 'plane',
-  'meteoroid-stream': 'plane',
-  // Galaxy shaders — mostly sphere/disk, 'plane' works for edge-on rendering.
-  'galaxy-billboard': 'plane',
+  'cluster-ob': 'tilted-plane',
+  'cluster-collision': 'tilted-plane',
+  'smallbody-field-points': 'tilted-plane',
+  // Transients are volumetric fireball / shell shaders that compute
+  // density at length(v_modelPos) and `discard` outside the shell.
+  // Small-sphere (r=0.5) puts every fragment inside the shell zone
+  // (r ∈ [0.4, 0.95] for GRB / TDE / XRB).
+  'transient-grb': 'small-sphere',
+  'transient-frb': 'small-sphere',
+  'transient-tde': 'small-sphere',
+  'transient-kilonova': 'small-sphere',
+  'transient-xrb': 'small-sphere',
+  'meteoroid-stream': 'tilted-plane',
+  // Galaxy billboards remain plane (intentionally screen-aligned).
+  'galaxy-billboard': 'tilted-plane',
 };
 
 function geometryFor(shader: string): CaptureGeometry {
@@ -532,6 +558,10 @@ function injectCaptureDefaults(
   ensureFloat('u_rotation', 0);
   ensureFloat('u_activity', 0.3 + seed * 0.6);
   ensureFloat('u_coreRadius', 0.2 + seed * 0.3);
+  // Transient age (0 = peak, 1 = faded). Set near peak so the fireball
+  // shell is at small radius + bright; otherwise shaders like
+  // transient-grb produce alpha ≈ 0 and `discard` every fragment.
+  ensureFloat('u_age', 0.15);
 
   // Sun direction baseline — matches the entry's sunDirWorld so shaders
   // that read u_sunDir shade against the same light direction.
