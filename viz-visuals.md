@@ -191,7 +191,7 @@ pnpm typecheck
 
 ---
 
-### T-V-01 — Visual regression harness 🟢
+### T-V-01 — Visual regression harness ✅ DONE 6b37db0 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 4h
 **Goal:** Preview-driven screenshot comparison per ENT-ID. Detects regressions when a family shader changes.
 **Files:**
@@ -211,7 +211,7 @@ pnpm typecheck
 
 ---
 
-### T-V-02 — Per-family MaterialFactory unit test harness 🟢
+### T-V-02 — Per-family MaterialFactory unit test harness ✅ DONE 4de53a1 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 2h
 **Goal:** Parameterized vitest — feed every ENT-ID in shared-types into `MaterialFactory.create()`, assert no throw + correct shader name.
 **Files:**
@@ -230,7 +230,7 @@ pnpm typecheck
 
 ## Phase V1 — Small bodies: 7 new shader files + 20 Tier A subtypes (4 days)
 
-### T-V-03 — `smallbody-asteroid.frag` 🟢
+### T-V-03 — `smallbody-asteroid.frag` ✅ DONE f7a8fc0 2026-04-22 🟢
 **Depends:** T-V-02  **Est:** 3h
 **Goal:** Unified asteroid shader covering C/S/M/V Tholen classes via `#define`.
 **Files:** `apps/web/src/shaders/smallbody-asteroid.vert` (new), `smallbody-asteroid.frag` (new)

@@ -44,6 +44,8 @@ import {
   planetGasFragSource,
   planetRockyFragSource,
   planetVertSource,
+  smallbodyAsteroidBinaryFragSource,
+  smallbodyAsteroidBinaryVertSource,
   smallbodyAsteroidFragSource,
   smallbodyAsteroidVertSource,
   smallbodyCometFragSource,
@@ -147,6 +149,10 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
   'smallbody-asteroid': {
     vert: smallbodyAsteroidVertSource,
     frag: smallbodyAsteroidFragSource,
+  },
+  'smallbody-asteroid-binary': {
+    vert: smallbodyAsteroidBinaryVertSource,
+    frag: smallbodyAsteroidBinaryFragSource,
   },
   'smallbody-comet': { vert: smallbodyCometVertSource, frag: smallbodyCometFragSource },
 
