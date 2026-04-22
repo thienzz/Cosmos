@@ -96,6 +96,16 @@ import {
   starRemnantFragSource,
   starVariableFragSource,
   starVertSource,
+  transientFrbFragSource,
+  transientFrbVertSource,
+  transientGrbFragSource,
+  transientGrbVertSource,
+  transientKilonovaFragSource,
+  transientKilonovaVertSource,
+  transientTdeFragSource,
+  transientTdeVertSource,
+  transientXrbFragSource,
+  transientXrbVertSource,
 } from '@/shaders';
 
 /**
@@ -185,6 +195,13 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
   'star-subdwarf':    { vert: starSubdwarfVertSource, frag: starSubdwarfFragSource },
   'star-carbon':      { vert: starCarbonVertSource, frag: starCarbonFragSource },
   'star-pms':         { vert: starPmsVertSource, frag: starPmsFragSource },
+
+  // Transients (T-V-55, Tier B).
+  'transient-grb':      { vert: transientGrbVertSource,      frag: transientGrbFragSource },
+  'transient-frb':      { vert: transientFrbVertSource,      frag: transientFrbFragSource },
+  'transient-tde':      { vert: transientTdeVertSource,      frag: transientTdeFragSource },
+  'transient-kilonova': { vert: transientKilonovaVertSource, frag: transientKilonovaFragSource },
+  'transient-xrb':      { vert: transientXrbVertSource,      frag: transientXrbFragSource },
 
   // Galaxies
   'galaxy-spiral':             { vert: galaxyVertSource, frag: galaxySpiralFragSource },
@@ -498,6 +515,31 @@ const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.fre
   'ENT-7030': { shader: 'lss-filament' },
   'ENT-7031': { shader: 'lss-void' },
   'ENT-7032': { shader: 'lss-great-wall' },
+
+  // Tier B LSS extensions (T-V-54). Reserved ENT-7050..7054.
+  'ENT-7050': { shader: 'lss-supercluster', defines: { LSS_ABELL_R0: 1 } },
+  'ENT-7051': { shader: 'lss-supercluster', defines: { LSS_ABELL_R1: 1 } },
+  'ENT-7052': { shader: 'lss-supercluster', defines: { LSS_ABELL_R2: 1 } },
+  'ENT-7053': { shader: 'lss-supercluster', defines: { LSS_SZ_DETECTED: 1 } },
+  'ENT-7054': { shader: 'lss-supercluster', defines: { LSS_XRAY_SELECTED: 1 } },
+
+  // Tier B transients (T-V-55). Reserved ENT-7060..7064.
+  'ENT-7060': { shader: 'transient-grb' },
+  'ENT-7061': { shader: 'transient-frb' },
+  'ENT-7062': { shader: 'transient-tde' },
+  'ENT-7063': { shader: 'transient-kilonova' },
+  'ENT-7064': { shader: 'transient-xrb' },
+
+  // Tier B exotic extensions (T-V-56). Reserved ENT-8030..8038.
+  'ENT-8030': { shader: 'exotic-blackhole', defines: { BH_IMBH: 1 } },
+  'ENT-8031': { shader: 'exotic-blackhole', defines: { BH_WANDERING: 1 } },
+  'ENT-8032': { shader: 'exotic-compact',   defines: { COMPACT_CCO: 1 } },
+  'ENT-8033': { shader: 'star-remnant',     defines: { WD_DA: 1 } },
+  'ENT-8034': { shader: 'star-remnant',     defines: { WD_DB: 1 } },
+  'ENT-8035': { shader: 'star-remnant',     defines: { WD_DC: 1 } },
+  'ENT-8036': { shader: 'star-remnant',     defines: { WD_DQ: 1 } },
+  'ENT-8037': { shader: 'star-remnant',     defines: { WD_DZ: 1 } },
+  'ENT-8038': { shader: 'star-remnant',     defines: { WD_DO: 1 } },
 });
 
 /**

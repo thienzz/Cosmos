@@ -887,21 +887,21 @@ pnpm typecheck
 
 ## Phase V13 — Tier B: Galaxy extensions (+10 subtypes, 3 days)
 
-### T-V-51 — de Vaucouleurs T-type full + dwarf variants 🟡
+### T-V-51 — de Vaucouleurs T-type full + dwarf variants ✅ DONE f0f842c 2026-04-22 🟡
 **Depends:** T-V-27  **Est:** 5h
 
 **Do:** Hubble types T=-6..+10 via uniform ramp; dwarf subclasses dE/dSph/UCD/UFD/BCD with unique size+brightness presets.
 
 ---
 
-### T-V-52 — Morphology specials 🟢
+### T-V-52 — Morphology specials ✅ DONE f0f842c 2026-04-22 🟢
 **Depends:** T-V-51  **Est:** 4h
 
 **Do:** Green pea, polar ring, tidal dwarf, cD (central dominant in cluster), BCG (brightest cluster galaxy), chain (edge-on), ULIRG/HyLIRG sub-types.
 
 ---
 
-### T-V-53 — Wire Tier B galaxy factory 🟡
+### T-V-53 — Wire Tier B galaxy factory ✅ DONE f0f842c 2026-04-22 🟡
 **Depends:** T-V-51, T-V-52  **Est:** 2h
 
 **Do:** +10 Tier B galaxy entries.

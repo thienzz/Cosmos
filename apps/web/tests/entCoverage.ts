@@ -298,6 +298,31 @@ export const ENT_COVERAGE_FIXTURE: readonly EntCoverageRow[] = Object.freeze([
   { id: 'ENT-8023', subtype: 'Quasi-Star',      shader: 'exotic-quasi-star', status: 'shipped' },
   { id: 'ENT-8024', subtype: 'Planck Star',     shader: 'exotic-planck',     status: 'shipped' },
   { id: 'ENT-8025', subtype: 'Naked Singularity', shader: 'exotic-gr-extreme', status: 'shipped' },
+
+  // Tier B LSS extensions (T-V-54, reserved ENT-7050..7054).
+  { id: 'ENT-7050', subtype: 'Abell R0 (poor)',     shader: 'lss-supercluster', status: 'shipped', note: 'T-V-54 LSS_ABELL_R0' },
+  { id: 'ENT-7051', subtype: 'Abell R1',            shader: 'lss-supercluster', status: 'shipped', note: 'T-V-54 LSS_ABELL_R1' },
+  { id: 'ENT-7052', subtype: 'Abell R2 (rich)',     shader: 'lss-supercluster', status: 'shipped', note: 'T-V-54 LSS_ABELL_R2' },
+  { id: 'ENT-7053', subtype: 'SZ-detected Cluster', shader: 'lss-supercluster', status: 'shipped', note: 'T-V-54 LSS_SZ_DETECTED' },
+  { id: 'ENT-7054', subtype: 'X-ray selected',      shader: 'lss-supercluster', status: 'shipped', note: 'T-V-54 LSS_XRAY_SELECTED' },
+
+  // Tier B transients (T-V-55, reserved ENT-7060..7064).
+  { id: 'ENT-7060', subtype: 'GRB Afterglow',       shader: 'transient-grb',      status: 'shipped', note: 'T-V-55 GRB fireball fade' },
+  { id: 'ENT-7061', subtype: 'FRB Site',            shader: 'transient-frb',      status: 'shipped', note: 'T-V-55 FRB ms-pulse' },
+  { id: 'ENT-7062', subtype: 'TDE',                 shader: 'transient-tde',      status: 'shipped', note: 'T-V-55 stream + accretion flare' },
+  { id: 'ENT-7063', subtype: 'Kilonova',            shader: 'transient-kilonova', status: 'shipped', note: 'T-V-55 r-process ejecta + jet' },
+  { id: 'ENT-7064', subtype: 'X-ray Burster',       shader: 'transient-xrb',      status: 'shipped', note: 'T-V-55 periodic bursts' },
+
+  // Tier B exotic extensions (T-V-56, reserved ENT-8030..8038).
+  { id: 'ENT-8030', subtype: 'IMBH',                shader: 'exotic-blackhole', status: 'shipped', note: 'T-V-56 BH_IMBH intermediate' },
+  { id: 'ENT-8031', subtype: 'Wandering BH',        shader: 'exotic-blackhole', status: 'shipped', note: 'T-V-56 BH_WANDERING' },
+  { id: 'ENT-8032', subtype: 'CCO',                 shader: 'exotic-compact',   status: 'shipped', note: 'T-V-56 COMPACT_CCO' },
+  { id: 'ENT-8033', subtype: 'WD Cooling DA',       shader: 'star-remnant',     status: 'shipped', note: 'T-V-56 WD_DA hydrogen atm' },
+  { id: 'ENT-8034', subtype: 'WD Cooling DB',       shader: 'star-remnant',     status: 'shipped', note: 'T-V-56 WD_DB helium atm' },
+  { id: 'ENT-8035', subtype: 'WD Cooling DC',       shader: 'star-remnant',     status: 'shipped', note: 'T-V-56 WD_DC continuum' },
+  { id: 'ENT-8036', subtype: 'WD Cooling DQ',       shader: 'star-remnant',     status: 'shipped', note: 'T-V-56 WD_DQ carbon-rich' },
+  { id: 'ENT-8037', subtype: 'WD Cooling DZ',       shader: 'star-remnant',     status: 'shipped', note: 'T-V-56 WD_DZ metal-polluted' },
+  { id: 'ENT-8038', subtype: 'WD Cooling DO',       shader: 'star-remnant',     status: 'shipped', note: 'T-V-56 WD_DO hot hydrogen-deficient' },
 ]);
 
 export function assertUniqueEntIds(rows = ENT_COVERAGE_FIXTURE): void {

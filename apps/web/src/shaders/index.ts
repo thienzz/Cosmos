@@ -104,6 +104,16 @@ import starSubdwarfFragSource from './star-subdwarf.frag';
 import starSubdwarfVertSource from './star-subdwarf.vert';
 import starVariableFragSource from './star-variable.frag';
 import starVertSource from './star.vert';
+import transientFrbFragSource from './transient-frb.frag';
+import transientFrbVertSource from './transient-frb.vert';
+import transientGrbFragSource from './transient-grb.frag';
+import transientGrbVertSource from './transient-grb.vert';
+import transientKilonovaFragSource from './transient-kilonova.frag';
+import transientKilonovaVertSource from './transient-kilonova.vert';
+import transientTdeFragSource from './transient-tde.frag';
+import transientTdeVertSource from './transient-tde.vert';
+import transientXrbFragSource from './transient-xrb.frag';
+import transientXrbVertSource from './transient-xrb.vert';
 import zodiacalLightFragSource from './zodiacal-light.frag';
 
 export {
@@ -212,5 +222,15 @@ export {
   starSubdwarfVertSource,
   starVariableFragSource,
   starVertSource,
+  transientFrbFragSource,
+  transientFrbVertSource,
+  transientGrbFragSource,
+  transientGrbVertSource,
+  transientKilonovaFragSource,
+  transientKilonovaVertSource,
+  transientTdeFragSource,
+  transientTdeVertSource,
+  transientXrbFragSource,
+  transientXrbVertSource,
   zodiacalLightFragSource,
 };
