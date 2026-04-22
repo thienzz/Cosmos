@@ -9,5 +9,6 @@ export * from './entityRef.js';
 export * from './entityToggles.js';
 export * from './guards.js';
 export * from './primitives.js';
+export * from './render.js';
 export * from './taxonomy.js';
 export * from './tiles.js';
