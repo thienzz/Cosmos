@@ -7,6 +7,7 @@ import {
   type GalaxyMaterialHandle,
   type GalaxyMaterialOptions,
 } from './GalaxyMaterial';
+import { createMaterialForEntity } from './MaterialFactory';
 
 /**
  * T29 — LOD orchestrator for a single galaxy entity.
@@ -90,18 +91,22 @@ export class GalaxyLod {
     // --- Billboard tier (LOD1-2) ---
     // Camera-facing quad. We use a circular alpha gradient on the palette
     // tint — cheap, reads as a disk at any angle, no overdraw spike.
-    const billboardMat = new THREE.ShaderMaterial({
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      side: THREE.DoubleSide,
-      uniforms: {
-        u_tint: { value: new THREE.Color(options.tint) },
-        u_logDepthBufFC: { value: 0 },
+    const billboardTint = new THREE.Color(options.tint);
+    const { material: billboardMat } = createMaterialForEntity(
+      {
+        render: {
+          shader: 'galaxy-billboard',
+          uniforms: {
+            u_tint: [billboardTint.r, billboardTint.g, billboardTint.b],
+          },
+        },
       },
-      vertexShader: BILLBOARD_VERT,
-      fragmentShader: BILLBOARD_FRAG,
-    });
+      { debugName: `GalaxyLod:${this.kind}:billboard` },
+    );
+    billboardMat.transparent = true;
+    billboardMat.depthWrite = false;
+    billboardMat.blending = THREE.AdditiveBlending;
+    billboardMat.side = THREE.DoubleSide;
     const quadGeometry = new THREE.PlaneGeometry(2, 2);
     this.billboardMesh = new THREE.Mesh(quadGeometry, billboardMat);
     this.billboardMesh.name = `GalaxyLod:${this.kind}:billboard`;
@@ -182,51 +187,5 @@ export class GalaxyLod {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Billboard shaders — camera-facing quad with a radial gradient on the tint.
-// ---------------------------------------------------------------------------
-
-const BILLBOARD_VERT = /* glsl */ `
-varying vec2 v_uv;
-#ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-  varying float v_fragDepth;
-#endif
-void main() {
-  v_uv = uv;
-  // Camera-facing: extract the camera basis from the view matrix and
-  // reconstruct the quad so it always faces the camera.
-  vec3 right = vec3(viewMatrix[0].x, viewMatrix[1].x, viewMatrix[2].x);
-  vec3 up    = vec3(viewMatrix[0].y, viewMatrix[1].y, viewMatrix[2].y);
-  vec3 localOffset = right * position.x + up * position.y;
-  // modelMatrix position + camera-facing local offset scaled by the mesh's
-  // scale.x (uniform scale is assumed for galaxy billboards).
-  vec3 worldOffset = localOffset * length(vec3(modelMatrix[0].x, modelMatrix[0].y, modelMatrix[0].z));
-  vec4 worldPos = modelMatrix * vec4(0.0, 0.0, 0.0, 1.0);
-  worldPos.xyz += worldOffset;
-  gl_Position = projectionMatrix * viewMatrix * worldPos;
-  #ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-    v_fragDepth = 1.0 + gl_Position.w;
-  #endif
-}
-`;
-
-const BILLBOARD_FRAG = /* glsl */ `
-precision highp float;
-varying vec2 v_uv;
-uniform vec3 u_tint;
-#ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-  uniform float logDepthBufFC;
-  varying float v_fragDepth;
-#endif
-void main() {
-  vec2 uv = v_uv * 2.0 - 1.0;
-  float r = length(uv);
-  if (r > 1.0) discard;
-  // Radial gradient: 1 at centre, 0 at rim.
-  float falloff = exp(-r * r * 2.4);
-  gl_FragColor = vec4(u_tint * falloff, falloff);
-  #ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-    gl_FragDepth = log2(v_fragDepth) * logDepthBufFC * 0.5;
-  #endif
-}
-`;
+// Billboard shaders moved to apps/web/src/shaders/galaxy-billboard.{vert,frag}
+// and routed through MaterialFactory under 'galaxy-billboard' (T-V-58).

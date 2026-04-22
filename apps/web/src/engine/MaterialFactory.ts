@@ -25,6 +25,8 @@ import {
   exoticTzoFragSource,
   exoticVertSource,
   galaxyAgnFragSource,
+  galaxyBillboardFragSource,
+  galaxyBillboardVertSource,
   galaxyEllipticalFragSource,
   galaxyIrregularFragSource,
   galaxyLenticularFragSource,
@@ -209,6 +211,10 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
 
   // Galaxies
   'galaxy-spiral':             { vert: galaxyVertSource, frag: galaxySpiralFragSource },
+  // T-V-58 — mid-distance LOD billboard (camera-facing quad with radial
+  // gradient). Separate from the volumetric galaxy-* shaders so the LOD
+  // orchestrator can hot-swap tiers without touching the raymarching path.
+  'galaxy-billboard':          { vert: galaxyBillboardVertSource, frag: galaxyBillboardFragSource },
   'galaxy-elliptical':         { vert: galaxyVertSource, frag: galaxyEllipticalFragSource },
   'galaxy-lenticular':         { vert: galaxyVertSource, frag: galaxyLenticularFragSource },
   'galaxy-irregular':          { vert: galaxyVertSource, frag: galaxyIrregularFragSource },

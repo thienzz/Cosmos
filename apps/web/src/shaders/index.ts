@@ -22,6 +22,8 @@ import exoticTopologyFragSource from './exotic-topology.frag';
 import exoticTzoFragSource from './exotic-tzo.frag';
 import exoticVertSource from './exotic.vert';
 import galaxyAgnFragSource from './galaxy-agn.frag';
+import galaxyBillboardFragSource from './galaxy-billboard.frag';
+import galaxyBillboardVertSource from './galaxy-billboard.vert';
 import galaxyEllipticalFragSource from './galaxy-elliptical.frag';
 import galaxyIrregularFragSource from './galaxy-irregular.frag';
 import galaxyLenticularFragSource from './galaxy-lenticular.frag';
@@ -144,6 +146,8 @@ export {
   exoticTzoFragSource,
   exoticVertSource,
   galaxyAgnFragSource,
+  galaxyBillboardFragSource,
+  galaxyBillboardVertSource,
   galaxyEllipticalFragSource,
   galaxyIrregularFragSource,
   galaxyLenticularFragSource,
