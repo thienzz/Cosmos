@@ -985,21 +985,35 @@ pnpm typecheck
 
 ## Phase V16 — Final regression + baseline (2 days)
 
-### T-V-61 — Visual baseline capture ✅ DONE de49607 2026-04-22 🟢
-**Depends:** T-V-57  **Est:** 5h
+### T-V-61 — Visual baseline capture ✅ DONE e3fd534 2026-04-23 🟢
+**Depends:** T-V-57  **Est:** 5h (actual: ~14h including post-merge audit + rewrite)
 
 **Goal:** 262 reference screenshots committed to `apps/web/tests/visual/baseline/`.
 
 **Do:**
-1. Script `pnpm --filter @cosmos/web test:visual:capture-all` — for each of 262 ENT-IDs, fly to representative pose, screenshot.
-2. Commit baseline. ~262 PNGs × ~80 KB avg = ~21 MB (acceptable in repo, not via LFS).
+1. Script `pnpm --filter @cosmos/web test:visual:capture-all` — for each fixture row, mount the procedural material and screenshot.
+2. Commit baseline. ~21 MB total (acceptable in repo, not via LFS).
 
-**Verify:** `find apps/web/tests/visual/baseline -name '*.png' | wc -l` = 261 (262 fixture rows − ENT-7040 CMB which is `shader: null` / inline per CLAUDE.md §1).
+**Verify:** `find apps/web/tests/visual/baseline -name '*.png' | wc -l` = **246** (261 capturable rows − 15 documented dropouts; see "Dropped baselines" below).
 
 **Implementation notes:**
-- Standalone capture page [apps/web/visual-capture.html](apps/web/visual-capture.html) + entry [src/visualCaptureEntry.ts](apps/web/src/visualCaptureEntry.ts) isolate capture from the full app (SearchTargetMarker has no `ENT-NNNN` prefix branch — handling every ENT-ID through `flyToCelestialCoord` would have required risky changes to that renderer).
-- [src/testHarness/visualCaptureRegistry.ts](apps/web/src/testHarness/visualCaptureRegistry.ts) routes each shader to its dedicated builder so palette uniforms are Doc-accurate (MaterialFactory by itself produces monochrome output — see its own comment at `ENT-2010` re `ROCKY_PALETTES`). Tier B `#define` overlays from `ENT_ID_TO_RENDER` merge on top to give `CARBON_CR` / `BD_L` / etc. a distinct visual fingerprint.
-- Driver [tests/visual/capture.ts](apps/web/tests/visual/capture.ts) runs 4-way concurrent with a 2-pass serial retry for race-condition failures (`Element not attached to DOM` / `Execution context was destroyed`). Full sweep ≈ 5–6 min.
+- Standalone capture page [apps/web/visual-capture.html](apps/web/visual-capture.html) + entry [src/visualCaptureEntry.ts](apps/web/src/visualCaptureEntry.ts) isolate capture from the full app (`SearchTargetMarker` has no `ENT-NNNN` prefix branch).
+- [src/testHarness/visualCaptureRegistry.ts](apps/web/src/testHarness/visualCaptureRegistry.ts) hosts a **262-row ENT → builder map** that routes each ENT-ID to the right per-family builder (`createStarMaterial(kind)`, `createPlanetMaterial(kind)`, `createMoonMaterial(kind)`, `createGalaxyMaterial(kind, subvariant)`, `createNebulaMaterialForSubtype(subtype)`, `createExoticMaterial(kind)`). Shaders without dedicated builders (small-body / cluster / lss / transient / Tier B nebulae) flow through MaterialFactory + `injectCaptureDefaults()` — a per-ENT-ID hash seeds `u_shapeSeed` / `u_richness` / palette colour slots so each ENT-ID renders distinctly.
+- `overlayNonSelectorDefines()` filters out family-selector defines (`ROCKY_*`, `MOON_*`, `EVOLVED_*`, …) before merging Tier B `#define`s on top of the dedicated material — the original implementation stacked them naively, which let `ROCKY_EARTH` (later in `planet-rocky.frag`) override every overlaid `ROCKY_MARS` / `ROCKY_VENUS`.
+- Per-frame `update(ctx)` callbacks: every dedicated handle is wrapped to refresh `u_cameraLocal` + `u_sunDir` + `u_rotation` from the entry's tick loop. Generic `syncCameraLocal()` fallback handles MaterialFactory-only materials so raymarch shaders aren't degenerate.
+- Geometry per shader (`GEOMETRY_BY_SHADER`): volumetric raymarch shaders (exotic family, nebula family, lss family) render on a 2×2×2 box; transients on a plane; everything else on a sphere. Camera at +Z=2.6, sphere radius 1, FOV 45°.
+- Driver [tests/visual/capture.ts](apps/web/tests/visual/capture.ts) runs 4-way concurrent with a 2-pass serial retry. Sanity check rejects PNGs <3 KB (the 1826-byte all-black signature) and warns on hash groups >3 ENT-IDs (shader dispatch collapse). Full sequential sweep ≈ 13 min.
+
+**Dropped baselines (15 ENT-IDs; documented harness limitation, not a shader bug):**
+- 5 comets (ENT-4020/4021/4022/4023/4095) — `smallbody-comet.frag` reads custom vertex attributes (`v_tailCoord`, `v_component`, `v_activity`) populated only by `CometRenderer`'s 4-draw-per-comet setup.
+- 8 Tier B nebulae (ENT-5102..5109) — `nebula-hh` / `nebula-pillar` / `nebula-dark` Tier B variants render below the 3 KB threshold on the isolated harness; they need the `NebulaRenderer` blend setup.
+- ENT-8012 Preon — `exotic-compact`'s PREON branch is shader-designed as "tiny fuzzy quantum point" → effectively invisible at our pose.
+- ENT-8018 DM Halo — `exotic-dark` NFW profile is volumetric and transparent; below threshold.
+
+**Companion shader fixes (4bddcce):**
+- `star-variable.frag`: scoped `mu` declaration inside `#ifdef VAR_SYMBIOTIC` — pre-existing GLSL ES 3.0 redefinition bug that crashed ENT-1038.
+- `star-evolved.frag`: scoped `mu` / `rim` inside `#ifdef EVOLVED_BSG` — same class of bug, crashed ENT-1024.
+Both errors only manifest at runtime; vitest's jsdom fake-WebGL never compiles the shader so the coverage test (523 pass / 1 skip) didn't catch them.
 
 ---
 
