@@ -9,6 +9,7 @@ import type { MainSeqKind, StarFamilyKind } from '@/utils/starFamilyPalette';
 
 import { createExoticMaterial, type ExoticMaterialHandle } from './ExoticMaterial';
 import { createGalaxyMaterial, type GalaxyMaterialHandle } from './GalaxyMaterial';
+import { createMaterialForEntity } from './MaterialFactory';
 import {
   createNebulaMaterial,
   createNebulaMaterialForSubtype,
@@ -38,41 +39,8 @@ import { createStarMaterial, type StarMaterialHandle } from './StarMaterialFamil
  * "you arrived here" affordance on top of the volumetric mesh.
  */
 
-const VERT_SHADER = `
-uniform float u_time;
-varying vec3 v_normal;
-varying vec3 v_worldPos;
-void main() {
-  v_normal = normalize(normalMatrix * normal);
-  // Gentle breathing pulse (±3%) so the marker reads as "live" not a dead ball.
-  float s = 1.0 + 0.03 * sin(u_time * 2.5);
-  vec4 world = modelMatrix * vec4(position * s, 1.0);
-  v_worldPos = world.xyz;
-  gl_Position = projectionMatrix * viewMatrix * world;
-}`;
-
-// Three.js auto-declares `cameraPosition` in the fragment shader, but NOT
-// `modelMatrix` — pass world position via a varying so we can compute the
-// view vector without touching unavailable uniforms.
-const FRAG_SHADER = `
-uniform float u_time;
-uniform vec3 u_color;
-varying vec3 v_normal;
-varying vec3 v_worldPos;
-void main() {
-  // Rim-lit sphere — fresnel falloff plus soft core so it reads against a
-  // black starfield background.
-  vec3 view = normalize(cameraPosition - v_worldPos);
-  float fres = pow(1.0 - max(0.0, dot(v_normal, view)), 2.0);
-  float core = max(0.0, dot(v_normal, view));
-  // Slow hue shift so multiple markers can be distinguished at a glance.
-  float pulse = 0.6 + 0.4 * sin(u_time * 1.7);
-  vec3 col = u_color * (core * 0.7 + fres * 1.5 * pulse);
-  // Clamp + soft glow — alpha falloff on rim so the sphere looks translucent
-  // rather than cartoony solid.
-  float a = 0.35 + 0.55 * fres;
-  gl_FragColor = vec4(col, a);
-}`;
+// Orb shader sources moved to apps/web/src/shaders/search-marker-orb.{vert,frag}
+// and routed through MaterialFactory under the 'search-marker-orb' key (T-V-58).
 
 function makeLabelSprite(label: string, color = '#a5f3fc'): THREE.Sprite | null {
   const canvas = document.createElement('canvas');
@@ -310,7 +278,6 @@ export class SearchTargetMarker {
   private readonly orb: THREE.Mesh;
   private readonly labelSprite: THREE.Sprite | null;
   private readonly material: THREE.ShaderMaterial;
-  private readonly uniforms: { u_time: { value: number }; u_color: { value: THREE.Color } };
   private elapsedSec = 0;
   private radiusHint: number;
   /** P2F — optional procedural entity mesh rendered alongside the orb. */
@@ -326,18 +293,20 @@ export class SearchTargetMarker {
     this.group.name = 'SearchTargetMarker';
     this.group.position.copy(targetScene);
 
-    this.uniforms = {
-      u_time: { value: 0 },
-      u_color: { value: new THREE.Color(colorHex) },
-    };
-    this.material = new THREE.ShaderMaterial({
-      uniforms: this.uniforms,
-      vertexShader: VERT_SHADER,
-      fragmentShader: FRAG_SHADER,
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    });
+    const color = new THREE.Color(colorHex);
+    const { material } = createMaterialForEntity(
+      {
+        render: {
+          shader: 'search-marker-orb',
+          uniforms: { u_color: [color.r, color.g, color.b] },
+        },
+      },
+      { debugName: 'SearchTargetMarker' },
+    );
+    material.transparent = true;
+    material.depthWrite = false;
+    material.blending = THREE.AdditiveBlending;
+    this.material = material;
     const geo = new THREE.SphereGeometry(1, 32, 24);
     this.orb = new THREE.Mesh(geo, this.material);
     this.orb.name = 'SearchTargetMarker:orb';
@@ -389,7 +358,7 @@ export class SearchTargetMarker {
    */
   update(deltaSec: number, cameraWorldPos: THREE.Vector3): void {
     this.elapsedSec += deltaSec;
-    this.uniforms.u_time.value = this.elapsedSec;
+    this.material.uniforms.u_time!.value = this.elapsedSec;
 
     const distToCam = this.group.position.distanceTo(cameraWorldPos);
     // Target visual radius ~ 1.2 % of distance (a small but obvious orb at

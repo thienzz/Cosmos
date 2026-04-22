@@ -68,6 +68,8 @@ import {
   planetGasFragSource,
   planetRockyFragSource,
   planetVertSource,
+  searchMarkerOrbFragSource,
+  searchMarkerOrbVertSource,
   smallbodyAsteroidBinaryFragSource,
   smallbodyAsteroidBinaryVertSource,
   smallbodyAsteroidFragSource,
@@ -272,6 +274,13 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
   'exoplanet-host-marker': {
     vert: exoplanetHostMarkerVertSource,
     frag: exoplanetHostMarkerFragSource,
+  },
+  // T-V-58 — UI orb drawn at a fly-to search destination. Not an ENT-ID
+  // entity; lives outside the Doc 17 catalog but shares the factory plumbing
+  // so the integration sweep can eliminate inline ShaderMaterial uses.
+  'search-marker-orb': {
+    vert: searchMarkerOrbVertSource,
+    frag: searchMarkerOrbFragSource,
   },
 });
 
