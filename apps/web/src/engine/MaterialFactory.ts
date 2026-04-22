@@ -275,6 +275,23 @@ const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.fre
   'ENT-2047': { shader: 'planet-extreme', defines: { EXTREME_SYNESTIA: 1 } },
   'ENT-2050': { shader: 'planet-rocky',   defines: { ROCKY_CHTHONIAN: 1 } },
 
+  // Moons (T-V-22..24) — all 15 variants live across 6 moon-*.frag files.
+  'ENT-3010': { shader: 'moon-volcanic',    defines: { MOON_IO: 1 } },
+  'ENT-3011': { shader: 'moon-icy',         defines: { MOON_EUROPA: 1 } },
+  'ENT-3012': { shader: 'moon-atmospheric', defines: { MOON_TITAN: 1 } },
+  'ENT-3013': { shader: 'moon-rocky',       defines: { MOON_LUNA: 1 } },
+  'ENT-3014': { shader: 'moon-rocky',       defines: { MOON_IRREGULAR: 1 } },
+  'ENT-3015': { shader: 'moon-icy',         defines: { MOON_ENCELADUS: 1 } },
+  'ENT-3016': { shader: 'moon-rocky',       defines: { MOON_CALLISTO: 1 } },
+  'ENT-3017': { shader: 'moon-icy',         defines: { MOON_GANYMEDE: 1 } },
+  'ENT-3018': { shader: 'moon-extreme',     defines: { MOON_TRITON: 1 } },
+  'ENT-3019': { shader: 'moon-extreme',     defines: { MOON_MIRANDA: 1 } },
+  'ENT-3020': { shader: 'moon-extreme',     defines: { MOON_HYPERION: 1 } },
+  'ENT-3021': { shader: 'moon-minor',       defines: { MOON_SHEPHERD: 1 } },
+  'ENT-3022': { shader: 'moon-minor',       defines: { MOON_TROJAN_MOON: 1 } },
+  'ENT-3023': { shader: 'moon-minor',       defines: { MOON_BINARY: 1 } },
+  'ENT-3024': { shader: 'moon-icy',         defines: { MOON_SUBSURFACE_OCEAN: 1 } },
+
   // Small bodies (T-V-10).
   'ENT-4010': { shader: 'smallbody-asteroid',        defines: { TYPE_C: 1 } },
   'ENT-4011': { shader: 'smallbody-asteroid',        defines: { TYPE_S: 1 } },
