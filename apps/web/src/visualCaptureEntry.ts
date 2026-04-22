@@ -27,7 +27,7 @@ import { createMaterialForEntity } from '@/engine/MaterialFactory';
 import { buildCaptureMaterial } from '@/testHarness/visualCaptureRegistry';
 
 const CANVAS_PX = 512;
-const SETTLE_SEC = 0.4; // run animated shaders for this long before capture
+const SETTLE_SEC = 1.0; // run animated shaders for this long before capture
 const FIXED_TIME = 1.0; // deterministic u_time value stamped at capture
 const CAMERA_Z = 2.6;
 
@@ -121,6 +121,27 @@ function setUniformTime(t: number): void {
 
 const startMs = performance.now();
 
+function finish(): void {
+  // Render the deterministic pinned frame three times with an explicit
+  // GPU flush between each. Single-render captures occasionally race
+  // ahead of the WebGL pipeline (the screenshot reads back before the
+  // fragment shader has actually written), producing black PNGs even
+  // though the material compiled fine. Three renders + flushes is
+  // empirically race-free under headless Chromium swiftshader.
+  setUniformTime(FIXED_TIME);
+  for (let i = 0; i < 3; i++) {
+    renderer.render(scene, camera);
+    const gl = renderer.getContext();
+    gl.flush();
+    gl.finish();
+  }
+  // Wait one more rAF so Chromium's compositor has the latest texture
+  // bound to the canvas before the screenshot arrives.
+  requestAnimationFrame(() => {
+    win.__captureReady = true;
+  });
+}
+
 function tick(): void {
   const elapsed = (performance.now() - startMs) / 1000;
   if (elapsed < SETTLE_SEC) {
@@ -129,10 +150,7 @@ function tick(): void {
     requestAnimationFrame(tick);
     return;
   }
-  // Final pinned-time frame for reproducibility.
-  setUniformTime(FIXED_TIME);
-  renderer.render(scene, camera);
-  win.__captureReady = true;
+  finish();
 }
 
 requestAnimationFrame(tick);
