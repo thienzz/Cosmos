@@ -62,6 +62,8 @@ import smallbodyKboFragSource from './smallbody-kbo.frag';
 import smallbodyKboVertSource from './smallbody-kbo.vert';
 import smallbodyRubbleFragSource from './smallbody-rubble.frag';
 import smallbodyRubbleVertSource from './smallbody-rubble.vert';
+import smallbodyTrojanFragSource from './smallbody-trojan.frag';
+import smallbodyTrojanVertSource from './smallbody-trojan.vert';
 import starBinaryFragSource from './star-binary.frag';
 import starEvolvedFragSource from './star-evolved.frag';
 import starMainseqFragSource from './star-mainseq.frag';
@@ -136,6 +138,8 @@ export {
   smallbodyKboVertSource,
   smallbodyRubbleFragSource,
   smallbodyRubbleVertSource,
+  smallbodyTrojanFragSource,
+  smallbodyTrojanVertSource,
   starBinaryFragSource,
   starEvolvedFragSource,
   starMainseqFragSource,

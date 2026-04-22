@@ -56,6 +56,8 @@ import {
   smallbodyKboVertSource,
   smallbodyRubbleFragSource,
   smallbodyRubbleVertSource,
+  smallbodyTrojanFragSource,
+  smallbodyTrojanVertSource,
   starBinaryFragSource,
   starEvolvedFragSource,
   starMainseqFragSource,
@@ -172,6 +174,10 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
   'smallbody-rubble': {
     vert: smallbodyRubbleVertSource,
     frag: smallbodyRubbleFragSource,
+  },
+  'smallbody-trojan': {
+    vert: smallbodyTrojanVertSource,
+    frag: smallbodyTrojanFragSource,
   },
 
   // Exotic

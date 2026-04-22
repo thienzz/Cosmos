@@ -126,7 +126,7 @@ export const ENT_COVERAGE_FIXTURE: readonly EntCoverageRow[] = Object.freeze([
   { id: 'ENT-4041', subtype: 'Plutino (Resonant KBO)', shader: 'smallbody-kbo', status: 'shipped', note: 'T-V-06 default tholin' },
   { id: 'ENT-4042', subtype: 'Scattered Disk',   shader: 'smallbody-kbo',     status: 'shipped', note: 'T-V-06 default tholin' },
   { id: 'ENT-4050', subtype: 'Centaur',          shader: 'smallbody-centaur', status: 'shipped', note: 'T-V-07 CHIRON/CHARIKLO/ACTIVE defines' },
-  { id: 'ENT-4051', subtype: 'Jupiter Trojan',   shader: 'smallbody-trojan',  status: 'planned', note: 'V1 T-V-08' },
+  { id: 'ENT-4051', subtype: 'Jupiter Trojan',   shader: 'smallbody-trojan',  status: 'shipped', note: 'T-V-08 TROJAN_L4/L5 halo defines' },
   { id: 'ENT-4060', subtype: 'Meteoroid Stream', shader: 'meteoroid-stream',  status: 'planned', note: 'V1 T-V-09' },
 
   // Nebulae (ENT-5xxx) — 14 subtypes, polished by V5
