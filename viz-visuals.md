@@ -2,7 +2,7 @@
 
 > **Companion to [viz.md](viz.md) and [viz-tasks.md](viz-tasks.md).** This file describes the "visual coverage" phases — writing + polishing every GLSL shader so each entity type (ENT-ID) renders with its spec-correct appearance per [docs/18-visual-rendering-specification.md](docs/18-visual-rendering-specification.md).
 >
-> **Target:** 240 distinct shader signatures — "100% realistic universe coverage" (beyond this is diminishing-return uniform tweaking). Split into 16 phases (V1..V16), ~40 days focused work.
+> **Target:** 262 distinct shader signatures — "100% realistic universe coverage" (beyond this is diminishing-return uniform tweaking). Split into 17 phases (V0..V16), ~5-7 weeks focused work.
 >
 > **Scope:** client-side only. Backend unchanged. Per CLAUDE.md §1, all visuals stay procedural (no new textures). Per CLAUDE.md §3, Three.js direct (no R3F).
 >
@@ -28,16 +28,16 @@ Per [docs/17-coverage-checklist.md](docs/17-coverage-checklist.md):
 | Stars (ENT-1xxx) | 31 | 31 ✓ | 0 | 0 | +20 |
 | Planets (ENT-2xxx) | 27 | 1 | 6 | 21 (shader exists, needs polish) | +15 |
 | Moons (ENT-3xxx) | 15 | 0 | 0 | 15 (shader exists, needs polish) | +10 |
-| Small Bodies (ENT-4xxx) | 20 | 0 | 0 | 20 | +20 (Bus-DeMeo full) |
+| Small Bodies (ENT-4xxx) | 20 | 0 | 0 | 20 | +24 (Bus-DeMeo 20 + active/MBC/damocloid/Neptune-Trojan) |
 | Nebulae (ENT-5xxx) | 14 | 2 | 4 | 9 | +10 |
 | Galaxies (ENT-6xxx) | 19 | 1 | 3 | 15 | +10 |
 | LSS (ENT-7xxx) | 12 | 0 | 5 | 7 | +5 |
-| Exotic (ENT-8xxx) | 16 | 16 ✓ | 0 | 0 | +5 |
+| Exotic (ENT-8xxx) | 16 | 16 ✓ | 0 | 0 | +9 (IMBH/wandering/CCO + 6 WD cooling DA/DB/DC/DQ/DZ/DO) |
 | Transient | 0 | — | — | — | +5 (new) |
 | **Tier A total** | 154 | 51 | 18 | 87 | — |
-| **Tier B total** | — | — | — | — | **+100 extensions** |
+| **Tier B total** | — | — | — | — | **+108 extensions** |
 
-**End state:** 240 distinct shader signatures (154 Tier A polished + 86 Tier B new).
+**End state:** 262 distinct shader signatures (154 Tier A polished + 108 Tier B new).
 
 ### 0.2 Missing shader files (must write from scratch)
 
@@ -91,7 +91,7 @@ apps/web/src/shaders/
 │    ├─ binds render.uniforms                                   │
 │    └─ falls back to kind→default if render block missing      │
 │                                                               │
-│  All 240 .frag/.vert bundled by Vite at build time.           │
+│  All 262 .frag/.vert bundled by Vite at build time.           │
 └───────────────────────────────────────────────────────────────┘
 ```
 
@@ -824,7 +824,7 @@ pnpm typecheck
 
 ---
 
-## Phase V11 — Tier B: Bus-DeMeo asteroid taxonomy (+20 subtypes, 4 days)
+## Phase V11 — Tier B: Bus-DeMeo asteroid taxonomy (+24 subtypes, 4 days)
 
 ### T-V-45 — Bus-DeMeo primary classes: A, B, Cb, Cg, Cgh, Ch, D, K, L, Ld, O, Q, R, Sa, Sq, Sr, T, Xc, Xe, Xk 🟢
 **Depends:** T-V-03  **Est:** 10h
@@ -908,7 +908,7 @@ pnpm typecheck
 
 ---
 
-## Phase V14 — Tier B: LSS + Transient + Exotic extensions (+20 subtypes, 3 days)
+## Phase V14 — Tier B: LSS + Transient + Exotic extensions (+19 subtypes, 3 days)
 
 ### T-V-54 — LSS extensions: Abell richness classes, SZ-detected, X-ray selected 🟢
 **Depends:** T-V-29  **Est:** 3h
@@ -945,8 +945,8 @@ pnpm typecheck
 ### T-V-57 — Wire all remaining Tier B factories 🟡
 **Depends:** T-V-54..T-V-56  **Est:** 3h
 
-**Do:** +20 Tier B entries. Full 240 coverage.
-**Verify:** coverage test passes 240/240.
+**Do:** +19 Tier B entries. Full 262 coverage.
+**Verify:** coverage test passes 262/262.
 
 ---
 
@@ -980,9 +980,9 @@ pnpm typecheck
 ### T-V-60 — Doc 17 checklist update 🟢
 **Depends:** T-V-57  **Est:** 2h
 
-**Do:** Mark all 240 entries in [docs/17-coverage-checklist.md](docs/17-coverage-checklist.md) as `shipped`. Remove `planned` / `in-progress` markers. Rename stale aliases.
+**Do:** Mark all 262 entries in [docs/17-coverage-checklist.md](docs/17-coverage-checklist.md) as `shipped`. Remove `planned` / `in-progress` markers. Rename stale aliases.
 
-**Verify:** `grep -c "shipped" docs/17-coverage-checklist.md` = 240.
+**Verify:** `grep -c "shipped" docs/17-coverage-checklist.md` = 262.
 
 ---
 
@@ -991,13 +991,13 @@ pnpm typecheck
 ### T-V-61 — Visual baseline capture 🟢
 **Depends:** T-V-57  **Est:** 5h
 
-**Goal:** 240 reference screenshots committed to `apps/web/tests/visual/baseline/`.
+**Goal:** 262 reference screenshots committed to `apps/web/tests/visual/baseline/`.
 
 **Do:**
-1. Script `pnpm --filter @cosmos/web test:visual:capture-all` — for each of 240 ENT-IDs, fly to representative pose, screenshot.
-2. Commit baseline. ~240 JPGs × ~50 KB = ~12 MB (acceptable in repo, not via LFS).
+1. Script `pnpm --filter @cosmos/web test:visual:capture-all` — for each of 262 ENT-IDs, fly to representative pose, screenshot.
+2. Commit baseline. ~262 JPGs × ~50 KB = ~13 MB (acceptable in repo, not via LFS).
 
-**Verify:** `ls apps/web/tests/visual/baseline/**/*.jpg | wc -l` = 240.
+**Verify:** `ls apps/web/tests/visual/baseline/**/*.jpg | wc -l` = 262.
 
 ---
 
@@ -1023,11 +1023,11 @@ pnpm typecheck
 **Depends:** T-V-60  **Est:** 2h
 
 **Do:**
-1. Update [CLAUDE.md](CLAUDE.md) "Entity System" section: 240 types across 9 categories (not 96).
+1. Update [CLAUDE.md](CLAUDE.md) "Entity System" section: 262 types across 9 categories (not 96).
 2. Update [docs/18-visual-rendering-specification.md](docs/18-visual-rendering-specification.md) table of contents with new Tier B sections.
 3. Add `docs/17a-tier-b-extensions.md` — research-grade taxonomy additions beyond Doc 17.
 
-**Verify:** new CLAUDE.md entity count matches shader file count matches coverage test count = 240.
+**Verify:** new CLAUDE.md entity count matches shader file count matches coverage test count = 262.
 
 ---
 
@@ -1042,7 +1042,7 @@ pnpm --filter @cosmos/web test:e2e && \
 pnpm --filter @cosmos/web test:visual && \
 pnpm --filter @cosmos/web test:perf
 ```
-**Success:** all green; 240/240 shader coverage; no FPS regression; visual baseline clean.
+**Success:** all green; 262/262 shader coverage; no FPS regression; visual baseline clean.
 
 ---
 
@@ -1083,10 +1083,10 @@ Parallel: small-bodies + clusters + polish sprints can run parallel (different f
 | V11 Small bodies Tier B (Bus-DeMeo) | 3 | 16h | +24 subtypes |
 | V12 Nebulae Tier B | 3 | 8h | +10 subtypes |
 | V13 Galaxies Tier B | 3 | 11h | +10 subtypes |
-| V14 LSS/Transient/Exotic Tier B | 4 | 15h | +20 subtypes |
+| V14 LSS/Transient/Exotic Tier B | 4 | 15h | +19 subtypes (5 LSS + 5 transient + 9 exotic) |
 | V15 Integration | 3 | 11h | Inline SM count = 0 |
-| V16 Regression + baseline | 5 | 14h | 240 shaders, 240 screenshots |
-| **Total** | **66 tasks** | **212h (~27 days focused)** | **240 distinct shaders** |
+| V16 Regression + baseline | 5 | 14h | 262 shaders, 262 screenshots |
+| **Total** | **66 tasks** | **212h (~27 days focused)** | **262 distinct shaders** |
 
 Calendar estimate: **5-7 weeks** at 1 dev 40h/week (assumes 75% effective focus).
 
@@ -1129,7 +1129,7 @@ grep -c "shipped" docs/17-coverage-checklist.md   # increased by progress
 ```
 Phase V<N> complete.
   Shader files added: <count>
-  ENT-IDs covered: <count> / 240
+  ENT-IDs covered: <count> / 262
   Coverage test: <pass/fail count>
   Visual baseline: <new screenshots count>
   FPS at standard poses: solar=<fps>, stellar=<fps>, galactic=<fps>, cosmic=<fps>
@@ -1170,11 +1170,11 @@ Phase V<N> complete.
 | V14 | `apps/web/src/shaders/transient-kilonova.frag` | new |
 | V14 | `apps/web/src/shaders/transient-xrb.frag` | new |
 | V15 | `apps/web/src/engine/*Material*.ts` | edit (delegate to factory) |
-| V16 | `apps/web/tests/visual/baseline/**/*.jpg` | new (240 files) |
+| V16 | `apps/web/tests/visual/baseline/**/*.jpg` | new (262 files) |
 | V16 | `apps/web/tests/perf/baseline.json` | new |
 | V16 | `.github/workflows/visual-regression.yml` | new |
 | V16 | [docs/17-coverage-checklist.md](docs/17-coverage-checklist.md) | edit (mark all shipped) |
-| V16 | [CLAUDE.md](CLAUDE.md) | edit (entity count 240) |
+| V16 | [CLAUDE.md](CLAUDE.md) | edit (entity count 262) |
 | V16 | `docs/17a-tier-b-extensions.md` | new |
 
 ---
@@ -1197,10 +1197,10 @@ When every task is done, this file should show all checkboxes ticked:
 - [ ] V11 — 24 Bus-DeMeo asteroid classes
 - [ ] V12 — 10 Tier B nebula extensions
 - [ ] V13 — 10 Tier B galaxy extensions
-- [ ] V14 — 20 Tier B LSS/transient/exotic extensions
+- [ ] V14 — 19 Tier B LSS/transient/exotic extensions (5 LSS + 5 transient + 9 exotic)
 - [ ] V15 — Integration: zero inline ShaderMaterial
 - [ ] V16 — Visual + perf baseline + CI + docs updated
-- [ ] **End state: 240 distinct shaders, 240 screenshots baseline, 240 passing coverage entries, FPS budget green**
+- [ ] **End state: 262 distinct shaders, 262 screenshots baseline, 262 passing coverage entries, FPS budget green**
 
 At end state: every ENT-ID in Cosmos Explorer renders with its Doc 18 spec-correct visual signature. The universe catalog is visually complete at "100% realistic saturation".
 
