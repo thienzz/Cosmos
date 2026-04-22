@@ -21,6 +21,8 @@ import galaxyMorphologySpecialFragSource from './galaxy-morphology-special.frag'
 import galaxySpiralFragSource from './galaxy-spiral.frag';
 import galaxyStarburstFragSource from './galaxy-starburst.frag';
 import galaxyVertSource from './galaxy.vert';
+import meteoroidStreamFragSource from './meteoroid-stream.frag';
+import meteoroidStreamVertSource from './meteoroid-stream.vert';
 import moonAtmosphericFragSource from './moon-atmospheric.frag';
 import moonExtremeFragSource from './moon-extreme.frag';
 import moonIcyFragSource from './moon-icy.frag';
@@ -97,6 +99,8 @@ export {
   galaxySpiralFragSource,
   galaxyStarburstFragSource,
   galaxyVertSource,
+  meteoroidStreamFragSource,
+  meteoroidStreamVertSource,
   moonAtmosphericFragSource,
   moonExtremeFragSource,
   moonIcyFragSource,

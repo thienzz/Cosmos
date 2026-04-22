@@ -24,6 +24,8 @@ import {
   galaxySpiralFragSource,
   galaxyStarburstFragSource,
   galaxyVertSource,
+  meteoroidStreamFragSource,
+  meteoroidStreamVertSource,
   moonAtmosphericFragSource,
   moonExtremeFragSource,
   moonIcyFragSource,
@@ -154,6 +156,10 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
   'nebula-wolfrayet':      { vert: nebulaVertSource, frag: nebulaWolfRayetFragSource },
 
   // Small bodies
+  'meteoroid-stream': {
+    vert: meteoroidStreamVertSource,
+    frag: meteoroidStreamFragSource,
+  },
   'smallbody-asteroid': {
     vert: smallbodyAsteroidVertSource,
     frag: smallbodyAsteroidFragSource,
