@@ -21,7 +21,8 @@
  * Exits non-zero on any capture failure.
  */
 
-import { mkdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { mkdir, readFile, stat, unlink } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -36,6 +37,14 @@ const DEFAULT_CONCURRENCY = 4;
 const PER_PAGE_TIMEOUT_MS = 20_000;
 const POST_READY_DWELL_MS = 50;
 const FAILURE_RETRY_PASSES = 2; // serial passes after the parallel pass
+// Below this size, a 512×512 PNG is almost certainly a black canvas
+// (1826 B = empty render; ~3 KB still ~99% black with a faint silhouette).
+// Treat as a capture failure so it triggers the retry pass.
+const BLACK_PNG_BYTES = 3000;
+// If a single MD5 hash is shared by more than this many ENT-IDs, the
+// shaders are collapsing into the same default and the registry needs a
+// new dispatch entry. Reported but not fatal.
+const DUP_HASH_WARN_THRESHOLD = 3;
 
 interface Args {
   baseUrl: string;
@@ -119,6 +128,8 @@ interface CaptureOutcome {
   ok: boolean;
   error?: string;
   shaderKeyOnPage?: string;
+  bytes?: number;
+  md5?: string;
 }
 
 async function captureOne(
@@ -153,7 +164,25 @@ async function captureOne(
       type: 'png',
       omitBackground: false,
     });
-    return { task, ok: true, shaderKeyOnPage };
+    // Reject effectively-black PNGs — they indicate the screenshot fired
+    // before the shader rendered (race) or the shader itself silently
+    // produced no output. Remove the bad file so the committed baseline
+    // tree only contains meaningful renders; the retry pass will try to
+    // capture these again.
+    const fileStats = await stat(task.outPath);
+    if (fileStats.size < BLACK_PNG_BYTES) {
+      await unlink(task.outPath).catch(() => undefined);
+      return {
+        task,
+        ok: false,
+        error: `black-or-empty PNG (${fileStats.size} B < ${BLACK_PNG_BYTES})`,
+        shaderKeyOnPage,
+        bytes: fileStats.size,
+      };
+    }
+    const buf = await readFile(task.outPath);
+    const md5 = createHash('md5').update(buf).digest('hex');
+    return { task, ok: true, shaderKeyOnPage, bytes: fileStats.size, md5 };
   } catch (err) {
     return { task, ok: false, error: (err as Error).message };
   }
@@ -287,7 +316,33 @@ async function main(): Promise<void> {
   const durSec = ((performance.now() - startMs) / 1000).toFixed(1);
   console.log('');
   console.log(`capture: ${successes}/${outcomes.length} successes in ${durSec}s`);
+
+  // Duplicate-hash audit — warn when a single image is shared by several
+  // ENT-IDs (dispatch collapse) so the registry can be tuned.
+  const byHash = new Map<string, string[]>();
+  for (const o of outcomes) {
+    if (!o.ok || !o.md5) continue;
+    const list = byHash.get(o.md5) ?? [];
+    list.push(o.task.row.id);
+    byHash.set(o.md5, list);
+  }
+  const dups = [...byHash.entries()]
+    .filter(([, ids]) => ids.length > DUP_HASH_WARN_THRESHOLD)
+    .sort((a, b) => b[1].length - a[1].length);
+  if (dups.length > 0) {
+    console.log('');
+    console.log(
+      `capture: WARN — ${dups.length} hash groups with >${DUP_HASH_WARN_THRESHOLD} ENT-IDs (shader dispatch collapse):`,
+    );
+    for (const [hash, ids] of dups.slice(0, 8)) {
+      console.log(`  ${hash.slice(0, 10)} × ${ids.length}: ${ids.slice(0, 6).join(', ')}${ids.length > 6 ? ' …' : ''}`);
+    }
+  } else {
+    console.log('capture: OK — no dispatch collapse (every hash ≤ 3 ENT-IDs)');
+  }
+
   if (failures.length > 0) {
+    console.log('');
     console.log(`capture: ${failures.length} FAILURES:`);
     for (const f of failures.slice(0, 20)) {
       console.log(`  - ${f.task.row.id} (${f.task.family}): ${f.error}`);

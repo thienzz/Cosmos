@@ -24,7 +24,11 @@
 import * as THREE from 'three';
 
 import { createMaterialForEntity } from '@/engine/MaterialFactory';
-import { buildCaptureMaterial } from '@/testHarness/visualCaptureRegistry';
+import {
+  buildCaptureMaterial,
+  type CaptureGeometry,
+  type CaptureMaterial,
+} from '@/testHarness/visualCaptureRegistry';
 
 const CANVAS_PX = 512;
 const SETTLE_SEC = 1.0; // run animated shaders for this long before capture
@@ -54,20 +58,20 @@ function reportError(message: string): never {
   throw new Error(message);
 }
 
-function buildMaterial(): { material: THREE.ShaderMaterial; shaderKey: string } {
+function buildMaterial(): CaptureMaterial {
   // Prefer the capture registry — it routes each shader through its
   // dedicated builder so the resulting material has Doc-accurate palette
   // and parameter uniforms (not just the bare MaterialFactory defaults).
   if (shaderHint) {
-    const r = buildCaptureMaterial(shaderHint, entId);
-    return { material: r.material, shaderKey: r.shaderKey };
+    return buildCaptureMaterial(shaderHint, entId);
   }
   if (entId) {
     // No shader hint from the URL — fall back to MaterialFactory's
     // ENT-ID resolution. Some palette uniforms will be missing, but
     // Tier B `#define`s still apply.
     try {
-      return createMaterialForEntity({ ent_id: entId });
+      const r = createMaterialForEntity({ ent_id: entId });
+      return { material: r.material, shaderKey: r.shaderKey, geometry: 'sphere' };
     } catch {
       // fall through
     }
@@ -96,21 +100,75 @@ const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 100);
 camera.position.set(0, 0, CAMERA_Z);
 camera.lookAt(0, 0, 0);
 
-let material: THREE.ShaderMaterial;
-let shaderKey: string;
+let built: CaptureMaterial;
 try {
-  const built = buildMaterial();
-  material = built.material;
-  shaderKey = built.shaderKey;
+  built = buildMaterial();
 } catch (err) {
   reportError(`visualCaptureEntry: ${(err as Error).message}`);
 }
+const material = built.material;
+const shaderKey = built.shaderKey;
+const geometryKind = built.geometry;
 
 win.__captureShaderKey = shaderKey;
 
-const geometry = new THREE.SphereGeometry(1, 96, 96);
-const mesh = new THREE.Mesh(geometry, material);
+function buildMesh(kind: CaptureGeometry): THREE.Object3D {
+  switch (kind) {
+    case 'box-raymarch': {
+      // Volumetric raymarch — camera sits OUTSIDE the box at +Z, looks at
+      // origin. Don't touch material.side — exotic/nebula builders set it
+      // to DoubleSide intentionally so the front faces register hits even
+      // when the box's bounding volume occludes itself.
+      const geom = new THREE.BoxGeometry(2, 2, 2);
+      return new THREE.Mesh(geom, material);
+    }
+    case 'plane': {
+      // Screen-aligned billboard — fills most of the view from the
+      // default camera position (CAMERA_Z ≈ 2.6, FOV 45°). Leave
+      // material.side alone (most plane shaders default to FrontSide
+      // and depthTest=true; flipping causes culling artefacts).
+      const geom = new THREE.PlaneGeometry(2.2, 2.2);
+      return new THREE.Mesh(geom, material);
+    }
+    case 'fullscreen-quad': {
+      // Render a true fullscreen quad — bypass camera projection by using
+      // an ortho setup. Currently unused (all 'plane' cases tile well
+      // enough under the perspective camera); kept for future shaders.
+      const geom = new THREE.PlaneGeometry(2, 2);
+      material.side = THREE.DoubleSide;
+      material.depthTest = false;
+      return new THREE.Mesh(geom, material);
+    }
+    case 'points': {
+      // Scatter 512 particles in a unit cube — enough for cluster/field
+      // shaders to paint something non-trivial.
+      const count = 512;
+      const positions = new Float32Array(count * 3);
+      for (let i = 0; i < count; i++) {
+        positions[i * 3 + 0] = (Math.random() - 0.5) * 1.6;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 1.6;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 1.6;
+      }
+      const geom = new THREE.BufferGeometry();
+      geom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      return new THREE.Points(geom, material);
+    }
+    case 'sphere':
+    default: {
+      const geom = new THREE.SphereGeometry(1, 96, 96);
+      return new THREE.Mesh(geom, material);
+    }
+  }
+}
+
+const mesh = buildMesh(geometryKind);
 scene.add(mesh);
+
+// Precompute per-frame tick context — most fields are static over the
+// capture. sunDirWorld picks a generic 3/4-angle so planet/moon/star
+// shaders that shade against it get a non-polar illumination pattern.
+const sunDirWorld = new THREE.Vector3(0.8, 0.35, 0.5).normalize();
+const cameraWorld = camera.position.clone();
 
 function setUniformTime(t: number): void {
   const u = material.uniforms;
@@ -119,7 +177,46 @@ function setUniformTime(t: number): void {
   if (u.time) (u.time as { value: number }).value = t;
 }
 
+// Reused scratch objects for camera-local sync (avoids per-frame alloc).
+const _tmpCameraLocal = new THREE.Vector3();
+const _tmpInvMat = new THREE.Matrix4();
+
+function syncCameraLocal(): void {
+  // Many raymarch shaders (exotic-blackhole/compact/dark, nebula-emission/
+  // dark/planetary, lss-supercluster, …) read `u_cameraLocal` to compute
+  // the view ray inside object-local space. The dedicated builders set it
+  // via their `update()` callback; for materials that fall through to
+  // MaterialFactory (no update), we set it here so the raymarch isn't
+  // degenerate. Harmless when the uniform is absent.
+  const u = material.uniforms as Record<string, { value: unknown } | undefined>;
+  const slot = u['u_cameraLocal'];
+  if (!slot) return;
+  _tmpCameraLocal.copy(cameraWorld);
+  _tmpInvMat.copy(mesh.matrixWorld).invert();
+  _tmpCameraLocal.applyMatrix4(_tmpInvMat);
+  const v = slot.value as { copy?: (s: THREE.Vector3) => void; set?: (x: number, y: number, z: number) => void };
+  if (v.copy) v.copy(_tmpCameraLocal);
+  else if (v.set) v.set(_tmpCameraLocal.x, _tmpCameraLocal.y, _tmpCameraLocal.z);
+}
+
+function tickMaterial(deltaSec: number, elapsedSec: number): void {
+  setUniformTime(elapsedSec);
+  mesh.updateWorldMatrix(true, false);
+  if (built.update) {
+    built.update({
+      deltaSec,
+      elapsedSec,
+      sunDirWorld,
+      cameraWorld,
+      meshMatrixWorld: mesh.matrixWorld,
+    });
+  } else {
+    syncCameraLocal();
+  }
+}
+
 const startMs = performance.now();
+let lastMs = startMs;
 
 function finish(): void {
   // Render the deterministic pinned frame three times with an explicit
@@ -128,6 +225,7 @@ function finish(): void {
   // fragment shader has actually written), producing black PNGs even
   // though the material compiled fine. Three renders + flushes is
   // empirically race-free under headless Chromium swiftshader.
+  tickMaterial(0, FIXED_TIME);
   setUniformTime(FIXED_TIME);
   for (let i = 0; i < 3; i++) {
     renderer.render(scene, camera);
@@ -143,9 +241,12 @@ function finish(): void {
 }
 
 function tick(): void {
-  const elapsed = (performance.now() - startMs) / 1000;
+  const nowMs = performance.now();
+  const elapsed = (nowMs - startMs) / 1000;
+  const delta = (nowMs - lastMs) / 1000;
+  lastMs = nowMs;
   if (elapsed < SETTLE_SEC) {
-    setUniformTime(elapsed);
+    tickMaterial(delta, elapsed);
     renderer.render(scene, camera);
     requestAnimationFrame(tick);
     return;
