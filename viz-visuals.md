@@ -1039,7 +1039,7 @@ pnpm typecheck
 
 ---
 
-### T-V-65 — End-of-V regression ✅ DONE <pending-sha> 2026-04-23 🟢
+### T-V-65 — End-of-V regression ✅ DONE 4fe71b3 2026-04-23 🟢
 **Depends:** T-V-58..T-V-64  **Est:** 3h
 
 **Do:** Run viz.md §3.5 regression + preview smoke + visual baseline capture + perf baseline + coverage test.
