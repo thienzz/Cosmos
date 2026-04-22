@@ -247,6 +247,34 @@ const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.fre
   'ENT-2012': { shader: 'planet-rocky', defines: { ROCKY_EARTH: 1,   PLANET_EARTH: 1 } },
   'ENT-2013': { shader: 'planet-rocky', defines: { ROCKY_MARS: 1,    PLANET_MARS: 1 } },
 
+  // Gas giants (T-V-18) — planet-gas.frag handles GAS_* + Doc 22 toggles.
+  'ENT-2020': { shader: 'planet-gas', defines: { GAS_JUPITER: 1, PLANET_JUPITER: 1 } },
+  'ENT-2021': { shader: 'planet-gas', defines: { GAS_SATURN: 1,  PLANET_SATURN: 1 } },
+  'ENT-2025': { shader: 'planet-gas', defines: { GAS_URANUS: 1,  PLANET_URANUS: 1 } },
+  'ENT-2026': { shader: 'planet-gas', defines: { GAS_NEPTUNE: 1, PLANET_NEPTUNE: 1 } },
+
+  // Exotic rocky + gas (T-V-19/20) — shared planet-rocky / planet-gas /
+  // planet-extreme files already ship every branch; this wires ENT-IDs only.
+  'ENT-2030': { shader: 'planet-gas',     defines: { GAS_HOT_JUPITER: 1 } },
+  'ENT-2031': { shader: 'planet-rocky',   defines: { ROCKY_SUPER_EARTH: 1 } },
+  'ENT-2032': { shader: 'planet-gas',     defines: { GAS_MINI_NEPTUNE: 1 } },
+  'ENT-2033': { shader: 'planet-extreme', defines: { EXTREME_HYCEAN: 1 } },
+  'ENT-2034': { shader: 'planet-extreme', defines: { EXTREME_EYEBALL: 1 } },
+  'ENT-2035': { shader: 'planet-rocky',   defines: { ROCKY_MAGMA: 1 } },
+  'ENT-2036': { shader: 'planet-rocky',   defines: { ROCKY_OCEAN: 1 } },
+  'ENT-2037': { shader: 'planet-rocky',   defines: { ROCKY_CARBON: 1 } },
+  'ENT-2038': { shader: 'planet-rocky',   defines: { ROCKY_IRON: 1 } },
+  'ENT-2039': { shader: 'planet-rocky',   defines: { ROCKY_DESERT: 1 } },
+  'ENT-2040': { shader: 'planet-rocky',   defines: { ROCKY_ROGUE: 1 } },
+  'ENT-2041': { shader: 'planet-gas',     defines: { GAS_PUFFY: 1 } },
+  'ENT-2042': { shader: 'planet-rocky',   defines: { ROCKY_PROTOPLANET: 1 } },
+  'ENT-2043': { shader: 'planet-extreme', defines: { EXTREME_TIDALLY_HEATED: 1 } },
+  'ENT-2044': { shader: 'planet-rocky',   defines: { ROCKY_WATER: 1 } },
+  'ENT-2045': { shader: 'planet-gas',     defines: { GAS_HELIUM: 1 } },
+  'ENT-2046': { shader: 'planet-gas',     defines: { GAS_CIRCUMBINARY: 1 } },
+  'ENT-2047': { shader: 'planet-extreme', defines: { EXTREME_SYNESTIA: 1 } },
+  'ENT-2050': { shader: 'planet-rocky',   defines: { ROCKY_CHTHONIAN: 1 } },
+
   // Small bodies (T-V-10).
   'ENT-4010': { shader: 'smallbody-asteroid',        defines: { TYPE_C: 1 } },
   'ENT-4011': { shader: 'smallbody-asteroid',        defines: { TYPE_S: 1 } },
