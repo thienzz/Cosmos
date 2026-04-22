@@ -94,6 +94,8 @@ import smallbodyCentaurFragSource from './smallbody-centaur.frag';
 import smallbodyCentaurVertSource from './smallbody-centaur.vert';
 import smallbodyCometFragSource from './smallbody-comet.frag';
 import smallbodyCometVertSource from './smallbody-comet.vert';
+import smallbodyFieldPointsFragSource from './smallbody-field-points.frag';
+import smallbodyFieldPointsVertSource from './smallbody-field-points.vert';
 import smallbodyKboFragSource from './smallbody-kbo.frag';
 import smallbodyKboVertSource from './smallbody-kbo.vert';
 import smallbodyRubbleFragSource from './smallbody-rubble.frag';
@@ -224,6 +226,8 @@ export {
   smallbodyCentaurVertSource,
   smallbodyCometFragSource,
   smallbodyCometVertSource,
+  smallbodyFieldPointsFragSource,
+  smallbodyFieldPointsVertSource,
   smallbodyKboFragSource,
   smallbodyKboVertSource,
   smallbodyRubbleFragSource,

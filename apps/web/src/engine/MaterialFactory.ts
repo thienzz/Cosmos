@@ -88,6 +88,8 @@ import {
   smallbodyCentaurVertSource,
   smallbodyCometFragSource,
   smallbodyCometVertSource,
+  smallbodyFieldPointsFragSource,
+  smallbodyFieldPointsVertSource,
   smallbodyKboFragSource,
   smallbodyKboVertSource,
   smallbodyRubbleFragSource,
@@ -274,6 +276,14 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
     frag: smallbodyCentaurFragSource,
   },
   'smallbody-comet': { vert: smallbodyCometVertSource, frag: smallbodyCometFragSource },
+  // T-V-58 — GPU Kepler propagator Points shader used by AsteroidFieldRenderer
+  // for ~1.2M minor bodies. Palette size is set at compile time via the
+  // SUBTYPE_COUNT define; the u_palette array uniform is set post-creation
+  // because MaterialFactory's render-block uniforms don't cover array shapes.
+  'smallbody-field-points': {
+    vert: smallbodyFieldPointsVertSource,
+    frag: smallbodyFieldPointsFragSource,
+  },
   'smallbody-kbo': {
     vert: smallbodyKboVertSource,
     frag: smallbodyKboFragSource,

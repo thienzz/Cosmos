@@ -16,6 +16,7 @@ import {
 
 import { applyEntityToggles } from './applyEntityToggles';
 import type { GpuLifecycleHook } from './gpuLifecycle';
+import { createMaterialForEntity } from './MaterialFactory';
 
 /**
  * Procedural minor-body field renderer (T39 + T44, Doc 23 §8.7,
@@ -94,122 +95,11 @@ const DEFAULT_BUDGET_SPLIT: Record<ProceduralBodyKind, number> = {
 const J2000_JD = 2_451_545.0;
 const SECONDS_PER_DAY = 86_400.0;
 
-// ---------------------------------------------------------------------------
-// Vertex / fragment shaders (GLSL ES 3.0)
-// ---------------------------------------------------------------------------
-
-const VERTEX_SHADER = /* glsl */ `
-in vec3 a_orbitA_e_i;        // x: a (km), y: e, z: inclination (rad)
-in vec3 a_node_arg_M0;       // x: Omega, y: omega, z: M0 (rad)
-in float a_meanMotion;       // rad / second
-in float a_subtypeIndex;     // 0..SUBTYPE_COUNT-1 → palette lookup (T44)
-
-uniform float u_dtSecondsSinceEpoch;
-uniform float u_kmToScene;
-uniform float u_pointSizePx;
-uniform float u_devicePixelRatio;
-
-out float v_subtypeIndex;
-out float v_comet;           // 1.0 if this particle is a comet (boosts halo)
-
-float solveKepler(float M, float e) {
-  M = mod(M + 3.141592653589793, 6.283185307179586) - 3.141592653589793;
-  float E = M + e * sin(M);
-  for (int i = 0; i < 3; i++) {
-    float dE = (E - e * sin(E) - M) / (1.0 - e * cos(E));
-    E -= dE;
-  }
-  return E;
-}
-
-void main() {
-  float a = a_orbitA_e_i.x;
-  float e = a_orbitA_e_i.y;
-  float inc = a_orbitA_e_i.z;
-  float Omega = a_node_arg_M0.x;
-  float omega = a_node_arg_M0.y;
-  float M0 = a_node_arg_M0.z;
-
-  float M = M0 + a_meanMotion * u_dtSecondsSinceEpoch;
-  float E = solveKepler(M, e);
-  float cosE = cos(E);
-  float sinE = sin(E);
-
-  float sqrtFactor = sqrt(1.0 - e * e);
-  float nu = atan(sqrtFactor * sinE, cosE - e);
-  float r = a * (1.0 - e * cosE);
-
-  float xOrb = r * cos(nu);
-  float yOrb = r * sin(nu);
-
-  float cw = cos(omega);
-  float sw = sin(omega);
-  float x1 = xOrb * cw - yOrb * sw;
-  float y1 = xOrb * sw + yOrb * cw;
-
-  float ci = cos(inc);
-  float si = sin(inc);
-  float x2 = x1;
-  float y2 = y1 * ci;
-  float z2 = y1 * si;
-
-  float cO = cos(Omega);
-  float sO = sin(Omega);
-  vec3 ecliptic = vec3(
-    x2 * cO - y2 * sO,
-    x2 * sO + y2 * cO,
-    z2
-  );
-
-  vec3 scenePos = vec3(ecliptic.x, ecliptic.z, -ecliptic.y) * u_kmToScene;
-
-  vec4 mvPos = modelViewMatrix * vec4(scenePos, 1.0);
-  gl_Position = projectionMatrix * mvPos;
-
-  float dist = max(1.0, -mvPos.z);
-
-  // Subtype indices 7..10 are comets — give them a slightly larger point
-  // size so the coma cue is visible at Solar System zoom.
-  float subtype = a_subtypeIndex;
-  float cometFlag = (subtype >= 6.5 && subtype <= 10.5) ? 1.0 : 0.0;
-  float sizeBoost = 1.0 + 0.8 * cometFlag;
-
-  gl_PointSize = u_pointSizePx * u_devicePixelRatio * (60.0 / dist) * sizeBoost;
-  v_subtypeIndex = subtype;
-  v_comet = cometFlag;
-}
-`;
-
-/**
- * Fragment shader. The palette uniform is a `vec3[SUBTYPE_COUNT]`; we use
- * a loop + conditional accumulation so the shader stays GLSL ES 3.0
- * compatible (dynamic array indexing via `palette[int(v_subtypeIndex)]`
- * is legal in ES 3.0, but we still iterate to make the switch explicit
- * and keep the compile path fast on constrained drivers).
- */
-const FRAGMENT_SHADER = /* glsl */ `
-in float v_subtypeIndex;
-in float v_comet;
-uniform vec3 u_palette[${SUBTYPE_COUNT}];
-
-out vec4 fragColor;
-
-void main() {
-  vec2 uv = gl_PointCoord - vec2(0.5);
-  float r2 = dot(uv, uv);
-  if (r2 > 0.25) discard;
-  float alpha = smoothstep(0.25, 0.0, r2);
-
-  int idx = int(clamp(v_subtypeIndex + 0.5, 0.0, ${SUBTYPE_COUNT - 1}.0));
-  vec3 colour = u_palette[idx];
-
-  // Comets get a pale-cyan halo bias so they read against the dust cloud.
-  vec3 cometBoost = vec3(0.25, 0.45, 0.55) * v_comet;
-  colour += cometBoost * alpha * 0.4;
-
-  fragColor = vec4(colour, alpha);
-}
-`;
+// Shaders moved to apps/web/src/shaders/smallbody-field-points.{vert,frag}
+// and routed through MaterialFactory under 'smallbody-field-points' (T-V-58).
+// SUBTYPE_COUNT is passed as a compile-time define; u_palette is set post-
+// creation because the factory's render-block uniforms don't cover array
+// shapes.
 
 // ---------------------------------------------------------------------------
 // Renderer
@@ -283,26 +173,30 @@ export class AsteroidFieldRenderer implements GpuLifecycleHook {
     this.geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 1e9);
 
     const palette = buildPalette(options.colors ?? {});
-    this.material = new THREE.ShaderMaterial({
-      name: 'asteroid-field',
-      vertexShader: VERTEX_SHADER,
-      fragmentShader: FRAGMENT_SHADER,
-      glslVersion: THREE.GLSL3,
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      uniforms: {
-        u_dtSecondsSinceEpoch: {
-          value: ((options.initialJulianDate ?? J2000_JD) - J2000_JD) * SECONDS_PER_DAY,
+    const { material } = createMaterialForEntity(
+      {
+        render: {
+          shader: 'smallbody-field-points',
+          defines: { SUBTYPE_COUNT },
+          uniforms: {
+            u_dtSecondsSinceEpoch:
+              ((options.initialJulianDate ?? J2000_JD) - J2000_JD) * SECONDS_PER_DAY,
+            u_kmToScene: options.kmToSceneScale,
+            u_pointSizePx: 1.6,
+            u_devicePixelRatio:
+              typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1,
+          },
         },
-        u_kmToScene: { value: options.kmToSceneScale },
-        u_pointSizePx: { value: 1.6 },
-        u_devicePixelRatio: {
-          value: typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1,
-        },
-        u_palette: { value: palette },
       },
-    });
+      { debugName: 'asteroid-field' },
+    );
+    material.transparent = true;
+    material.depthWrite = false;
+    material.blending = THREE.AdditiveBlending;
+    // Array uniform — set post-creation. MaterialFactory's buildUniformValue
+    // only handles numbers + 2/3/4-length arrays, not THREE.Color[].
+    material.uniforms.u_palette = { value: palette };
+    this.material = material;
 
     this.points = new THREE.Points(this.geometry, this.material);
     this.points.name = 'AsteroidField';
