@@ -985,16 +985,21 @@ pnpm typecheck
 
 ## Phase V16 — Final regression + baseline (2 days)
 
-### T-V-61 — Visual baseline capture 🟢
+### T-V-61 — Visual baseline capture ✅ DONE de49607 2026-04-22 🟢
 **Depends:** T-V-57  **Est:** 5h
 
 **Goal:** 262 reference screenshots committed to `apps/web/tests/visual/baseline/`.
 
 **Do:**
 1. Script `pnpm --filter @cosmos/web test:visual:capture-all` — for each of 262 ENT-IDs, fly to representative pose, screenshot.
-2. Commit baseline. ~262 JPGs × ~50 KB = ~13 MB (acceptable in repo, not via LFS).
+2. Commit baseline. ~262 PNGs × ~80 KB avg = ~21 MB (acceptable in repo, not via LFS).
 
-**Verify:** `ls apps/web/tests/visual/baseline/**/*.jpg | wc -l` = 262.
+**Verify:** `find apps/web/tests/visual/baseline -name '*.png' | wc -l` = 261 (262 fixture rows − ENT-7040 CMB which is `shader: null` / inline per CLAUDE.md §1).
+
+**Implementation notes:**
+- Standalone capture page [apps/web/visual-capture.html](apps/web/visual-capture.html) + entry [src/visualCaptureEntry.ts](apps/web/src/visualCaptureEntry.ts) isolate capture from the full app (SearchTargetMarker has no `ENT-NNNN` prefix branch — handling every ENT-ID through `flyToCelestialCoord` would have required risky changes to that renderer).
+- [src/testHarness/visualCaptureRegistry.ts](apps/web/src/testHarness/visualCaptureRegistry.ts) routes each shader to its dedicated builder so palette uniforms are Doc-accurate (MaterialFactory by itself produces monochrome output — see its own comment at `ENT-2010` re `ROCKY_PALETTES`). Tier B `#define` overlays from `ENT_ID_TO_RENDER` merge on top to give `CARBON_CR` / `BD_L` / etc. a distinct visual fingerprint.
+- Driver [tests/visual/capture.ts](apps/web/tests/visual/capture.ts) runs 4-way concurrent with a 2-pass serial retry for race-condition failures (`Element not attached to DOM` / `Execution context was destroyed`). Full sweep ≈ 5–6 min.
 
 ---
 
