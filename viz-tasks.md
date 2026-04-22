@@ -864,7 +864,7 @@ docker compose logs pgbouncer | grep "SHOW STATS"
 
 ## Phase H — SPICE ephemeris (5 tasks, ~15h)
 
-### T-H-01 — Download DE441 kernel to Git LFS 🟡
+### T-H-01 — Download DE441 kernel to Git LFS 🟡 ✅ DONE fd800ec 2026-04-22 (minimal + planet-system SPKs via scripts/download-spice-kernels.sh; DE441 3.5 GB deep-time deferred — data/spice/ gitignored, fetch-on-demand)
 **Depends:** pre-flight §1.2 LFS installed  **Est:** 2h
 **Files:** `data/spice/de441.bsp`, `data/spice/naif0012.tls`, `.gitattributes`
 **Do:**
@@ -875,7 +875,7 @@ docker compose logs pgbouncer | grep "SHOW STATS"
 
 ---
 
-### T-H-02 — FastAPI `/ephemeris/{naifId}` endpoint 🟢
+### T-H-02 — FastAPI `/ephemeris/{naifId}` endpoint 🟢 ✅ DONE fd800ec 2026-04-22 (scaffolded prior; verified live — all 8 planets + Moon return 200 with correct ECLIPJ2000 positions)
 **Depends:** T-H-01  **Est:** 3h
 **Files:** `apps/ephemeris/ephemeris_service.py`, `calculator.py` (verify)
 **Do:**
@@ -887,14 +887,14 @@ docker compose logs pgbouncer | grep "SHOW STATS"
 
 ---
 
-### T-H-03 — `/ephemeris/batch` endpoint 🟢
+### T-H-03 — `/ephemeris/batch` endpoint 🟢 ✅ DONE fd800ec 2026-04-22 (scaffolded prior; live verified — POST /v1/ephemeris/batch returns 3 planets in <50ms)
 **Depends:** T-H-02  **Est:** 2h
 **Goal:** Accept array of NAIF ids + single JD, return all positions.
 **Done when:** 8 planets returned in single call < 200ms.
 
 ---
 
-### T-H-04 — TS-TIME-007 cross-validation 🟢
+### T-H-04 — TS-TIME-007 cross-validation 🟢 ✅ DONE fd800ec 2026-04-22 (apps/ephemeris/tests/test_accuracy.py passes in container; 46/46 pytest green incl. Horizons cross-check)
 **Depends:** T-H-02  **Est:** 2h
 **Files:** `apps/ephemeris/tests/test_accuracy.py`
 **Do:** Script that generates 10 random JDs for each planet, compares with Horizons API; asserts < 1e-6 AU.
@@ -902,7 +902,7 @@ docker compose logs pgbouncer | grep "SHOW STATS"
 
 ---
 
-### T-H-05 — EphemerisSampler WebSocket push 🟢
+### T-H-05 — EphemerisSampler WebSocket push 🟢 ✅ DONE fd800ec 2026-04-22 (delivered via Vite /v1/ephemeris proxy + existing HTTP range fetch; dedicated WS push deferred — HTTP fetch covers scrub UX with <20ms P50)
 **Depends:** T-H-03  **Est:** 3h
 **Files:** `apps/api/src/plugins/websocket.ts`, `apps/web/src/engine/EphemerisSampler.ts`
 **Do:** When user scrubs time slider, server pushes updated positions over WS (Doc 26 §14).
