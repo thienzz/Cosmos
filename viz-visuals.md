@@ -1012,14 +1012,14 @@ pnpm typecheck
 
 ---
 
-### T-V-63 — Performance baseline 🟢
+### T-V-63 — Performance baseline ✅ DONE f9d816d 2026-04-22 🟢
 **Depends:** T-V-59  **Est:** 2h
 
 **Do:** Record FPS per regime (solar, stellar, galactic, cosmic) with all-families-visible poses. Commit to `apps/web/tests/perf/baseline.json`. CI compares subsequent runs, fails on >10% regression.
 
 ---
 
-### T-V-64 — Documentation update 🟢
+### T-V-64 — Documentation update ✅ DONE f9d816d 2026-04-22 🟢
 **Depends:** T-V-60  **Est:** 2h
 
 **Do:**
