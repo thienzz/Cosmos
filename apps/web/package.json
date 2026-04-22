@@ -18,6 +18,7 @@
     "test:visual": "vitest run --passWithNoTests tests/visual",
     "test:visual:capture": "tsx tests/visual/capture.ts",
     "test:visual:capture-all": "tsx tests/visual/capture.ts --all",
+    "test:visual:diff": "tsx tests/visual/runner.ts",
     "seed:export": "vite-node scripts/export-ts-catalog.ts"
   },
   "dependencies": {

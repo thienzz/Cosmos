@@ -1,0 +1,97 @@
+name: visual-regression
+
+# T-V-62 — Visual regression gate.
+#
+# Re-captures all 261 procedural-shader baselines (one PNG per Tier A/B
+# ENT-ID in apps/web/tests/entCoverage.ts, minus ENT-7040 CMB which is
+# inline per CLAUDE.md §1) and diffs them against the committed tree under
+# apps/web/tests/visual/baseline/. Fails the job if any pair breaches the
+# Doc 33 §Visual QA thresholds — default ΔE2000 ≤ 5.0 / SSIM ≥ 0.65 /
+# pHash ≤ 8, tightened per-family (star ΔE ≤ 3.0, nebula ≤ 4.0).
+#
+# Triggers only on PRs that touch shader sources, MaterialFactory, or the
+# capture pipeline itself — those are the only changes that can shift the
+# rendered output. Other PRs skip the job so we don't burn ~6 min of CI
+# per merge.
+
+on:
+  pull_request:
+    paths:
+      - "apps/web/src/shaders/**"
+      - "apps/web/src/engine/MaterialFactory.ts"
+      - "apps/web/src/engine/*Material*.ts"
+      - "apps/web/src/engine/StarMaterialFamily.ts"
+      - "apps/web/src/testHarness/visualCaptureRegistry.ts"
+      - "apps/web/src/visualCaptureEntry.ts"
+      - "apps/web/visual-capture.html"
+      - "apps/web/tests/visual/**"
+      - "apps/web/tests/entCoverage.ts"
+      - ".github/workflows/visual-regression.yml"
+  workflow_dispatch:
+
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: false
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium for Playwright
+        run: pnpm --filter @cosmos/web exec playwright install --with-deps chromium
+
+      - name: Start Vite dev server
+        run: |
+          pnpm --filter @cosmos/web exec vite --port 5183 --strictPort > /tmp/vite.log 2>&1 &
+          echo $! > /tmp/vite.pid
+          for i in $(seq 1 60); do
+            if curl -sf "http://localhost:5183/visual-capture.html?entId=ENT-1010&shader=star-mainseq" > /dev/null; then
+              echo "dev server up after ${i}s"; exit 0
+            fi
+            sleep 1
+          done
+          echo "dev server failed to respond within 60s" >&2
+          tail -50 /tmp/vite.log >&2
+          exit 1
+
+      - name: Capture current renders
+        run: |
+          pnpm --filter @cosmos/web exec tsx tests/visual/capture.ts \
+            --all --outdir "$RUNNER_TEMP/current" --concurrency 3
+        working-directory: apps/web
+
+      - name: Diff against committed baselines
+        run: |
+          pnpm --filter @cosmos/web exec tsx tests/visual/runner.ts \
+            --current "$RUNNER_TEMP/current" \
+            --baseline tests/visual/baseline
+        working-directory: apps/web
+
+      - name: Upload current renders on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-current-${{ github.run_id }}
+          path: ${{ runner.temp }}/current
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Shut down Vite dev server
+        if: always()
+        run: kill $(cat /tmp/vite.pid) 2>/dev/null || true
