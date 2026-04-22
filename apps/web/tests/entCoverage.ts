@@ -146,6 +146,18 @@ export const ENT_COVERAGE_FIXTURE: readonly EntCoverageRow[] = Object.freeze([
   { id: 'ENT-3023', subtype: 'Binary',           shader: 'moon-minor',       status: 'shipped', note: 'T-V-23 MOON_BINARY Pluto-Charon' },
   { id: 'ENT-3024', subtype: 'Subsurface Ocean', shader: 'moon-icy',         status: 'shipped', note: 'T-V-23 MOON_SUBSURFACE_OCEAN' },
 
+  // Tier B moon extensions (T-V-42..44, reserved range ENT-3050..3059).
+  { id: 'ENT-3050', subtype: 'Co-orbital Moon',     shader: 'moon-minor', status: 'shipped', note: 'T-V-42 MOON_CO_ORBITAL' },
+  { id: 'ENT-3051', subtype: 'Quasi-Satellite',     shader: 'moon-minor', status: 'shipped', note: 'T-V-42 MOON_QUASI_SATELLITE' },
+  { id: 'ENT-3052', subtype: 'Horseshoe',           shader: 'moon-minor', status: 'shipped', note: 'T-V-42 MOON_HORSESHOE' },
+  { id: 'ENT-3053', subtype: 'Sesquinary',          shader: 'moon-minor', status: 'shipped', note: 'T-V-42 MOON_SESQUINARY' },
+  { id: 'ENT-3054', subtype: 'Binary Pair (Tier B)',shader: 'moon-minor', status: 'shipped', note: 'T-V-42 BINARY_PAIR' },
+  { id: 'ENT-3055', subtype: 'Shepherd Gap',        shader: 'moon-minor', status: 'shipped', note: 'T-V-42 SHEPHERD_GAP Pan/Daphnis' },
+  { id: 'ENT-3056', subtype: 'Trojan Moon (Tier B)',shader: 'moon-minor', status: 'shipped', note: 'T-V-42 TROJAN_TETHYS Telesto-like' },
+  { id: 'ENT-3057', subtype: 'Captured Retrograde', shader: 'moon-rocky', status: 'shipped', note: 'T-V-43 CAPTURED_RETROGRADE' },
+  { id: 'ENT-3058', subtype: 'Laplace Resonant',    shader: 'moon-icy',   status: 'shipped', note: 'T-V-43 LAPLACE_RESONANT Io-Europa-Ganymede' },
+  { id: 'ENT-3059', subtype: 'Resonant Chain',      shader: 'moon-minor', status: 'shipped', note: 'T-V-43 CHAIN_RESONANT' },
+
   // Small Bodies (ENT-4xxx) — 20 subtypes, wired in V1
   { id: 'ENT-4010', subtype: 'C-Type Asteroid', shader: 'smallbody-asteroid',        status: 'shipped', note: 'T-V-03 #define TYPE_C' },
   { id: 'ENT-4011', subtype: 'S-Type Asteroid', shader: 'smallbody-asteroid',        status: 'shipped', note: 'T-V-03 #define TYPE_S' },

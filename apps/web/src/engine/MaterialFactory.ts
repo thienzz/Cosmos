@@ -356,6 +356,18 @@ const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.fre
   'ENT-3023': { shader: 'moon-minor',       defines: { MOON_BINARY: 1 } },
   'ENT-3024': { shader: 'moon-icy',         defines: { MOON_SUBSURFACE_OCEAN: 1 } },
 
+  // Tier B moon extensions (T-V-42..44). Reserved range ENT-3050..3059.
+  'ENT-3050': { shader: 'moon-minor',       defines: { MOON_CO_ORBITAL: 1 } },
+  'ENT-3051': { shader: 'moon-minor',       defines: { MOON_QUASI_SATELLITE: 1 } },
+  'ENT-3052': { shader: 'moon-minor',       defines: { MOON_HORSESHOE: 1 } },
+  'ENT-3053': { shader: 'moon-minor',       defines: { MOON_SESQUINARY: 1 } },
+  'ENT-3054': { shader: 'moon-minor',       defines: { MOON_BINARY: 1, BINARY_PAIR: 1 } },
+  'ENT-3055': { shader: 'moon-minor',       defines: { MOON_SHEPHERD: 1, SHEPHERD_GAP: 1 } },
+  'ENT-3056': { shader: 'moon-minor',       defines: { MOON_TROJAN_MOON: 1, TROJAN_TETHYS: 1 } },
+  'ENT-3057': { shader: 'moon-rocky',       defines: { MOON_IRREGULAR: 1, CAPTURED_RETROGRADE: 1 } },
+  'ENT-3058': { shader: 'moon-icy',         defines: { MOON_EUROPA: 1, LAPLACE_RESONANT: 1 } },
+  'ENT-3059': { shader: 'moon-minor',       defines: { MOON_SESQUINARY: 1, CHAIN_RESONANT: 1 } },
+
   // Nebulae (T-V-25..26) — uniform-driven, one shader per family/topology.
   'ENT-5010': { shader: 'nebula-emission' },
   'ENT-5011': { shader: 'nebula-emission' },
