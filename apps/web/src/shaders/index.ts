@@ -63,6 +63,8 @@ import nebulaSuperbubbleFragSource from './nebula-superbubble.frag';
 import nebulaSupernovaFragSource from './nebula-supernova.frag';
 import nebulaWolfRayetFragSource from './nebula-wolfrayet.frag';
 import nebulaVertSource from './nebula.vert';
+import phenomenonPlaceholderFragSource from './phenomenon-placeholder.frag';
+import phenomenonPlaceholderVertSource from './phenomenon-placeholder.vert';
 import planetExtremeFragSource from './planet-extreme.frag';
 import planetGasFragSource from './planet-gas.frag';
 import planetRockyFragSource from './planet-rocky.frag';
@@ -183,6 +185,8 @@ export {
   nebulaSupernovaFragSource,
   nebulaVertSource,
   nebulaWolfRayetFragSource,
+  phenomenonPlaceholderFragSource,
+  phenomenonPlaceholderVertSource,
   planetExtremeFragSource,
   planetGasFragSource,
   planetRockyFragSource,

@@ -64,6 +64,8 @@ import {
   nebulaSupernovaFragSource,
   nebulaVertSource,
   nebulaWolfRayetFragSource,
+  phenomenonPlaceholderFragSource,
+  phenomenonPlaceholderVertSource,
   planetExtremeFragSource,
   planetGasFragSource,
   planetRockyFragSource,
@@ -281,6 +283,15 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
   'search-marker-orb': {
     vert: searchMarkerOrbVertSource,
     frag: searchMarkerOrbFragSource,
+  },
+  // T-V-58 — constant-colour placeholder used by PhenomenaGalleryRenderer
+  // for 20 Doc 22 8xxx phenomena (kilonova, GRB, TDE, bow shock, …) that
+  // don't have a dedicated procedural shader. applyEntityToggles.patchMaterial
+  // injects the universal toggle dimming so each entry still responds to
+  // InfoPanel toggle flips.
+  'phenomenon-placeholder': {
+    vert: phenomenonPlaceholderVertSource,
+    frag: phenomenonPlaceholderFragSource,
   },
 });
 

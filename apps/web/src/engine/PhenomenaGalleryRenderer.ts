@@ -2,6 +2,7 @@ import * as THREE from 'three';
 
 import { applyEntityToggles } from './applyEntityToggles';
 import type { GpuLifecycleHook } from './gpuLifecycle';
+import { createMaterialForEntity } from './MaterialFactory';
 
 /**
  * T52 — Doc 22 8xxx phenomena placeholder gallery.
@@ -60,26 +61,8 @@ const PHENOMENA_ENTRIES: readonly PhenomenonEntry[] = [
   { entId: 'ENT-8046', tint: '#8ce0a0', label: 'Heliosphere' },
 ];
 
-const PHENOMENON_VERT = `#version 300 es
-precision highp float;
-in vec3 position;
-uniform mat4 modelViewMatrix;
-uniform mat4 projectionMatrix;
-void main() {
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-}
-`;
-
-const PHENOMENON_FRAG = `#version 300 es
-precision highp float;
-uniform vec3 u_tint;
-out vec4 fragColor;
-void main() {
-  // Constant-colour placeholder. The universal toggle post-correction
-  // (injected by applyEntityToggles.patchMaterial) drives visible change.
-  fragColor = vec4(u_tint, 1.0);
-}
-`;
+// Shader sources moved to apps/web/src/shaders/phenomenon-placeholder.{vert,frag}
+// and routed through MaterialFactory under 'phenomenon-placeholder' (T-V-58).
 
 interface Body {
   entId: string;
@@ -108,15 +91,16 @@ export class PhenomenaGalleryRenderer implements GpuLifecycleHook {
     const geometry = new THREE.SphereGeometry(1, 12, 12);
     let cursor = 0;
     for (const entry of PHENOMENA_ENTRIES) {
-      const material = new THREE.ShaderMaterial({
-        name: `phenomenon:${entry.entId}`,
-        glslVersion: THREE.GLSL3,
-        uniforms: {
-          u_tint: { value: new THREE.Color(entry.tint) },
+      const tint = new THREE.Color(entry.tint);
+      const { material } = createMaterialForEntity(
+        {
+          render: {
+            shader: 'phenomenon-placeholder',
+            uniforms: { u_tint: [tint.r, tint.g, tint.b] },
+          },
         },
-        vertexShader: PHENOMENON_VERT,
-        fragmentShader: PHENOMENON_FRAG,
-      });
+        { debugName: `phenomenon:${entry.entId}` },
+      );
       const mesh = new THREE.Mesh(geometry, material);
       mesh.name = `PhenomenaGallery:${entry.entId}`;
       mesh.scale.setScalar(size);
