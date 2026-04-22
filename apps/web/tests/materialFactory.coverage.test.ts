@@ -31,16 +31,20 @@ describe('MaterialFactory coverage — Tier A fixture', () => {
     expect(() => assertUniqueEntIds()).not.toThrow();
   });
 
-  it('covers all 154 Tier A subtypes', () => {
-    expect(ENT_COVERAGE_FIXTURE.length).toBe(154);
+  it('covers all 154 Tier A + Tier B extensions', () => {
+    // 154 Tier A + incremental Tier B adds. Tier B grows as V8..V14 ship.
+    expect(ENT_COVERAGE_FIXTURE.length).toBeGreaterThanOrEqual(154);
   });
 
   it('tracks a sensible status distribution at V0 entry', () => {
     const counts = countByStatus();
-    // Rough bounds matching Doc 17 §0.1 summary. Exact counts drift as
-    // rows flip; this test just guards against accidental mass-regress.
+    // Rough bounds — Tier A baseline is 154; Tier B (V8..V14) grows the
+    // fixture incrementally. Assert (shipped | in-progress | planned |
+    // inline) cover all rows, and shipped count grew past Doc 17 §0.1 floor.
     expect(counts.shipped).toBeGreaterThanOrEqual(45);
-    expect(counts.shipped + counts['in-progress'] + counts.planned + counts.inline).toBe(154);
+    expect(
+      counts.shipped + counts['in-progress'] + counts.planned + counts.inline,
+    ).toBe(ENT_COVERAGE_FIXTURE.length);
     // Every inline row must document why it isn't factory-routed.
     for (const row of ENT_COVERAGE_FIXTURE) {
       if (row.status === 'inline') {

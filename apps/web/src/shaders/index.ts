@@ -85,11 +85,19 @@ import smallbodyRubbleVertSource from './smallbody-rubble.vert';
 import smallbodyTrojanFragSource from './smallbody-trojan.frag';
 import smallbodyTrojanVertSource from './smallbody-trojan.vert';
 import starBinaryFragSource from './star-binary.frag';
+import starBrownDwarfFragSource from './star-brown-dwarf.frag';
+import starBrownDwarfVertSource from './star-brown-dwarf.vert';
+import starCarbonFragSource from './star-carbon.frag';
+import starCarbonVertSource from './star-carbon.vert';
 import starEvolvedFragSource from './star-evolved.frag';
 import starMainseqFragSource from './star-mainseq.frag';
+import starPmsFragSource from './star-pms.frag';
+import starPmsVertSource from './star-pms.vert';
 import starPointFragSource from './star-point.frag';
 import starPointVertSource from './star-point.vert';
 import starRemnantFragSource from './star-remnant.frag';
+import starSubdwarfFragSource from './star-subdwarf.frag';
+import starSubdwarfVertSource from './star-subdwarf.vert';
 import starVariableFragSource from './star-variable.frag';
 import starVertSource from './star.vert';
 import zodiacalLightFragSource from './zodiacal-light.frag';
@@ -181,11 +189,19 @@ export {
   smallbodyTrojanFragSource,
   smallbodyTrojanVertSource,
   starBinaryFragSource,
+  starBrownDwarfFragSource,
+  starBrownDwarfVertSource,
+  starCarbonFragSource,
+  starCarbonVertSource,
   starEvolvedFragSource,
   starMainseqFragSource,
+  starPmsFragSource,
+  starPmsVertSource,
   starPointFragSource,
   starPointVertSource,
   starRemnantFragSource,
+  starSubdwarfFragSource,
+  starSubdwarfVertSource,
   starVariableFragSource,
   starVertSource,
   zodiacalLightFragSource,

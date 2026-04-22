@@ -79,6 +79,14 @@ import {
   smallbodyTrojanFragSource,
   smallbodyTrojanVertSource,
   starBinaryFragSource,
+  starBrownDwarfFragSource,
+  starBrownDwarfVertSource,
+  starCarbonFragSource,
+  starCarbonVertSource,
+  starPmsFragSource,
+  starPmsVertSource,
+  starSubdwarfFragSource,
+  starSubdwarfVertSource,
   starEvolvedFragSource,
   starMainseqFragSource,
   starRemnantFragSource,
@@ -163,11 +171,16 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
   'moon-minor':       { vert: moonVertSource, frag: moonMinorFragSource },
 
   // Stars
-  'star-mainseq':  { vert: starVertSource, frag: starMainseqFragSource },
-  'star-evolved':  { vert: starVertSource, frag: starEvolvedFragSource },
-  'star-remnant':  { vert: starVertSource, frag: starRemnantFragSource },
-  'star-variable': { vert: starVertSource, frag: starVariableFragSource },
-  'star-binary':   { vert: starVertSource, frag: starBinaryFragSource },
+  'star-mainseq':     { vert: starVertSource, frag: starMainseqFragSource },
+  'star-evolved':     { vert: starVertSource, frag: starEvolvedFragSource },
+  'star-remnant':     { vert: starVertSource, frag: starRemnantFragSource },
+  'star-variable':    { vert: starVertSource, frag: starVariableFragSource },
+  'star-binary':      { vert: starVertSource, frag: starBinaryFragSource },
+  // Tier B stellar extensions (T-V-30..33).
+  'star-brown-dwarf': { vert: starBrownDwarfVertSource, frag: starBrownDwarfFragSource },
+  'star-subdwarf':    { vert: starSubdwarfVertSource, frag: starSubdwarfFragSource },
+  'star-carbon':      { vert: starCarbonVertSource, frag: starCarbonFragSource },
+  'star-pms':         { vert: starPmsVertSource, frag: starPmsFragSource },
 
   // Galaxies
   'galaxy-spiral':             { vert: galaxyVertSource, frag: galaxySpiralFragSource },
@@ -247,6 +260,27 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
  * T-V-21 planets, etc).
  */
 const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.freeze({
+  // Tier B stellar extensions (T-V-30..36). Reserved range ENT-1050..1069.
+  'ENT-1050': { shader: 'star-brown-dwarf', defines: { BD_L: 1, HAS_CLOUDS: 1 } },
+  'ENT-1051': { shader: 'star-brown-dwarf', defines: { BD_T: 1, HAS_CLOUDS: 1 } },
+  'ENT-1052': { shader: 'star-brown-dwarf', defines: { BD_Y: 1 } },
+  'ENT-1053': { shader: 'star-subdwarf',    defines: { SUBDWARF_O: 1 } },
+  'ENT-1054': { shader: 'star-subdwarf',    defines: { SUBDWARF_B: 1 } },
+  'ENT-1055': { shader: 'star-carbon',      defines: { CARBON_CR: 1 } },
+  'ENT-1056': { shader: 'star-carbon',      defines: { CARBON_CN: 1 } },
+  'ENT-1057': { shader: 'star-carbon',      defines: { CARBON_CJ: 1 } },
+  'ENT-1058': { shader: 'star-pms',         defines: { PMS_HERBIG_AE: 1 } },
+  'ENT-1059': { shader: 'star-pms',         defines: { PMS_HERBIG_BE: 1 } },
+  'ENT-1060': { shader: 'star-pms',         defines: { PMS_T_TAURI: 1 } },
+  'ENT-1061': { shader: 'star-pms',         defines: { PMS_T_TAURI_WL: 1 } },
+  'ENT-1062': { shader: 'star-pms',         defines: { PMS_FU_ORI: 1 } },
+  'ENT-1063': { shader: 'star-variable',    defines: { VAR_LBV: 1 } },
+  'ENT-1064': { shader: 'star-variable',    defines: { VAR_BE_STAR: 1 } },
+  'ENT-1065': { shader: 'star-variable',    defines: { VAR_AM_CVN: 1 } },
+  'ENT-1066': { shader: 'star-evolved',     defines: { EVOLVED_POST_AGB: 1 } },
+  'ENT-1067': { shader: 'star-evolved',     defines: { EVOLVED_HB_TIER_B: 1 } },
+  'ENT-1068': { shader: 'star-evolved',     defines: { EVOLVED_RGB_TIP: 1 } },
+  'ENT-1069': { shader: 'star-evolved',     defines: { EVOLVED_EXTREME_AGB: 1 } },
   // Rocky planets (T-V-17). Defines select the per-body branch in
   // planet-rocky.frag; PLANET_* aliases keep the legacy SolarSystemRenderer
   // / PlanetGalleryRenderer code paths working. Palette uniforms are not

@@ -61,6 +61,28 @@ export const ENT_COVERAGE_FIXTURE: readonly EntCoverageRow[] = Object.freeze([
   { id: 'ENT-1039', subtype: 'Blue Straggler',    shader: 'star-variable', status: 'shipped' },
   { id: 'ENT-1040', subtype: 'Hypergiant',        shader: 'star-evolved', status: 'shipped' },
 
+  // Tier B stellar extensions (T-V-30..36, reserved range ENT-1050..1069).
+  { id: 'ENT-1050', subtype: 'L Dwarf (dedicated)', shader: 'star-brown-dwarf', status: 'shipped', note: 'T-V-30 BD_L + HAS_CLOUDS' },
+  { id: 'ENT-1051', subtype: 'T Dwarf (dedicated)', shader: 'star-brown-dwarf', status: 'shipped', note: 'T-V-30 BD_T + HAS_CLOUDS' },
+  { id: 'ENT-1052', subtype: 'Y Dwarf (dedicated)', shader: 'star-brown-dwarf', status: 'shipped', note: 'T-V-30 BD_Y thermal-only' },
+  { id: 'ENT-1053', subtype: 'sdO Subdwarf',       shader: 'star-subdwarf',    status: 'shipped', note: 'T-V-31 SUBDWARF_O' },
+  { id: 'ENT-1054', subtype: 'sdB Subdwarf',       shader: 'star-subdwarf',    status: 'shipped', note: 'T-V-31 SUBDWARF_B' },
+  { id: 'ENT-1055', subtype: 'Carbon C-R',         shader: 'star-carbon',      status: 'shipped', note: 'T-V-32 CARBON_CR ruby' },
+  { id: 'ENT-1056', subtype: 'Carbon C-N',         shader: 'star-carbon',      status: 'shipped', note: 'T-V-32 CARBON_CN N-type' },
+  { id: 'ENT-1057', subtype: 'Carbon C-J',         shader: 'star-carbon',      status: 'shipped', note: 'T-V-32 CARBON_CJ 13C-enhanced' },
+  { id: 'ENT-1058', subtype: 'Herbig Ae',          shader: 'star-pms',         status: 'shipped', note: 'T-V-33 PMS_HERBIG_AE' },
+  { id: 'ENT-1059', subtype: 'Herbig Be',          shader: 'star-pms',         status: 'shipped', note: 'T-V-33 PMS_HERBIG_BE' },
+  { id: 'ENT-1060', subtype: 'Classical T Tauri',  shader: 'star-pms',         status: 'shipped', note: 'T-V-33 PMS_T_TAURI' },
+  { id: 'ENT-1061', subtype: 'Weak-lined T Tauri', shader: 'star-pms',         status: 'shipped', note: 'T-V-33 PMS_T_TAURI_WL' },
+  { id: 'ENT-1062', subtype: 'FU Orionis',         shader: 'star-pms',         status: 'shipped', note: 'T-V-33 PMS_FU_ORI outburst' },
+  { id: 'ENT-1063', subtype: 'LBV',                shader: 'star-variable',    status: 'shipped', note: 'T-V-34 VAR_LBV' },
+  { id: 'ENT-1064', subtype: 'Be Star',            shader: 'star-variable',    status: 'shipped', note: 'T-V-34 VAR_BE_STAR' },
+  { id: 'ENT-1065', subtype: 'AM CVn',             shader: 'star-variable',    status: 'shipped', note: 'T-V-34 VAR_AM_CVN' },
+  { id: 'ENT-1066', subtype: 'Post-AGB',           shader: 'star-evolved',     status: 'shipped', note: 'T-V-35 EVOLVED_POST_AGB' },
+  { id: 'ENT-1067', subtype: 'Horizontal Branch (Tier B)', shader: 'star-evolved', status: 'shipped', note: 'T-V-35' },
+  { id: 'ENT-1068', subtype: 'RGB Tip',            shader: 'star-evolved',     status: 'shipped', note: 'T-V-35 EVOLVED_RGB_TIP' },
+  { id: 'ENT-1069', subtype: 'Extreme AGB',        shader: 'star-evolved',     status: 'shipped', note: 'T-V-35 EVOLVED_EXTREME_AGB' },
+
   // Planets (ENT-2xxx) — 27 subtypes, polished by V3
   { id: 'ENT-2010', subtype: 'Mercury',      shader: 'planet-rocky',   status: 'shipped', note: 'T-V-17 ROCKY_MERCURY + full Doc 22 toggle uniforms (T52)' },
   { id: 'ENT-2011', subtype: 'Venus',        shader: 'planet-rocky',   status: 'shipped', note: 'T-V-17 ROCKY_VENUS + cloud deck + Doc 22 toggles' },
