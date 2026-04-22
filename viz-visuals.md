@@ -910,14 +910,14 @@ pnpm typecheck
 
 ## Phase V14 — Tier B: LSS + Transient + Exotic extensions (+19 subtypes, 3 days)
 
-### T-V-54 — LSS extensions: Abell richness classes, SZ-detected, X-ray selected 🟢
+### T-V-54 — LSS extensions: Abell richness classes, SZ-detected, X-ray selected ✅ DONE 690835f 2026-04-22 🟢
 **Depends:** T-V-29  **Est:** 3h
 
 **Do:** +5 LSS subtypes with cluster-catalog-specific rendering tweaks.
 
 ---
 
-### T-V-55 — Transient phenomena (NEW family) 🟢
+### T-V-55 — Transient phenomena (NEW family) ✅ DONE 690835f 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 5h
 **Files:** `transient-*.frag` (new family, 5 files)
 
@@ -930,7 +930,7 @@ pnpm typecheck
 
 ---
 
-### T-V-56 — Exotic Tier B extensions 🟢
+### T-V-56 — Exotic Tier B extensions ✅ DONE 690835f 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 4h
 **Files:** extend `exotic-*.frag`
 
@@ -942,7 +942,7 @@ pnpm typecheck
 
 ---
 
-### T-V-57 — Wire all remaining Tier B factories 🟡
+### T-V-57 — Wire all remaining Tier B factories ✅ DONE 690835f 2026-04-22 🟡
 **Depends:** T-V-54..T-V-56  **Est:** 3h
 
 **Do:** +19 Tier B entries. Full 262 coverage.
