@@ -308,6 +308,27 @@ const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.fre
   'ENT-5070': { shader: 'nebula-protoplanetary' },
   'ENT-5080': { shader: 'nebula-superbubble' },
 
+  // Galaxies (T-V-27..28) — 19 Hubble-sequence subtypes across 7 shaders.
+  'ENT-6010': { shader: 'galaxy-spiral' },
+  'ENT-6011': { shader: 'galaxy-spiral',                defines: { HAS_BAR: 1 } },
+  'ENT-6012': { shader: 'galaxy-lenticular' },
+  'ENT-6020': { shader: 'galaxy-elliptical' },
+  'ENT-6021': { shader: 'galaxy-elliptical',            defines: { DWARF_ELLIPTICAL: 1 } },
+  'ENT-6022': { shader: 'galaxy-elliptical',            defines: { DWARF_SPHEROIDAL: 1 } },
+  'ENT-6030': { shader: 'galaxy-irregular' },
+  'ENT-6031': { shader: 'galaxy-irregular',             defines: { IRR_II: 1 } },
+  'ENT-6040': { shader: 'galaxy-agn',                   defines: { AGN_SEYFERT: 1 } },
+  'ENT-6041': { shader: 'galaxy-agn',                   defines: { AGN_QUASAR: 1 } },
+  'ENT-6042': { shader: 'galaxy-agn',                   defines: { AGN_RADIO: 1 } },
+  'ENT-6043': { shader: 'galaxy-agn',                   defines: { AGN_BLAZAR: 1 } },
+  'ENT-6044': { shader: 'galaxy-agn',                   defines: { AGN_LINER: 1 } },
+  'ENT-6050': { shader: 'galaxy-starburst' },
+  'ENT-6051': { shader: 'galaxy-morphology-special',    defines: { MORPH_RING: 1 } },
+  'ENT-6052': { shader: 'galaxy-morphology-special',    defines: { MORPH_JELLYFISH: 1 } },
+  'ENT-6053': { shader: 'galaxy-starburst',             defines: { SB_ULIRG: 1 } },
+  'ENT-6054': { shader: 'galaxy-morphology-special',    defines: { MORPH_ULTRA_DIFFUSE: 1 } },
+  'ENT-6055': { shader: 'galaxy-morphology-special',    defines: { MORPH_MERGING: 1 } },
+
   // Small bodies (T-V-10).
   'ENT-4010': { shader: 'smallbody-asteroid',        defines: { TYPE_C: 1 } },
   'ENT-4011': { shader: 'smallbody-asteroid',        defines: { TYPE_S: 1 } },
