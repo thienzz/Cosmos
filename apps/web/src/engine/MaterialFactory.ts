@@ -235,6 +235,18 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
  * T-V-21 planets, etc).
  */
 const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.freeze({
+  // Rocky planets (T-V-17). Defines select the per-body branch in
+  // planet-rocky.frag; PLANET_* aliases keep the legacy SolarSystemRenderer
+  // / PlanetGalleryRenderer code paths working. Palette uniforms are not
+  // set here — callers that want Doc-accurate colours go through
+  // createPlanetMaterial(kind) in PlanetMaterial.ts which owns the full
+  // ROCKY_PALETTES + ROCKY_PARAMS tables. This table is the minimal
+  // compile-safe default for API-driven lookups.
+  'ENT-2010': { shader: 'planet-rocky', defines: { ROCKY_MERCURY: 1, PLANET_MERCURY: 1 } },
+  'ENT-2011': { shader: 'planet-rocky', defines: { ROCKY_VENUS: 1,   PLANET_VENUS: 1 } },
+  'ENT-2012': { shader: 'planet-rocky', defines: { ROCKY_EARTH: 1,   PLANET_EARTH: 1 } },
+  'ENT-2013': { shader: 'planet-rocky', defines: { ROCKY_MARS: 1,    PLANET_MARS: 1 } },
+
   // Small bodies (T-V-10).
   'ENT-4010': { shader: 'smallbody-asteroid',        defines: { TYPE_C: 1 } },
   'ENT-4011': { shader: 'smallbody-asteroid',        defines: { TYPE_S: 1 } },

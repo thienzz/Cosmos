@@ -62,10 +62,10 @@ export const ENT_COVERAGE_FIXTURE: readonly EntCoverageRow[] = Object.freeze([
   { id: 'ENT-1040', subtype: 'Hypergiant',        shader: 'star-evolved', status: 'shipped' },
 
   // Planets (ENT-2xxx) — 27 subtypes, polished by V3
-  { id: 'ENT-2010', subtype: 'Mercury',      shader: 'planet-rocky',   status: 'in-progress' },
-  { id: 'ENT-2011', subtype: 'Venus',        shader: 'planet-rocky',   status: 'in-progress' },
-  { id: 'ENT-2012', subtype: 'Earth',        shader: 'planet-rocky',   status: 'in-progress' },
-  { id: 'ENT-2013', subtype: 'Mars',         shader: 'planet-rocky',   status: 'in-progress' },
+  { id: 'ENT-2010', subtype: 'Mercury',      shader: 'planet-rocky',   status: 'shipped', note: 'T-V-17 ROCKY_MERCURY + full Doc 22 toggle uniforms (T52)' },
+  { id: 'ENT-2011', subtype: 'Venus',        shader: 'planet-rocky',   status: 'shipped', note: 'T-V-17 ROCKY_VENUS + cloud deck + Doc 22 toggles' },
+  { id: 'ENT-2012', subtype: 'Earth',        shader: 'planet-rocky',   status: 'shipped', note: 'T-V-17 ROCKY_EARTH + PBR ocean/clouds/atmosphere rim' },
+  { id: 'ENT-2013', subtype: 'Mars',         shader: 'planet-rocky',   status: 'shipped', note: 'T-V-17 ROCKY_MARS + polar caps + iron-oxide dust' },
   { id: 'ENT-2020', subtype: 'Jupiter',      shader: 'planet-gas',     status: 'in-progress' },
   { id: 'ENT-2021', subtype: 'Saturn',       shader: 'planet-gas',     status: 'in-progress' },
   { id: 'ENT-2025', subtype: 'Uranus',       shader: 'planet-gas',     status: 'planned' },
