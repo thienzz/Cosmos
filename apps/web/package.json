@@ -15,6 +15,9 @@
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:visual": "vitest run --passWithNoTests tests/visual",
+    "test:visual:capture": "vite-node tests/visual/capture.ts --",
+    "test:visual:capture-all": "vite-node tests/visual/capture.ts -- --all",
     "seed:export": "vite-node scripts/export-ts-catalog.ts"
   },
   "dependencies": {

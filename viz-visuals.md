@@ -165,7 +165,7 @@ Set up the visual-regression test harness BEFORE any shader work. Every subseque
 
 ---
 
-### T-V-00 — MaterialFactory + render-block schema 🟢
+### T-V-00 — MaterialFactory + render-block schema ✅ DONE a3d6c7b 2026-04-22 🟢
 **Depends:** —  **Est:** 4h
 **Goal:** Client-side `MaterialFactory.create(entity)` that accepts optional `render: {shader, defines, uniforms}` from API, falls back to `kind→default`.
 **Files:**
