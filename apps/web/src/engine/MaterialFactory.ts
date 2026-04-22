@@ -292,6 +292,22 @@ const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.fre
   'ENT-3023': { shader: 'moon-minor',       defines: { MOON_BINARY: 1 } },
   'ENT-3024': { shader: 'moon-icy',         defines: { MOON_SUBSURFACE_OCEAN: 1 } },
 
+  // Nebulae (T-V-25..26) — uniform-driven, one shader per family/topology.
+  'ENT-5010': { shader: 'nebula-emission' },
+  'ENT-5011': { shader: 'nebula-emission' },
+  'ENT-5012': { shader: 'nebula-emission' },
+  'ENT-5020': { shader: 'nebula-planetary' },
+  'ENT-5021': { shader: 'nebula-planetary', defines: { PN_BIPOLAR: 1 } },
+  'ENT-5022': { shader: 'nebula-planetary', defines: { PN_IRREGULAR: 1 } },
+  'ENT-5030': { shader: 'nebula-reflection' },
+  'ENT-5040': { shader: 'nebula-dark' },
+  'ENT-5041': { shader: 'nebula-dark',      defines: { DARK_BOK_GLOBULE: 1 } },
+  'ENT-5050': { shader: 'nebula-supernova' },
+  'ENT-5051': { shader: 'nebula-supernova', defines: { SNR_PLERION: 1 } },
+  'ENT-5060': { shader: 'nebula-wolfrayet' },
+  'ENT-5070': { shader: 'nebula-protoplanetary' },
+  'ENT-5080': { shader: 'nebula-superbubble' },
+
   // Small bodies (T-V-10).
   'ENT-4010': { shader: 'smallbody-asteroid',        defines: { TYPE_C: 1 } },
   'ENT-4011': { shader: 'smallbody-asteroid',        defines: { TYPE_S: 1 } },

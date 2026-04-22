@@ -140,9 +140,9 @@
 | ENT-5030 | Reflection Nebula | `apps/web/src/shaders/nebula-reflection.frag` | T27 | shipped | |
 | ENT-5040 | Dark Nebula / MC | `apps/web/src/shaders/nebula-dark.frag` | T27 / T45 | in-progress | |
 | ENT-5041 | Bok Globule | `apps/web/src/shaders/nebula-dark.frag` | T45 | planned | smaller silhouette |
-| ENT-5050 | SNR (Shell) | `apps/web/src/shaders/nebula-snr.frag` | T27 / T45 | in-progress | |
-| ENT-5051 | SNR (Plerion / PWN) | `apps/web/src/shaders/nebula-snr.frag` | T45 | planned | center-bright |
-| ENT-5060 | Wolf-Rayet Nebula | `apps/web/src/shaders/nebula-wr.frag` | T45 | planned | ring bubble |
+| ENT-5050 | SNR (Shell) | `apps/web/src/shaders/nebula-supernova.frag` | T27 / T45 | in-progress | |
+| ENT-5051 | SNR (Plerion / PWN) | `apps/web/src/shaders/nebula-supernova.frag` | T45 | planned | center-bright |
+| ENT-5060 | Wolf-Rayet Nebula | `apps/web/src/shaders/nebula-wolfrayet.frag` | T45 | planned | ring bubble |
 | ENT-5070 | Protoplanetary Disk | `apps/web/src/shaders/nebula-protoplanetary.frag` | T45 | planned | gaps + cavity |
 | ENT-5080 | Superbubble | `apps/web/src/shaders/nebula-superbubble.frag` | T45 | planned | low-density cavity |
 
