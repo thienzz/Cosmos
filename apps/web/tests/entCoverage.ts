@@ -255,6 +255,18 @@ export const ENT_COVERAGE_FIXTURE: readonly EntCoverageRow[] = Object.freeze([
   { id: 'ENT-6054', subtype: 'Ultra-Diffuse',shader: 'galaxy-morphology-special', status: 'shipped', note: 'T-V-27 MORPH_ULTRA_DIFFUSE' },
   { id: 'ENT-6055', subtype: 'Merging',      shader: 'galaxy-morphology-special', status: 'shipped', note: 'T-V-27 MORPH_MERGING' },
 
+  // Tier B galaxy extensions (T-V-51..53, reserved ENT-6080..6089).
+  { id: 'ENT-6080', subtype: 'Green Pea',        shader: 'galaxy-starburst',          status: 'shipped', note: 'T-V-52 GREEN_PEA compact SF' },
+  { id: 'ENT-6081', subtype: 'Polar Ring',       shader: 'galaxy-morphology-special', status: 'shipped', note: 'T-V-52 POLAR_RING' },
+  { id: 'ENT-6082', subtype: 'Tidal Dwarf',      shader: 'galaxy-morphology-special', status: 'shipped', note: 'T-V-52 TIDAL_DWARF' },
+  { id: 'ENT-6083', subtype: 'cD (central dominant)', shader: 'galaxy-elliptical',    status: 'shipped', note: 'T-V-52 GAL_CD cluster dominant' },
+  { id: 'ENT-6084', subtype: 'BCG',              shader: 'galaxy-elliptical',         status: 'shipped', note: 'T-V-52 GAL_BCG brightest cluster galaxy' },
+  { id: 'ENT-6085', subtype: 'Chain (edge-on)',  shader: 'galaxy-spiral',             status: 'shipped', note: 'T-V-52 GAL_CHAIN_EDGE_ON' },
+  { id: 'ENT-6086', subtype: 'HyLIRG',           shader: 'galaxy-starburst',          status: 'shipped', note: 'T-V-52 SB_HYLIRG hyper-luminous IR' },
+  { id: 'ENT-6087', subtype: 'UCD',              shader: 'galaxy-elliptical',         status: 'shipped', note: 'T-V-51 DWARF_UCD ultra-compact dwarf' },
+  { id: 'ENT-6088', subtype: 'UFD',              shader: 'galaxy-elliptical',         status: 'shipped', note: 'T-V-51 DWARF_UFD ultra-faint dwarf' },
+  { id: 'ENT-6089', subtype: 'BCD',              shader: 'galaxy-starburst',          status: 'shipped', note: 'T-V-51 SB_BCD blue compact dwarf' },
+
   // LSS (ENT-7xxx) — 12 subtypes, V2 + V7
   { id: 'ENT-7010', subtype: 'Open Cluster',     shader: 'cluster-open',     status: 'shipped', note: 'T-V-11 NEBULOSITY_ON' },
   { id: 'ENT-7011', subtype: 'Globular Cluster', shader: 'cluster-globular', status: 'shipped', note: 'T-V-12 Plummer profile' },

@@ -650,7 +650,7 @@ pnpm typecheck
 
 ## Phase V7 — LSS Tier A polish (1 day)
 
-### T-V-29 — ENT-7040..7085 polish (superclusters/filaments/voids/cosmic web) 🟡
+### T-V-29 — ENT-7040..7085 polish (superclusters/filaments/voids/cosmic web) ✅ DONE 67db7b5 2026-04-22 🟡
 **Depends:** T-V-11..T-V-15  **Est:** 4h
 **Files:** inline shaders in LargeScaleStructureRenderer.ts → externalize
 
@@ -668,7 +668,7 @@ pnpm typecheck
 
 ## Phase V8 — Tier B: Star extensions (+20 subtypes, 4 days)
 
-### T-V-30 — Brown dwarfs: L, T, Y classes 🟢
+### T-V-30 — Brown dwarfs: L, T, Y classes ✅ DONE 53b8575 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 3h
 **Files:** `apps/web/src/shaders/star-brown-dwarf.frag` (new)
 
@@ -682,7 +682,7 @@ pnpm typecheck
 
 ---
 
-### T-V-31 — Sub-dwarfs sdO, sdB 🟢
+### T-V-31 — Sub-dwarfs sdO, sdB ✅ DONE 53b8575 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 2h
 **Files:** `star-subdwarf.frag` (new)
 
@@ -695,7 +695,7 @@ pnpm typecheck
 
 ---
 
-### T-V-32 — Carbon stars C-R, C-N, C-J 🟢
+### T-V-32 — Carbon stars C-R, C-N, C-J ✅ DONE 53b8575 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 2h
 **Files:** `star-carbon.frag` (new)
 
@@ -709,7 +709,7 @@ pnpm typecheck
 
 ---
 
-### T-V-33 — Pre-main-sequence: Herbig Ae/Be, T Tauri (classical + weak-lined), FU Ori 🟢
+### T-V-33 — Pre-main-sequence: Herbig Ae/Be, T Tauri (classical + weak-lined), FU Ori ✅ DONE 53b8575 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 4h
 **Files:** `star-pms.frag` (new)
 
@@ -724,7 +724,7 @@ pnpm typecheck
 
 ---
 
-### T-V-34 — Variable types: LBV, Be star, AM CVn 🟢
+### T-V-34 — Variable types: LBV, Be star, AM CVn ✅ DONE 53b8575 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 3h
 **Files:** extend `star-variable.frag`
 
@@ -737,7 +737,7 @@ pnpm typecheck
 
 ---
 
-### T-V-35 — Post-AGB + late-stage: post-AGB, horizontal branch, RGB tip, extreme AGB 🟢
+### T-V-35 — Post-AGB + late-stage: post-AGB, horizontal branch, RGB tip, extreme AGB ✅ DONE 53b8575 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 3h
 **Files:** extend `star-evolved.frag`
 
@@ -751,7 +751,7 @@ pnpm typecheck
 
 ---
 
-### T-V-36 — Wire Tier B star factory 🟡
+### T-V-36 — Wire Tier B star factory ✅ DONE 53b8575 2026-04-22 🟡
 **Depends:** T-V-30..T-V-35  **Est:** 2h
 
 **Do:** Add 20 Tier B stellar ENT-IDs (ENT-1050..1070 reserved range) to shared-types + MaterialFactory.
@@ -761,7 +761,7 @@ pnpm typecheck
 
 ## Phase V9 — Tier B: Planet extensions (+15 subtypes, 3 days)
 
-### T-V-37 — Composition variants: Helium planet, Carbon/Diamond, Iron 🟢
+### T-V-37 — Composition variants: Helium planet, Carbon/Diamond, Iron ✅ DONE ad2a85b 2026-04-22 🟢
 **Depends:** T-V-17..T-V-21  **Est:** 3h
 
 **Do:** Extend `planet-rocky.frag` + `planet-gas.frag`:
@@ -771,28 +771,28 @@ pnpm typecheck
 
 ---
 
-### T-V-38 — Ocean/ice sub-types: Water world (H2O), Ocean (H2+H2O), Ice ammonia/methane 🟢
+### T-V-38 — Ocean/ice sub-types: Water world (H2O), Ocean (H2+H2O), Ice ammonia/methane ✅ DONE ad2a85b 2026-04-22 🟢
 **Depends:** T-V-17  **Est:** 3h
 
 **Do:** Extend planet-extreme + planet-rocky with 4 ocean composition variants.
 
 ---
 
-### T-V-39 — Evolution stages: Protoplanet early/middle/late, Chthonian stripping 🟢
+### T-V-39 — Evolution stages: Protoplanet early/middle/late, Chthonian stripping ✅ DONE ad2a85b 2026-04-22 🟢
 **Depends:** T-V-17  **Est:** 3h
 
 **Do:** Composition + mass ramps through 3 protoplanet stages. Chthonian = exposed stripped core at 3 severity levels.
 
 ---
 
-### T-V-40 — Special variants: Super-puff, Bloated Saturn, Helium-shelled HJ, Magma ocean 🟢
+### T-V-40 — Special variants: Super-puff, Bloated Saturn, Helium-shelled HJ, Magma ocean ✅ DONE ad2a85b 2026-04-22 🟢
 **Depends:** T-V-18  **Est:** 3h
 
 **Do:** 4 gas-giant variants with extreme density/radius/temperature presets.
 
 ---
 
-### T-V-41 — Wire Tier B planet factory 🟡
+### T-V-41 — Wire Tier B planet factory ✅ DONE ad2a85b 2026-04-22 🟡
 **Depends:** T-V-37..T-V-40  **Est:** 2h
 
 **Do:** Add 15 Tier B planet ENT-IDs.
@@ -802,7 +802,7 @@ pnpm typecheck
 
 ## Phase V10 — Tier B: Moon extensions (+10 subtypes, 2 days)
 
-### T-V-42 — Orbital-type moons 🟢
+### T-V-42 — Orbital-type moons ✅ DONE 137e672 2026-04-22 🟢
 **Depends:** T-V-22..T-V-24  **Est:** 4h
 
 **Do:** Co-orbital, quasi-satellite, horseshoe, sesquinary, binary pair, shepherd (Pan/Daphnis gap pattern), Trojan moon (Tethys's Telesto).
@@ -810,14 +810,14 @@ pnpm typecheck
 
 ---
 
-### T-V-43 — Irregular + resonant 🟢
+### T-V-43 — Irregular + resonant ✅ DONE 137e672 2026-04-22 🟢
 **Depends:** T-V-42  **Est:** 3h
 
 **Do:** Retrograde captured, resonant family (Jovian 1:2:4 Io-Europa-Ganymede Laplace), sesquinary chain.
 
 ---
 
-### T-V-44 — Wire Tier B moon factory 🟡
+### T-V-44 — Wire Tier B moon factory ✅ DONE 137e672 2026-04-22 🟡
 **Depends:** T-V-42, T-V-43  **Est:** 1h
 
 **Do:** +10 Tier B moon entries.
@@ -826,7 +826,7 @@ pnpm typecheck
 
 ## Phase V11 — Tier B: Bus-DeMeo asteroid taxonomy (+24 subtypes, 4 days)
 
-### T-V-45 — Bus-DeMeo primary classes: A, B, Cb, Cg, Cgh, Ch, D, K, L, Ld, O, Q, R, Sa, Sq, Sr, T, Xc, Xe, Xk 🟢
+### T-V-45 — Bus-DeMeo primary classes: A, B, Cb, Cg, Cgh, Ch, D, K, L, Ld, O, Q, R, Sa, Sq, Sr, T, Xc, Xe, Xk ✅ DONE d51d8fe 2026-04-22 🟢
 **Depends:** T-V-03  **Est:** 10h
 **Files:** `smallbody-asteroid.frag` (extend with 24 `#define` class presets)
 
@@ -836,7 +836,7 @@ pnpm typecheck
 
 ---
 
-### T-V-46 — Active asteroids, main-belt comets, damocloids, Neptune Trojans 🟢
+### T-V-46 — Active asteroids, main-belt comets, damocloids, Neptune Trojans ✅ DONE d51d8fe 2026-04-22 🟢
 **Depends:** T-V-45  **Est:** 4h
 
 **Do:**
@@ -847,7 +847,7 @@ pnpm typecheck
 
 ---
 
-### T-V-47 — Wire Tier B small-body factory 🟡
+### T-V-47 — Wire Tier B small-body factory ✅ DONE d51d8fe 2026-04-22 🟡
 **Depends:** T-V-45, T-V-46  **Est:** 2h
 
 **Do:** +24 Tier B small-body ENT-IDs.
@@ -857,7 +857,7 @@ pnpm typecheck
 
 ## Phase V12 — Tier B: Nebula extensions (+10 subtypes, 2 days)
 
-### T-V-48 — Star-forming objects 🟢
+### T-V-48 — Star-forming objects ✅ DONE 2026-04-22 🟢
 **Depends:** T-V-25  **Est:** 4h
 
 **Do:**
@@ -871,14 +871,14 @@ pnpm typecheck
 
 ---
 
-### T-V-49 — Compact + molecular 🟢
+### T-V-49 — Compact + molecular ✅ DONE 2026-04-22 🟢
 **Depends:** T-V-48  **Est:** 3h
 
 **Do:** Cometary globules, H2O maser sites, GMCs, Lyman-α forest, SNR-shocked molecular clouds.
 
 ---
 
-### T-V-50 — Wire Tier B nebula factory 🟡
+### T-V-50 — Wire Tier B nebula factory ✅ DONE 2026-04-22 🟡
 **Depends:** T-V-48, T-V-49  **Est:** 1h
 
 **Do:** +10 Tier B nebula ENT-IDs.

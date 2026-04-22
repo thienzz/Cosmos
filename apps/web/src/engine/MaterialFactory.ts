@@ -423,6 +423,18 @@ const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.fre
   'ENT-6054': { shader: 'galaxy-morphology-special',    defines: { MORPH_ULTRA_DIFFUSE: 1 } },
   'ENT-6055': { shader: 'galaxy-morphology-special',    defines: { MORPH_MERGING: 1 } },
 
+  // Tier B galaxy extensions (T-V-51..53). Reserved ENT-6080..6089.
+  'ENT-6080': { shader: 'galaxy-starburst',          defines: { GREEN_PEA: 1 } },
+  'ENT-6081': { shader: 'galaxy-morphology-special', defines: { POLAR_RING: 1 } },
+  'ENT-6082': { shader: 'galaxy-morphology-special', defines: { TIDAL_DWARF: 1 } },
+  'ENT-6083': { shader: 'galaxy-elliptical',         defines: { GAL_CD: 1 } },
+  'ENT-6084': { shader: 'galaxy-elliptical',         defines: { GAL_BCG: 1 } },
+  'ENT-6085': { shader: 'galaxy-spiral',             defines: { GAL_CHAIN_EDGE_ON: 1 } },
+  'ENT-6086': { shader: 'galaxy-starburst',          defines: { SB_HYLIRG: 1 } },
+  'ENT-6087': { shader: 'galaxy-elliptical',         defines: { DWARF_UCD: 1 } },
+  'ENT-6088': { shader: 'galaxy-elliptical',         defines: { DWARF_UFD: 1 } },
+  'ENT-6089': { shader: 'galaxy-starburst',          defines: { SB_BCD: 1 } },
+
   // Small bodies (T-V-10).
   'ENT-4010': { shader: 'smallbody-asteroid',        defines: { TYPE_C: 1 } },
   'ENT-4011': { shader: 'smallbody-asteroid',        defines: { TYPE_S: 1 } },
