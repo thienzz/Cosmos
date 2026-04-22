@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmos Explorer — Visual Capture (T-V-61)</title>
+    <style>
+      html, body { margin: 0; padding: 0; background: #000; overflow: hidden; }
+      canvas { display: block; }
+      #capture-error {
+        position: fixed; top: 8px; left: 8px; color: #f87171;
+        font: 14px/1.2 "IBM Plex Mono", "Space Mono", monospace;
+        white-space: pre-wrap; max-width: 95vw;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="capture-canvas" width="512" height="512"></canvas>
+    <pre id="capture-error" hidden></pre>
+    <script type="module" src="/src/visualCaptureEntry.ts"></script>
+  </body>
+</html>
