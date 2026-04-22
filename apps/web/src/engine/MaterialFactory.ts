@@ -321,6 +321,24 @@ const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.fre
   'ENT-2047': { shader: 'planet-extreme', defines: { EXTREME_SYNESTIA: 1 } },
   'ENT-2050': { shader: 'planet-rocky',   defines: { ROCKY_CHTHONIAN: 1 } },
 
+  // Tier B planet extensions (T-V-37..41). Reuse existing planet-*.frag
+  // with additional defines — each entry adds a distinct visual signature.
+  'ENT-2060': { shader: 'planet-gas',     defines: { GAS_HELIUM: 1, HELIUM_BANDED: 1 } },
+  'ENT-2061': { shader: 'planet-rocky',   defines: { ROCKY_CARBON: 1, CARBON_DIAMOND: 1 } },
+  'ENT-2062': { shader: 'planet-rocky',   defines: { ROCKY_IRON: 1, IRON_MAGNETOSPHERE: 1 } },
+  'ENT-2063': { shader: 'planet-rocky',   defines: { ROCKY_WATER: 1, WATER_WORLD_H2O: 1 } },
+  'ENT-2064': { shader: 'planet-rocky',   defines: { ROCKY_OCEAN: 1, OCEAN_H2_H2O: 1 } },
+  'ENT-2065': { shader: 'planet-extreme', defines: { EXTREME_HYCEAN: 1, ICE_AMMONIA: 1 } },
+  'ENT-2066': { shader: 'planet-extreme', defines: { EXTREME_HYCEAN: 1, ICE_METHANE: 1 } },
+  'ENT-2067': { shader: 'planet-rocky',   defines: { ROCKY_PROTOPLANET: 1, PROTO_EARLY: 1 } },
+  'ENT-2068': { shader: 'planet-rocky',   defines: { ROCKY_PROTOPLANET: 1, PROTO_MIDDLE: 1 } },
+  'ENT-2069': { shader: 'planet-rocky',   defines: { ROCKY_PROTOPLANET: 1, PROTO_LATE: 1 } },
+  'ENT-2070': { shader: 'planet-rocky',   defines: { ROCKY_CHTHONIAN: 1, CHTHONIAN_SEVERE: 1 } },
+  'ENT-2071': { shader: 'planet-gas',     defines: { GAS_PUFFY: 1, PUFFY_SUPER: 1 } },
+  'ENT-2072': { shader: 'planet-gas',     defines: { GAS_SATURN: 1, SATURN_BLOATED: 1 } },
+  'ENT-2073': { shader: 'planet-gas',     defines: { GAS_HOT_JUPITER: 1, HJ_HELIUM_SHELL: 1 } },
+  'ENT-2074': { shader: 'planet-rocky',   defines: { ROCKY_MAGMA: 1, MAGMA_OCEAN: 1 } },
+
   // Moons (T-V-22..24) — all 15 variants live across 6 moon-*.frag files.
   'ENT-3010': { shader: 'moon-volcanic',    defines: { MOON_IO: 1 } },
   'ENT-3011': { shader: 'moon-icy',         defines: { MOON_EUROPA: 1 } },

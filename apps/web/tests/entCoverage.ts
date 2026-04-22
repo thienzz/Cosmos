@@ -112,6 +112,23 @@ export const ENT_COVERAGE_FIXTURE: readonly EntCoverageRow[] = Object.freeze([
   { id: 'ENT-2047', subtype: 'Synestia',     shader: 'planet-extreme', status: 'shipped', note: 'T-V-20 EXTREME_SYNESTIA' },
   { id: 'ENT-2050', subtype: 'Chthonian',    shader: 'planet-rocky',   status: 'shipped', note: 'T-V-20 ROCKY_CHTHONIAN stripped core' },
 
+  // Tier B planet extensions (T-V-37..41, reserved range ENT-2060..2074).
+  { id: 'ENT-2060', subtype: 'Helium Banded',       shader: 'planet-gas',     status: 'shipped', note: 'T-V-37 GAS_HELIUM + HELIUM_BANDED' },
+  { id: 'ENT-2061', subtype: 'Carbon Diamond',      shader: 'planet-rocky',   status: 'shipped', note: 'T-V-37 CARBON_DIAMOND high-albedo pearl' },
+  { id: 'ENT-2062', subtype: 'Iron Magnetosphere',  shader: 'planet-rocky',   status: 'shipped', note: 'T-V-37 IRON_MAGNETOSPHERE dark metallic' },
+  { id: 'ENT-2063', subtype: 'Water World (H2O)',   shader: 'planet-rocky',   status: 'shipped', note: 'T-V-38 WATER_WORLD_H2O' },
+  { id: 'ENT-2064', subtype: 'Ocean (H2+H2O)',      shader: 'planet-rocky',   status: 'shipped', note: 'T-V-38 OCEAN_H2_H2O deep ocean' },
+  { id: 'ENT-2065', subtype: 'Ice Ammonia',         shader: 'planet-extreme', status: 'shipped', note: 'T-V-38 ICE_AMMONIA' },
+  { id: 'ENT-2066', subtype: 'Ice Methane',         shader: 'planet-extreme', status: 'shipped', note: 'T-V-38 ICE_METHANE' },
+  { id: 'ENT-2067', subtype: 'Protoplanet Early',   shader: 'planet-rocky',   status: 'shipped', note: 'T-V-39 PROTO_EARLY' },
+  { id: 'ENT-2068', subtype: 'Protoplanet Middle',  shader: 'planet-rocky',   status: 'shipped', note: 'T-V-39 PROTO_MIDDLE' },
+  { id: 'ENT-2069', subtype: 'Protoplanet Late',    shader: 'planet-rocky',   status: 'shipped', note: 'T-V-39 PROTO_LATE' },
+  { id: 'ENT-2070', subtype: 'Chthonian Severe',    shader: 'planet-rocky',   status: 'shipped', note: 'T-V-39 CHTHONIAN_SEVERE stripping' },
+  { id: 'ENT-2071', subtype: 'Super-Puff',          shader: 'planet-gas',     status: 'shipped', note: 'T-V-40 PUFFY_SUPER ultra-low density' },
+  { id: 'ENT-2072', subtype: 'Bloated Saturn',      shader: 'planet-gas',     status: 'shipped', note: 'T-V-40 SATURN_BLOATED' },
+  { id: 'ENT-2073', subtype: 'Helium-Shelled HJ',   shader: 'planet-gas',     status: 'shipped', note: 'T-V-40 HJ_HELIUM_SHELL' },
+  { id: 'ENT-2074', subtype: 'Magma Ocean',         shader: 'planet-rocky',   status: 'shipped', note: 'T-V-40 MAGMA_OCEAN' },
+
   // Moons (ENT-3xxx) — 15 subtypes, polished by V4
   { id: 'ENT-3010', subtype: 'Volcanic (Io)',    shader: 'moon-volcanic',    status: 'shipped', note: 'T-V-22 MOON_IO + SO2 plumes' },
   { id: 'ENT-3011', subtype: 'Cracked Ice',      shader: 'moon-icy',         status: 'shipped', note: 'T-V-22 MOON_EUROPA chaos lineae' },
