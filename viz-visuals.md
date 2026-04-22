@@ -261,7 +261,7 @@ pnpm typecheck
 
 ---
 
-### T-V-04 — `smallbody-asteroid-binary.frag` 🟢
+### T-V-04 — `smallbody-asteroid-binary.frag` ✅ DONE c3a5a15 2026-04-22 🟢
 **Depends:** T-V-03  **Est:** 2h
 **Goal:** Binary asteroid pair rendered as 2-lobe contact binary (Arrokoth) or orbiting pair (Didymos/Dimorphos).
 **Files:** `smallbody-asteroid-binary.frag`, `.vert`
@@ -276,7 +276,7 @@ pnpm typecheck
 
 ---
 
-### T-V-05 — `smallbody-rubble.frag` 🟢
+### T-V-05 — `smallbody-rubble.frag` ✅ DONE 6667811 2026-04-22 🟢
 **Depends:** T-V-03  **Est:** 2h
 **Goal:** Rubble-pile asteroid — aggregate boulders, porous shadow (Bennu/Ryugu-like).
 **Files:** `smallbody-rubble.frag`, `.vert`
@@ -290,7 +290,7 @@ pnpm typecheck
 
 ---
 
-### T-V-06 — `smallbody-kbo.frag` 🟢
+### T-V-06 — `smallbody-kbo.frag` ✅ DONE 5b1e87f 2026-04-22 🟢
 **Depends:** T-V-03  **Est:** 3h
 **Goal:** Kuiper Belt Object — tholin reddish surface, larger body treatment (dwarf-planet-scale).
 **Files:** `smallbody-kbo.frag`, `.vert`
@@ -306,7 +306,7 @@ pnpm typecheck
 
 ---
 
-### T-V-07 — `smallbody-centaur.frag` 🟢
+### T-V-07 — `smallbody-centaur.frag` ✅ DONE 7cf1c28 2026-04-22 🟢
 **Depends:** T-V-06  **Est:** 2h
 **Goal:** Centaur — Chiron/Chariklo-type with faint comet-like activity.
 **Files:** `smallbody-centaur.frag`
@@ -321,7 +321,7 @@ pnpm typecheck
 
 ---
 
-### T-V-08 — `smallbody-trojan.frag` 🟢
+### T-V-08 — `smallbody-trojan.frag` ✅ DONE b6790a4 2026-04-22 🟢
 **Depends:** T-V-03  **Est:** 2h
 **Goal:** Trojan — L4/L5 indicator overlay + asteroid base.
 **Files:** `smallbody-trojan.frag`
@@ -336,7 +336,7 @@ pnpm typecheck
 
 ---
 
-### T-V-09 — `meteoroid-stream.frag` 🟡
+### T-V-09 — `meteoroid-stream.frag` ✅ DONE ffef279 2026-04-22 🟡
 **Depends:** T-V-00  **Est:** 3h
 **Goal:** Meteoroid stream — dust trail along comet orbit (Perseids, Leonids).
 **Files:** `meteoroid-stream.frag`, `.vert`
@@ -351,7 +351,7 @@ pnpm typecheck
 
 ---
 
-### T-V-10 — Wire small-body MaterialFactory mapping 🟡
+### T-V-10 — Wire small-body MaterialFactory mapping ✅ DONE d88fc22 2026-04-22 🟡
 **Depends:** T-V-03..T-V-09  **Est:** 3h
 **Goal:** Every ENT-4xxx resolves to correct shader + defines via `MaterialFactory`.
 **Files:** `apps/web/src/engine/MaterialFactory.ts`, `apps/web/src/engine/AsteroidFieldRenderer.ts`
@@ -369,7 +369,7 @@ pnpm typecheck
 
 ## Phase V2 — LSS/Clusters: 5 new shader files (3 days)
 
-### T-V-11 — `cluster-open.frag` 🟢
+### T-V-11 — `cluster-open.frag` ✅ DONE 158627a 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 3h
 **Goal:** Open cluster (Pleiades, Hyades) — sparse point distribution with nebulous reflection dust.
 **Files:** `cluster-open.frag`, `.vert`
@@ -384,7 +384,7 @@ pnpm typecheck
 
 ---
 
-### T-V-12 — `cluster-globular.frag` 🟢
+### T-V-12 — `cluster-globular.frag` ✅ DONE 158627a 2026-04-22 🟢
 **Depends:** T-V-11  **Est:** 3h
 **Goal:** Globular cluster — dense spherical core (M13, ω Centauri) with Plummer density profile.
 **Files:** `cluster-globular.frag`
@@ -399,7 +399,7 @@ pnpm typecheck
 
 ---
 
-### T-V-13 — `cluster-ob.frag` 🟢
+### T-V-13 — `cluster-ob.frag` ✅ DONE 158627a 2026-04-22 🟢
 **Depends:** T-V-11  **Est:** 2h
 **Goal:** OB association — bright blue young stars, often associated with parent nebula.
 **Files:** `cluster-ob.frag`
@@ -415,7 +415,7 @@ pnpm typecheck
 
 ---
 
-### T-V-14 — `cluster-collision.frag` 🟡
+### T-V-14 — `cluster-collision.frag` ✅ DONE 158627a 2026-04-22 🟡
 **Depends:** T-V-11  **Est:** 3h
 **Goal:** Disrupting / merging cluster — tidal tails, core asymmetry.
 **Files:** `cluster-collision.frag`
@@ -430,7 +430,7 @@ pnpm typecheck
 
 ---
 
-### T-V-15 — `lyman-alpha-blob.frag` 🟢
+### T-V-15 — `lyman-alpha-blob.frag` ✅ DONE 158627a 2026-04-22 🟢
 **Depends:** T-V-00  **Est:** 2h
 **Goal:** Lyman-α blob — extended high-z Lα emission (LAB-1 Watson 2004).
 **Files:** `lyman-alpha-blob.frag`
@@ -445,7 +445,7 @@ pnpm typecheck
 
 ---
 
-### T-V-16 — Wire cluster/LSS MaterialFactory mapping 🟡
+### T-V-16 — Wire cluster/LSS MaterialFactory mapping ✅ DONE 158627a 2026-04-22 🟡
 **Depends:** T-V-11..T-V-15  **Est:** 3h
 **Goal:** Every ENT-7xxx resolves correctly.
 **Files:** `MaterialFactory.ts`, `LargeScaleStructureRenderer.ts`, `CosmicWebRenderer.ts`
