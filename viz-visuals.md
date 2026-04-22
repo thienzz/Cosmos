@@ -464,7 +464,7 @@ pnpm typecheck
 
 27 subtypes covered by 3 existing family shaders (`planet-rocky`, `planet-gas`, `planet-extreme`). Each gets a `#define` branch + uniform preset.
 
-### T-V-17 — ENT-2010..2014 rocky planet defines (Mercury/Venus/Earth/Mars/Earth-analog) 🔴
+### T-V-17 — ENT-2010..2014 rocky planet defines (Mercury/Venus/Earth/Mars/Earth-analog) ✅ DONE 955216b 2026-04-22 🔴
 **Depends:** T-V-00  **Est:** 4h
 **Files:** `apps/web/src/shaders/planet-rocky.frag`
 
@@ -493,7 +493,7 @@ pnpm typecheck
 
 ---
 
-### T-V-18 — ENT-2020..2026 gas giant defines (Jupiter/Saturn/Uranus/Neptune) 🔴
+### T-V-18 — ENT-2020..2026 gas giant defines (Jupiter/Saturn/Uranus/Neptune) ✅ DONE 2cc1493 2026-04-22 🔴
 **Depends:** T-V-00  **Est:** 4h
 **Files:** `apps/web/src/shaders/planet-gas.frag`
 
@@ -509,7 +509,7 @@ pnpm typecheck
 
 ---
 
-### T-V-19 — ENT-2030..2039 exotic rocky defines (Hot Jupiter/Super-Earth/Hycean/Eyeball/Magma) 🟡
+### T-V-19 — ENT-2030..2039 exotic rocky defines (Hot Jupiter/Super-Earth/Hycean/Eyeball/Magma) ✅ DONE 2cc1493 2026-04-22 🟡
 **Depends:** T-V-17, T-V-18  **Est:** 4h
 **Files:** `planet-gas.frag`, `planet-extreme.frag`, `planet-rocky.frag`
 
@@ -525,7 +525,7 @@ pnpm typecheck
 
 ---
 
-### T-V-20 — ENT-2040..2050 rare types (Rogue/Puffy/Chthonian/Protoplanet/Desert/Ocean/Helium/Synestia) 🟡
+### T-V-20 — ENT-2040..2050 rare types (Rogue/Puffy/Chthonian/Protoplanet/Desert/Ocean/Helium/Synestia) ✅ DONE 2cc1493 2026-04-22 🟡
 **Depends:** T-V-19  **Est:** 4h
 
 **Do:** Remaining 12 Tier A planets via `#define` preset per Doc 18 spec. Rogue = self-emission only. Chthonian = exposed metallic core. Synestia = post-impact disk.
@@ -535,7 +535,7 @@ pnpm typecheck
 
 ---
 
-### T-V-21 — Wire planet factory mapping 🟡
+### T-V-21 — Wire planet factory mapping ✅ DONE 2cc1493 2026-04-22 🟡
 **Depends:** T-V-17..T-V-20  **Est:** 2h
 **Files:** `PlanetMaterial.ts`, `MaterialFactory.ts`
 
@@ -546,7 +546,7 @@ pnpm typecheck
 
 ## Phase V4 — Moons Tier A polish (2 days)
 
-### T-V-22 — ENT-3010..3015 inner moons (Io/Europa/Ganymede/Callisto/Titan/Enceladus) 🔴
+### T-V-22 — ENT-3010..3015 inner moons (Io/Europa/Ganymede/Callisto/Titan/Enceladus) ✅ DONE 0d885d9 2026-04-22 🔴
 **Depends:** T-V-00  **Est:** 5h
 **Files:** `moon-volcanic.frag`, `moon-icy.frag`, `moon-atmospheric.frag`
 
@@ -563,7 +563,7 @@ pnpm typecheck
 
 ---
 
-### T-V-23 — ENT-3016..3024 outer + minor moons (Triton/Miranda/Hyperion/shepherd/trojan/binary/subsurface-ocean) 🟡
+### T-V-23 — ENT-3016..3024 outer + minor moons (Triton/Miranda/Hyperion/shepherd/trojan/binary/subsurface-ocean) ✅ DONE 0d885d9 2026-04-22 🟡
 **Depends:** T-V-22  **Est:** 3h
 **Files:** `moon-extreme.frag`, `moon-minor.frag`
 
@@ -572,7 +572,7 @@ pnpm typecheck
 
 ---
 
-### T-V-24 — Wire moon factory mapping 🟡
+### T-V-24 — Wire moon factory mapping ✅ DONE 0d885d9 2026-04-22 🟡
 **Depends:** T-V-22, T-V-23  **Est:** 2h
 
 **Do:** Update MaterialFactory + MoonMaterial delegates.
@@ -582,7 +582,7 @@ pnpm typecheck
 
 ## Phase V5 — Nebulae Tier A polish (2 days)
 
-### T-V-25 — ENT-5000..5040 nebula polish (emission/reflection/dark/planetary/supernova/protoplanetary/superbubble/WR) 🔴
+### T-V-25 — ENT-5000..5040 nebula polish (emission/reflection/dark/planetary/supernova/protoplanetary/superbubble/WR) ✅ DONE b4daec7 2026-04-22 🔴
 **Depends:** T-V-00  **Est:** 6h
 **Files:** `nebula-*.frag` (all 8 existing)
 
@@ -600,7 +600,7 @@ pnpm typecheck
 
 ---
 
-### T-V-26 — Wire nebula factory + checklist rename 🟢
+### T-V-26 — Wire nebula factory + checklist rename ✅ DONE b4daec7 2026-04-22 🟢
 **Depends:** T-V-25  **Est:** 2h
 
 **Do:**
@@ -614,7 +614,7 @@ pnpm typecheck
 
 ## Phase V6 — Galaxies Tier A polish (3 days)
 
-### T-V-27 — ENT-6010..6055 galaxy Hubble types polish 🔴
+### T-V-27 — ENT-6010..6055 galaxy Hubble types polish ✅ DONE 5a4546e 2026-04-22 🔴
 **Depends:** T-V-00  **Est:** 8h
 **Files:** `galaxy-*.frag` (7 existing)
 
@@ -640,7 +640,7 @@ pnpm typecheck
 
 ---
 
-### T-V-28 — Wire galaxy factory mapping 🟡
+### T-V-28 — Wire galaxy factory mapping ✅ DONE 5a4546e 2026-04-22 🟡
 **Depends:** T-V-27  **Est:** 2h
 
 **Do:** Update 19 ENT-6xxx in MaterialFactory + GalaxyMaterial.

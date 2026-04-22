@@ -29,6 +29,14 @@ import galaxyMorphologySpecialFragSource from './galaxy-morphology-special.frag'
 import galaxySpiralFragSource from './galaxy-spiral.frag';
 import galaxyStarburstFragSource from './galaxy-starburst.frag';
 import galaxyVertSource from './galaxy.vert';
+import lssFilamentFragSource from './lss-filament.frag';
+import lssFilamentVertSource from './lss-filament.vert';
+import lssGreatWallFragSource from './lss-great-wall.frag';
+import lssGreatWallVertSource from './lss-great-wall.vert';
+import lssSuperclusterFragSource from './lss-supercluster.frag';
+import lssSuperclusterVertSource from './lss-supercluster.vert';
+import lssVoidFragSource from './lss-void.frag';
+import lssVoidVertSource from './lss-void.vert';
 import lymanAlphaBlobFragSource from './lyman-alpha-blob.frag';
 import lymanAlphaBlobVertSource from './lyman-alpha-blob.vert';
 import meteoroidStreamFragSource from './meteoroid-stream.frag';
@@ -117,6 +125,14 @@ export {
   galaxySpiralFragSource,
   galaxyStarburstFragSource,
   galaxyVertSource,
+  lssFilamentFragSource,
+  lssFilamentVertSource,
+  lssGreatWallFragSource,
+  lssGreatWallVertSource,
+  lssSuperclusterFragSource,
+  lssSuperclusterVertSource,
+  lssVoidFragSource,
+  lssVoidVertSource,
   lymanAlphaBlobFragSource,
   lymanAlphaBlobVertSource,
   meteoroidStreamFragSource,

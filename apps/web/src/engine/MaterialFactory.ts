@@ -32,6 +32,14 @@ import {
   galaxySpiralFragSource,
   galaxyStarburstFragSource,
   galaxyVertSource,
+  lssFilamentFragSource,
+  lssFilamentVertSource,
+  lssGreatWallFragSource,
+  lssGreatWallVertSource,
+  lssSuperclusterFragSource,
+  lssSuperclusterVertSource,
+  lssVoidFragSource,
+  lssVoidVertSource,
   lymanAlphaBlobFragSource,
   lymanAlphaBlobVertSource,
   meteoroidStreamFragSource,
@@ -136,6 +144,10 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
   'cluster-ob':        { vert: clusterObVertSource, frag: clusterObFragSource },
   'cluster-collision': { vert: clusterCollisionVertSource, frag: clusterCollisionFragSource },
   'lyman-alpha-blob':  { vert: lymanAlphaBlobVertSource, frag: lymanAlphaBlobFragSource },
+  'lss-supercluster':  { vert: lssSuperclusterVertSource, frag: lssSuperclusterFragSource },
+  'lss-filament':      { vert: lssFilamentVertSource, frag: lssFilamentFragSource },
+  'lss-void':          { vert: lssVoidVertSource, frag: lssVoidFragSource },
+  'lss-great-wall':    { vert: lssGreatWallVertSource, frag: lssGreatWallFragSource },
 
   // Planets
   'planet-rocky':   { vert: planetVertSource, frag: planetRockyFragSource },
@@ -357,6 +369,14 @@ const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.fre
   'ENT-7012': { shader: 'cluster-ob',  defines: { HAS_PARENT_NEBULA: 1 } },
   'ENT-7023': { shader: 'cluster-collision' },
   'ENT-7033': { shader: 'lyman-alpha-blob' },
+
+  // LSS externalised (T-V-29) — renderer swap happens in T-V-58.
+  'ENT-7020': { shader: 'lss-supercluster', defines: { LSS_GROUP: 1 } },
+  'ENT-7021': { shader: 'lss-supercluster', defines: { LSS_CLUSTER: 1 } },
+  'ENT-7022': { shader: 'lss-supercluster', defines: { LSS_SUPERCL: 1 } },
+  'ENT-7030': { shader: 'lss-filament' },
+  'ENT-7031': { shader: 'lss-void' },
+  'ENT-7032': { shader: 'lss-great-wall' },
 });
 
 /**
