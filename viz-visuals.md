@@ -1003,7 +1003,7 @@ pnpm typecheck
 
 ---
 
-### T-V-62 — Visual regression CI 🟢
+### T-V-62 — Visual regression CI ✅ DONE 87f0713 2026-04-22 🟢
 **Depends:** T-V-61  **Est:** 2h
 
 **Do:**
@@ -1011,6 +1011,12 @@ pnpm typecheck
 2. Preview + capture + diff vs baseline → fail if ΔE > 5 or SSIM < 0.65.
 
 **Verify:** intentionally bump a uniform in a PR → CI catches.
+
+**Implementation notes:**
+- `apps/web/tests/visual/runner.ts` — Node-side diff orchestrator. Decodes PNGs via `pngjs`, calls `metrics.ts` (ΔE2000 + SSIM + pHash), prints a per-row table, exits non-zero on any breach.
+- Per-family threshold tightening per Doc 33 §4.2: `star` ΔE ≤ 3.0, `nebula` ≤ 4.0; global default ΔE ≤ 5.0, SSIM ≥ 0.65, pHash ≤ 8.
+- Workflow path filters restrict runs to PRs that touch shader sources, `MaterialFactory.ts`, any `*Material*.ts`, the capture harness, or the workflow file itself — prevents ~6-min CI cost on unrelated PRs.
+- `pnpm --filter @cosmos/web test:visual:diff` runs the runner locally against `tests/visual/baseline/` + `--current <dir>`. Identity diff (same PNGs both sides) produces ΔE=0 / SSIM=1 / pHash=0 — verified in smoke test.
 
 ---
 
