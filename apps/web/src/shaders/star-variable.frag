@@ -193,11 +193,14 @@ void main() {
   #ifdef VAR_SYMBIOTIC
     // Bichromatic: one hemisphere red-giant dominant, the other hot
     // WD-dominated, slow sinusoidal interchange.
-    float swap = 0.5 + 0.5 * sin(TWO_PI * pulsePhase() + n.x * 1.5);
-    surface = mix(u_coolColor, u_hotColor, swap);
-    // Ionised-nebula halo at limb.
-    float mu = abs(dot(nW, v));
-    surface += u_haloColor * pow(1.0 - mu, 3.0) * 0.3;
+    {
+      float swap = 0.5 + 0.5 * sin(TWO_PI * pulsePhase() + n.x * 1.5);
+      surface = mix(u_coolColor, u_hotColor, swap);
+      // Ionised-nebula halo at limb. Scoped so `muSym` doesn't collide
+      // with the outer `mu` variable below.
+      float muSym = abs(dot(nW, v));
+      surface += u_haloColor * pow(1.0 - muSym, 3.0) * 0.3;
+    }
   #endif
 
   #ifdef VAR_BLUESTRAGGLER

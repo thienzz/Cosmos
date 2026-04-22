@@ -205,9 +205,14 @@ void main() {
 
   #ifdef EVOLVED_BSG
     // Blue-supergiant wind glow near limb (Doc 17 §ENT-1024 "cyan #00DDFF").
-    float mu = abs(dot(nW, v));
-    float rim = pow(1.0 - mu, 2.5);
-    surface += u_chromosphereColor * rim * 0.35;
+    // Scoped so `muBsg`/`rimBsg` don't collide with the outer `mu`/`rim`
+    // variables below — GLSL ES 3.0 forbids re-declaration at function
+    // scope even across disjoint #ifdef branches.
+    {
+      float muBsg = abs(dot(nW, v));
+      float rimBsg = pow(1.0 - muBsg, 2.5);
+      surface += u_chromosphereColor * rimBsg * 0.35;
+    }
   #endif
 
   #ifdef EVOLVED_HB
