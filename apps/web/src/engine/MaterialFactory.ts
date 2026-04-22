@@ -50,6 +50,8 @@ import {
   smallbodyAsteroidVertSource,
   smallbodyCometFragSource,
   smallbodyCometVertSource,
+  smallbodyRubbleFragSource,
+  smallbodyRubbleVertSource,
   starBinaryFragSource,
   starEvolvedFragSource,
   starMainseqFragSource,
@@ -155,6 +157,10 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
     frag: smallbodyAsteroidBinaryFragSource,
   },
   'smallbody-comet': { vert: smallbodyCometVertSource, frag: smallbodyCometFragSource },
+  'smallbody-rubble': {
+    vert: smallbodyRubbleVertSource,
+    frag: smallbodyRubbleFragSource,
+  },
 
   // Exotic
   'exotic-blackhole':   { vert: exoticVertSource, frag: exoticBlackholeFragSource },

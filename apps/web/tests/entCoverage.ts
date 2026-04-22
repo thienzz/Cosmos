@@ -113,7 +113,7 @@ export const ENT_COVERAGE_FIXTURE: readonly EntCoverageRow[] = Object.freeze([
   { id: 'ENT-4012', subtype: 'M-Type Asteroid', shader: 'smallbody-asteroid',        status: 'shipped', note: 'T-V-03 #define TYPE_M' },
   { id: 'ENT-4013', subtype: 'V-Type Asteroid', shader: 'smallbody-asteroid',        status: 'shipped', note: 'T-V-03 #define TYPE_V' },
   { id: 'ENT-4014', subtype: 'Binary Asteroid', shader: 'smallbody-asteroid-binary', status: 'shipped', note: 'T-V-04 #define BINARY_PAIR' },
-  { id: 'ENT-4015', subtype: 'Rubble-Pile',     shader: 'smallbody-rubble',          status: 'planned', note: 'V1 T-V-05' },
+  { id: 'ENT-4015', subtype: 'Rubble-Pile',     shader: 'smallbody-rubble',          status: 'shipped', note: 'T-V-05 Worley-F2F1 boulder AO' },
   { id: 'ENT-4016', subtype: 'Contact Binary',  shader: 'smallbody-asteroid-binary', status: 'shipped', note: 'T-V-04 #define BINARY_CONTACT' },
   { id: 'ENT-4020', subtype: 'Short-Period Comet', shader: 'smallbody-comet',        status: 'planned' },
   { id: 'ENT-4021', subtype: 'Long-Period Comet',  shader: 'smallbody-comet',        status: 'planned' },
