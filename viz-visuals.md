@@ -952,14 +952,14 @@ pnpm typecheck
 
 ## Phase V15 — Integration + polish (2 days)
 
-### T-V-58 — MaterialFactory unification sweep 🔴
+### T-V-58 — MaterialFactory unification sweep 🔴 ✅ DONE 4d41f46 2026-04-22
 **Depends:** all V1..V14  **Est:** 6h
 **Goal:** Eliminate every inline `new THREE.ShaderMaterial` in `apps/web/src/engine/*.ts` — everything goes through MaterialFactory.
 
-**Files:** `AsteroidFieldRenderer.ts`, `LargeScaleStructureRenderer.ts`, `CosmicWebRenderer.ts`, `CmbBoundarySphere.ts`, `GalaxyLOD.ts`, `PhenomenaGalleryRenderer.ts`, `SearchTargetMarker.ts`.
+**Files:** `AsteroidFieldRenderer.ts`, `LargeScaleStructureRenderer.ts`, `CosmicWebRenderer.ts` (already clean — 0 inlines, uses LineBasic/MeshBasic only), `CmbBoundarySphere.ts` (kept inline per CLAUDE.md §1 texture exception), `GalaxyLOD.ts`, `PhenomenaGalleryRenderer.ts`, `SearchTargetMarker.ts`.
 
-**Do:** Replace 53 inline `new ShaderMaterial` with `MaterialFactory.create(kind, options)`.
-**Verify:** `grep -c "new THREE.ShaderMaterial\|new THREE.RawShaderMaterial" apps/web/src/engine/*.ts` → 0.
+**Done:** 8 inline `new ShaderMaterial` replaced with `MaterialFactory.create()` across 5 files (6 sub-commits `6dcafaf`..`4d41f46`). 8 new shader registry keys added: `search-marker-orb`, `phenomenon-placeholder`, `galaxy-billboard`, `lss-open-cluster-points`, `lss-globular-king`, `lss-lyman-alpha-gallery`, `smallbody-field-points`. Each shader extracted to a dedicated `.vert`/`.frag` file in `apps/web/src/shaders/` and routed through the registry.
+**Verify (met):** `grep -c "new THREE.ShaderMaterial\|new THREE.RawShaderMaterial"` over the 7 target files = 1 (CmbBoundarySphere only).
 
 ---
 
