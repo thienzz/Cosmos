@@ -94,10 +94,13 @@ describe('ENT-ID resolution (T-V-10 onward)', () => {
   const entIdsInTable = new Set(MaterialFactory.listKnownEntIds());
 
   it('resolves every ENT-4xxx small-body subtype via ent_id alone', () => {
+    // Tier A is 20 rows (ENT-4010..ENT-4060); Tier B V11 grows this to
+    // include Bus-DeMeo taxonomy (ENT-4070..4089) + active/MBC/damocloid/
+    // Neptune-Trojan (ENT-4094..4097). Assert ≥20 to accommodate growth.
     const smallBodies = ENT_COVERAGE_FIXTURE.filter((r) =>
-      r.id.startsWith('ENT-4'),
+      r.id.startsWith('ENT-4') && r.shader !== null,
     );
-    expect(smallBodies).toHaveLength(20);
+    expect(smallBodies.length).toBeGreaterThanOrEqual(20);
     for (const row of smallBodies) {
       expect(entIdsInTable.has(row.id), `missing ${row.id}`).toBe(true);
       const { material, shaderKey } = createMaterialForEntity({ id: row.id });
