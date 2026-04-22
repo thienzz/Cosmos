@@ -54,6 +54,8 @@ import smallbodyAsteroidBinaryFragSource from './smallbody-asteroid-binary.frag'
 import smallbodyAsteroidBinaryVertSource from './smallbody-asteroid-binary.vert';
 import smallbodyAsteroidFragSource from './smallbody-asteroid.frag';
 import smallbodyAsteroidVertSource from './smallbody-asteroid.vert';
+import smallbodyCentaurFragSource from './smallbody-centaur.frag';
+import smallbodyCentaurVertSource from './smallbody-centaur.vert';
 import smallbodyCometFragSource from './smallbody-comet.frag';
 import smallbodyCometVertSource from './smallbody-comet.vert';
 import smallbodyKboFragSource from './smallbody-kbo.frag';
@@ -126,6 +128,8 @@ export {
   smallbodyAsteroidBinaryVertSource,
   smallbodyAsteroidFragSource,
   smallbodyAsteroidVertSource,
+  smallbodyCentaurFragSource,
+  smallbodyCentaurVertSource,
   smallbodyCometFragSource,
   smallbodyCometVertSource,
   smallbodyKboFragSource,
