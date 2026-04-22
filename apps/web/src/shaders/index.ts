@@ -1,4 +1,12 @@
 // Central re-export for GLSL modules (vite-plugin-glsl inlines the source).
+import clusterCollisionFragSource from './cluster-collision.frag';
+import clusterCollisionVertSource from './cluster-collision.vert';
+import clusterGlobularFragSource from './cluster-globular.frag';
+import clusterGlobularVertSource from './cluster-globular.vert';
+import clusterObFragSource from './cluster-ob.frag';
+import clusterObVertSource from './cluster-ob.vert';
+import clusterOpenFragSource from './cluster-open.frag';
+import clusterOpenVertSource from './cluster-open.vert';
 import exoplanetHostMarkerFragSource from './exoplanet-host-marker.frag';
 import exoplanetHostMarkerVertSource from './exoplanet-host-marker.vert';
 import exoticBlackholeFragSource from './exotic-blackhole.frag';
@@ -21,6 +29,8 @@ import galaxyMorphologySpecialFragSource from './galaxy-morphology-special.frag'
 import galaxySpiralFragSource from './galaxy-spiral.frag';
 import galaxyStarburstFragSource from './galaxy-starburst.frag';
 import galaxyVertSource from './galaxy.vert';
+import lymanAlphaBlobFragSource from './lyman-alpha-blob.frag';
+import lymanAlphaBlobVertSource from './lyman-alpha-blob.vert';
 import meteoroidStreamFragSource from './meteoroid-stream.frag';
 import meteoroidStreamVertSource from './meteoroid-stream.vert';
 import moonAtmosphericFragSource from './moon-atmospheric.frag';
@@ -77,6 +87,14 @@ import starVertSource from './star.vert';
 import zodiacalLightFragSource from './zodiacal-light.frag';
 
 export {
+  clusterCollisionFragSource,
+  clusterCollisionVertSource,
+  clusterGlobularFragSource,
+  clusterGlobularVertSource,
+  clusterObFragSource,
+  clusterObVertSource,
+  clusterOpenFragSource,
+  clusterOpenVertSource,
   exoplanetHostMarkerFragSource,
   exoplanetHostMarkerVertSource,
   exoticBlackholeFragSource,
@@ -99,6 +117,8 @@ export {
   galaxySpiralFragSource,
   galaxyStarburstFragSource,
   galaxyVertSource,
+  lymanAlphaBlobFragSource,
+  lymanAlphaBlobVertSource,
   meteoroidStreamFragSource,
   meteoroidStreamVertSource,
   moonAtmosphericFragSource,

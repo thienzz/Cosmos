@@ -2,6 +2,14 @@ import type { EntityRenderBlock } from '@cosmos/shared-types';
 import * as THREE from 'three';
 
 import {
+  clusterCollisionFragSource,
+  clusterCollisionVertSource,
+  clusterGlobularFragSource,
+  clusterGlobularVertSource,
+  clusterObFragSource,
+  clusterObVertSource,
+  clusterOpenFragSource,
+  clusterOpenVertSource,
   exoplanetHostMarkerFragSource,
   exoplanetHostMarkerVertSource,
   exoticBlackholeFragSource,
@@ -24,6 +32,8 @@ import {
   galaxySpiralFragSource,
   galaxyStarburstFragSource,
   galaxyVertSource,
+  lymanAlphaBlobFragSource,
+  lymanAlphaBlobVertSource,
   meteoroidStreamFragSource,
   meteoroidStreamVertSource,
   moonAtmosphericFragSource,
@@ -120,6 +130,13 @@ interface ShaderEntry {
  * each time a new `.frag` file lands in `apps/web/src/shaders/`.
  */
 const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
+  // Clusters (T-V-11..T-V-14) + Lyman-α (T-V-15)
+  'cluster-open':      { vert: clusterOpenVertSource, frag: clusterOpenFragSource },
+  'cluster-globular':  { vert: clusterGlobularVertSource, frag: clusterGlobularFragSource },
+  'cluster-ob':        { vert: clusterObVertSource, frag: clusterObFragSource },
+  'cluster-collision': { vert: clusterCollisionVertSource, frag: clusterCollisionFragSource },
+  'lyman-alpha-blob':  { vert: lymanAlphaBlobVertSource, frag: lymanAlphaBlobFragSource },
+
   // Planets
   'planet-rocky':   { vert: planetVertSource, frag: planetRockyFragSource },
   'planet-gas':     { vert: planetVertSource, frag: planetGasFragSource },
@@ -239,6 +256,13 @@ const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.fre
   'ENT-4050': { shader: 'smallbody-centaur' },
   'ENT-4051': { shader: 'smallbody-trojan' },
   'ENT-4060': { shader: 'meteoroid-stream' },
+
+  // Clusters / LSS (T-V-16).
+  'ENT-7010': { shader: 'cluster-open', defines: { NEBULOSITY_ON: 1 } },
+  'ENT-7011': { shader: 'cluster-globular' },
+  'ENT-7012': { shader: 'cluster-ob',  defines: { HAS_PARENT_NEBULA: 1 } },
+  'ENT-7023': { shader: 'cluster-collision' },
+  'ENT-7033': { shader: 'lyman-alpha-blob' },
 });
 
 /**

@@ -167,17 +167,17 @@ export const ENT_COVERAGE_FIXTURE: readonly EntCoverageRow[] = Object.freeze([
   { id: 'ENT-6055', subtype: 'Merging',      shader: 'galaxy-morphology-special', status: 'planned' },
 
   // LSS (ENT-7xxx) — 12 subtypes, V2 + V7
-  { id: 'ENT-7010', subtype: 'Open Cluster',     shader: 'cluster-open',     status: 'planned', note: 'V2 T-V-11' },
-  { id: 'ENT-7011', subtype: 'Globular Cluster', shader: 'cluster-globular', status: 'planned', note: 'V2 T-V-12' },
-  { id: 'ENT-7012', subtype: 'OB Association',   shader: 'cluster-ob',       status: 'planned', note: 'V2 T-V-13' },
+  { id: 'ENT-7010', subtype: 'Open Cluster',     shader: 'cluster-open',     status: 'shipped', note: 'T-V-11 NEBULOSITY_ON' },
+  { id: 'ENT-7011', subtype: 'Globular Cluster', shader: 'cluster-globular', status: 'shipped', note: 'T-V-12 Plummer profile' },
+  { id: 'ENT-7012', subtype: 'OB Association',   shader: 'cluster-ob',       status: 'shipped', note: 'T-V-13 HAS_PARENT_NEBULA' },
   { id: 'ENT-7020', subtype: 'Galaxy Group',     shader: null,               status: 'inline',  note: 'LargeScaleStructureRenderer; externalised in T-V-29/58' },
   { id: 'ENT-7021', subtype: 'Galaxy Cluster',   shader: null,               status: 'inline',  note: 'LargeScaleStructureRenderer; externalised in T-V-29/58' },
   { id: 'ENT-7022', subtype: 'Supercluster',     shader: null,               status: 'inline',  note: 'LargeScaleStructureRenderer; externalised in T-V-29/58' },
-  { id: 'ENT-7023', subtype: 'Cluster Collision',shader: 'cluster-collision', status: 'planned', note: 'V2 T-V-14' },
+  { id: 'ENT-7023', subtype: 'Cluster Collision',shader: 'cluster-collision', status: 'shipped', note: 'T-V-14 mergePhase animation' },
   { id: 'ENT-7030', subtype: 'Cosmic Filament',  shader: null,               status: 'inline',  note: 'CosmicWebRenderer tube geometry; T-V-29/58' },
   { id: 'ENT-7031', subtype: 'Cosmic Void',      shader: null,               status: 'inline',  note: 'LSSRenderer sphere wireframe; T-V-29/58' },
   { id: 'ENT-7032', subtype: 'Great Wall',       shader: null,               status: 'inline',  note: 'LSSRenderer LineSegments; T-V-29/58' },
-  { id: 'ENT-7033', subtype: 'Lyman-α Blob',     shader: 'lyman-alpha-blob', status: 'planned', note: 'V2 T-V-15' },
+  { id: 'ENT-7033', subtype: 'Lyman-α Blob',     shader: 'lyman-alpha-blob', status: 'shipped', note: 'T-V-15 volumetric 16-sample' },
   { id: 'ENT-7040', subtype: 'CMB',              shader: null,               status: 'inline',  note: 'CmbBoundarySphere — CLAUDE.md §1 texture exception' },
 
   // Exotic (ENT-8xxx) — 16 subtypes, all shipped
