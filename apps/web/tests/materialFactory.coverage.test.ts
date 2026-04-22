@@ -86,6 +86,23 @@ describe('MaterialFactory coverage — Tier A fixture', () => {
   );
 });
 
+describe('ENT-ID resolution (T-V-10 onward)', () => {
+  const entIdsInTable = new Set(MaterialFactory.listKnownEntIds());
+
+  it('resolves every ENT-4xxx small-body subtype via ent_id alone', () => {
+    const smallBodies = ENT_COVERAGE_FIXTURE.filter((r) =>
+      r.id.startsWith('ENT-4'),
+    );
+    expect(smallBodies).toHaveLength(20);
+    for (const row of smallBodies) {
+      expect(entIdsInTable.has(row.id), `missing ${row.id}`).toBe(true);
+      const { material, shaderKey } = createMaterialForEntity({ id: row.id });
+      expect(shaderKey).toBe(row.shader);
+      expect(material.name).toBe(row.shader);
+    }
+  });
+});
+
 describe('MaterialFactory.listRegisteredShaders', () => {
   it('exposes every shader referenced by Tier A shipped rows', () => {
     const shippedShaders = new Set<string>();

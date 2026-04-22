@@ -88,6 +88,10 @@ import {
 
 /** Minimal input shape — kept permissive so arbitrary entity objects fit. */
 export interface MaterialFactoryInput {
+  /** Canonical entity ID (e.g. `'ENT-4010'`) — used when render/kind absent. */
+  id?: string;
+  /** Legacy alias for `id`; some call sites pass ENT_ID via this name. */
+  ent_id?: string;
   /** Explicit shader-family hint (e.g. `'rocky_planet'`, `'moon'`). */
   kind?: string;
   /** Discriminated-union tag from `CelestialObject` (`'planet'`, `'star'`, …). */
@@ -207,6 +211,37 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
 });
 
 /**
+ * Per-ENT-ID render-block table. Gives callers a second fallback path —
+ * if an entity passes only its canonical `ent_id` (no `render` block and
+ * no `kind`/`object_type`), we can still recover the full render preset.
+ * Populated as families are wired (T-V-10 small bodies, T-V-16 clusters,
+ * T-V-21 planets, etc).
+ */
+const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.freeze({
+  // Small bodies (T-V-10).
+  'ENT-4010': { shader: 'smallbody-asteroid',        defines: { TYPE_C: 1 } },
+  'ENT-4011': { shader: 'smallbody-asteroid',        defines: { TYPE_S: 1 } },
+  'ENT-4012': { shader: 'smallbody-asteroid',        defines: { TYPE_M: 1 } },
+  'ENT-4013': { shader: 'smallbody-asteroid',        defines: { TYPE_V: 1 } },
+  'ENT-4014': { shader: 'smallbody-asteroid-binary', defines: { BINARY_PAIR: 1 } },
+  'ENT-4015': { shader: 'smallbody-rubble' },
+  'ENT-4016': { shader: 'smallbody-asteroid-binary', defines: { BINARY_CONTACT: 1 } },
+  'ENT-4020': { shader: 'smallbody-comet' },
+  'ENT-4021': { shader: 'smallbody-comet' },
+  'ENT-4022': { shader: 'smallbody-comet' },
+  'ENT-4023': { shader: 'smallbody-comet' },
+  'ENT-4030': { shader: 'smallbody-kbo',             defines: { KBO_PLUTO: 1 } },
+  'ENT-4031': { shader: 'smallbody-kbo',             defines: { KBO_CERES: 1 } },
+  'ENT-4032': { shader: 'smallbody-kbo',             defines: { KBO_ERIS: 1 } },
+  'ENT-4040': { shader: 'smallbody-kbo' },
+  'ENT-4041': { shader: 'smallbody-kbo' },
+  'ENT-4042': { shader: 'smallbody-kbo' },
+  'ENT-4050': { shader: 'smallbody-centaur' },
+  'ENT-4051': { shader: 'smallbody-trojan' },
+  'ENT-4060': { shader: 'meteoroid-stream' },
+});
+
+/**
  * Legacy kind → shader table. Used only when no `render` block is present.
  * Covers the eight `ObjectType` discriminants plus a handful of sub-kinds
  * callers commonly pass in (`rocky_planet`, `gas_giant`, `brown_dwarf`, etc).
@@ -256,16 +291,24 @@ const KIND_TO_SHADER: Readonly<Record<string, string>> = Object.freeze({
 
 const DEFAULT_LOG_DEPTH_COEF = 2.0 / Math.log2(1e12 + 1);
 
-function resolveShaderKey(input: MaterialFactoryInput): string {
-  if (input.render?.shader) return input.render.shader;
-  if (input.kind && KIND_TO_SHADER[input.kind]) return KIND_TO_SHADER[input.kind]!;
+/** Resolve (shader, defines, uniforms) for an entity in precedence order:
+ *  1. explicit `render` block,
+ *  2. canonical ENT-ID table,
+ *  3. kind/object_type fallback (no defines, no uniforms). */
+function resolveRender(input: MaterialFactoryInput): EntityRenderBlock {
+  if (input.render?.shader) return input.render;
+  const entId = input.id ?? input.ent_id;
+  if (entId && ENT_ID_TO_RENDER[entId]) return ENT_ID_TO_RENDER[entId]!;
+  if (input.kind && KIND_TO_SHADER[input.kind]) {
+    return { shader: KIND_TO_SHADER[input.kind]! };
+  }
   if (input.object_type && KIND_TO_SHADER[input.object_type]) {
-    return KIND_TO_SHADER[input.object_type]!;
+    return { shader: KIND_TO_SHADER[input.object_type]! };
   }
   throw new Error(
     `MaterialFactory: cannot resolve shader — entity has no render.shader, ` +
-      `kind, or recognised object_type (got kind=${String(input.kind)}, ` +
-      `object_type=${String(input.object_type)})`,
+      `known ent_id, kind, or object_type (got id=${String(entId)}, ` +
+      `kind=${String(input.kind)}, object_type=${String(input.object_type)})`,
   );
 }
 
@@ -342,27 +385,27 @@ export function createMaterialForEntity(
   entity: MaterialFactoryInput,
   options: MaterialFactoryOptions = {},
 ): MaterialFactoryResult {
-  const shaderKey = resolveShaderKey(entity);
-  const entry = SHADER_REGISTRY[shaderKey];
+  const render = resolveRender(entity);
+  const entry = SHADER_REGISTRY[render.shader];
   if (!entry) {
     throw new Error(
-      `MaterialFactory: unknown shader '${shaderKey}' — not in SHADER_REGISTRY`,
+      `MaterialFactory: unknown shader '${render.shader}' — not in SHADER_REGISTRY`,
     );
   }
 
   const material = new THREE.ShaderMaterial({
-    name: options.debugName ?? shaderKey,
+    name: options.debugName ?? render.shader,
     glslVersion: THREE.GLSL3,
     vertexShader: entry.vert,
     fragmentShader: entry.frag,
-    defines: buildDefines(entity.render),
+    defines: buildDefines(render),
     uniforms: buildUniforms(
-      entity.render,
+      render,
       options,
     ) as unknown as THREE.ShaderMaterial['uniforms'],
   });
 
-  return { material, shaderKey };
+  return { material, shaderKey: render.shader };
 }
 
 /** Registry introspection helper — used by coverage tests (T-V-02+). */
@@ -375,8 +418,14 @@ export function listKnownKinds(): readonly string[] {
   return Object.freeze(Object.keys(KIND_TO_SHADER));
 }
 
+/** ENT-ID-table introspection helper — used by coverage tests. */
+export function listKnownEntIds(): readonly string[] {
+  return Object.freeze(Object.keys(ENT_ID_TO_RENDER));
+}
+
 export const MaterialFactory = {
   create: createMaterialForEntity,
   listRegisteredShaders,
   listKnownKinds,
+  listKnownEntIds,
 } as const;
