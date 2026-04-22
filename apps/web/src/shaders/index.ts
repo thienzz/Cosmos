@@ -33,8 +33,14 @@ import galaxyStarburstFragSource from './galaxy-starburst.frag';
 import galaxyVertSource from './galaxy.vert';
 import lssFilamentFragSource from './lss-filament.frag';
 import lssFilamentVertSource from './lss-filament.vert';
+import lssGlobularKingFragSource from './lss-globular-king.frag';
+import lssGlobularKingVertSource from './lss-globular-king.vert';
 import lssGreatWallFragSource from './lss-great-wall.frag';
 import lssGreatWallVertSource from './lss-great-wall.vert';
+import lssLymanAlphaGalleryFragSource from './lss-lyman-alpha-gallery.frag';
+import lssLymanAlphaGalleryVertSource from './lss-lyman-alpha-gallery.vert';
+import lssOpenClusterPointsFragSource from './lss-open-cluster-points.frag';
+import lssOpenClusterPointsVertSource from './lss-open-cluster-points.vert';
 import lssSuperclusterFragSource from './lss-supercluster.frag';
 import lssSuperclusterVertSource from './lss-supercluster.vert';
 import lssVoidFragSource from './lss-void.frag';
@@ -157,8 +163,14 @@ export {
   galaxyVertSource,
   lssFilamentFragSource,
   lssFilamentVertSource,
+  lssGlobularKingFragSource,
+  lssGlobularKingVertSource,
   lssGreatWallFragSource,
   lssGreatWallVertSource,
+  lssLymanAlphaGalleryFragSource,
+  lssLymanAlphaGalleryVertSource,
+  lssOpenClusterPointsFragSource,
+  lssOpenClusterPointsVertSource,
   lssSuperclusterFragSource,
   lssSuperclusterVertSource,
   lssVoidFragSource,

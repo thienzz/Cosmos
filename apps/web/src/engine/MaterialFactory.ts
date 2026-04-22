@@ -36,8 +36,14 @@ import {
   galaxyVertSource,
   lssFilamentFragSource,
   lssFilamentVertSource,
+  lssGlobularKingFragSource,
+  lssGlobularKingVertSource,
   lssGreatWallFragSource,
   lssGreatWallVertSource,
+  lssLymanAlphaGalleryFragSource,
+  lssLymanAlphaGalleryVertSource,
+  lssOpenClusterPointsFragSource,
+  lssOpenClusterPointsVertSource,
   lssSuperclusterFragSource,
   lssSuperclusterVertSource,
   lssVoidFragSource,
@@ -176,6 +182,22 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
   'lss-filament':      { vert: lssFilamentVertSource, frag: lssFilamentFragSource },
   'lss-void':          { vert: lssVoidVertSource, frag: lssVoidFragSource },
   'lss-great-wall':    { vert: lssGreatWallVertSource, frag: lssGreatWallFragSource },
+  // T-V-58 — LSS gallery-specific shader variants extracted from
+  // LargeScaleStructureRenderer inline sources. Kept distinct from the
+  // cluster-*/lyman-alpha-blob entries because the gallery uses different
+  // densities, palettes, and mesh types (points vs volumetric sphere).
+  'lss-open-cluster-points':  {
+    vert: lssOpenClusterPointsVertSource,
+    frag: lssOpenClusterPointsFragSource,
+  },
+  'lss-globular-king':        {
+    vert: lssGlobularKingVertSource,
+    frag: lssGlobularKingFragSource,
+  },
+  'lss-lyman-alpha-gallery':  {
+    vert: lssLymanAlphaGalleryVertSource,
+    frag: lssLymanAlphaGalleryFragSource,
+  },
 
   // Planets
   'planet-rocky':   { vert: planetVertSource, frag: planetRockyFragSource },

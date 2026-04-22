@@ -21,6 +21,7 @@ import {
 
 import { applyEntityToggles } from './applyEntityToggles';
 import type { GpuLifecycleHook } from './gpuLifecycle';
+import { createMaterialForEntity } from './MaterialFactory';
 
 /**
  * Map this renderer's internal entity codes to Doc 22 ENT-IDs.
@@ -251,21 +252,21 @@ function buildOpenCluster(
   starsGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   starsGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
-  const starsMaterial = new THREE.ShaderMaterial({
-    name: 'lss-open-cluster-points',
-    glslVersion: THREE.GLSL3,
-    uniforms: {
-      u_pixelRatio: {
-        value:
-          typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1,
+  const { material: starsMaterial } = createMaterialForEntity(
+    {
+      render: {
+        shader: 'lss-open-cluster-points',
+        uniforms: {
+          u_pixelRatio:
+            typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1,
+        },
       },
     },
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-    vertexShader: OPEN_CLUSTER_VERT,
-    fragmentShader: OPEN_CLUSTER_FRAG,
-  });
+    { debugName: 'lss-open-cluster-points' },
+  );
+  starsMaterial.transparent = true;
+  starsMaterial.depthWrite = false;
+  starsMaterial.blending = THREE.AdditiveBlending;
 
   const stars = new THREE.Points(starsGeometry, starsMaterial);
   group.add(stars);
@@ -303,25 +304,22 @@ function buildGlobularCluster(
   const group = new THREE.Group();
   group.name = 'LSS:GlobularCluster';
 
-  const uniforms = {
-    u_time: { value: 0 },
-    // Harris-median core radius ≈ 1 pc; tidal radius ≈ 50 pc. In gallery
-    // units we use r_c ≈ 0.12, r_t ≈ 0.9 (normalized to cellRadius).
-    u_rCore: { value: 0.12 },
-    u_rTidal: { value: 0.9 },
-  };
-
   const geom = new THREE.SphereGeometry(cellRadius * 0.85, 48, 32);
-  const mat = new THREE.ShaderMaterial({
-    name: 'lss-globular-cluster',
-    glslVersion: THREE.GLSL3,
-    uniforms,
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-    vertexShader: GLOBULAR_VERT,
-    fragmentShader: GLOBULAR_FRAG,
-  });
+  const { material: mat } = createMaterialForEntity(
+    {
+      render: {
+        shader: 'lss-globular-king',
+        // Harris-median core radius ≈ 1 pc; tidal radius ≈ 50 pc. In gallery
+        // units we use r_c ≈ 0.12, r_t ≈ 0.9 (normalized to cellRadius).
+        uniforms: { u_rCore: 0.12, u_rTidal: 0.9 },
+      },
+    },
+    { debugName: 'lss-globular-cluster' },
+  );
+  mat.transparent = true;
+  mat.depthWrite = false;
+  mat.blending = THREE.AdditiveBlending;
+  const globularTimeUniform = mat.uniforms.u_time as { value: number };
   const sphere = new THREE.Mesh(geom, mat);
   group.add(sphere);
 
@@ -332,9 +330,9 @@ function buildGlobularCluster(
     group,
     materials: [mat],
     geometries: [geom],
-    uniforms: { u_time: uniforms.u_time },
+    uniforms: { u_time: globularTimeUniform },
     update: (_d, elapsed) => {
-      uniforms.u_time.value = elapsed;
+      globularTimeUniform.value = elapsed;
     },
   };
 }
@@ -374,21 +372,21 @@ function buildObAssociation(
   starsGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   starsGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
-  const starsMaterial = new THREE.ShaderMaterial({
-    name: 'lss-ob-association-points',
-    glslVersion: THREE.GLSL3,
-    uniforms: {
-      u_pixelRatio: {
-        value:
-          typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1,
+  const { material: starsMaterial } = createMaterialForEntity(
+    {
+      render: {
+        shader: 'lss-open-cluster-points',
+        uniforms: {
+          u_pixelRatio:
+            typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1,
+        },
       },
     },
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-    vertexShader: OPEN_CLUSTER_VERT,
-    fragmentShader: OPEN_CLUSTER_FRAG,
-  });
+    { debugName: 'lss-ob-association-points' },
+  );
+  starsMaterial.transparent = true;
+  starsMaterial.depthWrite = false;
+  starsMaterial.blending = THREE.AdditiveBlending;
 
   const stars = new THREE.Points(starsGeometry, starsMaterial);
   group.add(stars);
@@ -781,26 +779,20 @@ function buildLymanAlphaBlob(
   const group = new THREE.Group();
   group.name = 'LSS:LymanAlphaBlob';
 
-  const uniforms = {
-    u_time: { value: 0 },
-  };
-
   // 3 nested Gaussian shells — additive, emission-only.
   const sharedMaterials: THREE.Material[] = [];
   const sharedGeometries: THREE.BufferGeometry[] = [];
 
   const geom = new THREE.SphereGeometry(cellRadius * 0.85, 32, 24);
-  const mat = new THREE.ShaderMaterial({
-    name: 'lss-lyman-alpha-blob',
-    glslVersion: THREE.GLSL3,
-    uniforms,
-    transparent: true,
-    depthWrite: false,
-    side: THREE.DoubleSide,
-    blending: THREE.AdditiveBlending,
-    vertexShader: BLOB_VERT,
-    fragmentShader: BLOB_FRAG,
-  });
+  const { material: mat } = createMaterialForEntity(
+    { render: { shader: 'lss-lyman-alpha-gallery' } },
+    { debugName: 'lss-lyman-alpha-blob' },
+  );
+  mat.transparent = true;
+  mat.depthWrite = false;
+  mat.side = THREE.DoubleSide;
+  mat.blending = THREE.AdditiveBlending;
+  const lymanTimeUniform = mat.uniforms.u_time as { value: number };
   group.add(new THREE.Mesh(geom, mat));
   sharedMaterials.push(mat);
   sharedGeometries.push(geom);
@@ -825,9 +817,9 @@ function buildLymanAlphaBlob(
     group,
     materials: sharedMaterials,
     geometries: sharedGeometries,
-    uniforms: { u_time: uniforms.u_time },
+    uniforms: { u_time: lymanTimeUniform },
     update: (_d, elapsed) => {
-      uniforms.u_time.value = elapsed;
+      lymanTimeUniform.value = elapsed;
     },
   };
 }
@@ -865,181 +857,6 @@ function gaussian(rng: () => number): number {
   return z0;
 }
 
-// ---------------------------------------------------------------------------
-// Inline shaders
-// ---------------------------------------------------------------------------
-
-const OPEN_CLUSTER_VERT = /* glsl */ `
-in vec3 color;
-in float size;
-uniform float u_pixelRatio;
-out vec3 v_color;
-#ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-  out float vFragDepth;
-#endif
-void main() {
-  v_color = color;
-  vec4 mv = modelViewMatrix * vec4(position, 1.0);
-  gl_PointSize = max(1.0, size * u_pixelRatio);
-  gl_Position = projectionMatrix * mv;
-  #ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-    vFragDepth = 1.0 + gl_Position.w;
-  #endif
-}
-`;
-
-const OPEN_CLUSTER_FRAG = /* glsl */ `
-precision highp float;
-in vec3 v_color;
-#ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-  uniform float logDepthBufFC;
-  in float vFragDepth;
-#endif
-out vec4 fragColor;
-void main() {
-  // Radial gaussian sprite (tight core, soft halo).
-  vec2 d = gl_PointCoord - vec2(0.5);
-  float r2 = dot(d, d);
-  float a = exp(-r2 * 18.0);
-  fragColor = vec4(v_color * 1.4, a);
-  #ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-    gl_FragDepth = log2(vFragDepth) * logDepthBufFC * 0.5;
-  #endif
-}
-`;
-
-const GLOBULAR_VERT = /* glsl */ `
-out vec3 v_modelPos;
-#ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-  out float vFragDepth;
-#endif
-void main() {
-  v_modelPos = position;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  #ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-    vFragDepth = 1.0 + gl_Position.w;
-  #endif
-}
-`;
-
-// King profile density — Doc 17 ENT-7011 §Shader. Radial density
-// ρ(r) = 1 / (1 + (r/r_c)²)^1.5, with a tidal exp cutoff. Color blended
-// from core (warm yellow #FFD66A) to outer halo (dim red #884422).
-const GLOBULAR_FRAG = /* glsl */ `
-precision highp float;
-in vec3 v_modelPos;
-uniform float u_time;
-uniform float u_rCore;
-uniform float u_rTidal;
-#ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-  uniform float logDepthBufFC;
-  in float vFragDepth;
-#endif
-out vec4 fragColor;
-
-float hash(vec3 p){
-  p = fract(p * 0.1031);
-  p += dot(p, p.yzx + 33.33);
-  return fract((p.x + p.y) * p.z);
-}
-
-void main() {
-  float maxR = u_rTidal;
-  float r = length(v_modelPos) / 12.0; // gallery cellRadius ≈ 12 → normalize
-  if (r > maxR) discard;
-
-  // King profile.
-  float x = r / u_rCore;
-  float density = 1.0 / pow(1.0 + x * x, 1.5);
-  density *= exp(-(r * r) / (maxR * maxR));
-
-  // Speckle — fake resolved stars near surface.
-  float twinkle = hash(floor(v_modelPos * 40.0) + floor(u_time * 3.0));
-  density += twinkle * 0.04 * smoothstep(0.2, 0.8, r / maxR);
-
-  vec3 core  = vec3(1.0, 0.86, 0.45);
-  vec3 outer = vec3(0.55, 0.18, 0.10);
-  vec3 col = mix(outer, core, pow(density, 0.6));
-  float alpha = clamp(density * 1.6, 0.0, 1.0);
-  fragColor = vec4(col * (1.0 + density * 0.8), alpha);
-  #ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-    gl_FragDepth = log2(vFragDepth) * logDepthBufFC * 0.5;
-  #endif
-}
-`;
-
-const BLOB_VERT = /* glsl */ `
-out vec3 v_modelPos;
-#ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-  out float vFragDepth;
-#endif
-void main() {
-  v_modelPos = position;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  #ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-    vFragDepth = 1.0 + gl_Position.w;
-  #endif
-}
-`;
-
-// Volumetric cyan emission with fbm-driven filamentary sub-structure
-// per Doc 17 ENT-7033 §Shader — Gaussian radial + Perlin octaves.
-const BLOB_FRAG = /* glsl */ `
-precision highp float;
-in vec3 v_modelPos;
-uniform float u_time;
-#ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-  uniform float logDepthBufFC;
-  in float vFragDepth;
-#endif
-out vec4 fragColor;
-
-float hash(vec3 p){
-  p = fract(p * 0.3183099 + 0.1);
-  p *= 17.0;
-  return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
-}
-float valueNoise(vec3 p){
-  vec3 i = floor(p);
-  vec3 f = fract(p);
-  f = f * f * (3.0 - 2.0 * f);
-  float n000 = hash(i);
-  float n100 = hash(i + vec3(1,0,0));
-  float n010 = hash(i + vec3(0,1,0));
-  float n110 = hash(i + vec3(1,1,0));
-  float n001 = hash(i + vec3(0,0,1));
-  float n101 = hash(i + vec3(1,0,1));
-  float n011 = hash(i + vec3(0,1,1));
-  float n111 = hash(i + vec3(1,1,1));
-  float nx00 = mix(n000, n100, f.x);
-  float nx10 = mix(n010, n110, f.x);
-  float nx01 = mix(n001, n101, f.x);
-  float nx11 = mix(n011, n111, f.x);
-  float nxy0 = mix(nx00, nx10, f.y);
-  float nxy1 = mix(nx01, nx11, f.y);
-  return mix(nxy0, nxy1, f.z);
-}
-float fbm(vec3 p){
-  float s = 0.0; float a = 0.5;
-  for (int i = 0; i < 4; i++) { s += a * valueNoise(p); p *= 2.03; a *= 0.5; }
-  return s;
-}
-
-void main() {
-  // Gaussian envelope.
-  float sigma = 4.5; // gallery units
-  float r = length(v_modelPos);
-  float gaussian = exp(-(r*r) / (2.0 * sigma * sigma));
-
-  // Filamentary structure.
-  float n = fbm(v_modelPos * 0.6 + vec3(0.0, u_time * 0.05, 0.0));
-  float density = gaussian * (0.6 + 0.8 * n);
-
-  vec3 cyan = vec3(0.27, 0.86, 1.0);
-  vec3 col = cyan * density * 1.6;
-  fragColor = vec4(col, clamp(density, 0.0, 0.85));
-  #ifdef USE_LOGARITHMIC_DEPTH_BUFFER
-    gl_FragDepth = log2(vFragDepth) * logDepthBufFC * 0.5;
-  #endif
-}
-`;
+// Inline shaders moved to apps/web/src/shaders/lss-*.{vert,frag} and routed
+// through MaterialFactory under 'lss-open-cluster-points', 'lss-globular-
+// king', and 'lss-lyman-alpha-gallery' (T-V-58).
