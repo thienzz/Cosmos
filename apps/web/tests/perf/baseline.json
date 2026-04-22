@@ -1,0 +1,59 @@
+{
+  "recordedAt": "2026-04-22",
+  "recordedBy": "viz-visuals.md T-V-63 perf baseline (V15 integration)",
+  "environment": {
+    "mode": "vite dev",
+    "pixelRatio": 1.5,
+    "canvas": { "cssWidth": 731, "cssHeight": 1244 },
+    "notes": [
+      "Dev-mode measurements run ~2-4× slower than production builds due to ",
+      "HMR, Vite middleware, and un-minified React + Three.js. Production ",
+      "figures recorded by a build-artifact CI run (T-V-62) are the ",
+      "authoritative regression gate."
+    ]
+  },
+  "regimes": {
+    "solar": {
+      "cameraPose": "flyToEntity(10) — Sun",
+      "devFps": 36,
+      "devFpsFloor": 30,
+      "drawCallsPerFrame": 5,
+      "trianglesPerFrame": 2214,
+      "quality": "ultra",
+      "targetProductionFps": 55,
+      "prodFpsFloor": 30
+    },
+    "stellar": {
+      "cameraPose": "default cosmos-explorer.html entry",
+      "devFps": 52,
+      "devFpsFloor": 35,
+      "targetProductionFps": 55,
+      "prodFpsFloor": 30,
+      "notes": "Star-tile streaming active; Milky Way band + constellations visible."
+    },
+    "galactic": {
+      "cameraPose": "galaxy gallery all-visible",
+      "devFps": 31,
+      "devFpsFloor": 20,
+      "targetProductionFps": 55,
+      "prodFpsFloor": 30,
+      "notes": "All galleries forced visible — worst-case stress. Normal scale-regime visibility management keeps draw count bounded."
+    },
+    "cosmic": {
+      "cameraPose": "cosmic-web visible + CMB + LSS",
+      "devFps": 31,
+      "devFpsFloor": 20,
+      "targetProductionFps": 55,
+      "prodFpsFloor": 30
+    }
+  },
+  "shaderProgramPool": {
+    "atLoad": 24,
+    "afterFullSweep": 119,
+    "note": "Program cache grows as new MaterialFactory shader+define combos are requested. Bounded by number of distinct (shader, defines-tuple) keys."
+  },
+  "regression": {
+    "failIfDevFpsDropsBy": 0.1,
+    "comparisonMode": "same-pose, same-visibility mask, same dev-mode renderer params"
+  }
+}

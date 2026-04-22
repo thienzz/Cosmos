@@ -5,7 +5,7 @@
 
 ## Project Overview
 
-**Cosmos Explorer** is an interactive 3D web visualization of the observable universe — from individual moons to cosmic web filaments. It renders **96 entity types** across 9 categories (stars, rocky planets, gas giants, moons, nebulae, galaxies, small bodies, large-scale structure, exotic objects) using **procedural GLSL shaders** — no texture atlases, everything generated on-GPU. Doc 17 lists **152 named subtypes** consolidated into 96 rendering categories via `#define` + uniform variants. Each entity carries **~26 interactive toggles** (Doc 22) — total **~2,477 user-facing features**.
+**Cosmos Explorer** is an interactive 3D web visualization of the observable universe — from individual moons to cosmic web filaments. It renders **262 entity types** across 10 categories (stars, rocky planets, gas giants, moons, nebulae, galaxies, small bodies, large-scale structure, exotic objects, transient phenomena) using **procedural GLSL shaders** — no texture atlases, everything generated on-GPU. Doc 17 lists **154 Tier A subtypes**; the viz-visuals.md roadmap adds **+108 Tier B extensions** (brown dwarfs, sub-dwarfs, carbon stars, pre-main-sequence, Bus-DeMeo asteroid taxonomy, Herbig-Haro objects, pillars, transients, WD cooling sequence, and more). Each entity carries **~26 interactive toggles** (Doc 22) — total **~6,800 user-facing features**.
 
 **Scale (Doc 23 §6.4 census, total ~1.817B objects):**
 - **1.8 billion stars** (Gaia DR3 full; client streams a ~10M-star bright subset via tile pyramid)
@@ -187,20 +187,63 @@ cosmos-explorer/
 
 ## Entity System
 
-96 entity types, each with a unique ENT ID (ENT-1000 through ENT-9000):
-- **Stars (7):** Main Sequence, Red Giant, White Dwarf, Neutron Star, Red Supergiant, Wolf-Rayet, Protostar
-- **Rocky Planets (5):** Terrestrial, Super-Earth, Lava World, Ice World, Desert World
-- **Gas Giants (5):** Hot Jupiter, Cold Gas Giant, Ice Giant, Sub-Neptune, Super-Jupiter
-- **Moons (6):** Rocky Moon, Ice Moon, Volcanic Moon, Captured Asteroid Moon, Subsurface Ocean Moon, Titan-type
-- **Nebulae (5):** Emission, Reflection, Dark, Planetary, Supernova Remnant
-- **Galaxies (4):** Spiral, Elliptical, Irregular, Lenticular
-- **Small Bodies (3):** Asteroid, Comet, KBO
-- **Large-Scale Structure (3):** Galaxy Cluster, Cosmic Web Filament, Void
-- **Exotic (3):** Black Hole, Pulsar, Magnetar
+**262 entity subtypes** across 10 categories, each with a unique ENT ID
+(ENT-1000 through ENT-9000). Resolved client-side by
+`apps/web/src/engine/MaterialFactory.ts` — an entity's `render` block,
+canonical ENT-ID, kind, or `object_type` selects a shader + `#define`
+preset from `SHADER_REGISTRY` (121+ GLSL sources bundled by Vite).
 
-Each entity type has: procedural GLSL shader, interactive toggles (Doc 22), info panel data spec, and test cases (Doc 30).
+- **Stars (51):** Main-sequence O/B/A/F/G/K/M, L/T/Y brown dwarfs,
+  sub-dwarfs sdO/sdB, carbon C-R/C-N/C-J, pre-main-sequence (Herbig Ae/Be,
+  T Tauri classical + weak-lined, FU Ori), variables (Cepheid, RR Lyrae,
+  Mira, LBV, Be, AM CVn, eclipsing/cataclysmic/symbiotic binary), evolved
+  (subgiant, RGB/SG, blue SG, AGB, post-AGB, horizontal-branch, RGB tip,
+  extreme AGB, WR, carbon), remnants (WD + 6-class cooling sequence DA/DB/
+  DC/DQ/DZ/DO, neutron/pulsar), hypergiant, blue straggler.
+- **Planets (42):** Solar four (Mercury/Venus/Earth/Mars) + Jupiter/Saturn/
+  Uranus/Neptune, exoplanet categories (Hot Jupiter, Super-Earth,
+  Mini-Neptune, Hycean, Eyeball, Magma, Ocean, Carbon/Diamond, Iron,
+  Desert, Rogue, Puffy, Protoplanet + 3 evolution stages, Tidally-Heated
+  Io-type, Water, Helium + banded, Circumbinary, Synestia, Chthonian +
+  severe stripping), Tier B composition + special variants.
+- **Moons (25):** Io, Europa, Ganymede, Callisto, Titan, Enceladus, Luna,
+  Phobos/Deimos irregular, Triton, Miranda, Hyperion, Shepherd, Trojan,
+  Binary, Subsurface Ocean, Tier B orbital-type (co-orbital, quasi-
+  satellite, horseshoe, sesquinary, binary pair, shepherd gap, captured
+  retrograde, Laplace-resonant, chain resonant).
+- **Small bodies (44):** Tholen C/S/M/V asteroids, binary + contact binary,
+  rubble-pile, 4 comet families, 3 dwarf-planet subtypes (Pluto/Ceres/
+  Eris), 3 KBO populations, centaur, Jupiter Trojan, meteoroid stream,
+  Tier B Bus-DeMeo taxonomy (20 classes A..Xk) + active asteroid + MBC +
+  damocloid + Neptune Trojan.
+- **Nebulae (24):** HII giant/compact + HI, planetary spherical/bipolar/
+  irregular, reflection, dark/MC + Bok globule, SNR shell + plerion,
+  Wolf-Rayet, protoplanetary, superbubble, Tier B (Herbig-Haro ± bipolar,
+  EGG, pillars, IRDC, cometary globule, H2O maser, GMC, SNR molecular
+  shock).
+- **Galaxies (29):** Spiral SA/SB, lenticular, elliptical + dwarf
+  elliptical + dwarf spheroidal, irregular I/II, AGN Seyfert/Quasar/Radio/
+  Blazar/LINER, starburst, ring, jellyfish, ULIRG, ultra-diffuse, merging,
+  Tier B (Green Pea, polar ring, tidal dwarf, cD, BCG, chain edge-on,
+  HyLIRG, UCD, UFD, BCD).
+- **Large-scale structure (17):** Open cluster, globular cluster, OB
+  association, cluster collision, Lyman-α blob, galaxy group/cluster/
+  supercluster, cosmic filament, cosmic void, Great Wall, CMB (texture
+  exception), Tier B Abell R0/R1/R2 + SZ-detected + X-ray selected.
+- **Exotic (25):** Quark, strange, preon, boson, gravastar, white hole,
+  wormhole, cosmic string, DM halo, DE void, magnetar, Thorne-Żytkow,
+  primordial BH, quasi-star, Planck star, naked singularity, Tier B
+  IMBH + wandering BH + CCO.
+- **Transient (5, Tier B):** GRB afterglow, FRB site, TDE, kilonova,
+  X-ray burster — new family introduced in viz-visuals.md §V14.
 
-`→ Doc 17 for full taxonomy, Doc 18 for all shader specs, Doc 22 for toggle features`
+Each entity type has: procedural GLSL shader (via MaterialFactory or a
+per-family *Material.ts builder), interactive toggles (Doc 22), info
+panel data spec, and test cases (Doc 30). Tier A coverage is tracked in
+`docs/17-coverage-checklist.md`; Tier B extensions are tracked in
+`apps/web/tests/entCoverage.ts` fixture.
+
+`→ Doc 17 for full Tier A taxonomy, Doc 18 for all shader specs, Doc 22 for toggle features, viz-visuals.md for Tier B roadmap`
 
 ---
 
