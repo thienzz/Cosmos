@@ -50,6 +50,8 @@ import postFullscreenVertSource from './post-fullscreen.vert';
 import postLensingFragSource from './post-lensing.frag';
 import ringFragSource from './ring.frag';
 import ringVertSource from './ring.vert';
+import smallbodyAsteroidFragSource from './smallbody-asteroid.frag';
+import smallbodyAsteroidVertSource from './smallbody-asteroid.vert';
 import smallbodyCometFragSource from './smallbody-comet.frag';
 import smallbodyCometVertSource from './smallbody-comet.vert';
 import starBinaryFragSource from './star-binary.frag';
@@ -114,6 +116,8 @@ export {
   postLensingFragSource,
   ringFragSource,
   ringVertSource,
+  smallbodyAsteroidFragSource,
+  smallbodyAsteroidVertSource,
   smallbodyCometFragSource,
   smallbodyCometVertSource,
   starBinaryFragSource,

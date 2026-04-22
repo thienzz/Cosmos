@@ -44,6 +44,8 @@ import {
   planetGasFragSource,
   planetRockyFragSource,
   planetVertSource,
+  smallbodyAsteroidFragSource,
+  smallbodyAsteroidVertSource,
   smallbodyCometFragSource,
   smallbodyCometVertSource,
   starBinaryFragSource,
@@ -142,6 +144,10 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
   'nebula-wolfrayet':      { vert: nebulaVertSource, frag: nebulaWolfRayetFragSource },
 
   // Small bodies
+  'smallbody-asteroid': {
+    vert: smallbodyAsteroidVertSource,
+    frag: smallbodyAsteroidFragSource,
+  },
   'smallbody-comet': { vert: smallbodyCometVertSource, frag: smallbodyCometFragSource },
 
   // Exotic

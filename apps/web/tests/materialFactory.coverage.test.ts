@@ -51,7 +51,7 @@ describe('MaterialFactory coverage — Tier A fixture', () => {
 
   describe.each(ENT_COVERAGE_FIXTURE as EntCoverageRow[])(
     '$id $subtype',
-    ({ id, shader, status, note }) => {
+    ({ shader, status, note }) => {
       if (shader === null) {
         it.skip(`inline-rendered, excluded until externalised${note ? ` (${note})` : ''}`, () => {});
         return;

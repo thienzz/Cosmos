@@ -108,10 +108,10 @@ export const ENT_COVERAGE_FIXTURE: readonly EntCoverageRow[] = Object.freeze([
   { id: 'ENT-3024', subtype: 'Subsurface Ocean', shader: 'moon-icy',         status: 'planned' },
 
   // Small Bodies (ENT-4xxx) — 20 subtypes, wired in V1
-  { id: 'ENT-4010', subtype: 'C-Type Asteroid', shader: 'smallbody-asteroid',        status: 'planned', note: 'V1 T-V-03' },
-  { id: 'ENT-4011', subtype: 'S-Type Asteroid', shader: 'smallbody-asteroid',        status: 'planned', note: 'V1 T-V-03' },
-  { id: 'ENT-4012', subtype: 'M-Type Asteroid', shader: 'smallbody-asteroid',        status: 'planned', note: 'V1 T-V-03' },
-  { id: 'ENT-4013', subtype: 'V-Type Asteroid', shader: 'smallbody-asteroid',        status: 'planned', note: 'V1 T-V-03' },
+  { id: 'ENT-4010', subtype: 'C-Type Asteroid', shader: 'smallbody-asteroid',        status: 'shipped', note: 'T-V-03 #define TYPE_C' },
+  { id: 'ENT-4011', subtype: 'S-Type Asteroid', shader: 'smallbody-asteroid',        status: 'shipped', note: 'T-V-03 #define TYPE_S' },
+  { id: 'ENT-4012', subtype: 'M-Type Asteroid', shader: 'smallbody-asteroid',        status: 'shipped', note: 'T-V-03 #define TYPE_M' },
+  { id: 'ENT-4013', subtype: 'V-Type Asteroid', shader: 'smallbody-asteroid',        status: 'shipped', note: 'T-V-03 #define TYPE_V' },
   { id: 'ENT-4014', subtype: 'Binary Asteroid', shader: 'smallbody-asteroid-binary', status: 'planned', note: 'V1 T-V-04' },
   { id: 'ENT-4015', subtype: 'Rubble-Pile',     shader: 'smallbody-rubble',          status: 'planned', note: 'V1 T-V-05' },
   { id: 'ENT-4016', subtype: 'Contact Binary',  shader: 'smallbody-asteroid-binary', status: 'planned', note: 'V1 T-V-04' },
