@@ -977,7 +977,7 @@ pnpm typecheck
 
 ---
 
-### T-V-60 — Doc 17 checklist update 🟢
+### T-V-60 — Doc 17 checklist update ✅ DONE 2026-04-22 🟢
 **Depends:** T-V-57  **Est:** 2h
 
 **Do:** Mark all 262 entries in [docs/17-coverage-checklist.md](docs/17-coverage-checklist.md) as `shipped`. Remove `planned` / `in-progress` markers. Rename stale aliases.
