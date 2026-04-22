@@ -38,9 +38,9 @@ const PER_PAGE_TIMEOUT_MS = 20_000;
 const POST_READY_DWELL_MS = 50;
 const FAILURE_RETRY_PASSES = 2; // serial passes after the parallel pass
 // Below this size, a 512×512 PNG is almost certainly a black canvas
-// (1826 B = empty render; ~3 KB still ~99% black with a faint silhouette).
-// Treat as a capture failure so it triggers the retry pass.
-const BLACK_PNG_BYTES = 3000;
+// (1826 B = empty render; ~2 KB allows shaders that produce a very dim
+// silhouette — exotic-dark NFW halo lands at ~2.3 KB).
+const BLACK_PNG_BYTES = 2000;
 // If a single MD5 hash is shared by more than this many ENT-IDs, the
 // shaders are collapsing into the same default and the registry needs a
 // new dispatch entry. Reported but not fatal.

@@ -171,6 +171,100 @@ function buildMesh(kind: CaptureGeometry): THREE.Object3D {
       const geom = new THREE.SphereGeometry(0.5, 64, 64);
       return new THREE.Mesh(geom, material);
     }
+    case 'comet': {
+      // Inline NamedCometRenderer-style composite — 4 meshes sharing
+      // one ShaderMaterial, each switching `u_component` via
+      // onBeforeRender. Smallbody-comet shader expects an `a_tailCoord`
+      // vec2 attribute on the tail ribbons + the per-component switch.
+      const buildRibbon = (uSeg: number, vSeg: number): THREE.BufferGeometry => {
+        const positions: number[] = [];
+        const tailCoord: number[] = [];
+        const indices: number[] = [];
+        for (let u = 0; u <= uSeg; u++) {
+          for (let v = 0; v <= vSeg; v++) {
+            const uu = u / uSeg;
+            const vv = v / vSeg;
+            positions.push(uu, vv, 0);
+            tailCoord.push(uu, vv);
+          }
+        }
+        const stride = vSeg + 1;
+        for (let u = 0; u < uSeg; u++) {
+          for (let v = 0; v < vSeg; v++) {
+            const a = u * stride + v;
+            indices.push(a, a + 1, a + stride, a + 1, a + stride + 1, a + stride);
+          }
+        }
+        const g = new THREE.BufferGeometry();
+        g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        g.setAttribute(
+          'a_tailCoord',
+          new THREE.Float32BufferAttribute(tailCoord, 2),
+        );
+        g.setIndex(indices);
+        g.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 1e9);
+        return g;
+      };
+      // Seed comet-specific uniforms — NamedCometRenderer normally sets
+      // these per-frame; the capture page only needs static-frame values.
+      const u = material.uniforms as Record<string, { value: unknown }>;
+      const ensure = (k: string, v: unknown): void => {
+        if (u[k]) u[k]!.value = v;
+        else u[k] = { value: v };
+      };
+      ensure('u_sunDirection', new THREE.Vector3(0, 0, -1)); // anti-camera
+      ensure('u_tailLengthScene', 1.6);
+      ensure('u_tailWidthScene', 0.18);
+      ensure('u_nucleusRadius', 0.06);
+      ensure('u_activity', 0.85);
+      ensure('u_ionCurl', 0.12);
+      ensure('u_component', 0);
+      // Only seed comet colours when injectCaptureDefaults didn't
+      // already populate them — overwriting would erase the per-ENT
+      // hue variation that gives each comet a distinct baseline.
+      const setIfAbsent = (k: string, hex: string): void => {
+        if (u[k]) return;
+        u[k] = { value: new THREE.Color(hex) };
+      };
+      setIfAbsent('u_nucleusColour', '#1a1a2e');
+      setIfAbsent('u_dustColour',    '#f5e6d3');
+      setIfAbsent('u_ionColour',     '#4a8fc8');
+      setIfAbsent('u_comaColour',    '#9fbf9f');
+
+      material.transparent = true;
+      material.depthWrite = false;
+      material.blending = THREE.AdditiveBlending;
+
+      const group = new THREE.Group();
+      group.name = 'CapturedComet';
+      // Set u_component on the SHARED material right before each draw.
+      const dust = new THREE.Mesh(buildRibbon(16, 4), material);
+      dust.frustumCulled = false;
+      dust.renderOrder = 0;
+      dust.onBeforeRender = () => {
+        (material.uniforms.u_component as { value: number }).value = 1;
+      };
+      const ion = new THREE.Mesh(buildRibbon(16, 4), material);
+      ion.frustumCulled = false;
+      ion.renderOrder = 1;
+      ion.onBeforeRender = () => {
+        (material.uniforms.u_component as { value: number }).value = 2;
+      };
+      const coma = new THREE.Mesh(buildRibbon(1, 1), material);
+      coma.frustumCulled = false;
+      coma.renderOrder = 2;
+      coma.onBeforeRender = () => {
+        (material.uniforms.u_component as { value: number }).value = 3;
+      };
+      const nucleus = new THREE.Mesh(buildRibbon(1, 1), material);
+      nucleus.frustumCulled = false;
+      nucleus.renderOrder = 3;
+      nucleus.onBeforeRender = () => {
+        (material.uniforms.u_component as { value: number }).value = 0;
+      };
+      group.add(dust, ion, coma, nucleus);
+      return group;
+    }
     case 'sphere':
     default: {
       const geom = new THREE.SphereGeometry(1, 96, 96);

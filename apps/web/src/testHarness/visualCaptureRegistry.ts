@@ -56,6 +56,8 @@ export type CaptureGeometry =
   | 'tilted-plane'   // Plane shrunk + rotated so the shader doesn't fill the
                      // canvas as a flat square stamp; used for v_uv-driven
                      // sheets like lss-great-wall + lss-filament.
+  | 'comet'          // 4-draw composite (nucleus + coma + dust ribbon + ion
+                     // ribbon) mimicking NamedCometRenderer for ENT-4020..
   | 'fullscreen-quad';
 
 /**
@@ -284,6 +286,19 @@ const NEBULA_SUBTYPE: Record<string, NebulaSubtype | NebulaKind> = {
   'ENT-5060': 'wolfrayet',
   'ENT-5070': 'protoplanetary',
   'ENT-5080': 'superbubble',
+  // Tier B routed through base NebulaKind + overlaid Tier B define
+  // from ENT_ID_TO_RENDER so shaders still branch on DARK_GMC /
+  // EMISSION_H2O_MASER / SNR_MOLECULAR_SHOCK / etc. Palette uniforms
+  // come from createNebulaMaterial('dark'|'emission'|'supernova').
+  'ENT-5102': 'dark-molecular',      // BOK_COMPACT + DARK_BOK_GLOBULE
+  'ENT-5104': 'dark-molecular',      // DARK_IRDC
+  'ENT-5106': 'dark-molecular',      // DARK_COMETARY
+  'ENT-5107': 'hii-giant',           // EMISSION_H2O_MASER
+  'ENT-5108': 'dark-molecular',      // DARK_GMC
+  'ENT-5109': 'snr-shell',           // SNR_MOLECULAR_SHOCK
+  // ENT-5103 (PILLAR_EGG) + ENT-5105 (Pillars) use nebula-pillar which
+  // has no dedicated builder — handled in the fallback with per-shader
+  // geometry overrides below.
 };
 
 const EXOTIC_KIND: Record<string, ExoticKind> = {
@@ -320,20 +335,28 @@ const GEOMETRY_BY_SHADER: Record<string, CaptureGeometry> = {
   'nebula-wolfrayet': 'box-raymarch',
   'nebula-protoplanetary': 'box-raymarch',
   'nebula-superbubble': 'box-raymarch',
+  // nebula-hh works on box-raymarch (its +X bow-shock cone catches box
+  // face fragments). nebula-pillar samples length(P.xz) against a
+  // 0.4-tapered radius and discards above — sphere fragments at radius
+  // ≤ 1 pass; box corners at sqrt(3) all discard. Switch to sphere.
   'nebula-hh': 'box-raymarch',
-  'nebula-pillar': 'box-raymarch',
+  'nebula-pillar': 'sphere',
   'lyman-alpha-blob': 'box-raymarch',
   // Exotic objects — every shader in this family is volumetric raymarch
   // and needs `v_rayOriginLocal` interpolated across a bounding box, not
   // a sphere surface (sphere reduces to a 2D shell which doesn't traverse
   // the interior). Camera sits OUTSIDE the box at +Z so raymarch runs
-  // front-to-back along the view ray.
+  // front-to-back along the view ray. Two exceptions:
+  //   - exotic-compact PREON branch is a tiny near-zero point: r=0.5
+  //     (small-sphere) puts fragments inside the kernel.
+  //   - exotic-dark NFW halo: same — needs r < 1 so the density falloff
+  //     produces non-zero alpha.
   'exotic-blackhole': 'box-raymarch',
   'exotic-gr-extreme': 'box-raymarch',
-  'exotic-compact': 'box-raymarch',
+  'exotic-compact': 'box-raymarch',     // Preon overridden per-ENT below.
   'exotic-pulsar': 'box-raymarch',
   'exotic-magnetar': 'box-raymarch',
-  'exotic-dark': 'box-raymarch',
+  'exotic-dark': 'small-sphere',        // both halo + void renders better here
   'exotic-topology': 'box-raymarch',
   'exotic-tzo': 'box-raymarch',
   'exotic-primordial': 'box-raymarch',
@@ -373,6 +396,11 @@ const GEOMETRY_BY_SHADER: Record<string, CaptureGeometry> = {
   'transient-kilonova': 'small-sphere',
   'transient-xrb': 'small-sphere',
   'meteoroid-stream': 'tilted-plane',
+  // Comets — 4-draw composite (nucleus + coma + dust + ion) so the
+  // shader's u_component switch produces a recognisable Hale-Bopp
+  // composite rather than an empty quad. Mirrors the production
+  // NamedCometRenderer setup but as a single isolated entity.
+  'smallbody-comet': 'comet',
   // Galaxy billboards remain plane (intentionally screen-aligned).
   'galaxy-billboard': 'tilted-plane',
 };
@@ -775,10 +803,18 @@ export function buildCaptureMaterial(
   if (entId && EXOTIC_KIND[entId]) {
     const handle = createExoticMaterial(EXOTIC_KIND[entId]!);
     overlayNonSelectorDefines(handle.material, entId);
+    // Per-ENT geometry override: a couple of compact-family branches
+    // produce near-zero output on box-raymarch (Preon = "tiny fuzzy
+    // quantum point"). Small-sphere puts the camera close to a sub-unit
+    // r so the kernel actually fires.
+    const PER_ENT_GEOMETRY: Record<string, CaptureGeometry> = {
+      'ENT-8012': 'small-sphere', // Preon — exotic-compact PREON kernel
+    };
+    const geom = PER_ENT_GEOMETRY[entId] ?? geometryFor(shaderKey);
     return {
       material: handle.material,
       shaderKey,
-      geometry: geometryFor(shaderKey),
+      geometry: geom,
       update: (ctx) =>
         handle.update(ctx.deltaSec, ctx.elapsedSec, ctx.cameraWorld, ctx.meshMatrixWorld),
       dispose: () => handle.dispose(),
