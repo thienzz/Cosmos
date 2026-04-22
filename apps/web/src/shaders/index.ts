@@ -52,6 +52,10 @@ import mwBandFragSource from './mw-band.frag';
 import mwBandVertSource from './mw-band.vert';
 import nebulaDarkFragSource from './nebula-dark.frag';
 import nebulaEmissionFragSource from './nebula-emission.frag';
+import nebulaHhFragSource from './nebula-hh.frag';
+import nebulaHhVertSource from './nebula-hh.vert';
+import nebulaPillarFragSource from './nebula-pillar.frag';
+import nebulaPillarVertSource from './nebula-pillar.vert';
 import nebulaPlanetaryFragSource from './nebula-planetary.frag';
 import nebulaProtoplanetaryFragSource from './nebula-protoplanetary.frag';
 import nebulaReflectionFragSource from './nebula-reflection.frag';
@@ -156,6 +160,10 @@ export {
   mwBandVertSource,
   nebulaDarkFragSource,
   nebulaEmissionFragSource,
+  nebulaHhFragSource,
+  nebulaHhVertSource,
+  nebulaPillarFragSource,
+  nebulaPillarVertSource,
   nebulaPlanetaryFragSource,
   nebulaProtoplanetaryFragSource,
   nebulaReflectionFragSource,

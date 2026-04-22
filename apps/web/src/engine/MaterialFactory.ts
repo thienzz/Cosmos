@@ -53,6 +53,10 @@ import {
   moonVolcanicFragSource,
   nebulaDarkFragSource,
   nebulaEmissionFragSource,
+  nebulaHhFragSource,
+  nebulaHhVertSource,
+  nebulaPillarFragSource,
+  nebulaPillarVertSource,
   nebulaPlanetaryFragSource,
   nebulaProtoplanetaryFragSource,
   nebulaReflectionFragSource,
@@ -200,6 +204,8 @@ const SHADER_REGISTRY: Readonly<Record<string, ShaderEntry>> = Object.freeze({
   'nebula-protoplanetary': { vert: nebulaVertSource, frag: nebulaProtoplanetaryFragSource },
   'nebula-superbubble':    { vert: nebulaVertSource, frag: nebulaSuperbubbleFragSource },
   'nebula-wolfrayet':      { vert: nebulaVertSource, frag: nebulaWolfRayetFragSource },
+  'nebula-hh':             { vert: nebulaHhVertSource, frag: nebulaHhFragSource },
+  'nebula-pillar':         { vert: nebulaPillarVertSource, frag: nebulaPillarFragSource },
 
   // Small bodies
   'meteoroid-stream': {
@@ -383,6 +389,18 @@ const ENT_ID_TO_RENDER: Readonly<Record<string, EntityRenderBlock>> = Object.fre
   'ENT-5060': { shader: 'nebula-wolfrayet' },
   'ENT-5070': { shader: 'nebula-protoplanetary' },
   'ENT-5080': { shader: 'nebula-superbubble' },
+
+  // Tier B nebula extensions (T-V-48..50). Reserved ENT-5100..5109.
+  'ENT-5100': { shader: 'nebula-hh' },
+  'ENT-5101': { shader: 'nebula-hh',           defines: { HH_BIPOLAR: 1 } },
+  'ENT-5102': { shader: 'nebula-dark',         defines: { DARK_BOK_GLOBULE: 1, BOK_COMPACT: 1 } },
+  'ENT-5103': { shader: 'nebula-pillar',       defines: { PILLAR_EGG: 1 } },
+  'ENT-5104': { shader: 'nebula-dark',         defines: { DARK_IRDC: 1 } },
+  'ENT-5105': { shader: 'nebula-pillar' },
+  'ENT-5106': { shader: 'nebula-dark',         defines: { DARK_COMETARY: 1 } },
+  'ENT-5107': { shader: 'nebula-emission',     defines: { EMISSION_H2O_MASER: 1 } },
+  'ENT-5108': { shader: 'nebula-dark',         defines: { DARK_GMC: 1 } },
+  'ENT-5109': { shader: 'nebula-supernova',    defines: { SNR_MOLECULAR_SHOCK: 1 } },
 
   // Galaxies (T-V-27..28) — 19 Hubble-sequence subtypes across 7 shaders.
   'ENT-6010': { shader: 'galaxy-spiral' },

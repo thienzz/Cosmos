@@ -222,6 +222,18 @@ export const ENT_COVERAGE_FIXTURE: readonly EntCoverageRow[] = Object.freeze([
   { id: 'ENT-5070', subtype: 'Protoplanetary', shader: 'nebula-protoplanetary', status: 'shipped', note: 'T-V-25 disk + bipolar jets' },
   { id: 'ENT-5080', subtype: 'Superbubble',    shader: 'nebula-superbubble',    status: 'shipped', note: 'T-V-25 ionized cavity' },
 
+  // Tier B nebula extensions (T-V-48..50, reserved ENT-5100..5109).
+  { id: 'ENT-5100', subtype: 'Herbig-Haro',       shader: 'nebula-hh',         status: 'shipped', note: 'T-V-48 HH bow shock' },
+  { id: 'ENT-5101', subtype: 'Herbig-Haro Bipolar',shader: 'nebula-hh',        status: 'shipped', note: 'T-V-48 HH_BIPOLAR' },
+  { id: 'ENT-5102', subtype: 'Bok Globule Compact',shader: 'nebula-dark',      status: 'shipped', note: 'T-V-48 BOK_COMPACT' },
+  { id: 'ENT-5103', subtype: 'EGG',               shader: 'nebula-pillar',     status: 'shipped', note: 'T-V-48 PILLAR_EGG' },
+  { id: 'ENT-5104', subtype: 'IRDC',              shader: 'nebula-dark',       status: 'shipped', note: 'T-V-48 DARK_IRDC' },
+  { id: 'ENT-5105', subtype: 'Pillars',           shader: 'nebula-pillar',     status: 'shipped', note: 'T-V-48 erosion columns' },
+  { id: 'ENT-5106', subtype: 'Cometary Globule',  shader: 'nebula-dark',       status: 'shipped', note: 'T-V-49 DARK_COMETARY' },
+  { id: 'ENT-5107', subtype: 'H2O Maser',         shader: 'nebula-emission',   status: 'shipped', note: 'T-V-49 EMISSION_H2O_MASER' },
+  { id: 'ENT-5108', subtype: 'GMC',               shader: 'nebula-dark',       status: 'shipped', note: 'T-V-49 DARK_GMC' },
+  { id: 'ENT-5109', subtype: 'SNR Molecular Shock',shader: 'nebula-supernova', status: 'shipped', note: 'T-V-49 SNR_MOLECULAR_SHOCK' },
+
   // Galaxies (ENT-6xxx) — 19 subtypes, polished by V6
   { id: 'ENT-6010', subtype: 'Spiral (SA)',  shader: 'galaxy-spiral',     status: 'shipped', note: 'T-V-27' },
   { id: 'ENT-6011', subtype: 'Barred (SB)',  shader: 'galaxy-spiral',     status: 'shipped', note: 'T-V-27 HAS_BAR' },
