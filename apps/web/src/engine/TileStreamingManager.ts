@@ -66,6 +66,13 @@ export interface EnqueueHint {
   address: TileAddress;
   priority: number;
   estimatedSize?: number;
+  /**
+   * Skip the regime filter for this hint. Use for bootstrap tiles that must
+   * render regardless of regime (e.g. the initial star-tile set so the user
+   * sees a populated sky the moment the app boots, even while parked inside
+   * the solar-system regime). Default `false`.
+   */
+  bypassRegimeFilter?: boolean;
 }
 
 export class TileStreamingManager {
@@ -202,8 +209,11 @@ export class TileStreamingManager {
     const tileStore = useTileStore.getState();
     for (const hint of hints) {
       // T25 — drop hints whose tile kind isn't visible in the active regime
-      // (Doc 27 §9.3). `activeRegime=null` disables the filter.
+      // (Doc 27 §9.3). `activeRegime=null` disables the filter. Individual
+      // hints can bypass via `bypassRegimeFilter` for bootstrap data that
+      // must render regardless of regime.
       if (
+        !hint.bypassRegimeFilter &&
         this.activeRegime !== null &&
         !isAddressRelevantForRegime(hint.address, this.activeRegime)
       ) {

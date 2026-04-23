@@ -98,7 +98,7 @@ function devStarTileMiddleware(): PluginOption {
  * (default: http://localhost:9201). Set to empty string to disable.
  */
 function devSearchMiddleware(): PluginOption {
-  const esUrl = (process.env.COSMOS_DEV_SEARCH_ES_URL ?? 'http://localhost:9201').replace(/\/$/, '');
+  const esUrl = (process.env.COSMOS_DEV_SEARCH_ES_URL ?? '').replace(/\/$/, '');
   const CATEGORY_NAMES: Record<number, string> = {
     1: 'Star',
     2: 'Planet',

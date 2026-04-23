@@ -609,8 +609,13 @@ export class SceneManager {
     // default; the constructor-time read is still valid because the
     // controller is built before the regime controller and a regime
     // transition later will call setMoveSpeed() anyway.
+    // P5 — boot in the Stellar regime by default so the star-tile pyramid is
+    // the first thing the user sees, not a lonely Sun + Earth pair. The solar
+    // system is still rendered (and the user can dive into it via search /
+    // wheel-zoom / double-click on the Sun); this is just the entry pose.
+    // Gallery demos and solar-only fixture tests override via `scaleRegimeOptions.initial`.
     const initialRegime: ScaleRegime =
-      options.scaleRegimeOptions?.initial ?? 'solar_system';
+      options.scaleRegimeOptions?.initial ?? 'stellar';
     this.controls = new CameraController(this.camera, this.canvas, {
       moveSpeed: REGIME_MOVE_SPEED[initialRegime],
       orbitSpeed: 0.005,
@@ -1029,7 +1034,13 @@ export class SceneManager {
     // --- T25 Scale-regime state machine ---
     // Construct BEFORE the tile streaming manager so we can seed its
     // `activeRegime` from the controller's initial value in one place.
-    this.scaleRegime = new ScaleRegimeController(options.scaleRegimeOptions);
+    this.scaleRegime = new ScaleRegimeController({
+      ...(options.scaleRegimeOptions ?? {}),
+      // Keep the controller aligned with the `initialRegime` computed
+      // above so the camera pose, move speed, and distance clamps all
+      // agree from frame zero.
+      initial: initialRegime,
+    });
     this.scaleRegime.setOnTransition((transition) => this.onRegimeTransition(transition));
     // Sync the store to the controller's initial regime so React consumers
     // see `useCameraStore.getState().scaleRegime === controller.current`
@@ -1052,12 +1063,17 @@ export class SceneManager {
       this.starTileField = new StarTileRenderer(options.starTileRendererOptions);
       this.scene.add(this.starTileField.group);
       this.registerGpuHook(this.starTileField);
-      if (galleryFramesCamera) {
+      if (galleryFramesCamera || initialRegime === 'stellar') {
         // Pull the camera back to a stellar-regime pose. Populated tiles
         // span ±100 pc in X/Y at `sceneUnitsPerPc=500` → a ±50k scene-unit
         // box.  Seat the camera ~30 pc (15k units) from the Sun, looking
         // toward the galactic centre, so Sirius (at 2.64 pc) sits well
         // in-frame from the first rendered tile.
+        //
+        // P5 — this runs AFTER the solar-system block's (0, 8, 22) pose so
+        // the stellar pose wins whenever the user boots into the stellar
+        // regime (default). Tests that want the solar pose override via
+        // `scaleRegimeOptions: { initial: 'solar_system' }`.
         this.camera.position.set(0, 4000, 15000);
         this.camera.lookAt(0, 0, 0);
         this.controls.setTarget(0, 0, 0);
@@ -1996,6 +2012,11 @@ export class SceneManager {
           address: fullAddress,
           priority,
           estimatedSize: entry.sizeBytes,
+          // Bootstrap tiles must render regardless of active regime — users
+          // parked in the solar-system regime still expect a populated sky.
+          // 16 tiles × ~100 KB fits the budget comfortably and survives
+          // until the viewport-culling worker lands.
+          bypassRegimeFilter: true,
         };
       });
       tsm.enqueue(hints);

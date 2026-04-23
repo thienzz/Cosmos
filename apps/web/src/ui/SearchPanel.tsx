@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
+  getEntityByEntId,
   getSolarSystemBody,
   type AutocompleteItem,
   type TextSearchItem,
@@ -233,6 +234,74 @@ export function SearchPanel(): JSX.Element | null {
   // Row activation → selectEntityAsync + fly-to.
   // -------------------------------------------------------------------
   const activateRow = useCallback(async (row: Row): Promise<void> => {
+    // ETL frequently ranks semantically-weak canonical docs above richer
+    // sub-documents — e.g. "Andromeda" matches the constellation centroid
+    // (ENT-7050, no distance, no galaxy shader) ahead of the Andromeda
+    // Galaxy (GAL-m31, full catalog entry + procedural spiral). When the
+    // clicked row lacks both a NAIF id AND ra/dec, promote it to any
+    // sibling with the same display text that carries richer data. That
+    // way a user searching "Andromeda" lands on the galaxy even when the
+    // top autocomplete hit is the constellation stub.
+    const clickedText =
+      row.kind === 'suggestion' ? stripHighlight(row.item.text) : row.item.name;
+    const rowText = (r: Row): string =>
+      r.kind === 'suggestion' ? stripHighlight(r.item.text) : r.item.name;
+    const rowHasActionable = (r: Row): boolean => {
+      const id = r.item.id;
+      const rra = r.item.ra;
+      const rdec = r.item.dec;
+      return (
+        typeof id === 'number' ||
+        (typeof rra === 'number' && typeof rdec === 'number')
+      );
+    };
+    // Score each row so the promotion picks the entry most likely to
+    // render a meaningful visualization:
+    //
+    //   +3  catalog-backed ent_id (GAL-/NEB-/EXO-/HIP-/STAR-/OC-/GC-/OB-)
+    //       → SearchTargetMarker mounts its procedural shader.
+    //   +2  has a real heliocentric distance → marker lands at the
+    //       proper extragalactic depth rather than the null-distance
+    //       "60k u sky direction" cap.
+    //   +1  has a NAIF id or ra/dec fields at all (Path A/B eligible).
+    //
+    // For ambiguous names like "Andromeda" this boosts GAL-m31 ahead of
+    // the constellation centroid and the plain E-353 duplicate.
+    const richnessScore = (r: Row): number => {
+      let s = 0;
+      const id = r.item.id;
+      const rra = r.item.ra;
+      const rdec = r.item.dec;
+      const dist = r.item.distance_pc;
+      const entId = typeof r.item.ent_id === 'string' ? r.item.ent_id : '';
+      if (
+        /^(GAL|NEB|EXO|HIP|STAR|OC|GC|OB)-/.test(entId)
+      ) {
+        s += 3;
+      }
+      if (typeof dist === 'number' && Number.isFinite(dist) && dist > 0) s += 2;
+      if (typeof id === 'number') s += 1;
+      if (typeof rra === 'number' && typeof rdec === 'number') s += 1;
+      return s;
+    };
+    const clickedScore = richnessScore(row);
+    if (!rowHasActionable(row) || clickedScore < 3) {
+      // Scan for a higher-scoring sibling with the same display text.
+      let best: Row | null = null;
+      let bestScore = clickedScore;
+      for (const candidate of rows) {
+        if (candidate === row) continue;
+        if (rowText(candidate) !== clickedText) continue;
+        if (!rowHasActionable(candidate)) continue;
+        const score = richnessScore(candidate);
+        if (score > bestScore) {
+          bestScore = score;
+          best = candidate;
+        }
+      }
+      if (best) row = best;
+    }
+
     const rawId = row.item.id;
     const ent_id = row.item.ent_id;
     const name =
@@ -313,6 +382,76 @@ export function SearchPanel(): JSX.Element | null {
       return;
     }
 
+    // Path C — suggestion had neither NAIF id nor ra/dec (common for ETL
+    // aggregate docs like `ENT-1000` that strip coords off the canonical
+    // record). Fall back to the entity-detail endpoint: the `entities`
+    // table always carries ra_deg/dec_deg and `catalog_ids.naif` where
+    // applicable, so we can re-route through Path A or Path B once the
+    // detail fetch settles. Keeps the click from being a dead no-op when
+    // the user picks the most-obvious (topmost) suggestion.
+    if (ent_id) {
+      try {
+        const entity = await getEntityByEntId(ent_id);
+        const naifRaw = (entity.catalog_ids as Record<string, unknown> | undefined)?.naif;
+        const naifId = typeof naifRaw === 'number' ? naifRaw : null;
+        const detailRa = typeof entity.ra_deg === 'number' ? entity.ra_deg : null;
+        const detailDec = typeof entity.dec_deg === 'number' ? entity.dec_deg : null;
+        const detailDistancePc =
+          typeof entity.distance_pc === 'number' ? entity.distance_pc : null;
+
+        if (naifId !== null) {
+          openPanel('info');
+          requestFlyToEntity(naifId);
+          setIsOpen(false);
+          inputRef.current?.blur();
+          void useSelectionStore
+            .getState()
+            .selectEntityAsync(
+              naifId,
+              {
+                id: naifId,
+                ent_id,
+                object_type: 'star',
+                name,
+                payload: {},
+              },
+              {
+                fetcher: async (nid) => {
+                  const body = await getSolarSystemBody(nid);
+                  return apiSolarSystemBodyToEntityData(body);
+                },
+              },
+            )
+            .catch(() => {});
+          return;
+        }
+
+        if (detailRa !== null && detailDec !== null) {
+          useSelectionStore.getState().selectEntity(0, {
+            id: 0,
+            ent_id,
+            object_type: 'star',
+            name,
+            payload: {
+              ra_deg: detailRa,
+              dec_deg: detailDec,
+              distance_pc: detailDistancePc,
+            },
+          });
+          openPanel('info');
+          requestFlyToCelestialCoord(detailRa, detailDec, detailDistancePc, {
+            label: name,
+            entId: ent_id,
+          });
+          setIsOpen(false);
+          inputRef.current?.blur();
+          return;
+        }
+      } catch {
+        // Fall through to stub below — entity detail genuinely unavailable.
+      }
+    }
+
     useSelectionStore.getState().selectEntity(0, {
       id: 0,
       ent_id,
@@ -321,7 +460,7 @@ export function SearchPanel(): JSX.Element | null {
       payload: {},
     });
     openPanel('info');
-  }, [openPanel]);
+  }, [openPanel, rows]);
 
   // -------------------------------------------------------------------
   // Input keydown — Arrow / Enter / Escape.
