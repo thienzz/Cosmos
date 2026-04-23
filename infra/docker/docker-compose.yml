@@ -155,6 +155,9 @@ services:
       DATABASE_URL: postgresql://cosmos:cosmos_dev@pgbouncer:5432/cosmos
       REDIS_URL: redis://redis:6379
       TILE_SERVER_PORT: 3001
+      COSMOS_TILE_ROOT: /var/cosmos/tiles
+    volumes:
+      - ../../data/tiles:/var/cosmos/tiles:ro
 
   ephemeris:
     build:
