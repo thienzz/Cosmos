@@ -1,6 +1,7 @@
 import type { Client as EsClient } from '@elastic/elasticsearch';
 import cors from '@fastify/cors';
 import etag from '@fastify/etag';
+import websocket from '@fastify/websocket';
 import Fastify, { type FastifyInstance } from 'fastify';
 import type { Pool } from 'pg';
 
@@ -13,6 +14,7 @@ import { entityRoutes } from './routes/entities.js';
 import { healthRoutes } from './routes/health.js';
 import { searchRoutes } from './routes/search.js';
 import { solarSystemRoutes } from './routes/solar-system.js';
+import { websocketRoutes } from './routes/websocket.js';
 
 export interface BuildServerOptions {
   readonly logLevel?: string;
@@ -62,6 +64,19 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
   });
 
   await app.register(healthRoutes);
+
+  // T-H-06 — WebSocket transport for real-time push messages (Doc 26 §14).
+  // Registered early so its upgrade handler is in place before any route
+  // that might read a ws-only decorator.
+  await app.register(websocket, {
+    options: {
+      // FE reconnect loop treats a closed socket as a hiccup, so we don't
+      // need server-side backpressure tuning yet. The default max payload
+      // (1 MB) is plenty for JSON control frames.
+      maxPayload: 1_048_576,
+    },
+  });
+  await app.register(websocketRoutes);
 
   const dbConfigured = Boolean(process.env.DATABASE_URL);
   const useDb = opts.enableDb ?? dbConfigured;

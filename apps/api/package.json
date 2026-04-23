@@ -20,6 +20,7 @@
     "@fastify/cors": "^9.0.0",
     "@fastify/etag": "^5.2.0",
     "@fastify/rate-limit": "^9.0.0",
+    "@fastify/websocket": "^10.0.1",
     "envalid": "^8.0.0",
     "fastify": "^4.26.0",
     "fastify-plugin": "^5.1.0",

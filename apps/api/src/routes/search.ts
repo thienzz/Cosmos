@@ -22,9 +22,19 @@ interface AutocompleteQuery {
 interface SearchSuggestion {
   text: string;
   ent_id: string;
+  /**
+   * Numeric body id for fly-to routing. For solar bodies whose `ent_id`
+   * encodes a NAIF id (`"NAIF-399"`) we parse that out so the FE search
+   * panel's Path A can hand it to `SolarSystemRenderer.flyToEntity()`.
+   * `null` for stars / galaxies / nebulae — they use Path B (ra/dec).
+   */
+  id: number | null;
   category: number | null;
   kind: number | null;
   magnitude: number | null;
+  ra: number | null;
+  dec: number | null;
+  distance_pc: number | null;
 }
 
 interface AutocompleteResponse {
@@ -41,7 +51,18 @@ interface EsSuggestOption {
     category?: number | string;
     kind?: number | string;
     magnitude?: number | string;
+    ra_deg?: number | string;
+    dec_deg?: number | string;
+    distance_pc?: number | string;
   };
+}
+
+const NAIF_ID_RE = /^NAIF-(\d+)$/i;
+
+function numOrNull(value: unknown): number | null {
+  if (value === null || value === undefined || value === '') return null;
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
 }
 
 const DEFAULT_AUTOCOMPLETE_TTL = 60;
@@ -56,7 +77,7 @@ function clampLimit(raw: string | undefined): number {
 
 function autocompleteCacheKey(q: string, category: string | undefined, limit: number): string {
   const cat = category ?? '*';
-  return `ac:${cat}:${limit}:${q.toLowerCase()}`;
+  return `ac:v2:${cat}:${limit}:${q.toLowerCase()}`;
 }
 
 async function runAutocomplete(
@@ -81,7 +102,7 @@ async function runAutocomplete(
   };
   const result = await es.search({
     index: ENTITIES_AUTOCOMPLETE_INDEX,
-    _source: ['ent_id', 'category', 'kind', 'magnitude'],
+    _source: ['ent_id', 'category', 'kind', 'magnitude', 'ra_deg', 'dec_deg', 'distance_pc'],
     suggest: suggestBody,
     size: 0,
   });
@@ -90,12 +111,18 @@ async function runAutocomplete(
   const options = (sugg[0]?.options ?? []) as unknown as EsSuggestOption[];
   return options.map((opt) => {
     const src = opt._source ?? {};
+    const ent_id = typeof src.ent_id === 'string' ? src.ent_id : '';
+    const naifMatch = NAIF_ID_RE.exec(ent_id);
     return {
       text: opt.text,
-      ent_id: typeof src.ent_id === 'string' ? src.ent_id : '',
-      category: src.category === undefined ? null : Number(src.category),
-      kind: src.kind === undefined ? null : Number(src.kind),
-      magnitude: src.magnitude === undefined ? null : Number(src.magnitude),
+      ent_id,
+      id: naifMatch ? Number(naifMatch[1]) : null,
+      category: numOrNull(src.category),
+      kind: numOrNull(src.kind),
+      magnitude: numOrNull(src.magnitude),
+      ra: numOrNull(src.ra_deg),
+      dec: numOrNull(src.dec_deg),
+      distance_pc: numOrNull(src.distance_pc),
     };
   });
 }
