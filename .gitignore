@@ -23,3 +23,5 @@ data/spice/*
 !data/spice/.gitkeep
 data/raw/gaia/*.csv
 data/raw/gaia/.checkpoint.json
+.claude/
+
