@@ -156,8 +156,7 @@ cosmos-explorer/
 │   ├── spice/             # JPL SPICE kernels (Git LFS, ~600 MB)
 │   ├── tiles/             # Pre-baked demo tiles (100K stars)
 │   └── fixtures/          # Test fixtures
-├── infra/docker/          # docker-compose for local dev
-└── docs/                  # Engineering specs (architecture, shaders, tests)
+└── infra/docker/          # docker-compose for local dev
 ```
 
 ---
